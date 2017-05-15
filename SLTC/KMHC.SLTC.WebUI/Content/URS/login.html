@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URS统一认证 登录</title>
+    <link type="text/css" href="css/common.css" rel="stylesheet"/>
+    <link type="text/css" href="css/login.css" rel="stylesheet"/>
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+    <!-- IE兼容html5-->
+    <!--[if lt IE 9]>
+    <script src="js/core/html5.js"></script>
+    <script src="js/core/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- 顶部-->
+    <div class="top_wrapper">
+        <div class="top marginauto">
+            <img src="image/login/logo.png" class="logo">
+            <div class="login_btn right">
+                <a href="#">登录</a>  |
+                <a href="register.html">免费注册</a>  |
+                <a href="#">常见问题</a>
+            </div>
+        </div>
+    </div>
+    <!-- 顶部 END-->
+    <!-- 内容-->
+    <div class="content_wrapper">
+        <div class="login_img_wrapper marginauto">
+            <form class="login_form right" action="#">
+                <div class="input_name input_text">
+                    <img src="image/login/icon_person.png">
+                    <input type="text" name="name">
+                    <img src="image/login/icon_tick.png">
+                </div>
+                <div class="input_pass input_text">
+                    <img src="image/login/icon_lock.png">
+                    <input type="password" name="pass">
+                    <img src="image/login/icon_cross.png">
+                </div>
+                <div class="check_remenber left">
+                    <input type="checkbox"> 记住密码
+                </div>
+                <div class=" cboth login_submit submit_button_style">登 录</div>
+                <div class="login_forgetpass">
+                    <a href="register.html" class="left">免费注册</a>
+                    <a href="#" class="right">忘记密码?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- 内容 END-->
+    <!-- 底部 -->
+    <div class="bottom_wrapper">
+        <div class="copyright marginauto">
+            <p>康美健康云@版权所有 备案号: 粤ICP备15086500号-2</p>
+            <span class="bottom_btn marginauto">
+                <a href="#">关于我们</a> |
+                <a href="#">联系我们</a>
+            </span>
+        </div>
+    </div>
+    <!-- 底部 END-->
+    <script type="text/javascript" src="js/core/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".login_submit").click(function(){
+               window.location.href = "index.html";
+            });
+        })
+    </script>
+</body>
+</html>

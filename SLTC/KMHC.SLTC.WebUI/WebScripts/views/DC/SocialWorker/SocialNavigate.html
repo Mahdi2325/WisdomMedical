@@ -1,0 +1,188 @@
+﻿<style type="text/css">
+    #content {
+        background-color: white;
+        margin-top: 0;
+        min-height: 800px;
+        border-left: 1px solid #cdd2d2;
+        padding-bottom: 30px;
+    }
+</style>
+<div class="row">
+    <div id="content" class="col-sm-12">
+        <div class="col-sm-2">
+            <resident-list callback="residentSelected(resident)" />
+        </div>
+        <div class="col-sm-10 box-shadow-3 navi-container-div">
+            <div class="navi-container-div1">
+                <div class="navi-container-div2">
+                    <div>
+                        <table cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2" class="navi-image-td">
+                                    <div ng-click="NavigateLink('IpdregIn')">
+                                        <div>
+                                           <img src="../../Images/DC/social/rz_socialworker_work.png" alt="" style="cursor:pointer" /><br><label>收案作業</label>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2">
+                                    <div class="navi-image-td">
+                                        <img src="../../Images/DC/arrow.png" alt="" />
+                                    </div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="navi-image-td">
+                                    <div style="width:173px;height:88px">
+                                        <div class="navi-image-right-div">
+                                            <div class="navi-image-line">
+                                            </div>
+                                        </div>
+                                        <div ng-click="NavigateLink('PersonBasicInfor')" style="cursor:pointer">
+                                            <div style="float:right">
+                                                <img src="../../Images/DC/social/rz_socialworker_personbasic.png" alt="" style="cursor:pointer" />
+                                            </div>
+                                            <br><label class="mainlabel">個案基本資料</label>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td colspan="2" class="navi-image-td">
+                                    <div>
+                                        <div class="navi-image-left-div">
+                                            <div class="navi-image-line">
+                                            </div>
+                                        </div>
+                                        <div ng-click="NavigateLink('PersonLifeHistory')" style="cursor:pointer;float:left">
+                                            <img src="../../Images/DC/social/rz_socialworker_personlife.png" alt="" style="cursor:pointer" /><br><label class="mainlabel">個案生活史</label>
+                                        </div>
+                                        <div class="navi-image-left-div">
+                                            <div class="navi-image-line">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td colspan="2" class="navi-image-td">
+                                    <div>
+                                        <div class="navi-image-left-div">
+                                            <div class="navi-image-line">
+                                            </div>
+                                        </div>
+                                        <div style="cursor:pointer;float:left" ng-click="NavigateLink('OneDayLife')">
+                                            <img src="../../Images/DC/social/rz_socialworker_oneday.png" alt="" style="cursor:pointer" /><br><label class="mainlabel">一天的生活</label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2">
+                                    <div class="navi-image-td">
+                                        <img src="../../Images/DC/arrow.png" alt="" />
+                                    </div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2" class="navi-image-td">
+                                    <div>
+                                        <div ng-click="NavigateLink('SocialEval')" style="cursor:pointer;">
+                                            <img src="../../Images/DC/social/rz_socialworker_long.png" alt="" /><br><label>社工個案評估及處遇計劃表</label>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2">
+                                    <div class="navi-image-td">
+                                        <img src="../../Images/DC/arrow.png" alt="" style="cursor:pointer" />
+                                    </div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="navi-image-td">
+                                    <div style="width:173px;height:73px">
+                                        <div class="navi-image-right-div">
+                                            <div class="navi-image-line">
+                                            </div>
+                                        </div>
+                                            <div ng-click="NavigateLink('RegLifeQualityEval')" style="cursor:pointer;float:right">
+                                                <img src="../../Images/DC/social/rz_socialworker_fiduciary.png" alt="" style="cursor:pointer" />
+                                            </div>
+                                            <br><label>家庭照顧者生活品質評估問卷</label>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <div class="navi-image-line1">
+                                    </div>
+                                </td>
+                                <td colspan="2" class="navi-image-td">
+                                    <div style="width:173px;height:73px" ng-click="NavigateLink('RegQuestionEvalRec')">
+                                        <div class="navi-image-left-div">
+                                            <div class="navi-image-line">
+                                            </div>
+                                        </div>
+                                        <div style="float:left">
+                                            <img src="../../Images/DC/social/rz_socialworker_fiduciary.png" alt="" style="cursor:pointer" />
+                                        </div>
+                                        <br><label>受託長輩適應程度評估表</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2">
+                                    <div class="navi-image-td">
+                                        <img src="../../Images/DC/arrow.png" alt="" />
+                                    </div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2" class="navi-image-td">
+                                    <div>
+                                        <div>
+                                            <div ng-click="NavigateLink('PersonReferral')" style="cursor:pointer"><img src="../../Images/DC/social/rz_socialworker_personreferrals.png" alt="" /><br><label>個案轉介單</label></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2">
+                                    <div class="navi-image-td">
+                                        <img src="../../Images/DC/arrow.png" alt="" />
+                                    </div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2" class="navi-image-td">
+                                    <div>
+                                        <div ng-click="NavigateLink('IpdregOut')">
+                                            <img src="../../Images/DC/social/rz_socialworker_closed.png" alt="" style="cursor:pointer" /><br><label>個案結案表</label>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

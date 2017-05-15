@@ -1,0 +1,61 @@
+﻿<div style="width:400px" class="modal-content modal-lg" ng-controller="CallInfoEditCtrl">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-bars"></i>编辑来电信息
+            </div>
+            <div class="tools">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form role="form" name="CallInfoEditForm" w5c-form-validate novalidate>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <input name="Otime" ng-model="curCallInfo.CallDate" class="form-control" ca-date-time-picker required />
+                            <label for="CallInfoType">来电时间</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <select class="form-control" name="CallType" ng-model="curCallInfo.CallType" select-code="Q00.009" required></select>
+                            <label for="CallType">来电类型</label>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <select class="form-control" name="CallType" ng-model="curCallInfo.Status" select-code="Q00.008"></select>
+                            <label for="CallType">处理状态</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <textarea name="Remarks" class="form-control" rows="5" ng-model="curCallInfo.Result" ng-maxlength="1000" />
+                            <label for="Result">处理结果</label>
+                        </div>
+                    </div>
+
+                </div>
+                
+</form>
+            <div class="text-center">
+                <button type="button" class="btn btn-primary" ng-click="saveEdit()">确定</button>
+                <button type="button" class="btn btn-grey" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

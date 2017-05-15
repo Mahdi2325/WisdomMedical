@@ -1,0 +1,235 @@
+﻿
+ <div class="row">
+            <div class="col-sm-2">
+                <div class="box border green">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>会员信息
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <resident-select callback="txtResidentIDChange(resident)" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="box border green">
+                    <div class="box-title">
+                        <h4><i class="fa fa-table"></i>个人缴费账单</h4>
+                        <div class="tools">
+                            <a href="javascript:;" class="reload" ca-reload ng-click="reload()">
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>账单流水号</th>
+                                    <th>账单日期</th>
+                                    <th>消费总金额</th>
+                                    <th>实收总金额</th>
+                                    <th>优惠总金额</th>
+                                    <!--<th>剩余应缴金额</th>-->
+                                    <th>账单内容</th>
+                                    <th>账单状态</th>
+                                    <th><i class="fa fa-bars"></i> 操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="bill in Data.bills">
+                                    <td><a ng-click="detailClick(bill)" href="" data-toggle="modal" data-target="#modalmxDetail">{{bill.BillNo}}</a></td>
+                                    <td>{{bill.BillDate |date:'yyyy-MM-dd'}}</td>
+                                    <td>{{bill.TotalCpAmount | currency:"¥"}}</td>
+                                    <td>{{bill.TotalPayAmount | currency:"¥"}}</td>
+                                    <td>{{bill.TotalDiscountAmount | currency:"¥"}}</td>
+                                    <!--<td>{{bill.TotalNeedAmount | currency:"¥"}}</td>-->
+                                    <td>{{bill.BillContent}}</td>
+                                    <td>{{bill.BillStatus==0?"未缴费":(bill.BillStatus==1?"已缴清":"未缴清")}}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                            <!--<a class="btn btn-success" role="button" data-toggle="modal" ng-hide="bill.BillStatus==1" data-target="#modalDetail" ng-click="needPayDetailClick(bill)">缴费</a>-->
+                                            <a class="btn btn-success" role="button" data-toggle="modal" ng-hide="bill.BillStatus==1" ng-click="needPayDetailClick(bill)">缴费</a>
+                                            <a class="btn btn-danger" role="button" data-toggle="modal" data-target="#modalPayDetail" ng-click="searchPay(bill)">缴费记录</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer right" style="margin-top:0px;">
+                        <button type="button" class="btn btn-primary" ng-click="GenerateBill()">生成账单</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+<!--账单缴费明细-->
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 70%">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    账单缴费明细
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" name="paybillsform">
+                    <div class="panel-group">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="txtPayDate" class="col-sm-1 control-label">缴费时间<span class="required">*</span></label>
+                                    <div class="col-sm-3">
+                                        <input id="txtPayDate" class="form-control" ng-model="Data.curPayment.PayDate" ca-date-time-picker required>
+                                    </div>
+                                    <label for="txtInvoiceNo" class="col-sm-1 control-label">发票号<span class="required">*</span></label>
+                                    <div class="col-sm-3">
+                                        <input id="txtInvoiceNo" class="form-control" ng-model="Data.curPayment.InvoiceNo">
+                                    </div>
+                                    <!--<label for="myBillStatus" class="col-sm-1 control-label">账单状态<span class="required">*</span></label>
+                                    <div class="col-sm-3">
+                                        <select id="myBillStatus" class="form-control" ng-model="Data.curBill.BillStatus" required>
+                                            <option value="">--请选择--</option>
+                                            <option value="1">已缴清</option>
+                                            <option value="2">未缴清</option>
+                                        </select>
+                                    </div>-->
+                                    <label for="txtReceived" class="col-sm-1 control-label">收款人<span class="required">*</span></label>
+                                    <div class="col-sm-3">
+                                        <input id="txtPayee" class="form-control" ng-model="Data.curPayment.Payee" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtTotalNeedAmount" class="col-sm-1 control-label">应收金额</label>
+                                    <div class="col-sm-3">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">¥</span>
+                                            <input id="txtTotalNeedAmount" class="form-control" type="number" ng-model="Data.curPayment.TotalNeedAmount" readonly required>
+                                        </div>
+                                    </div>
+                                    <label for="txtAmount" class="col-sm-1 control-label">实收金额<span class="required">*</span></label>
+                                    <div class="col-sm-3">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">¥</span>
+                                            <input id="txtAmount" class="form-control" type="number" ng-model="Data.curPayment.Amount" required>
+                                        </div>
+                                    </div>
+                                    <label class="col-sm-1 control-label">收款方式<span class="required">*</span></label>
+                                    <div class="col-sm-3">
+                                        <select class="form-control" ng-model="Data.curPayment.PayMethod" required>
+                                            <option value="">--请选择--</option>
+                                            <option value="现场缴费">现场缴费</option>
+                                            <option value="线上支付">线上支付</option>
+                                            <option value="其他渠道">其他渠道</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer center" style="margin-top:0px;">
+                <button type="button" class="btn btn-primary" ng-click="submitPay()" ng-disabled="paybillsform.$invalid" data-dismiss="modal">确认缴费</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--账单缴费记录-->
+<div class="modal fade" id="modalPayDetail" tabindex="-1" role="dialog" aria-labelledby="modalPayDetailLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 60%">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    账单缴费记录
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="box border green">
+                    <div class="box-title">
+                        <h4><i class="fa fa-table"></i>缴费记录</h4>
+                        <div class="tools">
+                            <a href="javascript:;" class="reload" ca-reload ng-click="reload()">
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>缴费编号</th>
+                                    <th>缴费时间</th>                                   
+                                    <th>缴费金额</th>
+                                    <th>发票号</th>
+                                    <th>收款方式</th>
+                                    <th>收款人</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="bill in Pay.billPayHis">
+                                    <td>{{$index + 1}}</td>
+                                    <!--<td>{{bill.PaymentNo}}</td>-->
+                                    <td>{{bill.id}}</td> <!--临时用这个当编号-->
+                                    <td>{{bill.PayDate |date:'yyyy-MM-dd hh:mm:ss'}}</td>                                   
+                                    <td>{{bill.Amount}}</td>
+                                    <td>{{bill.InvoiceNo }}</td>
+                                    <td>{{bill.PayMethod }}</td>
+                                    <td>{{bill.Payee}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--明细--->
+<div class="modal fade" id="modalmxDetail" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 60%">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    账单明细
+                </h4>
+            </div>
+            <div class="modal-body mHeight-modal">
+                <table class="table table-striped table-bordered table-hover table-handler">
+                    <thead>
+                        <tr>
+                            <th>收费流水号</th>
+                            <th>收费项目</th>
+                            <th>费用时间</th>
+                            <th>数量</th>
+                            <th>单价</th>
+                            <th>收费金额</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="charge in Data.BillDetails">
+                            <td>{{charge.CostNo}}</td>
+                            <td>{{charge.CIName}}</td>
+                            <td>{{charge.FeeDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                            <td>{{charge.Quantity}}</td>
+                            <td>{{charge.Price}}</td>
+                            <td>{{charge.Amount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

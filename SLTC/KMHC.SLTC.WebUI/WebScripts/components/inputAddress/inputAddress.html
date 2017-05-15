@@ -1,0 +1,18 @@
+﻿<style type="text/css">
+    #searchMap {
+        height: 300px;
+        width: 100%;
+        position:absolute;
+        z-index: 99999;
+    }
+
+    .tangram-suggestion-main {
+        z-index: 99999;
+    }
+</style>
+    <input class="form-control" name="searchWords" id="searchWords" type="text" ng-model="searchWords" ng-blur="blur()" ng-focus="focus()" ng-click="click();" placeholder="请直接输入具体的街道或小区进行搜索" value="" ng-required={{required}} />
+    <div id="searchResultPanel" style="border: 1px solid #C0C0C0; width: 100%; height: auto; display: none; "></div>
+    <div class="row"  ng-hide="true">
+        <div id="searchMap"></div>
+    </div>
+

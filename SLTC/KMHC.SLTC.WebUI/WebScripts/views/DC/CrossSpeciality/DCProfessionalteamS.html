@@ -1,0 +1,222 @@
+﻿
+<link href="/Content/HL.css" rel="stylesheet" />
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                <resident-list feeno={{FeeNo}} callback="residentSelected(resident)" />
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="content_container searchsum_hits">
+                            <div class="content">
+                                <div class="btn toolbar">
+                                    <button class="btn btn-primary" ng-click="saveForm(MULTITEAM)" ng-disabled="btn_s"><i class="fa fa-save"></i> 儲存資料</button>
+                                    <button class="btn btn-info" ng-disabled="btn_s"><i class="fa fa-print"></i> 打印預覽</button>
+                                    <button class="btn btn-danger" ng-click="showhistroy()" ng-disabled="btn_s"><i class="fa fa-list"></i> 歷次資料</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content_container item_details">
+                    <div class="content">
+                        <form class="form-horizontal tb" name="rfrForm" role="form" novalidate>
+                            <div style="margin-bottom:5px;" class="col-md-12">
+                                <div style="text-align:center;font-size:24px;font-weight:700;line-height:36px;font-family:DFKai-SB;">
+
+                                    <table style="width:100%;border:none;margin-top:5px;" class="col-md-12">
+                                        <tr>
+                                            <td style="border:none;font-size:25px;" colspan="4">
+                                                跨專業團隊服務計劃表<br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:none;font-size:18px;">長輩姓名</td>
+                                            <td style="border: none; font-size:18px;"><input type="text" style="border-left-style:none;border-top-style:none;border-right-style:none;border-bottom-style:solid;border-bottom-width:2px" ng-model="DAYLIFE.RESIDENTNO" /></td>
+                                            <td style="border: none; font-size:18px;">照服員:</td>
+                                            <td style="border: none; font-size:18px;"><input type="text" style="border-left-style: none; border-top-style: none; border-right-style: none; border-bottom-style: solid; border-bottom-width: 2px" ng-model="MULTITEAM.NURSEAIDES" /></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div style="text-align:center;line-height:36px;">
+                                <table class="col-md-12" width:auto">
+                                    <tr style="background-color:lightgray">
+                                        <td class="col-md-12 tdlbl" colspan="2" style="text-align: center;font-weight: bolder; font-size: 18px;">
+                                            家庭暨社會評估
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class ="col-md-6 tdlbl" style="text-align:left">
+                                            生態圖
+                                        </td>
+                                        <td class="col-md-6 tdlbl" style="text-align:left">
+                                            個人史及收託現況
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-6 tdlbl" style="text-align:left" rowspan="11">
+                                            <img src="{{MULTITEAM.ECOLOGICALMAP}} class=" photoimg" />
+                                        </td>
+                                        <td ><textarea ng-model="MULTITEAM.PERSONALHISTORY" rows="2"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; color: black;text-align:left">生理部分</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <textarea ng-model="MULTITEAM.PHYSIOLOGY" rows="2"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; color: black;text-align:left">心理部分</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <textarea ng-model="MULTITEAM.PSYCHOLOGY" rows="2"></textarea>
+                                        </td>
+                                    </tr>
+                            
+                                    <tr>
+                                        <td style="font-weight: bold; color: black;text-align:left">家庭關係及非正式支持系統</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <textarea ng-model="MULTITEAM.FAMILYSUPPORT" rows="2"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; color: black;text-align:left">經濟部分</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <textarea ng-model="MULTITEAM.ECONOMICCAPACITY" rows="2"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; color: black;text-align:left">目前使用之社會資源</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <textarea ng-model="MULTITEAM.SOCIALRESOURCES" rows="2"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr style="background-color:lightgray">
+                                        <td class="col-md-12 tdlbl" colspan="2" style="text-align: center;font-weight: bolder; font-size: 18px;">
+                                            生理評估
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="font-weight: bold; color: black;text-align:left">
+                                            疾病狀況：
+                                        </td>
+                                      
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type="text" ng-model="MULTITEAM.DISEASEINFO" id="ARTICLESCARRIED11" input-select="DC.037" style=" width:80%" />
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="text-align:left;color:black" >
+                                            <span style="font-weight: bolder; font-size: 61px; color: black;"></span><span style="font-size:18px">
+                                                MMSE: <input type="text" ng-model="MULTITEAM.MMSESCORE" style="border-left-style:none;border-top-style:none;border-right-style:none;border-bottom-style:none;width:100px" />分/30分;
+                                                IADL: <input type="text" ng-model="MULTITEAM.IADLSCORE" style="border-left-style:none;border-top-style:none;border-right-style:none;border-bottom-style:none;width:100px" />分/24分;
+                                                ADL: <input type="text" ng-model="MULTITEAM.ADLSCORE" style="border-left-style:none;border-top-style:none;border-right-style:none;border-bottom-style:none;width:100px" />分/100分;
+                                            </span>
+                                        </td>
+                                   </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; color: black;text-align:left" colspan="2">情緒:</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type="text" ng-model="MULTITEAM.MOOD" id="ARTICLESCARRIED2" input-select="DC.037" style=" width:80%" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="font-weight: bold; color: black;text-align:left">問題行為:</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type="text" ng-model="MULTITEAM.PROBLEMBEHAVIOR" id="ARTICLESCARRIED3" input-select="DC.037" style=" width:80%" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="font-weight: bold; color: black;text-align:left">人際:</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type="text" ng-model="MULTITEAM.INTERPERSONAL" id="ARTICLESCARRIED4" input-select="DC.037" style=" width:80%" />
+                                        </td>
+                                    </tr>
+                                   
+                             </table>
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:80%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <!--<div ng-include="'/Views/Socialworker/AddProposalDisscuss.html'"></div>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box border green">
+                            <div class="box-title">
+                                <h4>日常生活照顧歷史記錄</h4>
+                            </div>
+                            <div class="box-body">
+                                <!--<ui-data-table options="options">-->
+                                <table class="table table-bordered" id="editTable">
+                                    <thead>
+                                        <tr>
+                                            <th>姓名</th>
+                                            <th>照服員</th>
+                                            <th>創建時間</th>
+                                            <th>情緒</th>
+                                            <th>問題行為</th>
+                                            <th>人際</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="list in HistoryList">
+                                            <td>{{Name}}</td>
+                                            <td>{{list.NURSEAIDES}}</td>
+                                            <td>{{list.CREATEDATE|date:'yyyy-MM-dd'}}</td>
+                                            <td>{{list.MOOD}}</td>
+                                            <td>{{list.PROBLEMBEHAVIOR}}</td>
+                                            <td>{{list.INTERPERSONAL}}</td>
+                                            <td>
+                                                <button class="btn btn-primary" ng-click="editDayLife(list)">编辑</button>
+                                                <a class="btn btn-danger" role="button" data-toggle="modal" ng-click="deleteReferral(list.ID)">删除</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                                <!--</ui-data-table>-->
+                                <div id="pager"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

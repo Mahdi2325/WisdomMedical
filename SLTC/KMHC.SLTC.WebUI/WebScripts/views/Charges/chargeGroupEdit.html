@@ -1,0 +1,130 @@
+﻿
+            <div class="box border green">
+                <div class="box-title">
+                    <h4>
+                        <i class="fa fa-bars">
+                        </i>
+                        编辑费用套餐
+                    </h4>
+                </div>
+                <div class="box-body big">
+                    <form role="form" class="form-horizontal" name="chargegroupeditform" ng-submit="saveEdit(curItem)" novalidate>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">套餐编码<span class="required">*</span></label>
+                            <div class="col-sm-10">
+                                <input class="form-control" ng-model="curItem.CGNo" placeholder="" ng-maxlength="10" required readonly />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">套餐名称<span class="required">*</span></label>
+                            <div class="col-sm-10">
+                                <input class="form-control" ng-model="curItem.CGName" placeholder="" ng-maxlength="50" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">套餐状态</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" ng-model="curItem.Status" placeholder="" ng-maxlength="10" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">套餐内容</label>
+                            <div class="col-sm-10">
+                                <div class="box border">
+                                    <div class="box-title"></div>
+                                    <div class="box-body green">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>服务项目编码</th>
+                                                    <th>服务项目名称</th>
+                                                    <th>服务项目类型</th>
+                                                    <th>服务价格</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in curItem.GroupItems track by $index">
+                                                    <td><input type="hidden" ng-model="curItem.hiddenId">{{$index + 1}}</td>
+                                                    <td>{{item.SINo}}</td>
+                                                    <td>{{item.SIName}}</td>
+                                                    <td>{{item.SIType}}</td>
+                                                    <td>{{item.SumPrice | currency:"¥"}}</td>
+                                                    <td class="text-left">
+                                                        <!--<button type="button" class="btn btn-success btn-xs" ng-click="charegeClick(item,$event)">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>-->
+                                                        <button type="button" class="btn btn-danger btn-xs" ng-click="deleteCharegeDetl(item,$event)">
+                                                            <span class="glyphicon glyphicon-remove"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <!--<tr>
+                                    <td></td>
+                                    <td>
+                                        <input-charge-item callback="selectChargeItem(item)" value="{{curChgItem.CINo}}" />
+                                    </td>
+                                    <td>
+                                        {{curChgItem.CIName}}
+                                    </td>
+                                    <td>
+                                        {{curChgItem.Price| currency:"¥"}}
+                                    </td>
+                                    <td>
+                                        <select class="form-control ng-pristine ng-valid ng-isolate-scope ng-touched" ng-model="curChgItem.Frequency" style="">
+                                            <option value="">-- 请选择 --</option>
+                                            <option value="Day">Day</option>
+                                            <option value="Month">Month</option>
+                                        </select>
+
+                                    </td>
+                                    <td><input type="number" class="form-control" placeholder="次数" ng-model="curChgItem.RepeatCount" /></td>
+                                    <td>
+                                        <button type="button" id="chgGroupEditAdd" class="btn btn-primary btn-xs" ng-click="saveChargeItem()">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                    </td>
+                                </tr>-->
+                                                <tr>
+                                                    <td></td>
+                                                    <td>
+                                                        <input name="SINo" style="width:155px" class="form-control" ng-model="curChgItem.SINo" placeholder="点击选择服务项目" data-toggle="modal" data-target="#modalServiceItem" />
+                                                    </td>
+                                                    <td>
+                                                        {{curChgItem.SIName}}
+                                                    </td>
+                                                    <td>
+                                                        {{curChgItem.SIType}}
+                                                    </td>
+                                                    <td>
+                                                        {{curChgItem.SumPrice}}
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" id="chgGroupEditAdd" class="btn btn-primary btn-xs" ng-click="saveChargeItem()">
+                                                            <span class="glyphicon glyphicon-plus"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group center">
+                            <button class="btn btn-primary" type="submit" ng-disabled="chargegroupeditform.$invalid">保存</button>
+                            <button type="button" class="btn btn-grey" ng-click="cancelEdit()">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+<!-- 服务项目Modal -->
+<div class="modal fade" id="modalServiceItem" tabindex="-1" role="dialog" aria-labelledby="modalServiceItemLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div ng-include="'/WebScripts/views/Service/ServiceItemModal.html'"></div>
+    </div>
+</div>

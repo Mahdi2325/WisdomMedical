@@ -1,0 +1,119 @@
+﻿<style>
+    ul {
+        list-style-type:none
+    }
+
+
+</style>
+<div class="pd0 margin0">
+    <div id="tabs" class="row white">
+        <div style="padding: 5px; color: white" class="col-sm-4 text-center   color-darkgreen pdt12">今日已服务人次 {{Data.TodayCompleteTotal}}</div>
+        <div style="padding: 5px; color: white"  class="col-sm-4 text-center color-orange pdt12">正在服务人数 {{Data.ExecutionTotal}}</div>
+        <div style="padding: 5px; color: white" class="col-sm-4 text-center color-lightgreen pdt12">已经完成服务次数 {{Data.CompleteTotal}}</div>
+    </div>
+    <div class="row" style="padding-top:10px">
+        <div class="col-sm-12 mgt10"><i class="fa fa-table"></i> 社区综合服务中心</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12" style="height: 400px;">
+            <ul class="margin0 pd0 list-style-none">
+                <li  class="pull-left pdt10 pdl8" ng-repeat="item in Data.Residents">
+                    <img src="Images/person_default.png" class="pull-left" style="width:90px; height: 120px;" />
+                    <div class="pull-left" class="pull-left mgt20 mgl4"><div>{{item.PersonName}}</div><div><input type="checkbox" id="chk{{$index}}" class="chk_1" ng-model="item.ResidentServiceStatus" /><label for="chk{{$index}}"><span></span></label></div></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-center" style="color: #B84A1A; height: 20px; margin: 10px 0;">{{Data.Message}}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="portlet box color-darkgreen">
+                <div class="bportlet-title">
+                    <div class="caption" style="padding:5px;color:white">
+                        <i class="fa fa-table"></i>&nbsp;服务情况
+                    </div>
+                </div>
+                <div class="portlet-body" style="height: 200px;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>服务人员</td>
+                                <td>当前状态</td>
+                                <td>已完成服务</td>
+                                <td>未完成服务</td>
+                                <td>服务总次数</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in Data.ServiceList">
+                                <td>{{item.EmployeeName}}</td>
+                                <td>{{item.ServiceStatus}}</td>
+                                <td class="text-center">{{item.CompleteTotal}}</td>
+                                <td class="text-center">{{item.UnCompleteTotal}}</td>
+                                <td class="text-center">{{item.CompleteTotal + item.UnCompleteTotal}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="portlet box color-darkgreen">
+                <div class="bportlet-title">
+                    <div class="caption" style="padding:5px;color:white">
+                        <i class="fa fa-table"></i>&nbsp;服务登记
+                    </div>
+                </div>
+                <div class="portlet-body" style="height: 200px;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>时间</td>
+                                <td>提醒内容</td>
+                                <td>会员</td>
+                                <td>服务人员</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in Data.RemindList" style="{{item.IsRemind ? 'color:red;':'' }}">
+                                <td><a data-toggle="modal" data-target="#modalServiceOrderInfo" ng-click="ServiceOrderInfo(item.ServiceOrderID)">{{item.Otime | timeFormat}}</a></td>
+                                <td>{{item.SIName}}</td>
+                                <td>{{item.PersonName}}</td>
+                                <td>{{item.EmployeeName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="portlet box color-darkgreen">
+                <div class="bportlet-title">
+                    <div class="caption" style="padding:5px;color:white">
+                        <i class="fa fa-table"></i>&nbsp;照顾护工
+                    </div>
+                </div>
+                <div class="portlet-body" style="height: 100px;">
+                    <ul class="list-style-none margin0 pd0">
+                        <li class="pull-left pdt10 pdl8" ng-repeat="item in Data.Emps">
+                            <img src="Images/person_default.png" class="pull-left" style="width:60px; height: 80px;" />
+                            <div class="pull-left mgl4"><div style="width:40px;">{{item.EmpName}}</div></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+                </div>
+            </div>
+        </div>
+
+<!-- 服务项目Modal -->
+<div class="modal fade" id="modalServiceOrderInfo" tabindex="-1" role="dialog" aria-labelledby="modalServiceItemLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 90%; z-index: 90;">
+        <div ng-include="'/WebScripts/views/Service/ServiceOrderInfo.html'"></div>
+    </div>
+</div>

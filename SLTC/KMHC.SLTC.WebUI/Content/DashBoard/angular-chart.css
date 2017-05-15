@@ -1,0 +1,63 @@
+.chart-legend {
+	text-align: center; padding-left: 0px; margin-top: 5px; list-style-type: none; -webkit-padding-start: 0; -moz-padding-start: 0;
+}
+.bar-legend {
+	text-align: center; padding-left: 0px; margin-top: 5px; list-style-type: none; -webkit-padding-start: 0; -moz-padding-start: 0;
+}
+.line-legend {
+	text-align: center; padding-left: 0px; margin-top: 5px; list-style-type: none; -webkit-padding-start: 0; -moz-padding-start: 0;
+}
+.pie-legend {
+	text-align: center; padding-left: 0px; margin-top: 5px; list-style-type: none; -webkit-padding-start: 0; -moz-padding-start: 0;
+}
+.radar-legend {
+	text-align: center; padding-left: 0px; margin-top: 5px; list-style-type: none; -webkit-padding-start: 0; -moz-padding-start: 0;
+}
+.polararea-legend {
+	text-align: center; padding-left: 0px; margin-top: 5px; list-style-type: none; -webkit-padding-start: 0; -moz-padding-start: 0;
+}
+.doughnut-legend {
+	text-align: center; padding-left: 0px; margin-top: 5px; list-style-type: none; -webkit-padding-start: 0; -moz-padding-start: 0;
+}
+.chart-legend li {
+	padding: 2px 8px 2px 28px; border-radius: 5px; font-size: smaller; margin-bottom: 4px; display: inline-block; white-space: nowrap; position: relative; cursor: default;
+}
+.bar-legend li {
+	padding: 2px 8px 2px 28px; border-radius: 5px; font-size: smaller; margin-bottom: 4px; display: inline-block; white-space: nowrap; position: relative; cursor: default;
+}
+.line-legend li {
+	padding: 2px 8px 2px 28px; border-radius: 5px; font-size: smaller; margin-bottom: 4px; display: inline-block; white-space: nowrap; position: relative; cursor: default;
+}
+.pie-legend li {
+	padding: 2px 8px 2px 28px; border-radius: 5px; font-size: smaller; margin-bottom: 4px; display: inline-block; white-space: nowrap; position: relative; cursor: default;
+}
+.radar-legend li {
+	padding: 2px 8px 2px 28px; border-radius: 5px; font-size: smaller; margin-bottom: 4px; display: inline-block; white-space: nowrap; position: relative; cursor: default;
+}
+.polararea-legend li {
+	padding: 2px 8px 2px 28px; border-radius: 5px; font-size: smaller; margin-bottom: 4px; display: inline-block; white-space: nowrap; position: relative; cursor: default;
+}
+.doughnut-legend li {
+	padding: 2px 8px 2px 28px; border-radius: 5px; font-size: smaller; margin-bottom: 4px; display: inline-block; white-space: nowrap; position: relative; cursor: default;
+}
+.chart-legend li span {
+	border-radius: 5px; left: 0px; top: 0px; width: 20px; height: 20px; display: block; position: absolute;
+}
+.bar-legend li span {
+	border-radius: 5px; left: 0px; top: 0px; width: 20px; height: 20px; display: block; position: absolute;
+}
+.line-legend li span {
+	border-radius: 5px; left: 0px; top: 0px; width: 20px; height: 20px; display: block; position: absolute;
+}
+.pie-legend li span {
+	border-radius: 5px; left: 0px; top: 0px; width: 20px; height: 20px; display: block; position: absolute;
+}
+.radar-legend li span {
+	border-radius: 5px; left: 0px; top: 0px; width: 20px; height: 20px; display: block; position: absolute;
+}
+.polararea-legend li span {
+	border-radius: 5px; left: 0px; top: 0px; width: 20px; height: 20px; display: block; position: absolute;
+}
+.doughnut-legend li span {
+	border-radius: 5px; left: 0px; top: 0px; width: 20px; height: 20px; display: block; position: absolute;
+}

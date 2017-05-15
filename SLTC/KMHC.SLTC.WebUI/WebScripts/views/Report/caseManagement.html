@@ -1,0 +1,249 @@
+﻿<style>
+    .selectedCor {
+        background-color: #dff8e7;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="col-md-2">
+            <div class="portlet box blue">
+                <div class="portlet-body">
+                    <resident-select callback="residentSelected(resident)" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="portlet box blue">
+                <div class="portlet-body">
+                    <form class="form-horizontal ng-pristine ng-valid" role="form">
+                        <div class="form-group">
+                            <label class="search-lable">开始时间</label>
+                            <input type="text" id="startDate" class="search-control search-input input-width-sm" ng-model="sDate" ca-date-picker ng-change="checkstartTime()" />
+                            <label class="search-lable">结束时间</label>
+                            <input type="text" id="endDate" class="search-control search-input input-width-sm" ng-model="eDate" ca-date-picker ng-change="checkstartTime()" />
+                            <div class="search-btn-div">
+                                <a class="btn btn-primary btn-sm" ng-click="getCaseCon()"><i class="fa fa-search"></i> 查询</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="box border primary">
+                <div class="box-title">
+
+                </div>
+                <div class="box-body">
+                    <div class="tabbable header-tabs">
+                        <ul class="nav nav-tabs " id="case-tab">
+                            <li data-type="GetEvlRec"><a><i class="fa fa-laptop"></i> <span class="hidden-inline-mobile">评估记录</span></a></li>
+                            <li data-type="GetMeasureRec"><a><i class="fa fa-list-ul"></i> <span class="hidden-inline-mobile">量测数据</span></a></li>
+                            <li data-type="GetNsRec"><a><i class="fa fa-list-alt"></i> <span class="hidden-inline-mobile">护理记录</span></a></li>
+                            <li data-type="GetCplRec"><a><i class="fa fa-calendar-o"></i> <span class="hidden-inline-mobile">护理计划</span></a></li>
+                            <li data-type="GetFee" class="active"><a><i class="fa fa-rmb"></i> <span class="hidden-inline-mobile">费用情况</span></a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in">
+                                <ui-data-table options="options">
+                                    <div id="showDatas">
+
+                                    </div>
+
+                                </ui-data-table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="GetFee" type="text/x-handlebars-template">
+    <table class="table table-hover table-bordered  text-center">
+        <thead>
+        <tr>
+            <th class="text-center" width="200">日期</th>
+            <th class="text-center" width="30%">名称</th>
+            <th class="text-center">类别</th>
+            <th class="text-center">计价单位</th>
+            <th class="text-center">单价</th>
+            <th class="text-center">计价数量</th>
+            <th class="text-center">总价</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each Data}}
+        <tr>
+            <td>{{getFullDate EvalTime}}</td>
+            <td>{{Name}}</td>
+            <td>{{RecordType}}</td>
+            <td>{{Units}}</td>
+            <td>{{Unitprice}}</td>
+            <td>{{Qty}}</td>
+            <td>{{Cost}}</td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</script>
+<script id="GetCplRec" type="text/x-handlebars-template">
+    <table class="table table-hover table-bordered  text-center">
+        <thead>
+        <tr>
+            <th class="text-center">计划期间</th>
+            <th class="text-center">照护计划</th>
+            <th class="text-center" width="20%">目标</th>
+            <th class="text-center" width="30%">措施</th>
+            <th class="text-center">是否完成</th>
+            <th class="text-center">评估结果</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each Data}}
+        <tr>
+            <td>{{getFullDate StartDate}}{{#if EndDate}} 至 {{getFullDate EndDate}}{{else}} 至今 {{/if}}</td>
+            <td>{{CplLevel}}</td>
+            <td>
+                {{#each this.Goal}}
+                <p style="text-align:left;">{{getIndex @index}} {{Activity}}</p>
+                {{/each }}
+            </td>
+            <td>
+                {{#each this.Activity}}
+                <p style="text-align:left;">{{getIndex @index}} {{Activity}}</p>
+                {{/each }}
+            </td>
+
+            <td>{{FinishFlag}}</td>
+            <td>{{CplResult}}</td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</script>
+<script id="GetNsRec" type="text/x-handlebars-template">
+    <table class="table table-hover table-bordered text-center">
+        <thead>
+        <tr>
+            <th class="text-center" width="200">日期</th>
+            <th class="text-center">护理记录内容</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each Data}}
+        <tr>
+            <td>{{getFullDate RecordDate}}</td>
+            <td>{{Content}}</td>
+
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</script>
+<script id="GetMeasureRec" type="text/x-handlebars-template">
+    <table class="table table-hover table-bordered text-center">
+        <thead>
+        <tr>
+            <th class="text-center" width="200">日期</th>
+            <th class="text-center">体温（℃）</th>
+            <th class="text-center">脉搏（次/分）</th>
+            <th class="text-center">呼吸（次/分）</th>
+            <th class="text-center">血压（mmhg）</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each Data}}
+        <tr>
+            <td>{{getFullDate MeasureDay}}</td>
+            <td>
+                <table class="text-center" style="width:100%;">
+                    <tbody>
+                    {{#each this.Temp}}
+                    <tr>
+                        <td>{{Value}} （{{getTime MeasureTime}}）</td>
+                    </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <table class="text-center" style="width:100%;">
+                    <tbody>
+                    {{#each this.Pulse}}
+                    <tr>
+                        <td>{{Value}} （{{getTime MeasureTime}}）</td>
+                    </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <table class="text-center" style="width:100%;">
+                    <tbody>
+                    {{#each this.Breath}}
+                    <tr>
+                        <td>{{Value}} （{{getTime MeasureTime}}）</td>
+                    </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <table class="text-center" style="width:100%;">
+                    <tbody>
+                    {{#each this.BP}}
+                    <tr>
+                        <td>{{DBP.Value}}/{{SBP.Value}} （{{getTime MeasureTime}}）</td>
+                    </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </td>
+
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</script>
+<script id="GetEvlRec" type="text/x-handlebars-template">
+    <table class="table table-hover table-bordered  text-center">
+        <thead>
+        <tr>
+            <th class="text-center" width="200">日期</th>
+            <th class="text-center" width="20%">评估量表名称</th>
+            <th class="text-center" width="20%">分值</th>
+            <th class="text-center" width="40%">结果说明</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        {{#each Data}}
+        <tr>
+            <td>{{getFullDate EvalTime}}</td>
+            <td>{{EvalName}}</td>
+            <td>{{Score}}</td>
+            <td>{{Result}}</td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</script>
+<script type="text/javascript">
+    function setScroll(){
+        $(".slimBox").slimScroll({
+            height: 600,
+            alwaysVisible: false,
+            size: '4px',
+            allowPageScroll: true,
+        });
+    }
+    setScroll();
+    $(window).on("resize",setScroll);
+    function selectTr(item) {
+        $(item).addClass('selectedCor').siblings().removeClass('selectedCor');
+    }
+</script>

@@ -1,0 +1,108 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html ng-app="sltcWapApp">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>SLTC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/cloud-admin.css">
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/themes/default.css" id="skin-switcher">
+    <link href="/Content/CloudAdmin/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/Index/css")
+    <!-- uploadify -->
+    <link href="/Content/uploadify/uploadify.css" rel="stylesheet" />
+    <style type="text/css">
+        .wap-img-responsive {
+            position: absolute;
+            max-width: 60%;
+            height: 30px;
+            width: 120px;
+        }
+
+        .navbar-wapuser {
+            position: relative;
+            top: -10px;
+            color: #ffffff;
+        }
+
+            .navbar-wapuser:before {
+                content: url("/Images/wap/personal.png");
+                position: relative;
+                top: 10px;
+            }
+
+        .navbar-wapexit {
+            position: relative;
+            top: -10px;
+            color: #ffffff;
+        }
+
+            .navbar-wapexit:before {
+                content: url("/Images/wap/exit.png");
+                position: relative;
+                top: 10px;
+            }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="navbar clearfix" id="header" style="background-color: #00b0f8">
+        <div class="container" style="height: 60px;">
+            <div class="navbar-brand">
+                <!-- COMPANY LOGO -->
+                <a href="#">
+                    <img src="/Images/wap/logo.png" alt="STLC Logo" class="img-responsive" style="left: 20px; height: 42px; width: 190px;">
+                </a>
+                <!-- /COMPANY LOGO -->
+            </div>
+            <!-- BEGIN TOP NAVIGATION MENU -->
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="brand" href="#">
+                        <span class="navbar-wapuser">个人中心</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="brand" href="#">
+                        <span class="navbar-wapexit">退出</span>
+                    </a>
+
+                </li>
+            </ul>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </header>
+    <!-- PAGE -->
+    <section id="page">
+        <div class="container" style="padding: 0px;" ui-view>
+
+        </div>
+    </section>
+
+    @Scripts.Render("~/Content/Index/js")
+    <!-- DATE PICKER -->
+    <script src="/Content/laydate/laydate.js"></script>
+    <!-- uploadify -->
+    <script src="/Content/uploadify/jquery.uploadify.min.js"></script>
+    <!-- CUSTOM SCRIPT -->
+    <script src="/Content/CloudAdmin/js/script.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            App.init(); //Initialise plugins and elements
+        });
+
+        this.currentUser = { EmpNo: '', EmpName: '' };
+
+    </script>
+    <!-- /JAVASCRIPTS -->
+    @Scripts.Render("~/Scripts/angular")
+    @Scripts.Render("~/Scripts/Wap")
+</body>
+</html>

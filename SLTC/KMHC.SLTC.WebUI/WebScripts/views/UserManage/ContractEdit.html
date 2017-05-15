@@ -1,0 +1,133 @@
+﻿<div style="width:900px" class="modal-content modal-lg" ng-controller="ContractEditCtrl">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-bars"></i>编辑合同
+            </div>
+            <div class="tools">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form role="form" name="contractEditForm" w5c-form-validate novalidate>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" class="form-control" id="PersonName" name="PersonName" ng-model="curContract.PersonName" disabled>
+                            <label for="PersonName">合同客户</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" class="form-control" id="ContractNo" ng-model="curContract.ContractNo" disabled>
+                            <label for="form_control_1">合同编号</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <div class="input-icon right">
+                                <input name="ContractValue" ng-model="curContract.ContractValue" type="number" id="ContractValue" class="form-control" placeholder="请输入合同金额">
+                                <label for="ContractValue">合同金额</label>
+                                <i class="fa fa-money"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input class="form-control" ng-model="curContract.DiscountInfo" name="DiscountInfo"  placeholder="请输入优惠信息" ng-maxlength="11" />
+                            <label for="DiscountInfo">优惠信息</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <div class="input-icon right">
+                                <input type="number" name="FinalValue" ng-model="curContract.FinalValue" id="FinalValue" class="form-control" placeholder="请输入实收合同金额">
+                                <label for="FinalValue">实收合同金额</label>
+                                <i class="fa fa-money"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input class="form-control datepicker" id="StartTime" name="StartTime" type="text" ng-model="curContract.StartTime" ca-date-picker />
+                            <label for="StartTime">合同开始时间</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input class="form-control datepicker" type="text" id="EndTime" name="EndTime" ng-model="curContract.EndTime" ca-date-picker />
+                            <label for="EndTime">合同结束时间</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-radios">
+                            <label>服务类型</label>
+                            <div class="md-radio-inline">
+                                <label>&nbsp;
+                                    <input type="radio" name="ServiceType" id="ServiceType1" ng-model="curContract.ServiceType" value="1">长者通
+                                </label>&nbsp;
+                                <label>&nbsp;
+                                    <input type="radio" name="ServiceType" id="ServiceType2" ng-model="curContract.ServiceType" value="2">上门照料
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <select class="form-control" name="ContractForm" ng-model="curContract.ContractForm" select-code="Q00.001" required></select>
+                            <label for="ContractForm">合同形式</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <select class="form-control" name="CaseNature" ng-model="curContract.CaseNature" select-code="Q00.002" required></select>
+                            <label for="CaseNature">个案性质</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <select name="ItemID" class="form-control" ng-model="curContract.ReservedOperator" ng-options="t.EmployeeID as t.EmpName for t in EmpList"></select>
+                            <label for="Description">预留业务人员</label>
+                        </div>
+                    </div>
+                 </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <div id="divFile" class="form-control form-control-static">
+                                <a ng-show="curContract.ContractFile" href={{curContract.ContractFile}} target="_blank">点击下载合同文本</a>
+                            </div>
+                            <label for="form_control_1">合同文本</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <div class="form-control form-control-static">
+                                <div id="FilePathPicker">上传文件</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input">
+                            <textarea name="Reason" class="form-control" rows="5" ng-model="curContract.Description" placeholder="请输入合同备注" ng-maxlength="1000" />
+                            <label for="Description">合同备注</label>
+                        </div>
+                    </div>
+                </div>
+</form>
+            <div class="text-center">
+                <button type="button" class="btn btn-primary" ng-click="saveEdit()">确定</button>
+                <button type="button" class="btn btn-grey" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

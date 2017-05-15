@@ -1,0 +1,505 @@
+﻿@using KMHC.SLTC.WebUI.Models
+@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" ng-app="sltcApp" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" ng-app="sltcApp" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" ng-app="sltcApp" class="no-js">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+<meta charset="utf-8"/>
+<title>居家养老平台</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="" name="description"/>
+<meta content="" name="author"/>
+
+    <base href="/">
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+        @Styles.Render("~/Content/Index/css")
+    <link rel="stylesheet" type="text/css" href="/Content/Metronic/assets/global/plugins/simple-line-icons/simple-line-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="/Content/Metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/Content/Metronic/assets/admin/layout/css/layout.css">
+    <link rel="stylesheet" type="text/css" href="/Content/Metronic/assets/admin/layout/css/themes/darkblue.css">
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/common/site.css">
+    <link rel="stylesheet" type="text/css" href="/Content/Metronic/assets/admin/layout/css/custom.css">
+
+
+</head>
+<body class="page-md page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo" ng-controller="mainCtrl">
+
+	<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+	<!-- BEGIN HEADER INNER -->
+	<div class="page-header-inner">
+		<!-- BEGIN LOGO -->
+		<div class="page-logo">
+			<a href="#">
+				@if (ViewBag.User.LogoPath == null || ViewBag.User.LogoPath == "")
+				{
+					<img src="../../Content/CloudAdmin/img/logo/logo-index.png" height="25px" alt="STLC Logo" class="logo-default" />
+                }
+                else
+                {
+                    <img src="@ViewBag.User.LogoPath" alt="STLC Logo" height="25px" class="logo-default" />
+                }
+			</a>
+			<div class="menu-toggler sidebar-toggler hide">
+			</div>
+		</div>
+		<!-- END LOGO -->
+		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+		</a>
+		<!-- END RESPONSIVE MENU TOGGLER -->
+		<!-- BEGIN TOP NAVIGATION MENU -->
+		<div class="top-menu">
+			<ul class="nav navbar-nav pull-right">
+				<!-- BEGIN NOTIFICATION DROPDOWN -->
+				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+				@*<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+					<i class="icon-bell"></i>
+					<span class="badge badge-default">
+					7 </span>
+					</a>
+					<ul class="dropdown-menu">
+						<li class="external">
+							<h3><span class="bold">12 pending</span> notifications</h3>
+							<a href="extra_profile.html">view all</a>
+						</li>
+						<li>
+							<ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+								<li>
+									<a href="javascript:;">
+									<span class="time">just now</span>
+									<span class="details">
+									<span class="label label-sm label-icon label-success">
+									<i class="fa fa-plus"></i>
+									</span>
+									New user registered. </span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+									<span class="time">3 mins</span>
+									<span class="details">
+									<span class="label label-sm label-icon label-danger">
+									<i class="fa fa-bolt"></i>
+									</span>
+									Server #12 overloaded. </span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+									<span class="time">10 mins</span>
+									<span class="details">
+									<span class="label label-sm label-icon label-warning">
+									<i class="fa fa-bell-o"></i>
+									</span>
+									Server #2 not responding. </span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+									<span class="time">14 hrs</span>
+									<span class="details">
+									<span class="label label-sm label-icon label-info">
+									<i class="fa fa-bullhorn"></i>
+									</span>
+									Application error. </span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+									<span class="time">2 days</span>
+									<span class="details">
+									<span class="label label-sm label-icon label-danger">
+									<i class="fa fa-bolt"></i>
+									</span>
+									Database overloaded 68%. </span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+									<span class="time">3 days</span>
+									<span class="details">
+									<span class="label label-sm label-icon label-danger">
+									<i class="fa fa-bolt"></i>
+									</span>
+									A user IP blocked. </span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+									<span class="time">4 days</span>
+									<span class="details">
+									<span class="label label-sm label-icon label-warning">
+									<i class="fa fa-bell-o"></i>
+									</span>
+									Storage Server #4 not responding dfdfdfd. </span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+									<span class="time">5 days</span>
+									<span class="details">
+									<span class="label label-sm label-icon label-info">
+									<i class="fa fa-bullhorn"></i>
+									</span>
+									System Error. </span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+									<span class="time">9 days</span>
+									<span class="details">
+									<span class="label label-sm label-icon label-danger">
+									<i class="fa fa-bolt"></i>
+									</span>
+									Storage server failed. </span>
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>*@
+				<!-- END NOTIFICATION DROPDOWN -->
+				<!-- BEGIN INBOX DROPDOWN -->
+				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+				@*<li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+					<i class="icon-envelope-open"></i>
+					<span class="badge badge-default">
+					4 </span>
+					</a>
+					<ul class="dropdown-menu">
+						<li class="external">
+							<h3>You have <span class="bold">7 New</span> Messages</h3>
+							<a href="page_inbox.html">view all</a>
+						</li>
+						<li>
+							<ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+								<li>
+									<a href="inbox.html?a=view">
+									<span class="photo">
+									<img src="/Content/Metronic/assets/admin/layout/img/avatar2.jpg" class="img-circle" alt="">
+									</span>
+									<span class="subject">
+									<span class="from">
+									Lisa Wong </span>
+									<span class="time">Just Now </span>
+									</span>
+									<span class="message">
+									Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+									</a>
+								</li>
+								<li>
+									<a href="inbox.html?a=view">
+									<span class="photo">
+									<img src="/Content/Metronic/assets/admin/layout/img/avatar3.jpg" class="img-circle" alt="">
+									</span>
+									<span class="subject">
+									<span class="from">
+									Richard Doe </span>
+									<span class="time">16 mins </span>
+									</span>
+									<span class="message">
+									Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+									</a>
+								</li>
+								<li>
+									<a href="inbox.html?a=view">
+									<span class="photo">
+									<img src="/Content/Metronic/assets/admin/layout/img/avatar1.jpg" class="img-circle" alt="">
+									</span>
+									<span class="subject">
+									<span class="from">
+									Bob Nilson </span>
+									<span class="time">2 hrs </span>
+									</span>
+									<span class="message">
+									Vivamus sed nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+									</a>
+								</li>
+								<li>
+									<a href="inbox.html?a=view">
+									<span class="photo">
+									<img src="/Content/Metronic/assets/admin/layout/img/avatar2.jpg" class="img-circle" alt="">
+									</span>
+									<span class="subject">
+									<span class="from">
+									Lisa Wong </span>
+									<span class="time">40 mins </span>
+									</span>
+									<span class="message">
+									Vivamus sed auctor 40% nibh congue nibh... </span>
+									</a>
+								</li>
+								<li>
+									<a href="inbox.html?a=view">
+									<span class="photo">
+									<img src="/Content/Metronic/assets/admin/layout/img/avatar3.jpg" class="img-circle" alt="">
+									</span>
+									<span class="subject">
+									<span class="from">
+									Richard Doe </span>
+									<span class="time">46 mins </span>
+									</span>
+									<span class="message">
+									Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>*@
+				<!-- END INBOX DROPDOWN -->
+				<!-- BEGIN TODO DROPDOWN -->
+				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+				@*<li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
+					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+					<i class="icon-calendar"></i>
+					<span class="badge badge-default">
+					3 </span>
+					</a>
+					<ul class="dropdown-menu extended tasks">
+						<li class="external">
+							<h3>You have <span class="bold">12 pending</span> tasks</h3>
+							<a href="page_todo.html">view all</a>
+						</li>
+						<li>
+							<ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+								<li>
+									<a href="javascript:;">
+									<span class="task">
+									<span class="desc">New release v1.2 </span>
+									<span class="percent">30%</span>
+									</span>
+									<span class="progress">
+									<span style="width: 40%;" class="progress-bar progress-bar-success" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"><span class="sr-only">40% Complete</span></span>
+									</span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+									<span class="task">
+									<span class="desc">Application deployment</span>
+									<span class="percent">65%</span>
+									</span>
+									<span class="progress">
+									<span style="width: 65%;" class="progress-bar progress-bar-danger" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"><span class="sr-only">65% Complete</span></span>
+									</span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+									<span class="task">
+									<span class="desc">Mobile app release</span>
+									<span class="percent">98%</span>
+									</span>
+									<span class="progress">
+									<span style="width: 98%;" class="progress-bar progress-bar-success" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100"><span class="sr-only">98% Complete</span></span>
+									</span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+									<span class="task">
+									<span class="desc">Database migration</span>
+									<span class="percent">10%</span>
+									</span>
+									<span class="progress">
+									<span style="width: 10%;" class="progress-bar progress-bar-warning" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><span class="sr-only">10% Complete</span></span>
+									</span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+									<span class="task">
+									<span class="desc">Web server upgrade</span>
+									<span class="percent">58%</span>
+									</span>
+									<span class="progress">
+									<span style="width: 58%;" class="progress-bar progress-bar-info" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100"><span class="sr-only">58% Complete</span></span>
+									</span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+									<span class="task">
+									<span class="desc">Mobile development</span>
+									<span class="percent">85%</span>
+									</span>
+									<span class="progress">
+									<span style="width: 85%;" class="progress-bar progress-bar-success" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span class="sr-only">85% Complete</span></span>
+									</span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+									<span class="task">
+									<span class="desc">New UI release</span>
+									<span class="percent">38%</span>
+									</span>
+									<span class="progress progress-striped">
+									<span style="width: 38%;" class="progress-bar progress-bar-important" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100"><span class="sr-only">38% Complete</span></span>
+									</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>*@
+				<!-- END TODO DROPDOWN -->
+				<!-- BEGIN USER LOGIN DROPDOWN -->
+				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+				<li class="dropdown dropdown-user">
+					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+					<img alt="" class="img-circle" src="/Content/Metronic/assets/admin/layout/img/avatar3_small.jpg"/>					
+                        <span class="username username-hide-on-mobile"  ng-bind="user.DisplayName"></span>
+					<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-default">
+						<li ng-if="!user.IsAdmin"><a href="#" ui-sref="AccountSet(4)"><i class="icon-info"></i> 账号设置</a></li>
+                        <li ng-if="!user.IsAdmin"><a href="#" ui-sref="UserBasicInfoSet"><i class="icon-user"></i> 个人信息管理</a></li>
+					</ul>
+				</li>
+				<!-- END USER LOGIN DROPDOWN -->
+				<!-- BEGIN QUICK SIDEBAR TOGGLER -->
+				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+				<li class="dropdown dropdown-quick-sidebar-toggler">
+					<a href="javascript:;" class="dropdown-toggle">
+					<i class="icon-logout" ng-click="logout()"></i>
+					</a>
+				</li>
+				<!-- END QUICK SIDEBAR TOGGLER -->
+			</ul>
+		</div>
+		<!-- END TOP NAVIGATION MENU -->
+	</div>
+	<!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+<div class="clearfix">
+</div>
+	
+	<!-- BEGIN CONTAINER -->
+<div class="page-container">
+	<!-- BEGIN SIDEBAR -->
+	<div class="page-sidebar-wrapper">
+		<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+		<!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+		<div class="page-sidebar navbar-collapse collapse">
+			<!-- BEGIN SIDEBAR MENU -->
+			<!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+			<!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+			<!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+			<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+			<!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+			<!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+            <ul class="page-sidebar-menu page-sidebar-menu-closed" data-keep-expanded="false" data-auto-scroll="false" data-slide-speed="200">
+                <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                <li class="sidebar-toggler-wrapper">
+                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                    <div class="sidebar-toggler">
+                    </div>
+                    <!-- END SIDEBAR TOGGLER BUTTON -->
+                </li>
+                <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+                
+                <li ng-class="{'active':active(homePageMenu)}">
+                    <a href="javascript:;" ng-click="homePageClick()">
+                        <i class="icon-home"></i>
+                        <span class="title">首页</span>
+                    </a>
+                </li>
+
+                <li ng-class="{'active open':active(menu), 'open start': ($index == 0 && $root.currentMenu == undefined)}" ng-repeat="menu in menus">
+                    <a href="javascript:;">
+                        <i class="icon-basket"></i>
+                        <span class="title">{{menu.MenuName}}</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" ng-style="{true:displayblock, false:displaynone}[active(menu)]">
+                        <li ng-class="{true: 'active', false: ''}[activeSub(subMenu)]" ng-repeat="subMenu in menu.Functions |  orderBy:'OrderSeq':false">
+                            <a class="" href="javascript:;" ng-click="subMenuClick($event,subMenu)">
+                                <i class="icon-home"></i>
+                                {{subMenu.FunctionName}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+			<!-- END SIDEBAR MENU -->
+		</div>
+	</div>
+	<!-- END SIDEBAR -->
+	<!-- BEGIN CONTENT -->
+	<div class="page-content-wrapper">
+        <div class="page-content" ui-view>
+            @*填充的内容*@
+        </div>
+	</div>
+</div>
+    
+	<!-- END CONTENT -->
+<!-- END CONTAINER -->
+    <div class="page-footer">
+        <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+        </div>
+    </div>
+
+        @Scripts.Render("~/Content/Index/js")
+    <!-- DATE PICKER -->
+    <script src="/Content/laydate/laydate.js"></script>
+    <!-- uploadify -->
+    <script src="/Content/uploadify/jquery.uploadify.min.js"></script>
+    <!-- CUSTOM SCRIPT -->
+    <script src="/Content/CloudAdmin/js/script.js"></script>
+    <script src="http://api.map.baidu.com/getscript?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM&services=&t=20160708193109"></script>
+
+    <script>
+        //window.loading = window.pleaseWait({
+        //    logo: "",
+        //    backgroundColor: '#32cdcd'
+        //    //,
+        //    //loadingHtml: "<p class='loading-message'></p><div class='sk-spinner sk-spinner-wave'><div class='sk-rect1'></div><div class='sk-rect2'></div><div class='sk-rect3'></div><div class='sk-rect4'></div><div class='sk-rect5'></div></div>"
+        //});
+        jQuery(document).ready(function () {
+            Metronic.init(); // init metronic core componets
+            Layout.init(); // init layout
+            QuickSidebar.init(); // init quick sidebar
+        });
+        this.currentUser = {
+            UserId: parseInt('@ViewBag.User.UserId'),
+            DisplayName: '@ViewBag.User.EmpName',
+            IsAdmin: '@ViewBag.User.IsSurperAdmin' === 'True',
+            IsGroupAdmin: '@ViewBag.User.IsGroupAdmin' === 'True',
+            GroupId:parseInt('@ViewBag.User.GroupId'),
+            OrgId: parseInt('@ViewBag.User.OrgId'),
+            RoleId: parseInt('@ViewBag.User.RoleId'),
+            EmpId: parseInt('@ViewBag.User.EmpId'),
+            DeptID: parseInt('@ViewBag.User.DeptID'),
+            CheckRoomID:parseInt('@ViewBag.User.CheckRoomID'),
+            OrgIds: @Html.Raw(Json.Encode(ViewBag.User.OrgIds))
+            };
+
+    </script>
+    <!-- /JAVASCRIPTS -->
+    @Scripts.Render("~/Scripts/angular")
+    @Scripts.Render("~/Scripts/AppCommon")
+    @Scripts.Render("~/Scripts/DC")
+    @Scripts.Render("~/Scripts/ReportManage")
+    @Scripts.Render("~/Scripts/echarts")
+    @Scripts.Render("~/Scripts/Sequence")
+</body>
+</html>
+

@@ -1,0 +1,88 @@
+﻿
+<div class="box border green">
+    <div class="box-title">
+        <h4><i class="fa fa-bars"></i>监测模版信息</h4>
+    </div>
+    <div class="box-body big">
+        <form role="form" class="form-horizontal" name="monitortemplateform" ng-submit="saveMonitorTemplate()" >
+            <div class="form-group">
+                <label class="col-sm-2 control-label">编码<span class="required">*</span></label>
+                <div class="col-sm-10">
+                    <input class="form-control" ng-model="MonitorTemplate.MTNo" ng-maxlength="10" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">名称<span class="required">*</span></label>
+                <div class="col-sm-10">
+                    <input class="form-control" ng-model="MonitorTemplate.MTName" ng-maxlength="40" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">描述</label>
+                <div class="col-sm-10">
+                    <input class="form-control" ng-model="MonitorTemplate.MTDescription" ng-maxlength="200" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">监测项目内容</label>
+                <div class="col-sm-10">
+                    <div class="box border">
+                        <div class="box-title"></div>
+                        <div class="box-body green">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>监测项目编码</th>
+                                        <th>监测项目名称</th>
+                                        <th>备注</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in MonitorTemplate.Items track by $index">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{item.MINo}}</td>
+                                        <td>{{item.MIName}}</td>
+                                        <td>{{item.Remark}}</td>
+                                        <td class="text-left">
+                                            <button type="button" class="btn btn-danger btn-xs" ng-click="deleteMonitorItem(item,$event)">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <input-monitor-item callback="selectMonitorItem(item)" value="{{curItem.CINo}}" required />
+                                        </td>
+                                        <td>
+                                            {{curItem.MIName}}
+                                        </td>
+                                        <td>
+                                            {{curItem.Remark}}
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary btn-xs" ng-click="saveMonitorItem()">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-5 col-sm-10">
+                    <button class="btn btn-info" type="submit" ng-disabled="monitortemplateform.$invalid">保存</button>
+                    <a class="btn btn-grey" ui-sref="MonitorTemplates">取消</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

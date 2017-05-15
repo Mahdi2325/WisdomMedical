@@ -1,0 +1,26 @@
+﻿<div>
+    <input class="form-control" id="residentName" type="text" ng-model="searchWords" name="name" ng-blur="blur()" ng-keypress="KeyPress()" ng-mouseleave="keyUp()" ng-change="keySearch()" ng-focus="focus();" placeholder="请输入姓名" ng-required={{required}} autocomplete="off" />
+    <span class="error-span"></span>
+    <table id="tb" class="table table-hover table-bordered input-select" ng-show="showList">
+        <thead>
+            <tr role="row">
+                <th>#</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>身份证编号</th>
+                <th>认证状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in residents" ng-click="rowClick(item)">
+                <td>{{$index + 1}}</td>
+                <td>{{item.Name}}</td>
+                <td> <span select-code="A00.001" select-value="{{item.Sex}}"></span> </td>
+                <td>{{item.Birthdate|ageFormat}}</td>
+                <td>{{item.IdCard|idcardFormat}}</td>
+                <td>{{item.AuditState=='A'?"已认证":"未认证"}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

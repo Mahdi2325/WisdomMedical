@@ -1,0 +1,223 @@
+﻿
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border green">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>团体活动信息</h4>
+                        </div>
+                        <div class="box-body">
+                            <div class="tabbable header-tabs">
+                                <ul class="nav nav-tabs" id="tabResident">
+                                    <li><a href="#Photo" data-toggle="tab"><i class="fa fa-medkit"></i> <span class="hidden-inline-mobile">精彩照片</span></a></li>
+                                    <li class="active"><a href="#Info" data-toggle="tab"><i class="fa fa-book"></i> <span class="hidden-inline-mobile">活动信息</span></a></li>
+                                </ul>
+                            </div>
+                            <form class="form-horizontal" role="form" name="groupactivityeidtform" ng-submit="save()" novalidate>
+                                <div class="tab-content">
+                                    <div id="Info" class="tab-pane active">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">活动信息</div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">活动编号<span class="required">*</span></label>
+                                                    <div class="col-sm-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.ActivityNo" lang="50" required />
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">活动名称<span class="required">*</span></label>
+                                                    <div class="col-sm-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.ActivityName" lang="50" required />
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">活动日期<span class="required">*</span></label>
+                                                    <div class="col-sm-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.EventDate" ca-date-picker required />
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">活动地点</label>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" ng-model="Data.Ga.EventPlace" select-code="F00.046"></select>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">活动时数</label>
+                                                    <div class="col-sm-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.EventHours" ng-maxlength="10" />
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">填写日期</label>
+                                                    <div class="col-sm-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.RecordDate" ca-date-picker />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">领导者</label>
+                                                    <div class="col-sm-3">
+                                                        <input-staff callback="staffSelected(item,'Leader')" value="{{Data.Ga.LeaderName}}" />
+                                                        <!--<input class="form-control" type="text" ng-model="Data.Leader">-->
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">协同领导者1</label>
+                                                    <div class="col-sm-3">
+                                                        <input-staff callback="staffSelected(item,'Leader1')" value="{{Data.Ga.LeaderName1}}" />
+                                                        <!--<input class="form-control" type="text" ng-model="Data.Leader1">-->
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">协同领导者2</label>
+                                                    <div class="col-sm-3">
+                                                        <input-staff callback="staffSelected(item,'Leader2')" value="{{Data.Ga.LeaderName2}}" />
+                                                        <!--<input class="form-control" type="text" ng-model="Data.Leader2">-->
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">活动结果</label>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" ng-model="Data.Ga.ActivityResults" select-code="F00.047"></select>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">评估总平均</label>
+                                                    <div class="col-sm-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.EvalResults" ng-maxlength="10" />
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">参加人数</label>
+                                                    <div class="col-sm-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.AttendNumber" ng-maxlength="10" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">活动类型<span class="required">*</span></label>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" ng-model="Data.Ga.ActivityType" select-code="F00.045" required></select>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">记录人员</label>
+                                                    <div class="col-sm-3">
+                                                        <input-staff callback="staffSelected(item,'InputName')" value="{{Data.Ga.Operator}}" />
+                                                        <!--<input class="form-control" type="text" ng-model="Data.InputName">-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">活动过程</div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">活动流程团体动力</label>
+                                                    <div class="col-sm-11">
+                                                        <textarea class="form-control" rows="3" ng-model="Data.Ga.GroupCompetence" ng-maxlength="200"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">特殊个案个别纪要</label>
+                                                    <div class="col-sm-11">
+                                                        <textarea class="form-control" rows="3" ng-model="Data.Ga.IndividualSummary" ng-maxlength="200"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">成果评估（建议改进事项）</label>
+                                                    <div class="col-sm-11">
+                                                        <textarea class="form-control" rows="3" ng-model="Data.Ga.Suggestion" ng-maxlength="200"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">备注</label>
+                                                    <div class="col-sm-11">
+                                                        <textarea class="form-control" rows="3" ng-model="Data.Ga.Description" ng-maxlength="200"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Photo" class="tab-pane">
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <h3>精彩照片1</h3>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h3>精彩照片2</h3>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <img src="{{Data.Ga.Picture1}}" />
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <img src="{{Data.Ga.Picture2}}" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-2">
+                                                <div id="Picture1PathPicker">選擇照片</div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <button class="btn btn-grey" ng-click="clear('picture1')">清除</button>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div id="Picture2PathPicker">選擇照片</div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <button class="btn btn-grey" ng-click="clear('picture2')">清除</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--
+        <div class="panel panel-default">
+            <div class="panel-heading">活動審核</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <labelclass="col-sm-1 control-label">組長/督導</label>
+                    <div class="col-sm-3">
+                        <input-staff callback="staffSelected(item,'Supervisor')" value="{{Data.Supervisor}}" />
+                    </div>
+                    <labelclass="col-sm-1 control-label">組長已審閱</label>
+                    <div class="col-sm-3">
+                        <input type="checkbox" ng-model="Data.SupCheck"> 是
+                    </div>
+                    <labelclass="col-sm-1 control-label">審閱日期</label>
+                    <div class="col-sm-3">
+                        <input class="form-control datepicker" type="text" ng-model="Data.SupCheckDate" ca-date-time-picker readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <labelclass="col-sm-1 control-label">審核結果</label>
+                    <div class="col-sm-3">
+                        <select class="form-control" ng-model="Data.SupCheckResult" select-code="F00.055"></select>
+                    </div>
+                    <labelclass="col-sm-1 control-label">審核備註</label>
+                    <div class="col-sm-7">
+                        <input class="form-control" type="text" ng-model="Data.SupCheckRemark">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <labelclass="col-sm-1 control-label">主任/主管</label>
+                    <div class="col-sm-3">
+                        <input-staff callback="staffSelected(item,'Director')" value="{{Data.Director}}" />
+                    </div>
+                    <labelclass="col-sm-1 control-label">主任已審閱</label>
+                    <div class="col-sm-3">
+                        <input type="checkbox" ng-model="Data.DirCheck"> 是
+                    </div>
+                    <labelclass="col-sm-1 control-label">審閱日期</label>
+                    <div class="col-sm-3">
+                        <input class="form-control datepicker" type="text" ng-model="Data.DirCheckDate" ca-date-time-picker readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <labelclass="col-sm-1 control-label">審核結果</label>
+                    <div class="col-sm-3">
+                        <select class="form-control" ng-model="Data.DirCheckResult" select-code="F00.055"></select>
+                    </div>
+                    <labelclass="col-sm-1 control-label">審核備註</label>
+                    <div class="col-sm-7">
+                        <input class="form-control" type="text" ng-model="Data.DirCheckRemark">
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+                                <div class="form-group center">
+                                    <button class="btn btn-success" type="submit" ng-disabled="groupactivityeidtform.$invalid">保存</button>
+                                    <button class="btn btn-grey" ui-sref="GroupActivityList">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>

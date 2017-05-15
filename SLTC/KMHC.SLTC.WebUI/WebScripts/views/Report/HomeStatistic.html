@@ -1,0 +1,127 @@
+﻿<div id="container">
+    <div class="row" style="margin-top:30px">
+        <div class="col-md-6">
+            <div class="box border custom">
+                <div class="box-title">呼叫中心</div>
+                <div class="box-body big form-horizontal" style="min-height: 280px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-bottom:8px;"><i class="icon todaycall-icon"></i><span class="icon-after-text">今日电话</span></div>
+                            <div class="row line" style="margin-right: 8px;"></div>
+                            <div class="form-group" style="margin-top:20px;">
+                                <div class="col-sm-6" style="padding-left:20%">接听：</div>
+                                <div class="col-sm-6">{{callIn}}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6" style="padding-left:20%">拔出：</div>
+                                <div class="col-sm-6">{{callOut}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-bottom:8px;"><i class="icon serviceworkorder-icon"></i><span class="icon-after-text">今日服务工单</span></div>
+                            <div class="row line" style="margin-right: 8px;"></div>
+                            <div class="form-group" style="margin-top: 20px;">
+                                <div class="col-sm-6" style="padding-left: 20%">服务预约：</div>
+                                <div class="col-sm-6">{{service1}}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6" style="padding-left:20%">已完成：</div>
+                                <div class="col-sm-6">{{service2}}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6" style="padding-left:20%">正在服务：</div>
+                                <div class="col-sm-6">{{service3}}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6" style="padding-left:20%">已下单：</div>
+                                <div class="col-sm-6">{{service4}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box border green">
+                <div class="box-title">服务情况</div>
+                <div class="box-body big form-horizontal" style="min-height: 280px;">
+                    <div class="form-group" style="margin-bottom:8px;"><i class="icon todayservice-icon"></i><span class="icon-after-text">今日服务情况</span></div>
+                    <div class="row line" style="margin-right: 8px;"></div>
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-11">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td>护理员</td>
+                                        <td>当前状态</td>
+                                        <td>已完成服务</td>
+                                        <td>未完成服务</td>
+                                        <td>服务总次数</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in todayServiceList">
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.state}}</td>
+                                        <td>{{item.s1}}</td>
+                                        <td>{{item.s2}}</td>
+                                        <td>{{item.total}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box border custom">
+                <div class="box-title">一键求救</div>
+                <div id="sosMapDiv" class="box-body big form-horizontal" style="min-height: 350px; padding: 0;">
+                    <div class="row" style="margin:0;">
+                        <div class="col-md-3 left-nav">
+                            <ul>
+                                <li ng-repeat="item in sosList">
+                                    <a href="#" ng-click="click('sosMap', item)"><div class="title">{{item.name}}</div><div class="description">{{item.phone}}</div></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-9" style="padding:0;">
+                            <div id="sosMap" class="drop" style="min-height: 350px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box border custom">
+                <div class="box-title">异常预警</div>
+                <div id="monitorMapDiv" class="box-body big form-horizontal" style="min-height: 350px; padding: 0;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>姓名</td>
+                                <td>类型</td>
+                                <td>量测值</td>
+                                <td>参考值</td>
+                                <td>结果</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in abnormityList">
+                                <td>{{item.name}}</td>
+                                <td>{{item.type}}</td>
+                                <td>{{item.v1}}</td>
+                                <td>{{item.v2}}</td>
+                                <td>{{item.result}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/Content/echarts/echarts.min.js"></script>

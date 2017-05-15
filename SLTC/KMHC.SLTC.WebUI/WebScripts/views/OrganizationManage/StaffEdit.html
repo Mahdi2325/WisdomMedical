@@ -1,0 +1,158 @@
+﻿
+<div class="row" ng-controller="staffEditCtrl">
+        <!-- BOX -->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bars"></i>{{isadd?"添加":"编辑"}}员工
+                </div>
+                <div class="tools">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+            </div>
+            <div class="portlet-body">
+
+                <form w5c-form-validate role="form" class="w5c-form" name="staffeditform" novalidate>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group form-md-line-input">
+                                <div id="divFile" class="form-control form-control-static">
+                                    <img style="height: 150px" ng-src="{{(Data.Emp.PhotoPath != null && Data.Emp.PhotoPath != '') ? Data.Emp.PhotoPath : '/Images/0.png'}}" alt="" />
+                                </div>
+                                <label for="form_control_1">头像</label>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group form-md-line-input">
+                                <div class="form-control form-control-static">
+                                    <div id="PicturePathPicker">上传图片</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group form-md-line-input">
+                                        <select class="form-control" name="OrganizationID" ng-model="Data.Emp.OrganizationID" ng-options="x.OrganizationID as x.OrgName for x in Data.Orgs" required></select>
+                                        <label for="PersonNo">所属机构<span class="required">*</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-md-line-input">
+                                        <input type="text" name="EmpNo" class="form-control" ng-model="Data.Emp.EmpNo" ng-maxlength="20" placeholder="请填入员工编号" disabled required />
+                                        <label for="PersonNo">员工编号<span class="required">*</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-md-line-input">
+                                        <input type="text" name="EmpName" class="form-control" ng-model="Data.Emp.EmpName" ng-maxlength="20" placeholder="请填入员工姓名" required />
+                                        <label for="PersonNo"> 员工姓名<span class="required">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group form-md-line-input">
+                                        <input class="form-control" name="IdCard" ng-model="Data.Emp.IdCard" ng-maxlength="18" ng-change="createBirthdate(Data.Emp.IdCard)" ng-minlength="16" placeholder="请输入正确的身份证号" idcard />
+                                        <label for="PersonNo">身份证号</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-md-line-input">
+                                        <input class="form-control datepicker" name="Birthdate" type="text" ng-model="Data.Emp.Birthdate" placeholder="请选择出生日期" ca-date-picker>
+                                        <label for="PersonNo">出生日期</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-md-line-input">
+                                        <select name="Sex" class="form-control" id="selSex" ng-model="Data.Emp.Sex" select-code="A00.001" required></select>
+                                        <label for="selSex">性别<span class="required">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group form-md-line-input">
+                                <div class="form-control form-control-static" style="padding-top:0px">
+                                    <input-address id="txtRecordBy" callback="addressInput(address)" value="{{StaffAddress}}" />
+                                </div>
+                                <label for="form_control_1">现地址</label>
+                                <!--<input id="myAddress1" class="form-control" data-toggle="modal" data-target="#modalInputAddress" ng-click="EditAddress()" placeholder="点击输入详细地址" style="width:100%" ng-model="StaffAddress" type="text">-->
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group form-md-line-input">
+                                <input class="form-control" ng-model="Data.Emp.Tel" name="Tel" ng-maxlength="20" placeholder="请输入联系号码" phone />
+                                <label for="PersonNo"> 联系电话</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group form-md-line-input">
+                                <input class="form-control" ng-model="Data.Emp.Zip" name="Zip" ng-maxlength="20" placeholder="请输入邮编" />
+                                <label for="PersonNo">邮编</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group form-md-line-input">
+                                <input class="form-control" ng-model="Data.Emp.ECPerson" name="ECPerson" ng-maxlength="20" placeholder="请输入紧急联系人" />
+                                <label for="PersonNo">紧急联系人</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group form-md-line-input">
+                                <input class="form-control" ng-model="Data.Emp.ECPhone" name="ECPhone" ng-maxlength="20" placeholder="请输入紧急联系电话" phone />
+                                <label for="PersonNo">紧急联系电话</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group form-md-line-input">
+                                <select class="form-control" ng-model="Data.Emp.Qualifications" name="Qualifications" select-code="A00.007"></select>
+                                <label for="PersonNo">教育程度</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group form-md-line-input">
+                                <select class="form-control" ng-model="Data.Emp.MerryFlag" name="MerryFlag" select-code="A00.011"></select>
+                                <label for="PersonNo">婚姻狀況</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group form-md-line-input">
+                                <select class="form-control" ng-model="Data.Emp.JobTitle" name="JobTitle" select-code="D00.001" required></select>
+                                <label for="PersonNo">员工类型<span class="required">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group form-md-line-input">
+                                <select class="form-control" ng-model="Data.Emp.Position" name="Position" select-code="D00.004"></select>
+                                <label for="PersonNo">职位</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group form-md-line-input">
+                                <select class="form-control" name="DeptID" ng-model="Data.Emp.DeptID" ng-options="x.DeptID as x.DeptName for x in Data.Depts"></select>
+                                <label for="PersonNo">所属部门（科室）</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group form-md-line-input">
+                                <select class="form-control" ng-model="Data.Emp.EmpState" name="EmpState" select-code="D00.003" required></select>
+                                <label for="PersonNo">员工状态<span class="required">*</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="submit" w5c-form-submit=" save(Data.Emp);">保存</button> <!--ng-disabled="staffeditform.$invalid"-->
+                        <button type="button" id="btnClose" class="btn btn-grey" data-dismiss="modal">关闭</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

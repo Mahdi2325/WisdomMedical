@@ -1,0 +1,222 @@
+/**顶部*/
+.top_wrapper{
+    background-color: #FFFFFF;
+    width: 100%;
+    max-height: 108px;
+    height: 108px;
+    overflow: hidden;
+}
+
+.top_wrapper .top{
+    position:relative;
+    max-width: 1280px;
+    width: auto;
+    height: 108px;
+}
+
+.logo{
+    float: left;
+    margin-left: 8px;
+    margin-top: 12px;
+}
+
+.content_wrapper{
+    background-color: #32cdcd;
+    width: 100%;
+    height: auto;
+    display: table;
+    margin: 0px;
+}
+
+.login_img_wrapper{
+    max-width: 1420px;
+    width: auto;
+    height: 701px;
+    background: url("../image/login/login_image.jpg") no-repeat center;
+}
+
+/**登录表单*/
+.login_form{
+    width: 410px;
+    height: 355px;
+    margin-top: 45px;
+    margin-right: 20px;
+    background-color: #FFFFFF;
+    box-shadow: #666 0px 0px 10px;
+}
+
+.login_box_form{
+    width: 410px;
+    height: 355px;
+    background-color: #FFFFFF;
+    box-shadow: #666 0px 0px 10px;
+}
+
+.input_text{
+    border: 1px solid #cccccc;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow:2px 2px 2px #f0f0ef inset;
+    -webkit-box-shadow:2px 2px 2px #f0f0ef inset;
+    box-shadow:2px 2px 2px #f0f0ef inset;
+}
+
+input{
+    font-size: 18px;
+    color: #6d6e70;
+    border:0px solid red;
+    padding-left: 8px;
+}
+
+.input_text input{
+    width: 225px;
+}
+
+input:focus {
+    outline:none;
+}
+
+.login_form .input_name,
+.login_box_form .input_name
+{
+    width: 303px;
+    height: 40px;
+    position: relative;
+    left: 12%;
+    top: 15%;
+}
+
+.login_form .input_text input，
+.login_box_form .input_text input
+{
+    width: 230px;
+    height: 30px;
+    padding: 0px;
+    margin-top: 4px;
+    margin-left: 4px;
+    border: 0px dashed red;
+}
+
+.login_form .input_text img:nth-child(1),
+.login_box_form .input_text img:nth-child(1)
+{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.login_form .input_pass,
+.login_box_form .input_pass
+{
+    width: 303px;
+    height: 40px;
+    position: relative;
+    left: 12%;
+    top: 20%;
+}
+
+.login_form .check_remenber,
+.login_box_form .check_remenber
+{
+    position: relative;
+    left: 12%;
+    top: 25%;
+}
+
+.submit_button_style{
+    width: 303px;
+    height: 45px;
+    border:none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #32cdcd;
+    color: #FFFFFF;
+    font-size: 20px;
+    text-align: center;
+    line-height: 45px;
+    font-family: "Microsoft Yahei";
+    cursor: pointer;
+}
+
+.content_wrapper .login_form .login_submit,
+.content_wrapper .login_box_form .login_submit{
+    position: relative;
+    left: 12%;
+    top: 30%;
+}
+
+.content_wrapper .login_form .login_forgetpass,
+.content_wrapper .login_box_form .login_forgetpass
+{
+    width: 303px;
+    position: relative;
+    left: 12%;
+    top: 38%;
+}
+
+/**注册表单*/
+.registere_form{
+    width: 1200px;
+    height: 600px;
+    margin-top: 45px;
+    background-color: #FFFFFF;
+    box-shadow: #666 0px 0px 10px;
+}
+
+.register_title {
+    height: 35px;
+    background: url("../image/login/line.jpg") no-repeat;
+    background-position: bottom;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.register_input_txt {
+    width:380px;
+    height: 30px;
+    border: 1px solid #cccccc;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow:2px 2px 2px #f0f0ef inset;
+    -webkit-box-shadow:2px 2px 2px #f0f0ef inset;
+    box-shadow:2px 2px 2px #f0f0ef inset;
+}
+
+.register_name,
+.register_pass,
+.register_confirm,
+.register_phone,
+.register_code,
+.register_agree
+{
+    width: 100%;
+    margin-top: 30px;
+    margin-left: 100px;
+}
+
+.register_pass {
+    text-indent: 20px;
+}
+
+.register_code{
+    text-indent: 8px;
+}
+
+.register_code input{
+    width: 140px;
+}
+
+.register_button{
+    margin-top: 30px;
+    margin-left: 100px;
+}
+
+/**分辨率小于455px*/
+@media (max-width: 455px) {
+    .login_btn{
+        margin-top: 8px;
+        margin-right: 5px;
+    }
+}

@@ -1,0 +1,378 @@
+﻿<style>
+
+   .home > li {
+        list-style-type: none;
+        border-bottom: 1px dashed #ccc;
+        line-height: 40px;
+		margin:5px 0 5px 0;
+	
+    }
+
+    .sub-title {
+        font-size: medium;
+        color: gray;
+        line-height: 35px;
+    }
+
+    .count {
+        font-size: medium;
+        color: blue;
+    }
+    .un-distribute {
+        float: left;
+        height: 32px;
+        width: 32px;
+        margin-top: 3px;
+        background: url(/Images/DC/1492754766_process.png) no-repeat center top;
+    }
+    .today-undeal {
+        float: left;
+        height: 32px;
+        width: 32px;
+        margin-top: 3px;
+        background: url(/Images/DC/clock_1-32.png) no-repeat center top;
+    }
+    .history-undeal {
+        float: left;
+        height: 32px;
+        width: 32px;
+        margin-top: 3px;
+        background-image: url(/Images/DC/1492756496_history_clear.png);
+    }
+   .return-visit {
+       float: left;
+       height: 32px;
+       width: 32px;
+       margin-top: 3px;
+       background-image: url(/Images/DC/return.png);
+   }
+   .refund {
+       float: left;
+       height: 32px;
+       width: 32px;
+       margin-top: 3px;
+       background-image: url(/Images/DC/refund.png);
+   }
+   .change {
+       float: left;
+       height: 32px;
+       width: 32px;
+       margin-top: 3px;
+       background-image: url(/Images/DC/change.png);
+   }
+    .self-pickup {
+        float: left;
+        height: 32px;
+        width: 32px;
+        margin-top: 3px;
+        background-image: url(/Images/DC/self-pickup.png);
+    }
+   .phone {
+       float: left;
+       height: 32px;
+       width: 32px;
+       margin-top: 3px;
+       background-image: url(/Images/DC/phone.png);
+   }
+    .app {
+        float: left;
+        height: 32px;
+        width: 32px;
+        margin-top: 3px;
+        background-image: url(/Images/DC/app.png);
+    }
+   .notice {
+       float: left;
+       height: 32px;
+       width: 32px;
+       margin-top: 3px;
+       background-image: url(/Images/DC/notice.png);
+   }
+   .signing-contract {
+       float: left;
+       height: 32px;
+       width: 32px;
+       margin-top: 3px;
+       background-image: url(/Images/DC/signing_contract-32.png);
+   }
+    .order-number {
+        float: left;
+        height: 32px;
+        width: 32px;
+        margin-top: 3px;
+        background-image: url(/Images/DC/order_number.png);
+    }
+   .task-number {
+       float: left;
+       height: 32px;
+       width: 32px;
+       margin-top: 3px;
+       background-image: url(/Images/DC/task-number.png);
+   }
+    .today-money {
+        float: left;
+        height: 32px;
+        width: 32px;
+        margin-top: 3px;
+        background-image: url(/Images/DC/today_money.png);
+    }
+   .row .distance {
+        padding-top: 20px;
+    }
+</style>
+
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-home"></i>首页
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-4">
+
+                    <div class="row clearfix">
+                        <div class="col-md-6 column "> <span class="sub-title">服务单处理</span></div>
+                        <div class="col-md-6 column " align="center">
+                            <a href="#" class="btn btn-primary " ng-click="refresh()">刷新</a>
+                        </div>
+                    </div>
+
+                    <ul class="home">
+                        <li>
+                            <div class=" clearfix ">
+                                <div class="col-md-2 column un-distribute">
+                                </div>
+                                <div class="col-md-6 column "><span>待指派工单数</span>
+                                </div>
+                                <div class="col-md-2 column count" align="center">
+                                    {{briefInfo.UnDistributeTaskCount}}
+                                </div>
+                                <div class="col-md-2 column" align="center">
+                                    单
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="clearfix">
+                                <div class="col-md-2 column today-undeal"></div>
+                                <div class="col-md-6 column ">今日待执行工单数</div>
+                                <div class="col-md-2 column count" align="center">
+                                    {{briefInfo.TodayUnDealTaskCount}}
+                                </div>
+                                <div class="col-md-2 column" align="center">
+                                    单
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="clearfix">
+                                <div class="col-md-2 column history-undeal"></div>
+                                <div class="col-md-6 column ">逾期未处理工单数</div>
+                                <div class="col-md-2 column count" align="center">
+                                    {{briefInfo.HistoryUnDealTaskCount}}
+                                </div>
+                                <div class="col-md-2 column" align="center">
+                                    单
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="clearfix">
+							  <div class="col-md-2 column return-visit"></div>
+                                <div class="col-md-6 column ">待回访工单数</div>
+                                <div class="col-md-2 column count" align="center">
+                                    {{briefInfo.RequireReturnVisitTaskCount}}
+                                </div>
+                                <div class="col-md-2 column" align="center">
+                                    单
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+
+                    <div class="row clearfix">
+                        <div class="col-md-12 column "> <span class="sub-title">今日各项指数</span></div>
+                    </div>
+
+                    <ul class="home">
+                        <li>
+                            <div class="clearfix ">
+                                <div class="col-md-2 column signing-contract"></div>
+                                <div class="col-md-6 column">
+                                    <span>建档人数</span>
+                                </div>
+                                <div class="col-md-2 column count" align="center">
+                                    {{todayInfo.ResidentNumber}}
+                                </div>
+                                <div class="col-md-2 column" align="center">
+                                    单
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="clearfix">
+                                <div class="col-md-2 column task-number"></div>
+                                <div class="col-md-6 column ">服务工单数</div>
+                                <div class="col-md-2 column count" align="center">
+                                    {{todayInfo.TaskNubmer}}
+                                </div>
+                                <div class="col-md-2 column" align="center">
+                                    单
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="clearfix">
+                                <div class="col-md-2 column order-number"></div>
+                                <div class="col-md-6 column ">订单总数</div>
+                                <div class="col-md-2 column count" align="center">
+                                    {{todayInfo.OrderNumber}}
+                                </div>
+                                <div class="col-md-2 column" align="center">
+                                    单
+                                </div>
+                            </div>
+                        </li>
+						<li>
+                            <div class="clearfix">
+                                <div class="col-md-2 column today-money"></div>
+                                <div class="col-md-4 column ">订单金额</div>
+                                <div class="col-md-4 column count" align="right">
+                                    {{todayInfo.OrderAmount|currency:'￥'}}
+                                </div>
+                                <div class="col-md-2 column" align="center">
+                                    元
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <div class="row clearfix">
+                        <div class="col-md-12 column "> <span class="sub-title">内部消息公告</span></div>
+
+                    </div>
+
+                    <ul class="home">
+                        <li>
+                            <div class=" clearfix ">
+							<div class="col-md-2 column notice"></div>
+                                <div class="col-md-6 column">
+                                    <span>关于新系统的使用情况</span>
+                                </div>
+                                <div class="col-md-4 column" align="center">
+                                    2017-04-18
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+          
+        </div>
+    <div class="row distance">
+        <div class="col-md-12">  
+			<div class="col-md-4">
+
+                    <div class="row clearfix">
+                        <div class="col-md-12 column "> <span class="sub-title">提醒</span></div>
+                    </div>
+
+                    <ul class="home">
+                        <li>
+                            <div class="clearfix ">
+							<div class="col-md-2 column refund"></div>
+                                <div class="col-md-6 column">
+                                    <span>需退款审核</span>
+                                </div>
+                                <div class="col-md-2 column count" align="center">
+                                    {{briefInfo.NeedAuditRefundOrderCount}}
+                                </div>
+                                <div class="col-md-2 column" align="center">
+                                    单
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="clearfix">
+                                <div class="col-md-2 column change"></div>
+                                <div class="col-md-6 column ">需改签审核</div>
+                                <div class="col-md-2 column count" align="center">
+                                    {{briefInfo.NeedChangeAuditOrderCount}}
+                                </div>
+                                <div class="col-md-2 column" align="center">
+                                    单
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="clearfix">
+							<div class="col-md-2 column self-pickup"></div>
+                                <div class="col-md-6 column ">上门提货</div>
+                                <div class="col-md-2 column count" align="center">
+                                    {{briefInfo.SelfPickupOrderCount}}
+                                </div>
+                                <div class="col-md-2 column" align="center">
+                                    单
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>	
+            <div class="col-md-4">
+                <div class="row clearfix">
+                    <div class="col-md-12 column "> <span class="sub-title">来电与回访</span></div>
+
+                </div>
+
+                <ul class="home">
+                    <li>
+                        <div class="clearfix ">
+							<div class="col-md-2 column phone"></div>
+                            <div class="col-md-6 column">
+                                <span>来电预约订单</span>
+                            </div>
+                            <div class="col-md-2 column count" align="center">
+                                1
+                            </div>
+                            <div class="col-md-2 column" align="center">
+                                单
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class=" clearfix ">
+						<div class="col-md-2 column app"></div>
+                            <div class="col-md-6 column">
+                                <span>APP预约订单</span>
+                            </div>
+                            <div class="col-md-2 column count" align="center">
+                                1
+                            </div>
+                            <div class="col-md-2 column" align="center">
+                                单
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+               
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+</div>

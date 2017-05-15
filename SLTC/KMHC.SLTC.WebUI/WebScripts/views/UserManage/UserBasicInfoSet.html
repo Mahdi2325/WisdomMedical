@@ -1,0 +1,118 @@
+﻿<link rel="stylesheet" type="text/css" href="/WebScripts/components/cityNewSelect/city-picker.css" />
+<script src="/WebScripts/components/cityNewSelect/city-picker.data.js"></script>
+<script src="/WebScripts/components/cityNewSelect/city-picker.js"></script>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>个人信息
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form class="form-horizontal" role="form" name="userbasicinfosetform">
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">员工编号<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" ng-model="Data.Emp.EmpNo" ng-maxlength="50" placeholder="请填入员工编号" required ng-readonly="true" />
+
+                        </div>
+                        <label class="col-sm-2 control-label">所属机构</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" ng-model="Data.Emp.OrganizationID" ng-options="x.OrganizationID as x.OrgName for x in Data.Orgs" ng-disabled="true" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">名称<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" ng-model="Data.Emp.EmpName" ng-maxlength="50" placeholder="请填入员工姓名" ng-readonly="true" required />
+                        </div>
+                        <label class="col-sm-2 control-label">性別</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" ng-model="Data.Emp.Sex" ng-disabled="true" select-code="A00.001"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">身份证号</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" ng-model="Data.Emp.IdCard" ng-readonly="true" ng-maxlength="20" ng-minlength="16" />
+                        </div>
+                        <label class="col-sm-2 control-label">出生日期</label>
+                        <div class="col-sm-4">
+                            <input class="form-control datepicker" type="text" ng-readonly="true" ng-model="Data.Emp.Birthdate" ca-date-picker>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">出生地址</label>
+                        <div class="col-sm-4">
+                            <div style="position: relative;">
+                                <input id="myAddress1" class="form-control" style="width:100%" ng-model="AddressDetail" readonly type="text" data-toggle="city-picker">
+                            </div>
+                        </div>
+                        <label class="col-sm-2 control-label">邮编</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" ng-model="Data.Emp.Zip" type="number" ng-maxlength="10" ng-readonly="true" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">婚姻狀況</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" ng-model="Data.Emp.MerryFlag" ng-disabled="true" select-code="A00.011"></select>
+                        </div>
+                        <label class="col-sm-2 control-label">联系电话<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <input class="form-control" ng-model="Data.Emp.Tel" ng-maxlength="20" required />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">紧急联系人<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <input class="form-control" ng-model="Data.Emp.ECPerson" ng-maxlength="20" required />
+                        </div>
+                        <label class="col-sm-2 control-label">紧急联系电话<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <input class="form-control" ng-model="Data.Emp.ECPhone" ng-maxlength="20" required />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">教育程度</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" ng-model="Data.Emp.Qualifications" ng-disabled="true" select-code="A00.007"></select>
+                        </div>
+                        <label class="col-sm-2 control-label">职称类别</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" ng-model="Data.Emp.HiredType" ng-disabled="true" select-code="D00.002"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">职称</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" ng-model="Data.Emp.JobTitle" ng-disabled="true" select-code="D00.004"></select>
+                        </div>
+                        <label class="col-sm-2 control-label">职位</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" ng-model="Data.Emp.Position" ng-disabled="true" select-code="D00.001"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">员工状态</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" ng-model="Data.Emp.EmpState" ng-disabled="true" select-code="D00.003"></select>
+                        </div>
+                    </div>
+
+
+                    <div class="text-center">
+                        <button class="btn btn-primary" ng-disabled="userbasicinfosetform.$invalid" type="submit" ng-click="save();">保存</button>
+                        <!--<button class="btn btn-grey" ui-sref="HomePage">取消</button>-->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

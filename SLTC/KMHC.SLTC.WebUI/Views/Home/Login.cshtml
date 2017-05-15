@@ -1,0 +1,92 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能居家养老服务平台 | 登录</title>
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+
+    <link type="text/css" href="../../Content/URS/css/common.css" rel="stylesheet" />
+    <link type="text/css" href="../../Content/URS/css/login.css" rel="stylesheet" />
+</head>
+<body ng-controller="loginCtrl">
+    <!-- 顶部-->
+    <div class="top_wrapper">
+        <div class="top marginauto">
+            <img src="../../../Content/URS/image/login/logo.png" class="logo">
+        </div>
+    </div>
+    <!-- 顶部 END-->
+    <!-- 内容-->
+    <div class="content_wrapper">
+        <div class="login_img_wrapper marginauto">
+            <form name="loginForm" method="post" class="login_form right" action="/Home/Login" onsubmit="return check();" novalidate>
+                <div class="input_name input_text">
+                    <img src="../../../Content/URS/image/login/icon_person.png">
+                    <input maxlength="20" id="txtName" type="text" class="input-username wryh" name="name" placeholder="用户名" required="required" onkeyup="this.value = this.value.replace(/(^\s*)|(\s*$)/g, '')" />
+                </div>
+                <div class="input_pass input_text">
+                    <img src="../../../Content/URS/image/login/icon_lock.png">
+                    <input id="txtPwd" type="password" class="input-password wryh" name="pwd" placeholder="密码" required="required" onkeyup="this.value = this.value.replace(/(^\s*)|(\s*$)/g, '')" />
+                </div>
+                <div class="check_remenber left">
+                    <input type="checkbox" id="check-remember" name="isRemember">
+                    <label for="check-remember"></label>
+                    <label class="txt-checkbox wryh">记住密码</label>
+                </div>
+                <button type="submit" class="cboth login_submit submit_button_style" style="border: 0px;display:block;">登录</button>
+
+                <div id="txtMsg" style="margin-top:120px;color:#e80c4d;">
+                    @ViewBag.Msg
+                </div>
+                <div class="login_forgetpass">
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- 内容 END-->
+    <!-- 底部 -->
+    <div class="bottom_wrapper">
+        <div class="copyright marginauto">
+            <p class="ac fs-13">康美健康云©版权所有</p>
+            <p class="ac fs-13">V3.1_20160908_01</p>
+        </div>
+    </div>
+    <!-- 底部 END-->
+</body>
+</html>
+<script type="text/javascript">
+    var check = function () {
+        var success = true;
+        var name = document.getElementById("txtName").value;
+        var password = document.getElementById("txtPwd").value;
+        var msg = document.getElementById("txtMsg");
+        msg.innerText = "";
+        if (name.length > 20) {
+            msg.innerText = "用户名长度不能大于20";
+            document.getElementById("txtName").focus();
+            success = false;
+        } else if (name.length === 0) {
+            msg.innerText = "用户名不能为空";
+            document.getElementById("txtName").focus();
+            success = false;
+        }
+        if (password.length === 0) {
+            var info = msg.innerText;
+            if (info.length === 0) {
+                msg.innerText = "密码不能为空";
+                document.getElementById("txtPwd").focus();
+            } else {
+                msg.innerHtml = info + ",密码不能为空";
+            }
+            success = false;
+        }
+        return success;
+    };
+</script>

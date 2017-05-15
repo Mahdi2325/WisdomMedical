@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html ng-app="sltcLogin">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能居家养老服务平台 | 登录</title>
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+
+    <script src="../../../Scripts/angular.js"></script>
+    <script src="../../../Scripts/angular-cookies.js"></script>
+
+    <!-- JQUERY -->
+    <script src="../../../Scripts/jquery-1.10.2.min.js"></script>
+    <!-- JQUERY COOKIE-->
+    <script src="../../../Scripts/jquery.cookie.js"></script>
+
+    <!-- BOOTSTRAP -->
+    <script src="../../../Content/cloudadmin/bootstrap-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../Content/cloudadmin/bootstrap-dist/js/validator/bootstrapValidator.js"></script>
+    <script src="../../../Content/SLTCLogin/js/validate.login.js"></script>
+
+    <link type="text/css" href="../../../Content/CloudAdmin/css/common/common.css" rel="stylesheet" />
+    <link type="text/css" href="../../../Content/SLTCLogin/css/login.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../Content/cloudadmin/bootstrap-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../Content/cloudadmin/bootstrap-dist/css/validator/bootstrapValidator.css" />
+
+
+    <script>
+        angular.module("sltcLogin", [])
+        .controller("loginCtrl", ['$scope', '$http', function ($scope, $http) {
+            var authenticateUrl = "http://120.25.225.5:5500/users/login";
+            var currentUserUrl = "http://120.25.225.5:5500/users/me";//获取当前用户的URL，服务器端根据SessionID验证
+
+            $scope.authenticate = function (user, pass) {
+                if (user == undefined) {
+                    user = $("#nameWrapper input").val();
+                }
+                if (pass == undefined) {
+                    pass = $("#passwordWrapper input").val();
+                }
+
+                if (user && pass) {//user 或 pass 为空会导致depoyd的异常
+                    $http.post(authenticateUrl, {
+                        username: user,
+                        password: pass
+                    }, {
+                        withCredentials: true
+                    }).success(function (data) {
+                        $http.get(currentUserUrl, { withCredentials: true }).then(function (response) {
+                            if (response.status == '200') {
+                                $http.get("http://120.25.225.5:5500/roles?RoleNo=" + response.data.RoleNo).success(function (roles) {
+                                    if (roles && roles.length > 0 && roles[0].DefaultPage) {
+                                        window.sessionStorage["DefaultPage"] = roles[0].DefaultPage;
+                                    }
+                                    window.location.replace("/angular"); //跳转至主页
+                                })
+                            }
+                        })
+
+                    }).error(function (error) {
+                        $scope.authenticationError = error;
+                    });
+                } else {
+                    $scope.authenticationError = "用户名或密码不能为空！";
+                }
+            };
+
+        }])
+    </script>
+</head>
+<body ng-controller="loginCtrl">
+
+    <div class="wrapper-bg marginauto">
+        <img src="../../../Content/SLTCLogin/img/logo/logo.png" class="block marginauto mgt75">
+        <!-- 登陆框 -->
+        <div class="login-box marginauto ac">
+            <form id="loginForm" method="post" class="form-horizontal" ng-submit="authenticate(username,password)">
+                <div class="form-group">
+                    <!-- 用户名 -->
+                    <div id="nameWrapper" class="marginauto padding0 pdt60">
+                        <input type="text" class="input-username wryh" ng-model="username" name="userName" placeholder="用户名" />
+                        <span class="help-block" id="userNameMessage" />
+                    </div>
+                    <!-- 用户名 END-->
+                    <!-- 密码 -->
+                    <div id="passwordWrapper" class="mgt40">
+                        <input type="password" class="input-password wryh" ng-model="password" name="passWord" placeholder="密码" />
+                        <span class="help-block" id="passWordMessage" />
+                    </div>
+                    <!-- 密码 END -->
+                </div>
+                <!-- 记住密码 -->
+                <div class="check-remember mgt30">
+                    <input type="checkbox" id="check-remember">
+                    <label for="check-remember"></label>
+                    <label class="txt-checkbox wryh">记住密码</label>
+                </div>
+                <div class="cboth"></div>
+                <!-- 记住密码 END-->
+                <button type="submit" class="btn-login wryh">登 录</button>
+
+                <div class=" mgt10 error-msg">
+                    {{authenticationError.message}}
+                </div>
+            </form>
+        </div>
+        <!-- 登陆框 END-->
+        <!-- 版权信息 -->
+        <div class="wrapper-copyright">
+            <p class="ac fs-13">康美健康云©版权所有</p>
+        </div>
+        <!-- 版权信息 END -->
+    </div>
+</body>
+</html>

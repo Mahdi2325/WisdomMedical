@@ -1,0 +1,132 @@
+﻿
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <table style="width:100%;text-align:left;vertical-align:middle">
+                <tr>
+                    <td style="width:20%">
+                        <select name="Status" class="form-control" ng-model="options.params['Data.SingleStatus']" placeholder="请选择工单状态" select-code="P00.004"></select>
+                    </td>
+                    <td style="width:20%">
+                        <input type="text" class="form-control" id="keyword" ng-model="options.params['Data.Name']" placeholder="请输入会员姓名">
+                    </td>
+                    <td style="width:15%">
+                        <input name="AppointmentTimeStart" ng-model="options.params['Data.AppointmentTimeStart']" class="form-control" ca-date-time-picker placeholder="请起始选择服务时间" />
+                    </td>
+                    <td style="width:15%">
+                        <input name="AppointmentTimeEnd" ng-model="options.params['Data.AppointmentTimeEnd']" class="form-control" ca-date-time-picker placeholder="请选择结束服务时间" />
+                    </td>
+                    <td style="text-align:left">
+                        <span class="input-group-btn">
+                            <a class="btn btn-primary" ng-click="search()"><i class="icon-search"></i>查询</a>
+                            <!--<a class="btn btn-primary" ui-sref="BedAdd">新增</a>-->
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-cogs"></i>工单管理
+				</div>
+			</div>
+            <div class="portlet-body">
+                <div >
+                <ui-data-table options="options">
+					<table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <!--<th>#</th>-->
+                            <th>任务编号</th>
+                            <th>订单编号</th>
+                            <th>服务项目名称</th>
+                            <th>会员姓名</th>
+                            <th>会员性别</th>
+                            <th>联系电话</th>
+                            <th>预约时间</th>
+                            <th>状态</th>
+                            <th><i class="fa fa-bars"></i> 操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in Tasks">
+                            <!--<td>{{$index + 1}}</td>-->
+                            <td><a data-toggle="modal" data-target="#modalTaskEdit" ng-click="TaskToShow(item.TaskID,0)">{{item.TaskNo}}</a></td>
+                            <td>{{item.SONo}}</td>
+                            <td>{{item.ServiceName}}</td>
+                            <td>{{item.PersonName}}</td>
+                            <td><span select-code="A00.001" select-value="{{item.Sex}}"></span></td>
+                            <td>{{item.Phone}}</td>
+                            <td>{{item.AppointmentTime | timeFormat}}</td>
+                            <td><span select-code="P00.004" ng-show="!item.IsCancel" select-value="{{item.Status}}" ></span>
+                                <span ng-show="item.IsCancel">已取消</span>
+                                <label ng-if="item.IsNeedChangeAudit && !item.IsCancel" class="text text-info">(已申请改签)</label>                              
+                            </td>
+                                <!--<div ng-if="item.Status == 0">
+                                    <label class="text text-info">工单生成</label>
+                                </div>
+                                <div ng-if="item.Status == 1">
+                                    <label class="text text-pink">工单派发</label>
+                                </div>
+                                <div ng-if="item.Status == 2">
+                                    <label class="text text-green">工单进行中</label>
+                                </div>
+                                <div ng-if="item.Status == 3">
+                                    <label class="text text-success">工单完成</label>
+                                </div>
+                                <div ng-if="item.Status == 4">
+                                    <label class="text text-danger">工单取消</label>
+                                </div>-->
+                            <td style="text-align:left;width:200px">
+                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                    <!--<a class="btn btn-danger" role="button" ui-sref="TaskDispatch({id:task.id})" ng-hide="task.Status > 0">任务派发</a>--><!--滑动版本-->
+                                    <!--<a class="btn btn-danger" role="button" ui-sref="TaskSend({id:task.id})" ng-hide="task.Status > 0">任务派发</a>--><!--列表模式-->
+                                    <button ng-click="TaskEdit(item, 0)" class="btn btn-success" role="button" ng-show="item.Status !='Wait' && !item.IsCancel">
+                                        <span ng-if="item.Status=='Finish'">工单回访</span>
+                                        <span ng-if="item.Status!='Finish'">查看工单</span>
+                                    </button><!--TaskEdit({id:task.id,flag:'0'})-->
+                                    <a class="btn btn-info" role="button" ng-if="item.Status == 'Assign' && !item.IsCancel && item.IsNeedChangeAudit==false" ng-click="Change(item,0)">
+                                        改签
+                                    </a>
+                                    <a class="btn btn-info" role="button" ng-if="item.Status == 'Assign' && !item.IsCancel && item.IsNeedChangeAudit==true" ng-click="Audit(item,0)">
+                                        审核改签
+                                    </a>
+                                    <a class="btn btn-danger" role="button" ng-if="item.Status == 'Assign' && !item.IsCancel" ng-click="GetBack(item)">取消派遣</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+				</ui-data-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 工单派发Modal -->
+<div class="modal fade" id="modalCarryOut" tabindex="-1" role="dialog" aria-labelledby="modalCarryOutLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" >
+        <div ng-include="'/WebScripts/views/ServiceOrder/CarryoutTask.html'"></div>
+    </div>
+</div>
+<!-- 任务改签Modal -->
+<div class="modal fade" id="taskChange" tabindex="-1" role="dialog" aria-labelledby="taskChangeLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div ng-include="'/WebScripts/views/ServiceOrder/TaskChange.html'"></div>
+    </div>
+</div>
+<!-- 改签审核Modal -->
+<div class="modal fade" id="taskAudit" tabindex="-1" role="dialog" aria-labelledby="taskAuditLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div ng-include="'/WebScripts/views/ServiceOrder/TaskAudit.html'"></div>
+    </div>
+</div>
+
+<!-- 改签审核Modal -->
+<div class="modal fade" id="modalTaskEdit" tabindex="-1" role="dialog" aria-labelledby="taskAuditLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div ng-include="'/WebScripts/views/ServiceOrder/TaskEdit.html'"></div>
+    </div>
+</div>

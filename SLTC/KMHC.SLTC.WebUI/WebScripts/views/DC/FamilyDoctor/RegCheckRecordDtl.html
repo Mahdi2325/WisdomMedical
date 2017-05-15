@@ -1,0 +1,92 @@
+﻿<div ng-controller="regCheckRecordDtlCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading">基本信息</div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-1 control-label">姓名/昵稱</label>
+                <div class="col-sm-1">
+                    <span class="form-control">{{resident.Name}}</span>
+                </div>
+                <div class="col-sm-1">
+                    <span class="form-control">{{resident.NickName}}</span>
+                </div>
+                <label class="col-sm-1 control-label">性別</label>
+                <div class="col-sm-2">
+                    <span class="form-control">{{resident.Sex}}</span>
+                </div>
+                <label class="col-sm-1 control-label">身份證</label>
+                <div class="col-sm-2">
+                    <span class="form-control">{{resident.IdNo}}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">生日</label>
+                <div class="col-sm-2">
+                    <span class="form-control">{{resident.BirthDate | dateFormat}}</span>
+                </div>
+                <label class="col-sm-1 control-label">年齡</label>
+                <div class="col-sm-2">
+                    <span class="form-control">{{resident.BirthDate | ageFormat}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">查詢</div>
+        <div class="panel-body form-horizontal">
+            <label class="control-label col-md-1">測量日期</label>
+            <div class="col-md-2">
+                <input class="form-control" type="text" ca-date-picker ng-model="options.params.startDate" max="{{options.params.endDate}}" />
+            </div>
+            <div class="col-md-2">
+                <input class="form-control" type="text" ca-date-picker ng-model="options.params.endDate" min="{{options.params.startDate}}" />
+            </div>
+            <label class="control-label col-md-1">測量項目</label>
+            <div class="col-md-1">
+                <select class="form-control" ng-model="options.params.checkTemplateCode" ng-options="item.CheckTemplateCode as item.CheckTemplateName for item in checkTemplateList"></select>
+            </div>
+            <label class="control-label col-md-1">顯示內容</label>
+            <div class="col-md-2">
+                <select class="form-control" ng-model="options.params.displayType">
+                    <option selected value="1">只顯示異常</option>
+                    <option value="0">顯示全部</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-primary" ng-click="options.search()"><i class="fa fa-search"></i>查詢</a>
+                <a class="btn btn-grey" ng-click="backTo()">返回</a>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">查询结果</div>
+        <div class="panel-body">
+            <ui-data-table options="options">
+                <table class="table table-striped table-bordered table-hover table-handler">
+                    <thead>
+                        <tr>
+                            <th>量測日期</th>
+                            <th>量測項目</th>
+                            <th>量測結果</th>
+                            <th>追蹤狀態</th>
+                            <th>追蹤</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in RegCheckRecordDtlList">
+                            <td>{{item.CheckDate | dateFormat}}</td>
+                            <td>{{item.CheckTemplateName}}</td>
+                            <td><span ng-bind-html="item.CheckResult | trustHtml"></span></td>
+                            <td>{{item.TraceStatus ? "已追蹤" : "未追蹤"}}</td>
+                            <td>
+                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                    <a ng-click="edit(item)" class="btn btn-success" ng-show="!item.TraceStatus">追蹤</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ui-data-table>
+        </div>
+    </div>
+</div>

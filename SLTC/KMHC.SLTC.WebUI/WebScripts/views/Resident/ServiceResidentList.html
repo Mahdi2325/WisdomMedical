@@ -1,0 +1,95 @@
+﻿<style>
+    .box-body{
+        padding: 18px;
+        color: #767676;
+    }
+
+    .item{
+        padding: 10px 20px 0;
+        min-width: 265px;
+        cursor: pointer;
+    }
+
+    .item div[class="row"]{
+        padding:13px 0 0 13px;
+        min-width:257px;
+        min-height: 140px;
+        border: 1px solid #e5e5e5;
+    }
+
+    #cardImgArea{
+        max-height: 112px;
+        max-width: 99px;
+        height: 100%;
+        padding: 0;
+        cursor: pointer;
+        margin-bottom:10px;
+    }
+
+    #cardImgArea img{
+        height: 100%;
+        max-width: 99px;
+        min-height:100px;
+        max-height: 110px;
+    }
+
+    .filter-content{
+        width: 138px;
+        height: 138px;
+        border-radius: 0;
+        border: 0.1rem dashed #c9c9c9;
+    }
+</style>
+
+<div class="row">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bar-chart-o"></i>会员列表
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row" style="padding: 10px 10px 0px 10px">
+                    <div class="form-group">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control" id="Keyword" ng-model="options.params['Data.PersonName']" placeholder="请输入会员姓名">
+                            <span class="input-group-btn">
+                                <a class="btn btn-primary" ng-click="options.search()"><i class="icon-search"></i>查询</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="padding: 0px 20px 0px 20px">
+                    <ui-data-table options="options">
+                        <div id="filter-items" class="row isotope mgl10 mgr10">
+                            <div class="col-xs-12 col-sm-2 design item " ng-repeat="item in residents ">
+                                <div class="row" ng-click="goPersonInfo(item)">
+                                    <div id="cardImgArea" class="col-lg-6">
+                                        <img alt="" ng-src="{{(item.PhotoPath != null && item.PhotoPath != '') ? item.PhotoPath : '/Images/0.png'}}" onerror=" this.src = '/Images/0.png';this.onerror = null ">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <h3 class="ng-binding">{{item.PersonName}}</h3>
+                                        <p class="ng-binding fs-16 text-nowrap over-hidden" style="min-width: 134px;">
+                                            <span select-code="A00.001" select-value="{{item.Sex}}" class="ng-isolate-scope"></span>&nbsp;|&nbsp;{{item.Birthdate|ageFormat}}
+                                        </p>
+                                        <p class="text-nowrap over-hidden" style="min-width: 132px; text-overflow: ellipsis;">{{item.AreaName}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="col-xs-12 col-md-1 pdt10 pdl5" ui-permission="ResidentSetOrg">
+                    <div class="filter-content">
+                        <div class="img-add">
+                            <a href="/angular/ResidentSetOrg">
+                                <img src="/Images/ADD.png" />
+                            </a>
+                        </div>
+                    </div>
+                </div>-->
+                        </div>
+                    </ui-data-table>
+                </div>
+                </div>
+            </div>
+
+    </div>

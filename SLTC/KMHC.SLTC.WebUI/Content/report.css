@@ -1,0 +1,317 @@
+﻿html {
+    background-color: #e2e2e2;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #fff;
+    border-top: solid 10px #000;
+    color: #333;
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #333;
+    outline: none;
+    padding-left: 3px;
+    padding-right: 3px;
+    text-decoration: underline;
+}
+
+    a:link, a:visited,
+    a:active, a:hover {
+        color: #333;
+    }
+
+    a:hover {
+        background-color: #c7d1d6;
+    }
+
+header, footer, hgroup,
+nav, section {
+    display: block;
+}
+
+mark {
+    background-color: #a6dbed;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.clear-fix:after {
+    content: ".";
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+    color: #000;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.75em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+h5, h6 {
+    font-size: 1em;
+}
+
+    h5 a:link, h5 a:visited, h5 a:active {
+        padding: 0;
+        text-decoration: none;
+    }
+/*横向菜单开始*/
+.nav {
+    text-align: center;
+    background-color: #000000;
+}
+
+    .nav ul {
+        display: inline-block;
+        list-style: none;
+    }
+
+    .nav li {
+        float: left;
+        width: 120px;
+        background: #000;
+        margin-left: 3px;
+        line-height: 100px;
+    }
+
+    .nav a {
+        display: block;
+        text-align: center;
+        width: 120px;
+        height: 70px;
+        font-size: 16px;
+    }
+
+        .nav a:link {
+            color: #fff;
+            /*background: url(/Images/DC/cross/rz_transdisciplinary_behavioralproblems.png) #000 no-repeat 28px 4px;*/
+            text-decoration: none;
+        }
+
+        .nav a:visited {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .nav a:hover, .nav a.action:link, .nav a.action:visited {
+            color: #0f0;
+            font-weight: bold;
+            text-decoration: none;
+            /*background: url(/Images/DC/cross/rz_transdisciplinary_behavioralproblems.png) #000 no-repeat 28px 4px;*/
+        }
+        #nav_home a:link {
+            background: url(/Images/Report/nav/nav_home_normal.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_home a:hover, #nav_home a.action:link {
+            background: url(/Images/Report/nav/nav_home_selected.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_member a:link {
+            background: url(/Images/Report/nav/nav_member_normal.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_member a:hover, #nav_member a.action:link {
+            background: url(/Images/Report/nav/nav_member_selected.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_care a:link {
+            background: url(/Images/Report/nav/nav_care_normal.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_care a:hover, #nav_care a.action:link {
+            background: url(/Images/Report/nav/nav_care_selected.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_health a:link {
+            background: url(/Images/Report/nav/nav_health_normal.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_health a:hover, #nav_health a.action:link {
+            background: url(/Images/Report/nav/nav_health_selected.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_familydoctor a:link {
+            background: url(/Images/Report/nav/nav_familydoctor_normal.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_familydoctor a:hover, #nav_familydoctor a.action:link {
+            background: url(/Images/Report/nav/nav_familydoctor_selected.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_chinesemedicine a:link {
+            background: url(/Images/Report/nav/nav_chinesemedicine_normal.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_chinesemedicine a:hover, #nav_chinesemedicine a.action:link {
+            background: url(/Images/Report/nav/nav_chinesemedicine_selected.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_chronicdisease a:link {
+            background: url(/Images/Report/nav/nav_chronicdisease_normal.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_chronicdisease a:hover, #nav_chronicdisease a.action:link {
+            background: url(/Images/Report/nav/nav_chronicdisease_selected.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_return a:link {
+            background: url(/Images/Report/nav/nav_return_normal.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+        #nav_return a:hover {
+            background: url(/Images/Report/nav/nav_return_selected.png) no-repeat center top; 
+            background-size:auto 40px;
+            -moz-background-size:auto 40px; /* 老版本的 Firefox */
+        }
+/*横向菜单结束*/
+
+/*菜单开始*/
+.left-nav {
+    text-align: left;
+    padding:0;
+}
+
+    .left-nav ul {
+        list-style: none;
+        margin:0; padding:0;
+    }
+
+    .left-nav li {
+        display: block;
+        background: #fff;
+        padding: 6px;
+        width: 100%;
+        border-bottom: 1px solid #dddddd;
+    }
+
+    .left-nav a {
+        display: block;
+        width: 100%;
+        height: 30px;
+        padding-left: 40px;
+        background: url(/Images/Report/home/home_position.png) no-repeat left top; 
+        background-size:auto 30px;
+        -moz-background-size:auto 30px; /* 老版本的 Firefox */
+    }
+
+    .left-nav a .title {
+    }
+
+    .left-nav a .description {
+        color: #aaaaaa;
+    }
+
+        .left-nav a:link {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .left-nav a:visited {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        .left-nav a:hover {
+            color: #000;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+
+/*菜单结束*/
+#container .box-title {
+    color: #ffffff;
+    background-color: #2BCC60;
+    border-bottom: 1px solid #2BCC60;
+}
+#container .border {
+    border: 1px solid #2BCC60;
+}
+.icon {
+    display: inline-block;
+    float:left;
+    width: 30px;
+    height: 30px;
+}
+.icon.todaycall-icon {
+    background: url(/Images/Report/home/home_todaycall.png) no-repeat center top; 
+    background-size:auto 30px;
+    -moz-background-size:auto 30px; /* 老版本的 Firefox */
+}
+.icon.serviceworkorder-icon {
+    background: url(/Images/Report/home/home_serviceworkorder.png) no-repeat center top; 
+    background-size:auto 30px;
+    -moz-background-size:auto 30px; /* 老版本的 Firefox */
+}
+.icon.todayservice-icon {
+    background: url(/Images/Report/home/home_todayservice.png) no-repeat center top; 
+    background-size:auto 30px;
+    -moz-background-size:auto 30px; /* 老版本的 Firefox */
+}
+.icon.position-icon {
+    background: url(/Images/Report/home/home_position.png) no-repeat center top; 
+    background-size:auto 30px;
+    -moz-background-size:auto 30px; /* 老版本的 Firefox */
+}
+.icon-after-text {
+    float:left;
+    padding-top: 7px;
+    padding-left: 10px;
+}
+.line {
+    height: 1px;
+    border-top: 1px solid #dddddd;
+}
+.line1 {
+    border-right: 1px solid #dddddd;
+}

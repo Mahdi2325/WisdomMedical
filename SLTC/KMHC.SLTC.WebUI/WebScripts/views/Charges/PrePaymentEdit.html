@@ -1,0 +1,89 @@
+﻿<div style="width:800px" class="modal-content modal-lg" ng-controller="prePaymentEditCtrl">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-bars"></i>新增预收款
+            </div>
+            <div class="tools">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form class="form-horizontal w5c-form" w5c-form-validate role="form" name="prePaymenteditform" novalidate>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">期初余额</label>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">¥</span>
+                            <input class="form-control" name="nowAmount" ng-model="currentItem.nowAmount" ng-maxlength="11" readonly>
+                        </div>
+                    </div>
+
+
+                    <label class="col-sm-2 control-label">预存日期<span class="required">*</span></label>
+                    <div class="col-sm-4">
+                        <input class="form-control datepicker" id="DepositDate" name="DepositDate" ng-model="currentItem.DepositDate" ca-date-picker disabled />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">本月消费总额</label>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">¥</span>
+                            <input class="form-control" ng-model="currentItem.TotalConSpeMonth" readonly>
+                        </div>
+                    </div>
+
+                    <label class="col-sm-2 control-label">发票号</label>
+                    <div class="col-sm-4">
+                        <input class="form-control datepicker" name="InvoiceNo" ng-model="currentItem.InvoiceNo" ng-maxlength="20" />
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label class="col-sm-2 control-label">预存后金额</label>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">¥</span>
+                            <input class="form-control" value="{{currentItem.nowAmount+currentItem.newAmount}}" readonly ng-maxlength="11" />
+                        </div>
+                    </div>
+
+
+                    <label class="col-sm-2 control-label">收款人<span class="required">*</span></label>
+                    <div class="col-sm-4">
+                        <input class="form-control" name="Payee" ng-model="currentItem.Payee" required ng-maxlength="20">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">预存金额<span class="required">*</span></label>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">¥</span>
+                            <input type="number" class="form-control" name="newAmount" placeholder="输入预存金额" ng-model="currentItem.newAmount" ng-maxlength="11" required>
+                        </div>
+                    </div>
+                    <label class="col-sm-2 control-label">操作方式<span class="required">*</span></label>
+                    <div class="col-sm-4">
+                        <select class="form-control" name="PayMethod" ng-model="currentItem.PayMethod" select-code="P00.001" required></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">备注</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" name="Remark" ng-model="currentItem.Remark" ng-maxlength="200"></textarea>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" w5c-form-submit="createItem(currentItem)">确定</button>
+                    <button type="button" class="btn btn-grey" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

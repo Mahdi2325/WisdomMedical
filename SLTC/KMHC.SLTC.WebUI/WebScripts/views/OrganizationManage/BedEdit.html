@@ -1,0 +1,83 @@
+﻿
+<link rel="stylesheet" type="text/css" href="/WebScripts/components/cityNewSelect/city-picker.css" />
+<script src="/WebScripts/components/cityNewSelect/city-picker.data.js"></script>
+<script src="/WebScripts/components/cityNewSelect/city-picker.js"></script>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box border green">
+            <div class="box-title">
+                <h4><i class="fa fa-bars"></i>床位信息</h4>
+            </div>
+            <div class="box-body big">
+                <h3 class="form-title"> </h3>
+                <form class="form-horizontal" role="form" name="bededitform" ng-submit="submit()" novalidate>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">床位编号<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <input name="BedNo" class="form-control" ng-model="Data.Bed.BedNo" ng-readonly="!isAdd" required />
+                        </div>
+                        <label class="col-sm-2 control-label">床位名称<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <input name="BedName" class="form-control" ng-model="Data.Bed.BedName" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">所属房间<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <select name="RoomNo" class="col-sm-12 form-control" ng-model="Data.Bed.RoomNo" ng-options="t.RoomNo as t.RoomName for t in Data.Rooms" required></select>
+                        </div>
+                        <label class="col-sm-2 control-label">性别限制<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <select name="SexType" class="form-control" ng-model="Data.Bed.Sex" select-code="J00.007" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">床位状态<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <select name="BedState" class="form-control" ng-model="Data.Bed.BedState" select-code="J00.002" required></select>
+                        </div>
+                        <label class="col-sm-2 control-label">床位分类<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <select class="form-control" ng-model="Data.Bed.Category" select-code="J00.003" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">床位类型<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <select name="BedType" class="form-control" ng-model="Data.Bed.BedType" select-code="J00.004" required></select>
+                        </div>
+                        <label class="col-sm-2 control-label">测试城市选择器<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <div style="position: relative;">
+                                <input id="myAddress1" class="form-control" style="width:100%" readonly type="text" ng-model="Address1" data-toggle="city-picker">
+                            </div>
+                        </div>
+                    </div>
+                        <!--<div class="form-group">
+                            <label class="col-sm-2 control-label">测试城市选择器2<span class="required">*</span></label>
+                            <div class="col-sm-4">
+                                <div style="position: relative; float:left">
+                                    <input id="myAddress2" class="form-control" style="width:208px" readonly type="text" ng-model="Address2" data-toggle="city-picker">
+                                </div>
+                                <div style="overflow:hidden;">
+                                    <input class="form-control" ng-model="Data.AddressDetail2" />
+                                </div>
+                            </div>
+                        </div>-->
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="5" ng-model="Data.Bed.Remark" ng-maxlength="200"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group center">
+                            <input type="button" class="btn btn-primary" value="测试" ng-click="myclick()" />
+                            <input type="submit" class="btn btn-primary" value="保存" /><!--ng-disabled="bedForm.$invalid"-->
+                            <button class="btn btn-grey" ui-sref="BedList">取消</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

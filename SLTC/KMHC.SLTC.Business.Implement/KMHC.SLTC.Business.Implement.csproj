@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F1527C86-69F5-4F62-AF10-753740868DF9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KMHC.SLTC.Business.Implement</RootNamespace>
+    <AssemblyName>KMHC.SLTC.Business.Implement</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\ThirdPartyLib\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\ThirdPartyLib\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.Extended">
+      <HintPath>..\..\ThirdPartyLib\EntityFramework.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\ThirdPartyLib\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelReport">
+      <HintPath>..\..\ThirdPartyLib\ExcelReport.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ThirdPartyLib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="KM.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ThirdPartyLib\KM.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ThirdPartyLib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.1.3.1, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ThirdPartyLib\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.Extend">
+      <HintPath>..\..\ThirdPartyLib\NPOI.Extend.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.1.3.1, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ThirdPartyLib\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.1.3.1, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ThirdPartyLib\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.1.3.1, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ThirdPartyLib\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivityManage\GroupActivityCategoryEditService.cs" />
+    <Compile Include="ActivityManage\GroupActivityCategoryService.cs" />
+    <Compile Include="ActivityManage\ActivityService.cs" />
+    <Compile Include="baiduTTS\BaiduTTSService.cs" />
+    <Compile Include="Component\CodeRuleService.cs" />
+    <Compile Include="FinancialManagement\RefundService.cs" />
+    <Compile Include="FinancialManagement\PaymentsService.cs" />
+    <Compile Include="Generation\ActivitynewService.cs" />
+    <Compile Include="Generation\BriefInfoService.cs" />
+    <Compile Include="Generation\CallInfoService.cs" />
+    <Compile Include="Generation\CommodityItemService.cs" />
+    <Compile Include="Generation\DeptService.cs" />
+    <Compile Include="Generation\EvaluationService.cs" />
+    <Compile Include="Generation\PriorityRemarkService.cs" />
+    <Compile Include="Generation\HabitService.cs" />
+    <Compile Include="Generation\FamilyService.cs" />
+    <Compile Include="Generation\DeviceService.cs" />
+    <Compile Include="Generation\ContractService.cs" />
+    <Compile Include="Generation\AreaService.cs" />
+    <Compile Include="Generation\BedService.cs" />
+    <Compile Include="Generation\BillService.cs" />
+    <Compile Include="Generation\ChargeItemService.cs" />
+    <Compile Include="Generation\ChartService.cs" />
+    <Compile Include="Generation\DepositService.cs" />
+    <Compile Include="Generation\DictionaryItemService.cs" />
+    <Compile Include="Generation\DictionaryService.cs" />
+    <Compile Include="Generation\EmployeeService.cs" />
+    <Compile Include="Generation\FloorService.cs" />
+    <Compile Include="Generation\FunctionService.cs" />
+    <Compile Include="Generation\GroupService.cs" />
+    <Compile Include="Generation\MonitorItemService.cs" />
+    <Compile Include="Generation\MonitorResultService.cs" />
+    <Compile Include="Generation\MonitorTemplateService.cs" />
+    <Compile Include="Generation\ResidentAddressService.cs" />
+    <Compile Include="Generation\OrganizationService.cs" />
+    <Compile Include="Generation\PaymentService.cs" />
+    <Compile Include="Generation\PersonService.cs" />
+    <Compile Include="Generation\ResidentCareService.cs" />
+    <Compile Include="ActivityManage\VolunteerService.cs" />
+    <Compile Include="Generation\CommodityTypeService.cs" />
+    <Compile Include="GuestService\ComOrderService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GuestService\ServiceAppService.cs" />
+    <Compile Include="ReportManageService.cs" />
+    <Compile Include="BaseService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Generation\ResidentService.cs" />
+    <Compile Include="Generation\ResidentServicePlanItemService.cs" />
+    <Compile Include="Generation\ResidentServicePlanService.cs" />
+    <Compile Include="Generation\RoleService.cs" />
+    <Compile Include="Generation\RoomService.cs" />
+    <Compile Include="Generation\FeeDetailService.cs" />
+    <Compile Include="Generation\SerOrdSerItService.cs" />
+    <Compile Include="Report\EvaluationReportService.cs" />
+    <Compile Include="Report\OrderReportService.cs" />
+    <Compile Include="Report\ReportTempManageService.cs" />
+    <Compile Include="Screen\ScreenSequenceService.cs" />
+    <Compile Include="Sequence\AppStatisticsService.cs" />
+    <Compile Include="Sequence\SequenceService.cs" />
+    <Compile Include="Service\ServiceGroupService.cs" />
+    <Compile Include="Service\ServiceItemCategoryService.cs" />
+    <Compile Include="Service\ServiceItemService.cs" />
+    <Compile Include="Service\ServiceOrderService.cs" />
+    <Compile Include="Generation\TaskService.cs" />
+    <Compile Include="Generation\UserRelationService.cs" />
+    <Compile Include="Generation\UserService.cs" />
+    <Compile Include="Generation\WatchRecordService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KMHC.Infrastructure\KMHC.Infrastructure.csproj">
+      <Project>{0997f971-1d2f-4aa8-aa67-5b1683afdefd}</Project>
+      <Name>KMHC.SLTC.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KMHC.SLTC.Business.Entity\KMHC.SLTC.Business.Entity.csproj">
+      <Project>{208d3a36-9507-4ff2-a3bf-374d718f0a11}</Project>
+      <Name>KMHC.SLTC.Business.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KMHC.SLTC.Business.Interface\KMHC.SLTC.Business.Interface.csproj">
+      <Project>{5b2e2137-06d2-4adf-bc85-aa94984acc50}</Project>
+      <Name>KMHC.SLTC.Business.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KMHC.SLTC.Persistence\KMHC.SLTC.Persistence.csproj">
+      <Project>{3a0737ce-99b6-429f-9b11-85b49fad1de2}</Project>
+      <Name>KMHC.SLTC.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KMHC.SLTC.Repository\KMHC.SLTC.Repository.csproj">
+      <Project>{22f072ac-cacf-4faa-9612-6f675019d187}</Project>
+      <Name>KMHC.SLTC.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

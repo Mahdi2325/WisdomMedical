@@ -1,0 +1,162 @@
+﻿<div class="row" ng-controller="PreOrderEditCtrl" style="background-color:white;padding:5px 5px 0px 5px">
+
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-bars"></i>{{isAdd?"添加":"编辑"}}预约
+            </div>
+            <div class="tools">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form role="form" name="preOrderEditForm" class="w5c-form" w5c-form-validate novalidate>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" class="form-control" id="PersonName" ng-model="preOrder.PersonName" disabled>
+                            <label for="form_control_1">客户姓名：</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <select class="form-control" name="ServiceType" ng-model="preOrder.ServiceType" select-code="Q00.012" disabled></select>
+                            <label for="ServiceType">服务模式：</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input name="ServiceDate" ng-model="preOrder.ServiceDate" ng-change="GetPNCList()" class="form-control" ca-date-picker placeholder="请选择预约日期" required />
+                            <label for="ServiceDate">服务日期：<span class="required">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <select class="form-control" name="PNC" ng-model="preOrder.PNCID" ng-options="x.PNCID as ( x.PNCName +' '+ x.StartTime+'-'+ x.EndTime +'（已预约'+x.AppCount+'人)') for x in PNCList">
+                                <option value="">-- 请选择 --</option>
+                            </select>
+                            <label for="PNC">时段：<span class="required">*</span></label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" class="form-control" id="AppBy" name="AppBy" ng-model="preOrder.AppBy" ng-maxlength="20" placeholder="请输入预约人姓名">
+                            <label for="PersonName">预约人：</label>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <div class="input-icon right">
+                                <input type="text" class="form-control" id="AppPhone" name="AppPhone" ng-model="preOrder.AppPhone" phone ng-maxlength="20" placeholder="请输入联系电话">
+                                <label for="AppPhone">联系电话：</label>
+                                <i class="fa fa-phone"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" class="form-control" id="Relation" name="Relation" ng-model="preOrder.Relation" ng-maxlength="20" placeholder="请输入预约人与客户关系">
+                            <label for="Relation">与客户关系：</label>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input name="AppTime" ng-model="preOrder.AppTime" class="form-control" placeholder="请选择预约日期" ca-date-time-picker readonly />
+                            <label for="AppTime">预约时间：</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <label for="InitPrice">服务项目列表：</label>
+                            <div class="portlet light " style="box-shadow:none;padding:0px">
+                                <div class="portlet-body form">
+                                    <table class="table table-striped table-bordered  table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>优先级</th>
+                                                <th>项目编码</th>
+                                                <th>项目名称</th>
+                                                <th>价格</th>
+                                                <th>数量</th>
+                                                <th>总价</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in preOrder.ServiceItems |  orderBy:['Priorit','OrderNum']:false">
+                                                <td>{{item.Priorit}}</td>
+                                                <td>{{item.SINo}}</td>
+                                                <td>{{item.SIName}}</td>
+                                                <td>{{item.UnitPrice | currency:"¥"}}</td>
+                                                <td>{{item.Qty}}</td>
+                                                <td>{{item.SumPrice | currency:"¥"}}</td>
+                                                <td class="text-left">
+                                                    <button type="button" class="btn btn-success btn-xs" ng-click="serviceItemClick(item,$event)">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-xs" ng-click="deleteServiceItem(item,$event)">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td>
+                                                    {{tempItem.Priorit}}
+                                                </td>
+                                                <td>
+                                                    <input name="SINo" style="width:155px;background-color:white" class="form-control" ng-model="tempItem.SINo" placeholder="点击选择项目" ng-click="OpenSelServiceItem()" data-toggle="modal" data-target="#modalServiceItem" readonly ng-maxlength="20" />
+                                                </td>
+                                                <td>
+                                                    {{tempItem.SIName}}
+                                                </td>
+                                                <td>
+                                                    {{tempItem.UnitPrice | currency:"¥"}}
+                                                </td>
+                                                <td><input name="Qty" type="number" class="form-control" placeholder="数量" ng-model="tempItem.Qty" ng-maxlength="11" /></td>
+                                                <td>{{tempItem.Qty * tempItem.UnitPrice | currency:"¥" }}</td>
+                                                <td>
+                                                    <button type="button" id="chgGroupEditAdd" class="btn btn-primary btn-xs" ng-disabled="tempItem.Qty==0 || !tempItem.Qty" ng-click="saveServiceItem()">
+                                                        <span class="glyphicon glyphicon-plus"></span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <textarea name="Remark" ng-model="preOrder.Remark" rows="5" class="form-control" ng-maxlength="200" />
+                            <label for="Remark">备注：</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" w5c-form-submit="saveEdit(preOrder)">保存</button>
+                    <button type="button" class="btn btn-grey" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,250 @@
+﻿<style type="text/css">
+    * {
+        list-style-type: none;
+    }
+
+    a, img {
+        border: 0;
+    }
+
+    /* starbox */
+    .starbox {
+        width: 480px;
+        margin: 20px auto;
+        height: 30px;
+    }
+
+    .fl {
+        float: left;
+        display: inline;
+    }
+
+    .s_name {
+        float: left;
+        display: block;
+        width: 60px;
+        text-align: right;
+    }
+
+    .star_ul {
+        background: url(/images/star.png) no-repeat 0 -150px;
+        width: 132px;
+        z-index: 10;
+        position: relative;
+        height: 25px;
+    }
+
+        .star_ul li {
+            float: left;
+            margin-right: 1px;
+            width: 25px;
+            height: 25px;
+        }
+
+            .star_ul li a {
+                display: block;
+                height: 25px;
+                position: absolute;
+                left: 0;
+                top: 0;
+                text-indent: -999em;
+            }
+
+            .star_ul li .active-star {
+                background: url(/images/star.png) no-repeat;
+            }
+
+            .star_ul li .one-star {
+                width: 25px;
+                background-position: 0 -120px;
+                z-index: 50;
+            }
+
+            .star_ul li .two-star {
+                width: 51px;
+                background-position: 0 -90px;
+                z-index: 40;
+            }
+
+            .star_ul li .three-star {
+                width: 79px;
+                background-position: 0 -60px;
+                z-index: 30;
+            }
+
+            .star_ul li .four-star {
+                width: 105px;
+                background-position: 0 -30px;
+                z-index: 20;
+            }
+
+            .star_ul li .five-star {
+                width: 129px;
+                margin-right: 0;
+                background-position: 0 0;
+                z-index: 10;
+            }
+
+    .s_result {
+        padding: 6px 0 0 5px;
+    }
+
+    .square_ul {
+        background: url(/images/star.png) no-repeat 0 -222px;
+        width: 146px;
+        z-index: 10;
+        position: relative;
+        height: 20px;
+    }
+
+        .square_ul li {
+            float: left;
+            margin-right: 1px;
+            width: 29px;
+            height: 20px;
+        }
+
+            .square_ul li a {
+                display: block;
+                height: 20px;
+                position: absolute;
+                left: 0;
+                top: 0;
+                text-indent: -999em;
+            }
+
+            .square_ul li .active-square {
+                background: url(/images/star.png) no-repeat;
+            }
+
+            .square_ul li .square-1 {
+                width: 29px;
+                background-position: 0 -243px;
+                z-index: 50;
+            }
+
+            .square_ul li .square-2 {
+                width: 58px;
+                background-position: 0 -264px;
+                z-index: 40;
+            }
+
+            .square_ul li .square-3 {
+                width: 87px;
+                background-position: 0 -285px;
+                z-index: 30;
+            }
+
+            .square_ul li .square-4 {
+                width: 116px;
+                background-position: 0 -306px;
+                z-index: 20;
+            }
+
+            .square_ul li .square-5 {
+                width: 145px;
+                margin-right: 0;
+                background-position: 0 -327px;
+                z-index: 10;
+            }
+
+    .s_result_square {
+        padding: 4px 0 0 9px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function () {
+
+        //$('.star_ul a').hover(function () {
+        //    $(this).addClass('active-star');
+        //    $('.s_result').css('color', '#c00').html($(this).attr('title'))
+        //}, function () {
+        //    $(this).removeClass('active-star');
+        //    $('.s_result').css('color', '#333').html('请打分')
+        //});
+    })
+</script>
+
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-bars"></i>工单执行
+        </div>
+        <div class="tools">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <span>
+                    <label style="font-size:40px;">{{Modal.Task.PersonName}}</label> &nbsp;&nbsp;
+                    <span style="font-size:20px;color:green;" select-code="A00.001" select-value="{{Modal.Task.Sex}}"></span>
+                </span>
+                <!--<h5 class="form-title">订单编号：{{Data.Task.SONo}}</h5>-->
+                <h5 class="form-title">服务项目：{{Modal.Task.ServiceName}}</h5>
+                <h5 class="form-title">预约服务时间：{{Modal.Task.AppointmentTime| timeFormat}}</h5>
+                <h5 class="form-title">服务地址：{{Modal.Task.Address}}</h5>
+                <h5 class="form-title">联系电话：{{Modal.Task.Phone}}</h5>
+                <h5 class="form-title">备注：{{Modal.Task.Remark}}</h5>
+                <legend>工单执行(<span select-code="P00.004" select-value="{{Modal.Task.Status}}"></span>)</legend>
+                <h5 class="form-title">服务人员：{{Modal.Task.EmployeeName}}</h5>
+                <h5 class="form-title" ng-if="Modal.Task.EndTime">服务时间：{{Modal.Task.EndTime | timeFormat}}  </h5>
+                <h5 class="form-title">联系电话：{{ServiceEmp.Tel}}</h5>
+
+                <form role="form" name="carryouttaskform" ng-show="Modal.Task.Status =='Finish'" class="form-horizontal w5c-form" w5c-form-validate novalidate>
+                    <legend>工单回访</legend>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="required">*</span>工单执行人：</label>
+                        <div class="col-sm-9">
+                            <select name="ExecutorId" class="form-control" ng-change="changeEmp()" ng-model="Modal.Task.EmployeeId" w5c-dynamic-element
+                                    ng-options="t.EmployeeID as t.EmpName for t in Emps " ng-disabled="true">
+                                <option value="">-- 请选择 --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">会员评分：</label>
+                        <div class="col-sm-9">
+                            <ul class="star_ul fl">
+                                <li><a class="one-star" ng-mouseover="OnStar(1)" ng-mouseleave="LeaveStar()"  ng-class="{true: 'active-star', false: ''}[Modal.Evaluation.Mark==1]" ng-click="ClickStar(1)" href="#"></a></li>
+                                <li><a class="two-star" ng-mouseover="OnStar(2)" ng-mouseleave="LeaveStar()" ng-class="{true: 'active-star', false: ''}[Modal.Evaluation.Mark==2]" ng-click="ClickStar(2)" href="#"></a></li>
+                                <li><a class="three-star" ng-mouseover="OnStar(3)" ng-mouseleave="LeaveStar()" ng-class="{true: 'active-star', false: ''}[Modal.Evaluation.Mark==3]" ng-click="ClickStar(3)" href="#"></a></li>
+                                <li><a class="four-star" ng-mouseover="OnStar(4)" ng-mouseleave="LeaveStar()" ng-class="{true: 'active-star', false: ''}[Modal.Evaluation.Mark==4]" ng-click="ClickStar(4)" href="#"></a></li>
+                                <li><a class="five-star" ng-mouseover="OnStar(5)" ng-mouseleave="LeaveStar()" ng-class="{true: 'active-star', false: ''}[Modal.Evaluation.Mark==5]" ng-click="ClickStar(5)" href="#"></a></li>
+                            </ul>
+                            <span class="s_result fl">
+                                <label ng-show="!Modal.Evaluation.Mark">请打分</label>
+                                <label class="font-red" ng-show="Modal.Evaluation.Mark==1">非常不满意</label>
+                                <label class="font-red" ng-show="Modal.Evaluation.Mark==2">不满意</label>
+                                <label class="font-red" ng-show="Modal.Evaluation.Mark==3">一般</label>
+                                <label class="font-red" ng-show="Modal.Evaluation.Mark==4">满意</label>
+                                <label class="font-red" ng-show="Modal.Evaluation.Mark==5">非常满意</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">备注</label>
+                        <div class="col-sm-9">
+                            <textarea name="CurryOutRemark" class="form-control" rows="3" ng-model="Modal.Evaluation.Content" ng-disabled="!EnableEdit" ng-maxlength="200" />
+                        </div>
+                    </div>
+
+
+                    <div class="text-center" ng-if="EnableEdit">
+                        <input type="submit" class="btn btn-primary" value="保存" ng-click="TaskCarryOut();" ng-disabled="carryouttaskform.$invalid" />
+                        <button class="btn btn-grey" data-dismiss="modal">关闭</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,87 @@
+﻿
+
+<script type="text/javascript" src="/WebScripts/components/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="/WebScripts/components/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="/WebScripts/components/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<!--编辑页面-->
+<div class="row" ng-controller="commodityItemEditCtrl">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bars"></i>{{isAdd?"添加":"编辑"}}商品
+                </div>
+                <div class="tools">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form role="form" class="form-horizontal w5c-form" w5c-form-validate name="chargetiemeditform" novalidate>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">商品编码<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <input type="text" name="CINo" class="form-control" ng-model="curItem.CINo" placeholder="请输入商品编码" ng-maxlength="20" required />
+                        </div>
+
+                        <label class="col-sm-2 control-label">商品分类</label>
+                        <div class="col-sm-4">
+                            <select name="CICategory" class="form-control" ng-model="curItem.CICategory" ng-options="t.CTypeID as t.CTypeName for t in commodityTypeList" required></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">商品名称<span class="required">*</span></label>
+                        <div class="col-sm-4">
+                            <input type="text" name="CIName" class="form-control" ng-model="curItem.CIName" placeholder="请输入商品名称" ng-maxlength="20" required />
+                        </div>
+                        <label class="col-sm-2 control-label">序号</label>
+                        <div class="col-sm-4">
+                            <input type="number" name="OrderNum" class="form-control" ng-model="curItem.OrderNum" placeholder="请输入商品排序号" ng-maxlength="20"  />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">商品单位</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="Unit" class="form-control" ng-model="curItem.Unit" placeholder="请输入商品单位" ng-maxlength="20" />
+                        </div>
+
+                        <label class="col-sm-2 control-label">单价</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">¥</span>
+                                <input class="form-control" ng-model="curItem.Price" name="Price" min="0" type="number" ng-blur="FixPrice()" placeholder="请输入商品收费单价" ng-maxlength="11" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">商品Logo</label>
+                        <div class="col-sm-10">
+                            <img style="padding-bottom: 10px; width:150px " ng-src="{{(curItem.PhotoPath != null && curItem.PhotoPath != '') ? curItem.PhotoPath : '/Images/0.png'}}" alt="" />
+                            <div id="PicturePathPicker">选择照片</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">商品描述</label>
+                        <div class="col-sm-10 ">
+                            <script id="EditorContainer" style="height:100px" type="text/plain">
+                            </script>
+                            <script type="text/javascript">
+                                //实例化编辑器
+                                var ue = UE.getEditor('EditorContainer', { initialFrameHeight: 300 });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="submit" w5c-form-submit="saveEdit(curItem);">保存</button>
+                        <button type="button" class="btn btn-grey" data-dismiss="modal">关闭</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

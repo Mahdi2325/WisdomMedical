@@ -1,0 +1,111 @@
+﻿<style type="text/css">
+    #content {
+        background-color: white;
+        margin-top: 0;
+        min-height: 800px;
+        border-left: 1px solid #cdd2d2;
+        padding-bottom: 30px;
+    }
+</style>
+<div class="row">
+    <div id="content" class="col-sm-12">
+        <div class="col-sm-2">
+            <resident-list callback="residentSelected(resident)" />
+        </div>
+        <div class="col-sm-10 box-shadow-3 navi-container-div">
+            <div class="navi-container-div1">
+                <div class="navi-container-div2">
+                    <div>
+                        <table cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td style="width:64px"></td>
+                                <td colspan="3"></td>
+                                <td>
+                                    <div class="navi-image-td navi-cross-row1" style="cursor: pointer;">
+                                        <div ng-click="NavigateLink('NurseCareLife')">
+                                            <div style="float:left">
+                                                <img src="../../Images/DC/cross/rz_transdisciplinary_nursinglife.png" alt="" /><br><label>護理及生活照顧服務記錄表</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td colspan="4"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"></td>
+                                <td>
+                                    <div class="navi-image-td">
+                                        <img src="../../Images/DC/arrow.png" alt="" />
+                                    </div>
+                                </td>
+                                <td colspan="4"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td colspan="3">
+                                    <div class="navi-image-td navi-cross-row2" style="cursor: pointer;">
+
+                                        <div ng-click="NavigateLink('DCDayLife')">
+
+                                            <div style="float:left">
+                                                <img src="../../Images/DC/cross/rz_transdisciplinary_dailylife.png" /><br><label>日常生活照顧記錄表</label>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td colspan="3"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"></td>
+                                <td>
+                                    <div class="navi-image-td">
+                                        <img src="../../Images/DC/arrow.png" alt="" />
+                                    </div>
+                                </td>
+                                <td colspan="4"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td colspan="3">
+                                    <div class="navi-image-td navi-cross-row3" style="cursor: pointer;">
+                                        <div ng-click="NavigateLink('DCProblem')">
+                                            <div style="float:left">
+                                                <img src="../../Images/DC/cross/rz_transdisciplinary_behavioralproblems.png" alt="" /><br><label>問題行為與異常情緒記錄表</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td colspan="3"></td>
+                            </tr>
+                            <!--<tr>
+                                <td colspan="4"></td>
+                                <td>
+                                    <div class="navi-image-td">
+                                        <img src="../../Images/DC/arrow.png" alt="" />
+                                    </div>
+                                </td>
+                                <td colspan="4"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td colspan="3">
+                                    <div class="navi-image-td navi-cross-row6" style="cursor: pointer;">
+                                        <div ng-click="NavigateLink('DCplan')">
+                                            <div style="float:left">
+                                                <img src="../../Images/DC/cross/rz_transdisciplinary_careplan.png" alt="" /><br><label>跨專業照顧計劃表</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td colspan="3"></td>
+                            </tr>-->
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

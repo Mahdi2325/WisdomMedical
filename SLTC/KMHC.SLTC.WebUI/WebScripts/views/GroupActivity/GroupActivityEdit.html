@@ -1,0 +1,253 @@
+﻿<link rel="stylesheet" type="text/css" href="/WebScripts/components/cityNewSelect/city-picker.css" />
+<script src="/WebScripts/components/cityNewSelect/city-picker.data.js"></script>
+<script src="/WebScripts/components/cityNewSelect/city-picker.js"></script>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border green">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>团体活动信息</h4>
+                        </div>
+                        <div class="box-body">
+                            <!--<div class="tabbable header-tabs">
+                                <ul class="nav nav-tabs" id="tabResident">
+                                    <li><a href="#Photo" data-toggle="tab"><i class="fa fa-medkit"></i> <span class="hidden-inline-mobile">精彩照片</span></a></li>
+                                    <li class="active"><a href="#Info" data-toggle="tab"><i class="fa fa-book"></i> <span class="hidden-inline-mobile">活动信息</span></a></li>
+                                </ul>
+                            </div>-->
+                            <form class="form-horizontal" role="form" name="groupactivityeidtform" ng-submit="save1()" novalidate>
+                                <div class="tab-content">
+                                    <div id="Info" class="tab-pane active">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">团体活动信息</div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label class="col-md-1 control-label">活动编号<span class="required">*</span></label>
+                                                    <div class="col-md-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.GANo" lang="50" required ng-readonly="!isAdd" />
+                                                    </div>
+                                                    <label class="col-md-1 control-label">活动标题<span class="required">*</span></label>
+                                                    <div class="col-md-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.GATitle" lang="50" required />
+                                                    </div>
+                                                    <label class="col-md-1 control-label">活动类型<span class="required">*</span></label>
+                                                    <div class="col-md-3">
+                                                        <select class="form-control" ng-model="Data.Ga.GAType" select-code="F00.046"></select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-1 control-label">开始时间</label>
+                                                    <div class="col-md-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.StartTime" ca-date-time-picker required />
+                                                    </div>
+                                                    <label class="col-md-1 control-label">结束时间</label>
+                                                    <div class="col-md-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.EndTime" ca-date-time-picker required />
+                                                    </div>
+                                                    <label class="col-md-1 control-label">发起机构</label>
+                                                    <div class="col-md-3">
+                                                        <select class="col-md-12 form-control" ng-model="Data.Ga.OrgNo" ng-options="t.OrgNo as t.OrgName for t in Data.Orgs" required ng-readonly="!isAdd"></select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-1 control-label">发起人</label>
+                                                    <div class="col-md-3">
+                                                        <input-staff callback="staffSelected(item,'Leader')" value="{{Data.Ga.Organizer}}" />
+                                                    </div>
+                                                    <label class="col-md-1 control-label">协助人员</label>
+                                                    <div class="col-md-7">
+                                                        <input id="selEmps" type="text" class="form-control" />
+                                                        <!--<input-staff callback="staffSelected(item,'Leader1')" value="{{Data.Ga.LeaderName1}}" />-->
+                                                        <!--<input class="form-control" type="text" ng-model="Data.Leader1">-->
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-1 control-label">活动主题</label>
+                                                    <div class="col-md-11">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.Description" lang="100" required />
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <label class="col-md-1 control-label">活动地址</label>
+                                                    <div class="col-md-11">
+                                                        <div style="position: relative;">
+                                                            <input id="myAddress1" class="form-control" style="width:100%" ng-model="AddressDetail" readonly type="text" data-toggle="city-picker">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-1 control-label">活动人数</label>
+                                                    <div class="col-md-3">
+                                                        <span><input class="form-control" type="text" ng-model="Data.Ga.ParticNum" width="10" /></span>
+                                                        <span ng-show="(Status.btnState >= 1 && Status.btnState<=2) "><a class="btn btn-info col-md-5" ui-sref="GroupActivityResList({id:Data.Ga.id})">人员列表</a></span>
+                                                    </div>
+
+                                                    <label class="col-md-1 control-label">报名日期</label>
+                                                    <div class="col-md-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.PStartTime" ca-date-picker />
+                                                    </div>
+                                                    <label class="col-md-1 control-label">截止日期</label>
+                                                    <div class="col-md-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.PEndTime" ca-date-picker />
+                                                        <!--<input-staff callback="staffSelected(item,'InputName')" value="{{Data.Ga.Operator}}" />-->
+                                                        <!--<input class="form-control" type="text" ng-model="Data.InputName">-->
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group" ng-if="Status.btnState >= 1">
+
+                                                    <label class="col-md-1 control-label">是否延时</label>
+                                                    <div class="col-md-1">
+                                                        <input type="checkbox" class="uniform" ng-show="Status.btnState >= 1" ng-checked="checked()" ng-model="Data.Ga.isDelay" ng-maxlength="100" />
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group" ng-show="Data.Ga.isDelay">
+
+                                                    <label class="col-md-1 control-label">延时时间</label>
+                                                    <div class="col-md-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.DelayStartTime" ca-date-time-picker />
+                                                    </div>
+                                                    <label class="col-md-1 control-label">结束时间</label>
+                                                    <div class="col-md-3">
+                                                        <input class="form-control" type="text" ng-model="Data.Ga.DelayEndTime" ca-date-time-picker />
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <label class="col-md-1 control-label">活动备注</label>
+                                                    <div class="col-md-11">
+                                                        <textarea class="form-control" ng-model="Data.Ga.Remark"></textarea>
+                                                        <!--<input class="form-control" type="text" ng-model="Data.Ga.EvalResults" ng-maxlength="10" />-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel panel-default">
+
+                                            <div class="panel-heading">活动结果</div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+
+                                                    <label class="col-md-1 control-label">活动结果</label>
+                                                    <div class="col-md-11">
+                                                        <select class="form-control" ng-model="Data.Ga.Result" select-code="F00.047"></select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-1 control-label">过程总结</label>
+                                                    <div class="col-md-11">
+                                                        <textarea class="form-control" rows="3" ng-model="Data.Ga.Process" ng-maxlength="200"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-1 control-label">活动总结</label>
+                                                    <div class="col-md-11">
+                                                        <textarea class="form-control" rows="3" ng-model="Data.Ga.Summary" ng-maxlength="200"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-1 control-label">成果评估（建议改进事项）</label>
+                                                    <div class="col-md-11">
+                                                        <textarea class="form-control" rows="3" ng-model="Data.Ga.Evaluation" ng-maxlength="200"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-1 control-label">结果备注</label>
+                                                    <div class="col-md-11">
+                                                        <textarea class="form-control" rows="3" ng-model="Data.Ga.ResultRemark" ng-maxlength="200"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div id="Photo" class="tab-pane">
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                <h3>精彩照片1</h3>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h3>精彩照片2</h3>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                <img src="{{Data.Ga.Picture1}}" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <img src="{{Data.Ga.Picture2}}" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-2">
+                                                <div id="Picture1PathPicker">選擇照片</div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button class="btn btn-primary" ng-click="clear('picture1')">清除</button>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div id="Picture2PathPicker">選擇照片</div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button class="btn btn-primary" ng-click="clear('picture2')">清除</button>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                </div>
+
+
+                                <div class="form-group center" ng-if="Status.btnState < 1">
+                                    <button class="btn btn-success" type="submit" ng-hide="Status.btnState == 0" ng-click="saveItem();">保存为草稿</button>
+                                    <button class="btn btn-success" type="submit" ng-show="Status.btnState < 1" ng-click="pubSub();">活动发布</button>
+                                    <button class="btn btn-grey" ui-sref="GroupActivityList">取消</button>
+                                </div>
+                                <div class="form-group center" ng-if="Status.btnState >= 1">
+                                    <span ng-if="Status.btnState >= 1">
+                                        <button class="btn btn-primary" ng-click="update();" ng-show="Status.btnState < 3">修改</button>
+                                    </span>
+                                    <span ng-if="Status.btnState >= 1">
+                                        <button class="btn btn-success" type="submit" ng-click="saveItemDelay();" ng-hide="Status.btnState > 3">活动延期</button>
+                                    </span>
+                                    <span ng-if="Status.btnState >= 3">
+                                        <button class="btn btn-grey" ng-click="complate();" ng-hide="Status.btnState >= 4">活动结束</button>
+                                    </span>
+                                    <span ng-if="Status.btnState >= 1">
+                                        <button class="btn btn-grey" ng-click="cancel();" ng-hide="Status.btnState > 3">活动取消</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+<!-- 住民Modal -->
+<div class="modal fade" id="modalBed" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div style="width:850px" class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalBedLabel">床位信息</h4>
+            </div>
+            <!--<button type="button" class="close" style="padding-right:5px" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+            <div class="modal-body">
+                <div ng-include="'/WebScripts/views/OrganizationManage/ResidentModel.html'"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-grey" data-dismiss="modal">关闭</button>
+                <!--<button type="button" class="btn btn-primary" id="btnOk">確定</button>-->
+            </div>
+        </div>
+    </div>
+</div>

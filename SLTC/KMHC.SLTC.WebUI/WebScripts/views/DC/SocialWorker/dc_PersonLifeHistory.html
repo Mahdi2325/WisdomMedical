@@ -1,0 +1,205 @@
+﻿<!---->
+<link href="../../../Content/socialworker.css" rel="stylesheet" />
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="marginLeft5">
+                    <resident-list feeno={{FeeNo}} callback="residentSelected(resident)" />
+                </div>
+                
+               
+            </div>
+            <div class="col-md-10 marginTop5">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                     
+                            <button class="btn btn-primary" ng-disabled="buttonShow" ng-click="saveForm(currentItem)"><i class="fa fa-save"></i> 儲存資料</button>
+
+                                <button class="btn btn-warning" ng-click="PrintPreview(currentItem.Id)" ng-disabled="buttonShow"><i class="fa fa-print"></i> 列印預覽</button>
+                        
+
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form class="form-horizontal tb" name="phForm" role="form" novalidate>
+                                <div style="margin-bottom:5px;" class="col-md-12">
+                                    <div class="center">
+                                        <h3>
+                                            <strong>{{Org}}老人日間照顧中心</strong>
+                                        </h3>
+                                        <h4>
+                                            <strong>個案生活史</strong>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div style="margin-bottom:5px;border:2px solid #000;padding:1px;" class="col-md-12">
+                                    <div style="text-align:center;line-height:36px;">
+
+                                        <table class="col-md-12">
+                                            <tr class="height50">
+                                                <td class="col-md-2 tdlbl">個案姓名</td>
+                                                <td class="col-md-2" align="left">
+                                                    {{currentResident.Name}}
+                                                </td>
+                                                <td class="col-md-2 tdlbl">最喜歡的稱呼</td>
+                                                <td class="col-md-2" align="left">
+                                                    {{currentResident.NickName}}
+                                                </td>
+                                                <td class="col-md-2 tdlbl">日字號</td>
+                                                <td class="col-md-2" align="left">{{currentResident.ResidentNo}}</td>
+
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl" colspan="1">出生地</td>
+                                                <td class="" align="left">{{currentResident.BirthPlace}}</td>
+                                                <td class="tdlbl" colspan="">兒時家庭環境</td>
+                                                <td colspan="3"><input class="form-control" type="text" placeholder="兒時家庭環境" ng-model="currentItem.FamilyEnvironment" name="兒時家庭環境" ng-maxlength="100"></td>
+
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">個案唸過的學校</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="個案唸過的學校" ng-maxlength="100" name="個案唸過的學校" ng-model="currentItem.School"  >
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">個案常提的童年經驗</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="個案常提的童年經驗" ng-maxlength="100" name="個案常提的童年經驗" ng-model="currentItem.ChildHoodExperience">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">讀書(或年少)時的得意事跡</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="讀書(或年少)時的得意事跡" ng-maxlength="100" name="讀書(或年少)時的得意事跡" ng-model="currentItem.ProudDeeds">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">羅曼史</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="羅曼史" ng-maxlength="200" name="羅曼史" ng-model="currentItem.Romance">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">結婚時間地點或重要過程</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="結婚時間地點或重要過程" name="結婚時間地點或重要過程" ng-maxlength="200" ng-model="currentItem.MerryInfo">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">對個案有重要影響的人(或最親近的親友)</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="對個案有重要影響的人(或最親近的親友)" name="對個案有重要影響的人(或最親近的親友)" ng-maxlength="100" ng-model="currentItem.MportantPeople">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">工作史</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="工作史" ng-maxlength="200" name="工作史" ng-model="currentItem.WorkHistory">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">個案服務史</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="個案服務史" ng-maxlength="200" name="個案服務史" ng-model="currentItem.ServiceHistory">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">個案宗教經驗</td>
+                                                <td colspan="2">
+                                                    <input class="form-control" type="text" placeholder="個案宗教經驗" ng-maxlength="50" name="個案宗教經驗" ng-model="currentItem.Religious">
+                                                </td>
+                                                <td colspan="1" class="tdlbl">個案居住經驗</td>
+                                                <td colspan="2" class="">
+                                                    <input class="form-control" type="text" placeholder="個案居住經驗" ng-maxlength="100" name="個案居住經驗" ng-model="currentItem.Living">
+                                                </td>
+                                            </tr>
+
+                                            <tr class="height50">
+                                                <td class="tdlbl">正向個性(三個以上形容詞)</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="正向個性(三個以上形容詞)" name="正向個性(三個以上形容詞)" ng-maxlength="50" ng-model="currentItem.PositivePersonality">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">負向個性(三個以上形容詞)</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="負向個性(三個以上形容詞)" name="負向個性(三個以上形容詞)" ng-maxlength="50" ng-model="currentItem.NegativePersonality">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">最困擾家屬的行為</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="最困擾家屬的行為" name="最困擾家屬的行為" ng-maxlength="200" ng-model="currentItem.FamilyTroubled">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">可安撫長輩情緒的方法</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="可安撫長輩情緒的方法" name="可安撫長輩情緒的方法" ng-maxlength="200" ng-model="currentItem.SoothingEmotion">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">嗜好專長</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="嗜好專長" name="嗜好專長" ng-model="currentItem.Skill" ng-maxlength="200">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">喜歡的打扮</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="喜歡的打扮" name="喜歡的打扮" ng-model="currentItem.FavoriteDress" ng-maxlength="200">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">喜歡/不喜歡的食物</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="喜歡/不喜歡的食物" name="喜歡/不喜歡的食物" ng-model="currentItem.Foodlike" ng-maxlength="200">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">喜歡/不喜歡的動物(養寵物經驗)</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="喜歡/不喜歡的動物(養寵物經驗)" name="喜歡/不喜歡的動物(養寵物經驗)" ng-model="currentItem.Animallike" ng-maxlength="200">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">假日/節慶活動</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="假日/節慶活動" name="假日/節慶活動" ng-model="currentItem.HolidayActivity" ng-maxlength="200">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">禁忌/不喜歡的事物</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="禁忌/不喜歡的事物" name="禁忌/不喜歡的事物" ng-model="currentItem.NotlikeThings" ng-maxlength="200">
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">其他重要事蹟或個案津津樂道的事情</td>
+                                                <td colspan="5">
+                                                    <input class="form-control" type="text" placeholder="其他重要事蹟或個案津津樂道的事情" name="其他重要事蹟或個案津津樂道的事情" ng-model="currentItem.InterestedThings" ng-maxlength="200">
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </form>
+                            <div style="width:970px;font-family: DFKai-SB;color:#000;">
+                                <div style="font-family: DFKai-SB;float:left;font-weight:700;font-size:18px;width:50%;line-height:40px;text-align:left">主責社工：</div>
+                                <div style="font-family: DFKai-SB;float:right;font-weight:700;font-size:18px;width:50%;line-height:40px;">主任/督導核閱：</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

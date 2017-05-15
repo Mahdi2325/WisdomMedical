@@ -1,0 +1,60 @@
+﻿#watc-panel {
+    background: whitesmoke;
+    padding: 10px;
+}
+
+.watc-container {
+    font-family: monospace;
+}
+
+.watc-transmission {
+
+}
+
+.watc-container input {
+    border: solid 1px #696969;
+    font-family: monospace;
+    padding: 3px;
+}
+
+a[data-cmd] {
+    text-decoration: none;
+    border: solid 1px #4848FF;
+    color: #4848FF;
+    display: inline-block;
+    padding: 0 3px;
+}
+
+.watc-activator {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 5px 15px;
+    display: inline-block;
+    opacity: .8;
+    text-decoration: none;
+    background-color: gray;
+    color: white;
+}
+
+
+.watc-properties {
+    padding: 0 0 0 15px;
+}
+
+.watc-list-container>span:not(:last-child)::after,
+.watc-property:not(:last-child)::after,
+.watc-input-list>span:not(:last-child)::after  {
+    content: ", ";
+}
+
+
+
+#watc-panel li {
+    list-style-type: none;
+    
+}
+
+#watc-panel ul {
+    margin: 0;
+}

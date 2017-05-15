@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMHC.SLTC.WebUI", "KMHC.SLTC.WebUI\KMHC.SLTC.WebUI.csproj", "{9D673794-35DE-4711-8929-114F2F6D7342}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMHC.Infrastructure", "KMHC.Infrastructure\KMHC.Infrastructure.csproj", "{0997F971-1D2F-4AA8-AA67-5B1683AFDEFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMHC.SLTC.Business.Entity", "KMHC.SLTC.Business.Entity\KMHC.SLTC.Business.Entity.csproj", "{208D3A36-9507-4FF2-A3BF-374D718F0A11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMHC.SLTC.Business.Implement", "KMHC.SLTC.Business.Implement\KMHC.SLTC.Business.Implement.csproj", "{F1527C86-69F5-4F62-AF10-753740868DF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMHC.SLTC.Business.Interface", "KMHC.SLTC.Business.Interface\KMHC.SLTC.Business.Interface.csproj", "{5B2E2137-06D2-4ADF-BC85-AA94984ACC50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMHC.SLTC.Persistence", "KMHC.SLTC.Persistence\KMHC.SLTC.Persistence.csproj", "{3A0737CE-99B6-429F-9B11-85B49FAD1DE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMHC.SLTC.Repository", "KMHC.SLTC.Repository\KMHC.SLTC.Repository.csproj", "{22F072AC-CACF-4FAA-9612-6F675019D187}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMHC.SLTC.Business.Interceptor", "KMHC.SLTC.Business.Interceptor\KMHC.SLTC.Business.Interceptor.csproj", "{23A3026E-DC64-45C1-A5BF-DC3B857D4EEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMHC.SLTC.WebAPI.Lib", "KMHC.SLTC.WebAPI.Lib\KMHC.SLTC.WebAPI.Lib.csproj", "{45277E7F-8FAB-4DCE-90A4-EEEC9991A0F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMHC.SLTC.WebAPI", "KMHC.SLTC.WebAPI\KMHC.SLTC.WebAPI.csproj", "{8A3AB0BA-7936-4CDC-952B-D918F572DB97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMHC.SLTC.APPAPI", "KMHC.SLTC.APPAPI\KMHC.SLTC.APPAPI.csproj", "{7EB5394A-E630-4EC4-AD53-C86299F70ACF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D673794-35DE-4711-8929-114F2F6D7342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D673794-35DE-4711-8929-114F2F6D7342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D673794-35DE-4711-8929-114F2F6D7342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D673794-35DE-4711-8929-114F2F6D7342}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0997F971-1D2F-4AA8-AA67-5B1683AFDEFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0997F971-1D2F-4AA8-AA67-5B1683AFDEFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0997F971-1D2F-4AA8-AA67-5B1683AFDEFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0997F971-1D2F-4AA8-AA67-5B1683AFDEFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{208D3A36-9507-4FF2-A3BF-374D718F0A11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{208D3A36-9507-4FF2-A3BF-374D718F0A11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{208D3A36-9507-4FF2-A3BF-374D718F0A11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{208D3A36-9507-4FF2-A3BF-374D718F0A11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1527C86-69F5-4F62-AF10-753740868DF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1527C86-69F5-4F62-AF10-753740868DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1527C86-69F5-4F62-AF10-753740868DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1527C86-69F5-4F62-AF10-753740868DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B2E2137-06D2-4ADF-BC85-AA94984ACC50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B2E2137-06D2-4ADF-BC85-AA94984ACC50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B2E2137-06D2-4ADF-BC85-AA94984ACC50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B2E2137-06D2-4ADF-BC85-AA94984ACC50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A0737CE-99B6-429F-9B11-85B49FAD1DE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A0737CE-99B6-429F-9B11-85B49FAD1DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A0737CE-99B6-429F-9B11-85B49FAD1DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A0737CE-99B6-429F-9B11-85B49FAD1DE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22F072AC-CACF-4FAA-9612-6F675019D187}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22F072AC-CACF-4FAA-9612-6F675019D187}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22F072AC-CACF-4FAA-9612-6F675019D187}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22F072AC-CACF-4FAA-9612-6F675019D187}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23A3026E-DC64-45C1-A5BF-DC3B857D4EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23A3026E-DC64-45C1-A5BF-DC3B857D4EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23A3026E-DC64-45C1-A5BF-DC3B857D4EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23A3026E-DC64-45C1-A5BF-DC3B857D4EEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45277E7F-8FAB-4DCE-90A4-EEEC9991A0F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45277E7F-8FAB-4DCE-90A4-EEEC9991A0F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45277E7F-8FAB-4DCE-90A4-EEEC9991A0F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45277E7F-8FAB-4DCE-90A4-EEEC9991A0F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A3AB0BA-7936-4CDC-952B-D918F572DB97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A3AB0BA-7936-4CDC-952B-D918F572DB97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A3AB0BA-7936-4CDC-952B-D918F572DB97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A3AB0BA-7936-4CDC-952B-D918F572DB97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EB5394A-E630-4EC4-AD53-C86299F70ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EB5394A-E630-4EC4-AD53-C86299F70ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EB5394A-E630-4EC4-AD53-C86299F70ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EB5394A-E630-4EC4-AD53-C86299F70ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal

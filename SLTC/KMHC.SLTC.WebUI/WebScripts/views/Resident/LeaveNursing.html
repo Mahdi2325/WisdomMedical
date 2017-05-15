@@ -1,0 +1,75 @@
+﻿
+
+<div class="row">
+
+    <div class="col-sm-2">
+        <div class="box border green">
+            <div class="box-title">
+                <h4>
+                    <i class="fa fa-bars"></i>会员信息
+                </h4>
+            </div>
+            <div class="box-body">
+                <resident-select callback="residentSelected(resident)" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-10">
+        <div class="box border green">
+            <div class="box-title">
+                <h4>
+                    <i class="fa fa-bars"></i>会员服务结束登记
+                </h4>
+            </div>
+            <div class="box-body">
+                <div class="well">
+                    <form class="form-horizontal" role="form" name="leaveNursingform" ng-submit="saveLeaveNursing(currentItem)" novalidate>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">会员服务起始日期</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" ng-model="currentItem.CheckinDate" readonly="readonly" />
+                            </div>
+                            <label class="col-sm-2 control-label">会员状态</label>
+                            <div class="col-sm-2">
+                                <select name="residentStatus" class="form-control" ng-model="currentItem.Status" select-code="J00.009" ng-disabled="true"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">护理员</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" ng-model="emp.EmpName" readonly="readonly" />
+                            </div>
+                            <label class="col-sm-2 control-label">套餐</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" ng-model="chargeGroups.CGName" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">床位号</label>
+                            <div class="col-sm-2">
+                                <input ng-model="Bed.BedNo" class="form-control" type="text" readonly="readonly">
+                            </div>
+                            <label class="col-sm-2 control-label">床位名称</label>
+                            <div class="col-sm-2">
+                                <input ng-model="Bed.BedName" class="form-control" type="text" readonly="readonly">
+                            </div>
+                            <label class="col-sm-2 control-label">床位状态</label>
+                            <div class="col-sm-2">
+                                <select name="BedState" class="form-control" ng-model="Bed.BedState" select-code="J00.002" ng-disabled="true"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-10 col-sm-2">
+                                <button class="btn btn-primary" type="submit" ng-disabled="leaveNursingform.$invalid" ng-show="buttonShow">会员服务结束登记</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

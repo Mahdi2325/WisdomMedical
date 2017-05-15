@@ -1,0 +1,185 @@
+@charset "utf-8";
+/* CSS Document */
+
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('fonts/bebas/bebasneue-webfont.eot');
+    src: url('fonts/bebas/bebasneue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/bebas/bebasneue-webfont.woff') format('woff'),
+         url('fonts/bebas/bebasneue-webfont.ttf') format('truetype'),
+         url('fonts/bebas/bebasneue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'PT Sans';
+    src: url('fonts/ptsans/pts55f-webfont.eot');
+    src: url('fonts/ptsans/pts55f-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/ptsans/pts55f-webfont.woff') format('woff'),
+         url('fonts/ptsans/pts55f-webfont.ttf') format('truetype'),
+         url('fonts/ptsans/pts55f-webfont.svg#PTSansRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'BebasNeueRegular', Sans;
+	font-weight: normal;
+	color:#313131;
+	margin:10px 0;
+}
+h1 {
+	font-size:38px;
+}
+h2 {
+	font-size:30px;
+}
+h3 {
+	font-size:22px;
+}
+h4 {
+	font-size:20px;
+}
+body {
+	background:#fff url(../images/background.png) repeat;
+	font-family: 'PT Sans', Sans-Serif;
+	font-size:14px;
+	margin:0;
+	text-align:center;
+}
+a {
+	text-decoration:none;
+	color:#dd5555;
+}
+
+a img {
+	border:0;
+}
+.clear {
+	clear:both;
+}
+.half_page {
+	width:460px;
+	float:left;
+}
+
+.half_page.first {
+	margin-right:20px;
+}
+
+.selectors {
+	text-align:center;
+	margin:20px;
+}
+.selectors a {
+	font-family: 'BebasNeueRegular', Sans;
+	font-weight: normal;
+	text-decoration:none;
+	color:#313131;
+	font-size:34px;
+	margin:10px;
+}
+.selectors a.active,
+.selectors a:hover {
+	color:#dd5555;
+}
+
+a.image_rollover_bottom,
+a.image_rollover_right,
+a.image_rollover_top,
+a.image_rollover_left
+{
+	margin:0;
+ 	display:block;
+	position:relative;
+	overflow:hidden;
+}
+
+a.image_rollover_bottom img,
+a.image_rollover_right img,
+a.image_rollover_top img,
+a.image_rollover_left img {
+	display:block;
+}
+.image_roll_zoom {
+	display:inline-block;
+	width:100%;
+	height:100%;
+	position:absolute;
+	background:url(../images/zoomIn.png) no-repeat center center;
+}
+.image_roll_glass {
+	display:none;
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	background:url('../images/glass.png') repeat;
+}
+
+
+/* ------------------------ help --------------------------------- */
+
+
+.help {
+	width:960px;
+	text-align:left;
+	margin:0 auto;
+}
+
+.help p {
+	margin:10px 0;
+}
+
+.help h2{
+	margin:40px 0 20px 0;
+	font-size:32px;
+}
+
+.help ol {
+	padding-left:20px;
+}
+
+.big_image {
+	margin-left:-120px
+}
+
+pre {
+	border: solid 1px #dddddd;
+	font-size: 11px;
+	color: blue;
+	margin: 10px 0;
+	padding:10px;
+	background: #f2f2f2;
+}
+code {
+	font-size:1.2em;
+	color: #008099;
+}
+
+.red { color:#c30000;}
+.green {color:#1c9600;}
+.orange {color:#c17b00;}
+.purple {color:#b100c1;}
+.blue {color:#1f08c9;}
+
+table {
+	border: solid 1px #dddddd;
+	background:#fff;
+	margin:10px 0;
+}
+th {
+	padding:10px;
+    background: #dddddd;
+}
+
+td {
+	padding:10px;
+    background: #f2f2f2;
+}
+

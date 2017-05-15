@@ -1,0 +1,172 @@
+﻿<script type="text/html" id="tpl-watc-container">
+    <div id="watc-panel">
+        
+        <div class="watc-container">
+            <div class="watc-api-title"><span id="watc-method">{{Method}}</span> <span id="watc-route">{{Origin}}{{SiteRoot}}{{Route}}</span></div>
+            <a href="#header" data-cmd="headerAdd">add header</a>
+            <div id="headers-container">
+                {{#each Headers}}
+                {{> header-item}}
+                {{/each}}
+            </div>
+            {{#if RouteParameters.length}}
+            <div>Route Params: </div>
+            {{> url-input-list RouteParameters}}
+            {{/if}}
+
+            {{#if QueryParameters.length}}
+            <div>Query Params: </div>
+            {{> url-input-list QueryParameters}}
+            {{/if}}
+
+            {{#if BodyParameter}}
+            <div>Body ({{#if BodyParameter.IsDictionary}}{ {{BodyParameter.KeyTypeName}} : {{BodyParameter.ValueTypeName}} } {{else}}{{BodyParameter.TypeName}}{{#if BodyParameter.IsList}}[]{{/if}}{{/if}}): </div>
+            <div class="watc-api-body">
+                {{> any-type BodyParameter}}
+            </div>
+            {{/if}}
+        </div>
+        <div class="watc-transmission">
+            <div><button data-cmd="sendRequest" id="sendRequestBtn">send request</button><span id="progress"></span></div>
+            <div class="watc-response">
+                <pre id="response-data">
+</pre>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="tpl-watc-any-type">
+    {{#if IsDictionary}}
+    {{> any-dictionary-type}} 
+    {{else}}
+
+    {{#if IsList}}
+    {{> any-list-type}}
+    {{else}}
+    {{#if IsSimple}}
+    {{> simple-input }}
+    {{else}}
+    {{> complex-object}}
+    {{/if}}
+    {{/if}}
+    {{/if}}
+</script>
+
+<script type="text/html" id="tpl-watc-header-item">
+    <div class="watc-header" id="header-{{id}}">
+        {{> simple-input Name}} : {{> simple-input Value}} <a href="#remove" title="remove an item" data-cmd="headerRemove" data-id="{{id}}">-</a>
+    </div>
+
+</script>
+
+
+<script type="text/html" id="tpl-watc-any-dictionary-type">
+    <span>{</span>
+    <div class="watc-properties" id="dictionary-{{id}}">
+        {{#each Items}}
+        {{> dictionary-item}}
+        {{/each}}
+    </div>
+    <a href="#less" title="remove an item" data-cmd="dictionaryRemove" data-id="{{id}}">-</a>
+    <a href="#more" title="add an item" data-cmd="dictionaryAdd" data-id="{{id}}">+</a>
+    <span>}</span>
+</script>
+
+<script type="text/html" id="tpl-watc-dictionary-item">
+    <div class="watc-property">
+        {{> simple-input Key}} : {{> simple-input Value}}
+    </div>
+
+</script>
+
+<script type="text/html" id="tpl-watc-any-list-type">
+    <span>[</span>
+    {{#if IsSimple}}
+    {{> input-list}}
+    {{else}}
+    {{> complex-object-list}}
+    {{/if}}
+    <span>]</span>
+    
+</script>
+    <script type="text/html" id="tpl-watc-complex-object-list">
+        <span class="watc-list-container" id="list-container-{{id}}">
+            {{#each Items}}
+            {{> complex-object-list-item}}
+            {{/each}}
+        </span>
+
+        <a href="#less" title="remove an item" data-cmd="complexListRemove" data-id="{{id}}">-</a>
+        <a href="#more" title="add an item" data-cmd="complexListAdd" data-id="{{id}}">+</a>
+
+    </script>
+
+    <script type="text/html" id="tpl-watc-complex-object-list-item">
+        <span >
+            {{> complex-object}}
+        </span>
+    </script>
+
+    <script type="text/html" id="tpl-watc-complex-object">
+        <span>{</span>
+        {{#if Properties}}
+        <div class="watc-properties">
+            {{#each Properties}}
+            {{> named-property}}
+            {{/each}}
+        </div>
+        {{else}}
+        <a href="#set" data-cmd="complexObjectSetValue" data-id="{{id}}" >set this value</a>
+        {{/if}}
+
+        <span>}</span>
+    </script>
+
+    <script type="text/html" id="tpl-watc-named-property">
+        <div class="watc-property" id="property-{{id}}">
+            <span class="watc-label">{{Name}} ({{#if IsDictionary}}{ {{KeyTypeName}} : {{ValueTypeName}} }{{else}}{{TypeName}}{{#if IsList}}[]{{/if}}{{/if}}, <label title="if checked, this property will be set to null in the response"><input type="checkbox" name="prop-null-{{id}}" />null</label>, <label title="if checked, this property and value will not be included in the response"><input type="checkbox" name="prop-excl-{{id}}" />excl</label>): </span>
+            {{> any-type}}
+        </div>
+    </script>
+
+    <script type="text/html" id="tpl-watc-url-input-list">
+        <ul>
+            {{#each this}}
+            {{#if IsList}}
+            {{> labeled-input-list}}
+            {{else}}
+            {{> labeled-input}}
+            {{/if}}
+            {{/each}}
+        </ul>
+
+    </script>
+
+    <script type="text/html" id="tpl-watc-simple-input">
+        <span ><input type="text" name="input-{{id}}" value="{{Value}}" id="{{uniqueId}}" /></span>
+    </script>
+
+    <script type="text/html" id="tpl-watc-labeled-input">
+        <li>
+            <span>{{Name}} ({{TypeName}})</span>:
+            {{> simple-input}}
+        </li>
+    </script>
+
+    <script type="text/html" id="tpl-watc-labeled-input-list">
+        <li>
+            <span>{{Name}} ({{TypeName}}[])</span>:
+            {{> input-list}}
+        </li>
+    </script>
+
+
+    <script type="text/html" id="tpl-watc-input-list">
+        <span class="watc-input-list" id="input-list-{{id}}">
+            {{> simple-input}}
+            {{> simple-input}}
+        </span>
+        <a href="#less" title="remove an item" data-cmd="inputListRemove" data-id="{{id}}">-</a>
+        <a href="#more" title="add an item" data-cmd="inputListAdd" data-id="{{id}}">+</a>
+    </script>

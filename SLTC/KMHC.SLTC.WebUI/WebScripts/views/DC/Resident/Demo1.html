@@ -1,0 +1,265 @@
+﻿<form name="myForm">
+    <div class="well col-md-12">
+        {{Data}}
+        <div class="col-md-2">
+            <resident-list feeno={{FeeNo}} callback="residentSelected(resident)" />
+        </div>
+      
+        <div class="col-md-10">
+            <div class="col-sm-12">
+                <div style="color:red" ng-show="IsInvalid">
+                    {{getErrorMessage(myForm.$error)}}
+                </div>
+            </div>
+            <div style="width:85%;padding:20px; margin:0 auto;background-color:white;font-family:DFKai-SB;">
+                <div id="headOne" style="text-align:center;">
+                    <h3><strong>(服務單位全銜)老人日間照顧中心</strong></h3>
+                </div>
+                <div id="headTwo" style="text-align:center;">
+                    <h4><strong>輔療性活動-個別化活動需求評估及計畫表</strong></h4>
+                </div>
+                <div id="headThree" style="line-height:3em" class="headThreeStyle">
+                    <div>
+                        <span>收案日期：</span><span style="font-size:18px">
+                            <input type="text" style="width:80px" />年
+                            <input type="text" style="width:40px" />月
+                            <input type="text" style="width:40px" />日
+                        </span>
+                        <span>初（覆）評日期：</span><span style="font-size:18px">
+                            <input type="text" style="width:80px" />年
+                            <input type="text" style="width:40px" />月
+                            <input type="text" style="width:40px" />日
+                        </span>
+                    </div>
+                    <div>
+                        <span>
+                            日字號：
+                            <input type="text" />
+                        </span>
+
+                        <span>姓名：<input type="text" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+
+                        <span>性别：</span><span style="font-size:18px"><input type="checkbox" />&nbsp;男 &nbsp;&nbsp;<input type="checkbox" />&nbsp;女</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span>出生：</span><span style="font-size:18px">
+                            <input type="text" style="width:80px" />年
+                            <input type="text" style="width:40px" />月
+                            <input type="text" style="width:40px" />日
+                            （<input type="text" style="border-left-style:none;border-top-style:none;border-right-style:none;border-bottom-style:none;width:30px;max-width:30px" />歲）
+                        </span>
+                    </div>
+                </div>
+
+                <div id="mainBody" class="bodyStyle">
+                    <div>
+                        <h4>壹、基本資料與認知狀況評估</h4>
+                        <div style="border:outset">
+                            <table class="tbStyle1">
+                                <tr>
+                                    <td style="text-align:center; width:60px;"><span>基本<br />資料</span></td>
+                                    <td>
+                                        <table class="tbStyle2">
+                                            <tr>
+                                                <td style="width:100px;"><span>教育程度:</span></td>
+                                                <td><input type="text" style="width:100%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>婚姻狀況:</span></td>
+                                                <td><input type="text" style="width:100%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>退休前職業:</span></td>
+                                                <td> <input type="text" style="width:60%" /><span>&nbsp;&nbsp;職稱:</span><input type="text" style="width:20%" /> </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>溝通語言:</span></td>
+                                                <td>
+                                                    <input type="text" id="test101" ng-model="Data.Language" hold ng-maxlength="14" input-select="DC01.002" style="width:100%" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>email</span></td>
+                                                <td>
+                                                        <input type="email" name="电子邮件" class="form-control" ng-model="model.email" required />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>数字</span></td>
+                                                <td>
+                                                    <input type="number" name="数字" class="form-control" ng-model="model.number" required />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>必填</span></td>
+                                                <td>
+                                                    <input type="number" name="必填Test" class="form-control" ng-model="model.notEmpty" required />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><span>时间:</span></td>
+                                                <td>
+                                                    <input type="text" class="Wdate" id="d122" onfocus="WdatePicker({isShowWeek:true,onpicked:function() {$dp.$('d122_1').value=$dp.cal.getP('W','W');}})" />
+                                                    <input type="text" id="d122_1" size="3">
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td><span>单选:</span></td>
+                                                <td>
+                                                    <select ng-model="Data.SingleSelect" class="form-control" select-dcode="DC01.002"></select>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td><span>主题</span></td>
+                                                <td>
+                                                    <input id="ms1" type="text" name="ms1" />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><span>计划</span></td>
+                                                <td style="height:20px;">
+                                                    <div id="cc">
+                                                        <input id="ms2" type="text" ng-model="Plan" select-data="{{jsonData}}" name="ms2" m-select-multiple />
+                                                        <div style="clear:both;"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>计划</span></td>
+                                                <td>
+                                                    <div>
+                                                        <textarea style="height:80px" class="form-control" ng-model="Plan" />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>toggle</span></td>
+                                                <td>
+                                                    <div class="make-switch switch-small" data-on="warning" data-off="danger">
+                                                        <input type="checkbox">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                       
+                                         
+                                        </table>
+                                        <button type="button" ng-click="Save(myForm.$invalid)">Save1</button>
+                                        <button type="button" ng-click="alert('姓名為必填項！\n col1為必填項！\n')">Submit</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                  
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var i = 0
+        $(".list").each(function () {
+            $(this).attr("id", ++i);
+        });
+
+       // $('.ms-ctn').attr("disabled", true);
+
+        //$('#cc').find("*").each(function () {
+        //    $(this).attr("disabled", "disabled");  })
+      //  $('#test101').removeAttr("disabled");
+    });
+
+
+</script>
+
+<style>
+    .headThreeStyle input {
+        border-left-style: none;
+        border-top-style: none;
+        border-right-style: none;
+        border-bottom-style: solid;
+        padding: 5px;
+    }
+
+    .headThreeStyle span {
+        font-weight: bolder;
+        font-size: 16px;
+    }
+
+    .bodyStyle input {
+        border-left-style: none;
+        border-top-style: none;
+        border-right-style: none;
+        border-bottom-style: solid;
+        padding: 5px;
+    }
+
+    .tbStyle1 {
+        width: 100%;
+        margin: 1px;
+        border-bottom: 1px solid black;
+        border-left: 1px solid black;
+        border-collapse: collapse;
+    }
+
+        .tbStyle1 td {
+            border-top: 1px solid black;
+            border-right: 1px solid black;
+        }
+
+    .tbStyle2 {
+        width: 100%;
+        margin: 1px;
+    }
+
+        .tbStyle2 td {
+            border: none;
+        }
+
+    .bodyStyle span {
+        font-weight: bolder;
+        font-size: 16px;
+        line-height: 2em;
+    }
+
+    .tbStyle3 {
+        width: 100%;
+        border-style: dotted;
+    }
+
+        .tbStyle3 td {
+            text-align: left;
+            padding-left: 4px;
+        }
+
+    table.selecttable {
+        font-family: verdana,arial,sans-serif;
+        font-size: 11px;
+        width: 100%;
+    }
+    table.selecttable th {
+        width: 50%;
+    }
+    table.selecttable tr:hover {
+        background-color: #dff8e7;
+    }
+    table.selecttable tr:hover td {
+        background: none;
+    }
+    table.selecttable td {
+        width: 50%;
+        background-color: #f4f4f4;
+    }
+    
+</style>

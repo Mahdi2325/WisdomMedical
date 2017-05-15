@@ -1,0 +1,248 @@
+﻿<link rel="stylesheet" type="text/css" href="/WebScripts/components/cityNewSelect/city-picker.css" />
+<!--<link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/bootstrap-switch/bootstrap-switch.min.css" />-->
+<!--<script src="/WebScripts/components/cityNewSelect/jquery.js"></script>
+<script src="/WebScripts/components/cityNewSelect/bootstrap.js"></script>-->
+<script src="/WebScripts/components/cityNewSelect/city-picker.data.js"></script>
+<script src="/WebScripts/components/cityNewSelect/city-picker.js"></script>
+<script src="/Scripts/jquery.qrcode.min.js"></script>
+<!--<script src="/Content/CloudAdmin/js/bootstrap-switch/bootstrap-switch.min.js"></script>-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="box border green">
+            <div class="box-title">
+                <h4><i class="fa fa-columns"></i> <span class="hidden-inline-mobile">会员档案信息</span></h4>
+            </div>
+            <div class="box-body">
+                <div class="tabbable header-tabs">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <!--<li id="c" class=""><a href="#watchCheck" data-toggle="tab"><i class="fa fa-rss"></i> <span class="hidden-inline-mobile">手表健康记录</span></a></li>-->
+                        <li id="b" class=""><a id="btnExamination" ng-click="InitHealthData()" href="#examination" data-toggle="tab"><i class="fa fa-bookmark"></i> <span class="hidden-inline-mobile">体检档案</span></a></li>
+                        <li id="a" class="active"><a id="btnPersonInfo" href="#personInfo" data-toggle="tab"><i class="fa fa-user"></i> <span class="hidden-inline-mobile">个人信息</span></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="personInfo">
+                            <div class="box-body" ng-controller="PersonInfoEditCtrl">
+                                <form role="form" name="personeditform" class="form-horizontal w5c-form" w5c-form-validate novalidate>
+                                    <div class="form-group">
+                                        <label class="col-md-offset-2 col-md-2 control-label">头像</label>
+                                        <div class="col-md-2">
+                                            <img style="padding: 10px;  width: 120px;" ng-src="{{(curItem.PhotoPath != null && curItem.PhotoPath != '') ? curItem.PhotoPath : '/Images/0.png'}}" alt="" />
+                                            <div id="PicturePathPicker">选择照片</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <img style=" width: 150px;" ng-show="curItem.ResidentID != null" ng-src="{{curItem.QrPath}}" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-offset-2 col-md-2 control-label">编号<span class="required">*</span></label>
+                                        <div class="col-md-4">
+                                            <input name="No" class="form-control" ng-model="curItem.PersonNo" required ng-readonly="isAdd" ng-maxlength="20" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-offset-2 col-md-2 control-label">姓名<span class="required">*</span></label>
+                                        <div class="col-md-4">
+                                            <input name="Name" class="form-control" ng-model="curItem.Name" required ng-readonly="isAdd" ng-maxlength="20" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-offset-2 col-md-2 control-label">身份证号<span class="required">*</span></label>
+                                        <div class="col-md-4">
+                                            <input name="IdCard1" class="form-control" ng-show="isAdd" ng-model="curItem.IdCard" ng-change="createBirthdate(curItem.IdCard)" required ng-readonly="isAdd"
+                                                   ng-maxlength="20" />
+                                            <div class="input-group" ng-show="!isAdd || personeditform.$error.w5cuniquecheck">
+                                                <input name="IdCard" class="form-control" ng-model="curItem.IdCard" ng-change="createBirthdate(curItem.IdCard)"
+                                                       w5c-unique-check="{url:'/home/CheckCard?id='+curItem.IdCard,isExists:true}" idcard required />
+                                                <span class="input-group-btn">
+                                                    <button id="basic-addon2" type="button" ng-click="getHltRecordInfo(curItem.IdCard)" class="btn btn-primary">点击获取信息</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div class="form-group">
+                <label class="col-md-offset-2 col-md-2 control-label">身份证号<span class="required">*</span></label>
+                <div class="col-md-4">
+                    <input name="IdCard1" class="form-control" ng-show="isAdd" ng-model="curItem.IdCard" ng-change="createBirthdate(curItem.IdCard)" required ng-readonly="isAdd" ng-maxlength="20" />
+                    <div class="input-group" ng-show="!isAdd || personeditform.$error.w5cuniquecheck">
+                        <input name="IdCard" class="form-control" ng-model="curItem.IdCard" ng-change="createBirthdate(curItem.IdCard)"
+                               w5c-unique-check="{url:'/home/CheckCard?id='+curItem.IdCard,isExists:true}" idcard required />
+                        <span class="input-group-addon" id="basic-addon2" ng-click="getHltRecordInfo(curItem.IdCard)">点击获取信息</span>
+                    </div>
+                </div>
+            </div>-->
+                                    <div class="form-group">
+                                        <label class="col-md-offset-2 col-md-2 control-label">生日<span class="required">*</span></label>
+                                        <div class="col-md-4">
+                                            <input name="Birthdate" class="form-control" ng-model="curItem.Birthdate" placeholder="" required ng-readonly="true" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-offset-2 col-md-2 control-label">性别<span class="required">*</span></label>
+                                        <div class="col-md-4">
+                                            <select name="Sex" class="form-control" id="selSex" ng-model="curItem.Sex" select-code="A00.001" required ng-readonly="isAdd" ng-disabled="isAdd"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-offset-2 col-md-2 control-label">户籍地址<span class="required">*</span></label>
+                                        <div class="col-md-4">
+                                            <input name="CensusAddressName" class="form-control" ng-model="curItem.CensusAddressName" required ng-readonly="isAdd" ng-maxlength="200" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-offset-2 col-md-2 control-label">现住地址<span class="required">*</span></label>
+                                        <div class="col-md-4">
+                                            <div style="position: relative;">
+                                                <input id="myAddress1" class="form-control" ng-model="AddressDetail" readonly type="text" style="width: 100%" data-toggle="city-picker" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-offset-2 col-md-2 control-label">本人电话<span class="required">*</span></label>
+                                        <div class="col-md-4">
+                                            <input name="Phone" class="form-control" ng-model="curItem.Phone" ng-maxlength="20" phone required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-offset-2 col-md-2 control-label">紧急联系人1<span class="required">*</span></label>
+                                        <div class="col-md-4">
+                                            <input name="ContactName1" class="form-control" ng-model="curItem.ContactName1" required ng-maxlength="20" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-offset-2 col-md-2 control-label">紧急联系人1电话<span class="required">*</span></label>
+                                        <div class="col-md-4">
+                                            <input name="ContactPhone1" class="form-control" ng-model="curItem.ContactPhone1" required ng-maxlength="20" phone />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-offset-2 col-md-2 control-label">紧急联系人2</label>
+                                        <div class="col-md-4">
+                                            <input name="ContactName2" class="form-control" ng-model="curItem.ContactName2" ng-maxlength="20" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-offset-2 col-md-2 control-label">紧急联系人2电话</label>
+                                        <div class="col-md-4">
+                                            <input name="ContactPhone2" class="form-control" ng-model="curItem.ContactPhone2" ng-maxlength="20" phone />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-offset-2 col-md-2 control-label">IMEI</label>
+                                        <div class="col-md-4">
+                                            <input name="IMEI" class="form-control" ng-model="curItem.Imei" ng-maxlength="50" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group center">
+                                        <button class="btn btn-primary" type="submit" ng-click="saveEdit(curItem)" ng-disabled="personeditform.$invalid ">保存</button>
+                                        <button class="btn btn-grey " ng-click="$root.goBack('PersonList');">取消</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="examination">
+                            <div class="box-body" ng-controller="healthCtrl">
+                                <ui-data-table options="options">
+                                    <table class="table table-striped table-bordered table-hover table-handler">
+                                        <thead>
+                                            <tr class="info">
+                                                <th class="col-md-2">体检类型</th>
+                                                <th class="col-md-2">体检报告编号</th>
+                                                <th class="col-md-1">体检医生</th>
+                                                <th class="col-md-2">体检时间</th>
+                                                <th class="col-md-2">健康状态</th>
+                                                <th class="col-md-1"><i class="fa fa-bars"></i>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in RecordList">
+                                                <td>健康工作站</td>
+                                                <td>{{item.ExamNo}}</td>
+                                                <td>{{item.Doctor}}</td>
+                                                <td>{{showDatetime(item.ExamDate)}}</td>
+                                                <th>{{item.HealthStatus}}</th>
+                                                <td>
+                                                    <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                        <a ng-click="popupResult(item)"  class="btn btn-success" role="button"><i class="fa fa-search"></i>结果查看</a>
+                                                        <a ng-click="popupSuggest(item)"  class="btn btn-info" role="button"><i class="fa fa-stethoscope"></i> 健康建议</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </ui-data-table>
+                            </div>
+                        </div>
+
+                        <!--<div class="tab-pane" id="watchCheck">
+                            <div class="col-md-12 col-lg-12">
+                                <div class="row  col-md-1 col-md-offset-11">
+                                    <div class="make-switch switch-large" data-on="info" ng-click="WatchShow(this)" data-off="success" data-on-label="列表" data-off-label="视图">
+                                        <input type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="ListShow">
+                                <table class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>结果编号</th>
+                                            <th>项目名称</th>
+                                            <th>监测时间</th>
+                                            <th>监测项目</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in MonitorResult">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{item.MRNo}}</td>
+                                            <td>{{item.MTName}}</td>
+                                            <td>{{item.MRDatetime|dateFormat}}</td>
+                                            <td>
+                                                <div ng-repeat="mi in item.MRItems">
+                                                    {{mi.MIName}}:{{mi.Result}}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div ng-show="ViewShow">
+                                <div class="row clear-fix">
+                                    <div id="filter-items" class="isotope">
+                                        <div class="col-md-12 col-lg-12">
+                                            <div id="bloodpressure" style="width: 85%; "></div>
+                                        </div>
+                                        <div class="col-md-12 col-lg-12">
+                                            <div id="bloodsugar" style="width: 85%; "></div>
+                                        </div>
+                                        <div class="col-md-12 col-lg-12">
+                                            <div id="heartRate" style="width: 85%; "></div>
+                                        </div>
+                                        <div class="col-md-12 col-lg-12">
+                                            <div id="BloodOxygen" style="width: 85%; "></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="modalResult" tabindex="-1" role="dialog" aria-labelledby="modalServiceItemLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="z-index: 90;">
+        <div ng-include="'/WebScripts/views/UserManage/ExamineResult.html'"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalSuggest" tabindex="-1" role="dialog" aria-labelledby="modalServiceItemLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="z-index: 90;">
+        <div ng-include="'/WebScripts/views/UserManage/ExamineSuggest.html'"></div>
+    </div>
+</div>
+<input type="hidden" id="CurrentExamId">

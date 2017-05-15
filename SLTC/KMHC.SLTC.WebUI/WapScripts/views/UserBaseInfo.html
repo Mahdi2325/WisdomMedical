@@ -1,0 +1,163 @@
+﻿
+
+<html>
+<head>
+    <!--     <meta http-equiv="content-type" content="text/html; charset=UTF-8"> -->
+    <!--   <meta charset="utf-8">  <meta charset="utf-8"> -->
+    <title>基本信息</title>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <style>
+        .bg1 {
+            background: url(/Images/wap//genre_bg1.png);
+            height: 90px;
+            width: 90px;
+            line-height: 90px;
+            color: #fff;
+            text-align: center;
+            float: left;
+        }
+
+        .bg2 {
+            background: url(/Images/wap//genre_bg2.png);
+            height: 90px;
+            width: 90px;
+            line-height: 90px;
+            color: #fff;
+            text-align: center;
+            float: left;
+        }
+
+        .bg3 {
+            background: url(/Images/wap//genre_bg3.png);
+            height: 90px;
+            width: 90px;
+            line-height: 90px;
+            color: #fff;
+            text-align: center;
+            float: left;
+        }
+
+        .bg4 {
+            background: url(/Images/wap//genre_bg4.png);
+            height: 90px;
+            width: 90px;
+            line-height: 90px;
+            color: #fff;
+            text-align: center;
+            float: left;
+        }
+
+        .bg5 {
+            background: url(/Images/wap//genre_bg5.png);
+            height: 90px;
+            width: 90px;
+            line-height: 90px;
+            color: #fff;
+            text-align: center;
+            float: left;
+        }
+
+        .bg6 {
+            background: url(/Images/wap//genre_bg6.png);
+            height: 90px;
+            width: 90px;
+            line-height: 90px;
+            color: #fff;
+            text-align: center;
+            float: left;
+        }
+
+        .divimg {
+            float: left;
+        }
+
+            .divimg img {
+                margin: 35px 10px;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="breadcrumb" style="margin:0px; padding-top:16px; height:20px;vertical-align:middle">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="/">首页</a>
+                </li>
+                <li class="active">基本信息</li>
+            </ul>
+        </div>
+    </div>
+    <div style="margin:20px 20px; background-color:white">
+        <div>
+            <div class="row">
+                <div class="col-sm-2" >
+                    <img src="/Images/wap//p1.png" width="120px">
+                </div>
+                <div class="col-sm-10">
+                    <span style="font-size:26px;">{{Person.Name}}</span>
+                    <img src="/Images/wap//women.png" ng-show="Person.Sex==1" style="margin-top:-15px;">
+                    <img src="Images/wap//men.png" ng-show="Person.Sex==0" style="margin-top:-15px;"><br><br>
+                    <div style="margin-top:10px;"><img src="/Images/wap//age.png">&nbsp;&nbsp;年龄：{{Person.Birthdate|ageFormat}}</div>
+                    <div style="margin-top:12px;"><img src="/Images/wap//location.png">&nbsp;&nbsp;地址：{{Person.Address}}	</div>
+                </div>
+            </div>
+        </div>
+        <hr style="width:100%">
+        <div class="panel panel-default panelBgColor">
+            <div class="panel-heading">
+                <h3 class="panel-title ">
+                    <img src="/Images/wap//check.png"><strong class="text-info">入住管理</strong>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="bg1">
+                    预约登记
+                </div>
+                <div class="divimg"><img src="/Images/wap//arrow.png"></div>
+                <div class="bg2">访探记录</div>
+                <div class="divimg"><img src="/Images/wap//arrow.png"></div>
+                <div class="bg3">接待记录</div>
+                <div class="divimg"><img src="/Images/wap//arrow.png"></div>
+                <div class="bg4">入住记录</div>
+                <div class="divimg"><img src="/Images/wap//arrow.png"></div>
+                <div class="bg5">住民列表</div>
+                <div class="divimg"><img src="/Images/wap//arrow.png"></div>
+                <div class="bg6">退住登记</div>
+            </div>
+        </div>
+
+        <div class="panel panel-default panelBgColor">
+            <div class="panel-heading">
+                <h3 class="panel-title ">
+                    <img src="/Images/wap//cost.png"><strong class="text-info">费用管理</strong>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="bg1">固定费用设定</div>
+                <div class="divimg"><img src="/Images/wap/arrow.png"></div>
+                <div class="bg2">费用明细录入</div>
+                <div class="divimg"><img src="/Images/wap//arrow.png"></div>
+                <div class="bg3">预收款</div>
+                <div class="divimg"><img src="/Images/wap//arrow.png"></div>
+                <div class="bg4">账单查询</div>
+            </div>
+        </div>
+
+        <div class="panel panel-default panelBgColor">
+
+            <div class="panel-heading">
+                <h3 class="panel-title ">
+                    <img src="/Images/wap//assess.png"><strong class="text-info">评估管理</strong>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <a ui-sref="ResidentList"><div class="bg1">住民评估</div></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

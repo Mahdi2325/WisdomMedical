@@ -1,0 +1,61 @@
+﻿    
+<style type="text/css">
+    #l-map {
+        height: 300px;
+        width: 100%;
+    }
+
+    #r-result {
+        width: 100%;
+    }
+    .tangram-suggestion-main {
+        z-index: 99999;
+    }
+</style>
+<div style="width:900px" class="modal-content modal-lg" ng-controller="AddressEditCtrl">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bars"></i>{{isAdd?"添加":"编辑"}}地址
+                </div>
+                <div class="tools">
+                    <button type="button" class="close" ng-click="HideModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form name="deviceEditForm" class="form-horizontal w5c-form" w5c-form-validate novalidate>
+                <div class="form-group">
+                    <label class="col-md-2  control-label">联系人<span class="required">*</span></label>
+                    <div class="col-md-4">
+                        <input id="Name" name="Name" type="text" class="form-control" ng-model="curAddress.Name" ng-maxlength="20" required />
+                    </div>
+                    <label class="col-md-2 control-label">联系电话<span class="required">*</span></label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="Phone" name="Phone" ng-model="curAddress.Phone" ng-maxlength="20" phone required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2  control-label">详细地址<span class="required">*</span></label>
+                    <div class="col-md-8" style="padding-top:0px">
+
+                        <input-address id="txtRecordBy" callback="addressInput(address)" value="{{AddressDetail}}" />
+                    </div>
+                    <div class="col-md-2">
+                        <input id="HouseNumber" name="HouseNumber" type="text" class="form-control" ng-model="curAddress.HouseNumber" placeholder="门牌号" maxlength="20" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">设置为默认</label>
+                    <div class="col-md-1">
+                        <input type="checkbox" style="width:20px" class="form-control" id="IsUsed" name="IsUsed" ng-model="curAddress.IsUsed">
+                    </div>
+                </div>
+                <div class="text-center" >
+                    <button type="button" class="btn btn-primary" w5c-form-submit="saveEdit()">保存地址</button>
+                    <button type="button" class="btn btn-grey" ng-click="HideModal()">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

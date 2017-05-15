@@ -1,0 +1,994 @@
+﻿<link href="../../../../Content/HL.css" rel="stylesheet" />
+<!---->
+<div class="row">
+    <div class="col-md-2">
+        <div class="box border green">
+            <div class="box-title">
+                <h4>
+                    <i class="fa fa-bars"></i>会员信息
+                </h4>
+            </div>
+            <div class="box-body">
+                <resident-select callback="residentSelected(resident)" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="content_container searchsum_hits">
+                    <div class="content">
+                        <div class="btn toolbar" style="position: relative; z-index: 0;">
+                            <button class="btn btn-primary" ng-click="saveForm(item1,item2,item3,item4,item5,NURSE)" ng-disabled="btn_s"><i class="fa fa-save"></i> 储存数据</button>
+                            <button class="btn btn-danger" ng-click="showhistroy()" ng-disabled="btn_s"><i class="fa fa-list"></i> 历次资料</button>
+                            <button class="btn btn-info" ng-click="week()" ng-disabled="btn_s"><i class="fa fa-print"></i> 本周</button>
+                            <button class="btn btn-danger" ng-click="lastweek()" ng-disabled="btn_s"><i class="fa fa-list"></i> 上周</button>
+                            <button class="btn btn-primary" ng-click="nextweek()" ng-disabled="btn_s"><i class="fa fa-list"></i> 下周</button>
+                            <!-- 查看历史记录的 -->
+                            <!--<input type="text" class="Wdate" id="d122" onfocus="
+                                ({ isShowWeek: true, onpicked: function () { $dp.$('d122_1').value = $dp.cal.getP('W', 'W'); } })" />
+                            <input type="text" id="d122_1" size="3">-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content_container item_details">
+            <div class="content">
+                <form class="form-horizontal tb" name="rfrForm" role="form" novalidate>
+                    <div style="margin-bottom:5px;" class="col-md-12">
+                        <div style="text-align:center;font-size:24px;font-weight:700;line-height:36px;font-family:DFKai-SB;">
+                            <table style="width:100%;border:none;margin-top:5px;">
+                                <!--<tr>
+                                    <td style="border:none;" colspan="12">                                       
+                                        <h3><strong>{{OrgName}}老人日间照顾中心</strong></h3>
+                                    </td>
+                                </tr>-->
+                                <tr>
+                                    <td style="border:none;" colspan="12">
+                                        <!--护理及生活照顾服务记录<br />-->
+                                        <h3><strong> 护理及生活照顾服务记录表</strong></h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border:none;font-size:18px;min-width:80px">日字号:</td>
+                                    <td style="border: none; font-size:18px; text-align:left"><input type="text" style="border-left-style:none;border-top-style:none;border-right-style:none;border-bottom-style:solid;border-bottom-width:2px" ng-model="NURSE.RESIDENTNO" ng-disabled="true" /></td>
+                                    <td style="border: none; font-size:18px;min-width:60px">姓名:</td>
+                                    <td style="border: none; font-size:18px;"><input type="text" style="border-left-style: none; border-top-style: none; border-right-style: none; border-bottom-style: solid; border-bottom-width: 2px" ng-model="NURSE.REGNAME" ng-disabled="true" /></td>
+                                    <td style="border: none; font-size: 18px; min-width: 60px">性别:</td>
+                                    <td style="border: none; font-size: 18px; min-width: 100px">
+                                        <div class="input-group">
+                                            <select style="border-left-style: none; border-top-style: none; border-right-style: none; border-bottom-style: solid; border-bottom-width: 2px" ng-model="NURSE.SEX" select-code="A00.001" ng-disabled="true"></select>
+                                            <!--<label class="radio-inline"><input type="radio" class="" name="gender" ng-checked="true" ng-model="NURSE.SEX" value="男"/>男</label><label class="radio-inline"><input type="radio" name="gender" ng-model="NURSE.SEX" value="女"/>女</label>-->
+                                        </div>
+                                    </td>
+                                    <td style="border: none; font-size: 18px; min-width:80px;text-align:left">照服员:</td>
+                                    <!--<td style="border: none; font-size:18px;"><input type="text" style="border-left-style: none; border-top-style: none; border-right-style: none; border-bottom-style: solid; border-bottom-width: 2px" ng-model="NURSE.NURSEAIDES" /></td>-->
+                                    <td style="border: none; font-size: 18px;min-width: 160px; ">
+                                        <!--<input type="text" style="border-left-style: none; border-top-style: none; border-right-style: none; border-bottom-style: solid; border-bottom-width: 2px" ng-model="DAYLIFE.NURSEAIDES" />-->
+                                        <select class="form-control" ng-model="NURSE.NURSEAIDES" ng-options="item.EmpName as item.EmpName+'('+item.EmpNo+')' for item in NurseAides"></select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <div style="border: 2px solid black; padding:1px" class=" col-md-12">
+                        <div style="text-align:center;line-height:36px;">
+                            <table class="col-md-12 tb" width:auto>
+                                <tr>
+                                    <td class="col-md-2 tdlbl" colspan="2">
+                                        <div class="col-md-12" style="text-align:right">日期</div>
+                                        <div class="col-md-12" style="text-align:left">项目</div>
+                                    </td>
+                                    <td class="col-md-2 tdlbl" style="height:50px">
+                                        <input type="text" style="text-align:center" ng-model="item1.DAYOFWEEK" />
+                                        <div style="width:50%;float:left;text-align:right">
+                                            星期一
+                                        </div>
+                                        <div style=" width:49%;float:right;margin-left:1px">
+                                            <div style="width:60%; float:left;text-align:right">休假</div>
+                                            <div style="width:40%;float:left;text-align:right;margin-top:2px"><input type="checkbox" class="uniform" ng-checked="DCWeekshow1" ng-disabled="DCtimedisabled1" ng-click="fun(1)" ng-model="item1.HOLIDAYFLAG"></div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2 tdlbl" style="height:50px">
+                                        <input type="text" style="text-align:center" ng-model="item2.DAYOFWEEK" />
+                                        <div style="width:50%;float:left;text-align:right">
+                                            星期二
+                                        </div>
+                                        <div style=" width:49%;float:right;margin-left:1px">
+                                            <div style="width:60%; float:left;text-align:right">休假</div>
+                                            <div style="width:40%;float:left;text-align:right;margin-top:2px"><input type="checkbox" class="uniform" ng-checked="DCWeekshow2" ng-disabled="DCtimedisabled2" ng-click="fun(2)" ng-model="item2.HOLIDAYFLAG"></div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2 tdlbl" style="height:50px">
+                                        <input type="text" style="text-align:center" ng-model="item3.DAYOFWEEK" />
+                                        <div style="width:50%;float:left;text-align:right">
+                                            星期三
+                                        </div>
+                                        <div style=" width:49%;float:right;margin-left:1px">
+                                            <div style="width:60%; float:left;text-align:right">休假</div>
+                                            <div style="width:40%;float:left;text-align:right;margin-top:2px"><input type="checkbox" class="uniform" ng-checked="DCWeekshow3" ng-disabled="DCtimedisabled3" ng-click="fun(3)" ng-model="item3.HOLIDAYFLAG"></div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2 tdlbl" style="height:50px">
+                                        <input type="text" style="text-align:center" ng-model="item4.DAYOFWEEK" />
+                                        <div style="width:50%;float:left;text-align:right">
+                                            星期四
+                                        </div>
+                                        <div style=" width:49%;float:right;margin-left:1px">
+                                            <div style="width:60%; float:left;text-align:right">休假</div>
+                                            <div style="width:40%;float:left;text-align:right;margin-top:2px"><input type="checkbox" class="uniform" ng-checked="DCWeekshow4" ng-disabled="DCtimedisabled4" ng-click="fun(4)" ng-model="item4.HOLIDAYFLAG"></div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2 tdlbl" style="height:50px">
+                                        <input type="text" style="text-align:center" ng-model="item5.DAYOFWEEK" />
+                                        <div style="width:50%;float:left;text-align:right">
+                                            星期五
+                                        </div>
+                                        <div style="width:49%;float:right;margin-left:1px">
+                                            <div style="width:60%; float:left;text-align:right">休假</div>
+                                            <div style="width:40%;float:left;text-align:right;margin-top:2px"><input type="checkbox" class="uniform" ng-checked="DCWeekshow5" ng-disabled="DCtimedisabled5" ng-click="fun(5)" ng-model="item5.HOLIDAYFLAG"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="20px" rowspan="6" style="font-weight: bold; color: black;">
+                                        辅疗性活动
+                                        &
+                                        文康休闲活动
+                                    </td>
+                                    <td>
+                                        <div class="col-md-12 tdlbl">9:00-10:50</div>
+                                    </td>
+                                    <td>
+                                        <div style="margin:10px 0px">
+                                            <div style="margin:1px">
+                                                <div style="width:50%;float:left;">
+                                                    <div style="width: 70%; float: left;text-align:center">小组</div>
+                                                    <div style="width: 30%; float: left; text-align:center;"><input type="radio" ng-disabled="DCshow1" ng-model="item1.CheckA" value="A" name="gender1" ng-click="change(1,'a')" /></div>
+                                                </div>
+                                                <div style="width: 50%; float: left;">
+                                                    <div style="width:65%; float: left; text-align:center">个别</div>
+                                                    <div style="width:35%; float: left; text-align: center;"><input type="radio" ng-disabled="DCshow1" ng-model="item1.CheckA" value="B" name="gender1" ng-click="change(1,'b')" /></div>
+                                                </div>
+                                            </div>
+                                            <div style="text-align: center;margin:1px">
+                                                <select class="form-control" ng-disabled="DCshow1" ng-model="item1.ACTIVITY9" ng-options="'1'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME+'('+ record.TITLENAME+')'  for record in CheckCodeA">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                            <div style="margin:1px">
+
+                                                <!--<select class="form-control" id="DEFECATIONWAY" ng-model="record.DEFECATIONWAY" select-code="E00.202"></select>-->
+
+                                                <select class="form-control" ng-model="item1.Checkcy1" ng-disabled="DCshow1" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+
+
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div style="margin:1px">
+                                            <div style="margin:1px">
+                                                <div style="width:50%;float:left">
+                                                    <div style="width:60%; float:left">小组</div>
+                                                    <div style="width:40%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow2" ng-model="item2.CheckB" value="A" name="gender2" ng-click="change(2,'a')" /></div>
+                                                </div>
+                                                <div style="width:50%;float:left">
+                                                    <div style="width:60%; float:left">个别</div>
+                                                    <div style="width:40%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow2" ng-model="item2.CheckB" value="B" name="gender2" ng-click="change(2,'b')" /></div>
+                                                </div>
+                                            </div>
+                                            <div style="text-align:center;margin:1px">
+                                                <select class="form-control" ng-model="item2.ACTIVITY9" ng-disabled="DCshow2" ng-options="'2'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record. ITEMNAME+'('+ record.TITLENAME+')'  for record in CheckCodeB">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                            <div style="margin:1px">
+                                                <select class="form-control" id="ACTIVITY92" ng-model="item2.Checkcy1" ng-disabled="DCshow2" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="margin:1px">
+                                            <div style="margin:1px">
+                                                <div style="width:50%;float:left">
+                                                    <div style="width:60%; float:left">小组</div>
+                                                    <div style="width:40%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow3" ng-model="item3.CheckC" value="A" name="gender3" ng-click="change(3,'a')" /></div>
+                                                </div>
+                                                <div style=" width:50%;float:left">
+                                                    <div style="width:60%; float:left">个别</div>
+                                                    <div style="width:40%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow3" ng-model="item3.CheckC" value="B" name="gender3" ng-click="change(3,'b')" /></div>
+                                                </div>
+                                            </div>
+                                            <div style="text-align: center; margin:1px">
+                                                <select class="form-control" ng-model="item3.ACTIVITY9" ng-disabled="DCshow3" ng-options="'3'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME+'('+ record.TITLENAME+')'  for record in CheckCodeC">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                            <div style="margin:1px">
+                                                <select class="form-control" id="ACTIVITY93" ng-disabled="DCshow3" ng-model="item3.Checkcy1" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="margin:1px">
+                                            <div style="margin:1px">
+                                                <div style="width:50%;float:left">
+                                                    <div style="width:60%; float:left">小组</div>
+                                                    <div style="width:40%; float:left;text-align:center;"><input type="radio" ng-disabled="DCshow4" ng-model="item4.CheckD" value="A" name="gender4" ng-click="change(4,'a')" /></div>
+                                                </div>
+                                                <div style=" width:50%;float:left">
+                                                    <div style="width:60%; float:left">个别</div>
+                                                    <div style="width:40%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow4" ng-model="item4.CheckD" value="B" name="gender4" ng-click="change(4,'b')" /></div>
+                                                </div>
+                                            </div>
+                                            <div style="text-align:center;margin:1px">
+                                                <select class="form-control" ng-model="item4.ACTIVITY9" ng-disabled="DCshow4" ng-options="'4'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME+'('+ record.TITLENAME+')'  for record in CheckCodeD">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                            <div style="margin:1px">
+                                                <select class="form-control" id="ACTIVITY94" ng-model="item4.Checkcy1" ng-disabled="DCshow4" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="margin:1px">
+                                            <div style="margin:1px">
+                                                <div style="width:50%;float:left">
+                                                    <div style="width:60%; float:left">小组</div>
+                                                    <div style="width:40%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow5" ng-model="item5.CheckE" value="A" name="gender5" ng-click="change(5,'a')" /></div>
+                                                </div>
+                                                <div style=" width:50%;float:left">
+                                                    <div style="width:60%; float:left">个别</div>
+                                                    <div style="width:40%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow5" ng-model="item5.CheckE" value="B" name="gender5" ng-click="change(5,'b')" /></div>
+                                                </div>
+                                            </div>
+                                            <div style="text-align: center; margin:1px">
+                                                <select class="form-control" ng-disabled="DCshow5" ng-model="item5.ACTIVITY9" ng-options="'5'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME+'('+ record.TITLENAME+')'  for record in CheckCodeE">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                            <div style="margin: 1px">
+                                                <select class="form-control" id="ACTACTIVITY95" ng-model="item5.Checkcy1" ng-disabled="DCshow5" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-md-12 tdlbl">11:00-11:50</div>
+                                    </td>
+                                    <td>
+                                        <div style="margin:10px 0px">
+                                            <div style="margin:1px">
+                                                <div style="width:50%;float:left">
+                                                    <div style="width:70%; float:left">小组</div>
+                                                    <div style="width:30%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow1" name="gender6" ng-model="item1.CheckF" value="A" class="uniform" ng-click="change(6,'a')"></div>
+                                                </div>
+                                                <div style=" width:50%;float:left">
+                                                    <div style="width:60%; float:left">个别</div>
+                                                    <div style="width:40%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow1" name="gender6" ng-model="item1.CheckF" value="B" class="uniform" ng-click="change(6,'b')"></div>
+                                                </div>
+                                            </div>
+                                            <div style="text-align:center;margin-top:1px">
+                                                <select class="form-control" ng-model="item1.ACTIVITY11" ng-disabled="DCshow1" ng-options="'6'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME +'('+ record.TITLENAME+')'  for record in CheckCodeF">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                            <div style="margin-top:2px">
+
+                                                <select class="form-control" id="ACTIVITY111" ng-model="item1.Checkcy2" ng-disabled="DCshow1" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div style="margin:10px 0px">
+                                            <div style="margin:1px">
+                                                <div style="width:50%;float:left">
+                                                    <div style="width:65%; float:left">小组</div>
+                                                    <div style="width:35%; float:left;text-align:center">
+                                                        <input type="radio" class="uniform" name="gender7" ng-click="change(7,'a')" ng-disabled="DCshow2" ng-model="item2.CheckG" value="A">
+                                                    </div>
+                                                </div>
+                                                <div style=" width:50%;float:left">
+                                                    <div style="width:65%; float:left">个别</div>
+                                                    <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow2" ng-model="item2.CheckG" value="B" name="gender7" ng-click="change(7,'b')"></div>
+                                                </div>
+                                            </div>
+                                            <div style="margin:1px">
+                                                <select class="form-control" ng-disabled="DCshow2" ng-model="item2.ACTIVITY11" ng-options="'7'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME +'('+ record.TITLENAME+')'  for record in CheckCodeG">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <select class="form-control" id="ACTIVITY112" ng-model="item2.Checkcy2" ng-disabled="DCshow2" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div>
+                                                <div style="width:50%;float:left">
+                                                    <div style="width:65%; float:left">小组</div>
+                                                    <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow3" ng-model="item3.CheckH" value="A" name="gender8" ng-click="change(8,'a')"></div>
+                                                </div>
+                                                <div style=" width:50%;float:left">
+                                                    <div style="width:65%; float:left">个别</div>
+                                                    <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow3" ng-model="item3.CheckH" value="B" name="gender8" ng-click="change(8,'b')"></div>
+                                                </div>
+                                            </div>
+                                            <div style="margin:1px">
+                                                <select class="form-control" ng-model="item3.ACTIVITY11" ng-disabled="DCshow3" ng-options="'8'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME+'('+ record.TITLENAME+')' for record in CheckCodeH">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <select class="form-control" id="ACTIVITY113" ng-model="item3.Checkcy2" ng-disabled="DCshow3" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                        <div>
+                                            <div style="width:50%;float:left">
+                                                <div style="width:65%; float:left">小组</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow4" class="uniform" name="gender9" ng-model="item4.CheckI" value="A" ng-click="change(9,'a')"></div>
+                                            </div>
+                                            <div style=" width:50%;float:left">
+                                                <div style="width:65%; float:left">个别</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow4" class="uniform" name="gender9" ng-model="item4.CheckI" value="B" ng-click="change(9,'b')"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin:1px">
+                                            <select class="form-control" ng-model="item4.ACTIVITY11" ng-disabled="DCshow4" ng-options="'9'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME+'('+ record.TITLENAME+')'  for record in CheckCodeI">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <select class="form-control" id="ACTIVITY114" ng-model="item4.Checkcy2" ng-disabled="DCshow4" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+
+
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="width:50%;float:left">
+                                                <div style="width:65%; float:left">小组</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow5" ng-model="item5.CheckJ" value="A" name="gender10" ng-click="change(10,'a')"></div>
+                                            </div>
+                                            <div style=" width:50%;float:left">
+                                                <div style="width:65%; float:left">个别</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow5" ng-model="item5.CheckJ" value="B" name="gender10" ng-click="change(10,'b')"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin:1px">
+                                            <select class="form-control" ng-model="item5.ACTIVITY11" ng-disabled="DCshow5" ng-options="'10'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME+'('+ record.TITLENAME+')'  for record in CheckCodeJ">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <select class="form-control" id="ACTIVITY115" ng-model="item5.Checkcy2" ng-disabled="DCshow5" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-md-12 tdlbl">14:00-14:50</div>
+                                    </td>
+                                    <td>
+                                        <div style="margin:10px 0px">
+                                            <div>
+                                                <div style="width:50%;float:left">
+                                                    <div style="width:65%; float:left">小组</div>
+                                                    <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow1" ng-model="item1.CheckK" value="A" ng-click="change(11,'a')"></div>
+                                                </div>
+                                                <div style=" width:50%;float:left">
+                                                    <div style="width:65%; float:left">个别</div>
+                                                    <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow1" ng-model="item1.CheckK" value="B" ng-click="change(11,'b')"></div>
+                                                </div>
+                                            </div>
+                                            <div style=" margin:1px">
+                                                <select class="form-control" ng-model="item1.ACTIVITY14" ng-disabled="DCshow1" ng-options="'11'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME+'('+ record.TITLENAME+')'  for record in CheckCodeK">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <select class="form-control" id="ACTIVITY141" ng-model="item1.Checkcy3" ng-disabled="DCshow1" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="width:50%;float:left">
+                                                <div style="width:65%; float:left">小组</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow2" ng-click="change(12,'a')" ng-model="item2.CheckL" value="A"></div>
+                                            </div>
+                                            <div style=" width:50%;float:left">
+                                                <div style="width:65%; float:left">个别</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow2" ng-click="change(12,'b')" ng-model="item2.CheckL" value="B"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin:1px">
+                                            <select class="form-control" ng-model="item2.ACTIVITY14" ng-disabled="DCshow2" ng-options="'12'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME+'('+ record.TITLENAME+')'  for record in CheckCodeL">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+                                        <div>
+
+                                            <select class="form-control" id="ACTIVITY142" ng-model="item2.Checkcy3" ng-disabled="DCshow2" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="width:50%;float:left">
+                                                <div style="width:80%; float:left">小组</div>
+                                                <div style="width:20%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow3" ng-click="change(13,'a')" ng-model="item3.CheckN" value="A"></div>
+                                            </div>
+                                            <div style=" width:50%;float:left">
+                                                <div style="width:80%; float:left">个别</div>
+                                                <div style="width:20%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow3" class="uniform" ng-click="change(13,'b')" ng-model="item3.CheckN" value="B"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin:1px">
+                                            <select class="form-control" ng-disabled="DCshow3" ng-model="item3.ACTIVITY14" ng-options="'13'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME +'('+ record.TITLENAME+')'  for record in CheckCodeN">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <select class="form-control" id="ACTIVITY143" ng-disabled="DCshow3" ng-model="item3.Checkcy3" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="width:50%;float:left">
+                                                <div style="width:65%; float:left">小组</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow4" class="uniform" ng-click="change(14,'a')" ng-model="item4.CheckM" value="A"></div>
+                                            </div>
+                                            <div style=" width:50%;float:left">
+                                                <div style="width:65%; float:left">个别</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow4" class="uniform" ng-click="change(14,'b')" ng-model="item4.CheckM" value="B"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin:1px">
+                                            <select class="form-control" ng-disabled="DCshow4" ng-model="item4.ACTIVITY14" ng-options="'14'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME +'('+ record.TITLENAME+')'  for record in CheckCodeM">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <select class="form-control" ng-disabled="DCshow4" id="ACTIVITY144" ng-model="item4.Checkcy3" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="width:50%;float:left">
+                                                <div style="width:65%; float:left">小组</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow5" class="uniform" ng-click="change(15,'a')" ng-model="item5.CheckO" value="A"></div>
+                                            </div>
+                                            <div style=" width:50%;float:left">
+                                                <div style="width:65%; float:left">个别</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow5" class="uniform" ng-click="change(15,'b')" ng-model="item5.CheckO" value="B"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin:1px">
+                                            <select class="form-control" ng-model="item5.ACTIVITY14" ng-disabled="DCshow5" ng-options="'15'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME +'('+ record.TITLENAME+')'  for record in CheckCodeO">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+
+
+                                        </div>
+                                        <div>
+                                            <select class="form-control" id="ACTIVITY145" ng-model="item5.Checkcy3" ng-disabled="DCshow5" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-md-12 tdlbl">15:00-15:50</div>
+                                    </td>
+                                    <td>
+                                        <div style="margin:10px 0px">
+                                            <div>
+                                                <div style="width:50%;float:left">
+                                                    <div style="width:65%; float:left">小组</div>
+                                                    <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow1" class="uniform" ng-click="change(16,'a')" ng-model="item1.CheckP" value="A"></div>
+                                                </div>
+                                                <div style=" width:50%;float:left">
+                                                    <div style="width:65%; float:left">个别</div>
+                                                    <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow1" class="uniform" ng-click="change(16,'b')" ng-model="item1.CheckP" value="B"></div>
+                                                </div>
+                                            </div>
+                                            <div style="margin:1px">
+                                                <select class="form-control" ng-model="item1.ACTIVITY15" ng-disabled="DCshow1" ng-options="'16'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME +'('+ record.TITLENAME+')'  for record in CheckCodeP">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <select class="form-control" id="ACTIVITY151" ng-model="item1.Checkcy4" ng-disabled="DCshow1" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="width:50%;float:left">
+                                                <div style="width:65%; float:left">小组</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow2" class="uniform" ng-click="change(17,'a')" ng-model="item2.CheckQ" value="A"></div>
+                                            </div>
+                                            <div style=" width:50%;float:left">
+                                                <div style="width:65%; float:left">个别</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow2" ng-click="change(17,'b')" ng-model="item2.CheckQ" value="B"></div>
+                                            </div>
+                                        </div>
+                                        <div style=" margin:1px">
+                                            <select class="form-control" ng-model="item2.ACTIVITY15" ng-disabled="DCshow2" ng-options="'17'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME+'('+ record.TITLENAME+')'  for record in CheckCodeQ">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <select class="form-control" id="ACTIVITY152" ng-model="item2.Checkcy4" ng-disabled="DCshow2" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="width:50%;float:left">
+                                                <div style="width:65%; float:left">小组</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow3" class="uniform" ng-click="change(18,'a')" ng-model="item3.CheckR" value="A"></div>
+                                            </div>
+                                            <div style=" width:50%;float:left">
+                                                <div style="width:65%; float:left">个别</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow3" class="uniform" ng-click="change(18,'b')" ng-model="item3.CheckR" value="B"></div>
+                                            </div>
+                                        </div>
+                                        <div style=" margin:1px">
+                                            <select class="form-control" ng-model="item3.ACTIVITY15" ng-disabled="DCshow3" ng-options="'18'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME +'('+ record.TITLENAME+')'  for record in CheckCodeR">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <select class="form-control" id="ACTIVITY153" ng-disabled="DCshow3" ng-model="item3.Checkcy4" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="width:50%;float:left">
+                                                <div style="width:65%; float:left">小组</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow4" class="uniform" ng-click="change(19,'a')" ng-model="item4.CheckS" value="A"></div>
+                                            </div>
+                                            <div style=" width:50%;float:left">
+                                                <div style="width:65%; float:left">个别</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow4" class="uniform" ng-click="change(19,'b')" ng-model="item4.CheckS" value="B"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin:1px">
+                                            <select class="form-control" ng-model="item4.ACTIVITY15" ng-disabled="DCshow4" ng-options="'19'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME+'('+ record.TITLENAME+')'  for record in CheckCodeS">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <select class="form-control" id="ACTIVITY154" ng-model="item4.Checkcy4" ng-disabled="DCshow4" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="width:50%;float:left">
+                                                <div style="width:65%; float:left">小组</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow5" class="uniform" ng-click="change(20,'a')" ng-model="item5.CheckT" value="A"></div>
+                                            </div>
+                                            <div style=" width:50%;float:left">
+                                                <div style="width:65%; float:left">个别</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow5" ng-click="change(20,'b')" ng-model="item5.CheckT" value="B"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin:1px">
+                                            <select class="form-control" ng-model="item5.ACTIVITY15" ng-disabled="DCshow5" ng-options="'20'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME +'('+ record.TITLENAME+')'  for record in CheckCodeT">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <select class="form-control" id="ACTIVITY155" ng-model="item5.Checkcy4" ng-disabled="DCshow5" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-md-12 tdlbl">16:00-16:30</div>
+                                    </td>
+                                    <td>
+                                        <div style="margin:10px 0px">
+                                            <div>
+                                                <div style="width:50%;float:left">
+                                                    <div style="width:65%; float:left">小组</div>
+                                                    <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow1" ng-click="change(21,'a')" ng-model="item1.CheckU" value="A"></div>
+                                                </div>
+                                                <div style=" width:50%;float:left">
+                                                    <div style="width:65%; float:left">个别</div>
+                                                    <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow1" ng-click="change(21,'b')" ng-model="item1.CheckU" value="B"></div>
+                                                </div>
+                                            </div>
+                                            <div style="margin:1px">
+                                                <select class="form-control" ng-model="item1.ACTIVITY16" ng-disabled="DCshow1" ng-options="'21'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME +'('+ record.TITLENAME+')'  for record in CheckCodeU">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <select class="form-control" id="ACTIVITY161" ng-model="item1.Checkcy5" ng-disabled="DCshow1" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                    <option value="" selected="selected">---请选择---</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="width:50%;float:left">
+                                                <div style="width:65%; float:left">小组</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow2" ng-click="change(22,'a')" ng-model="item2.CheckV" value="A"></div>
+                                            </div>
+                                            <div style=" width:50%;float:left">
+                                                <div style="width:65%; float:left">个别</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow2" ng-click="change(22,'b')" ng-model="item2.CheckV" value="B"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin:1px">
+                                            <select class="form-control" ng-model="item2.ACTIVITY16" ng-disabled="DCshow2" ng-options="'22'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME +'('+ record.TITLENAME+')'  for record in CheckCodeV">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <select class="form-control" id="ACTIVITY162" ng-model="item2.Checkcy5" ng-disabled="DCshow2" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="width:50%;float:left">
+                                                <div style="width:65%; float:left">小组</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow3" ng-click="change(23,'a')" ng-model="item3.CheckW" value="A"></div>
+                                            </div>
+                                            <div style=" width:50%;float:left">
+                                                <div style="width:65%; float:left">个别</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow3" ng-click="change(23,'b')" ng-model="item3.CheckW" value="B"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin:1px">
+                                            <select class="form-control" ng-model="item3.ACTIVITY16" ng-disabled="DCshow3" ng-options="'23'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME +'('+ record.TITLENAME+')'  for record in CheckCodeW">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <select class="form-control" id="ACTIVITY163" ng-disabled="DCshow3" ng-model="item3.Checkcy5" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="width:50%;float:left">
+                                                <div style="width:65%; float:left">小组</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow4" ng-click="change(24,'a')" ng-model="item4.CheckX" value="A"></div>
+                                            </div>
+                                            <div style=" width:50%;float:left">
+                                                <div style="width:65%; float:left">个别</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow4" ng-click="change(24,'b')" ng-model="item4.CheckX" value="B"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin:1px">
+                                            <select class="form-control" ng-model="item4.ACTIVITY16" ng-disabled="DCshow4" ng-options="'24'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME +'('+ record.TITLENAME+')' for record in CheckCodeX">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <select class="form-control" id="ACTIVITY164" ng-model="item4.Checkcy5" ng-disabled="DCshow4" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="width:50%;float:left">
+                                                <div style="width:65%; float:left">小组</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" ng-disabled="DCshow5" class="uniform" ng-click="change(25,'a')" ng-model="item5.CheckY" value="A"></div>
+                                            </div>
+                                            <div style=" width:50%;float:left">
+                                                <div style="width:65%; float:left">个别</div>
+                                                <div style="width:35%; float:left;text-align:center"><input type="radio" class="uniform" ng-disabled="DCshow5" ng-click="change(25,'b')" ng-model="item5.CheckY" value="B"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin:1px">
+                                            <select class="form-control" ng-model="item5.ACTIVITY16" ng-disabled="DCshow5" ng-options="'25'+','+record.ITEMNAME+'('+ record.TITLENAME+')'+','+record.ACTIVITYCODE as record.ITEMNAME +'('+ record.TITLENAME+')' for record in CheckCodeY">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <select class="form-control" id="ACTIVITY165" ng-disabled="DCshow5" ng-model="item5.Checkcy5" ng-options="tt.ITEMNAME as tt.ITEMNAME for tt in CodeCy">
+                                                <option value="" selected="selected">---请选择---</option>
+                                            </select>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; color: black;">照服员签章</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td width="15px" rowspan="3" style="font-weight: bold; color: black;">
+                                        生命征象
+                                        及药物
+                                    </td>
+                                    <td style="font-weight: bold; color: black;">
+                                        体温(耳温)/
+                                        脉搏/呼吸
+                                    </td>
+                                    <td>
+                                        <div style="width:33%;float:left">
+                                            <input type="text" ng-model="item1.BODYTEMPERATURE" placeholder="耳温" ng-disabled="DCshow1" ng-required="!DCshow1" style="text-align:center" />
+                                        </div>
+                                        <div style="width:33%;float:left;text-align:center"><input type="text" ng-model="item1.PULSE" placeholder="脉搏" ng-disabled="DCshow1" ng-required="!DCshow1" style="text-align:center" /></div>
+                                        <div style="width:33%;float:left;text-align:center"><input type="text" ng-model="item1.BREATH" placeholder="呼吸" ng-disabled="DCshow1" ng-required="!DCshow1" style="text-align:center" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width:33%;float:left"><input type="text" ng-model="item2.BODYTEMPERATURE" placeholder="耳温" ng-disabled="DCshow2" ng-required="!DCshow2" style="text-align:center" /></div>
+                                        <div style="width:33%;float:left"><input type="text" ng-model="item2.PULSE" placeholder="脉搏" ng-disabled="DCshow2" ng-required="!DCshow2" style="text-align:center" /></div>
+                                        <div style="width:33%;float:left"><input type="text" ng-model="item2.BREATH" placeholder="呼吸" ng-disabled="DCshow2" ng-required="!DCshow2" style="text-align:center" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width:33%;float:left"><input type="text" ng-model="item3.BODYTEMPERATURE" placeholder="耳温" ng-disabled="DCshow3" ng-required="!DCshow3" style="text-align:center" /></div>
+                                        <div style="width:33%;float:left"><input type="text" ng-model="item3.PULSE" placeholder="脉搏" ng-disabled="DCshow3" ng-required="!DCshow3" style="text-align:center" /></div>
+                                        <div style="width:33%;float:left"><input type="text" ng-model="item3.BREATH" placeholder="呼吸" ng-disabled="DCshow3" ng-required="!DCshow3" style="text-align:center" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width:33%;float:left"><input type="text" ng-model="item4.BODYTEMPERATURE" placeholder="耳温" ng-disabled="DCshow4" ng-required="!DCshow4" style="text-align:center" /></div>
+                                        <div style="width:33%;float:left"><input type="text" ng-model="item4.PULSE" placeholder="脉搏" ng-disabled="DCshow4" ng-required="!DCshow4" style="text-align:center" /></div>
+                                        <div style="width:33%;float:left"><input type="text" ng-model="item4.BREATH" placeholder="呼吸" ng-disabled="DCshow4" ng-required="!DCshow4" style="text-align:center" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width:33%;float:left"><input type="text" ng-model="item5.BODYTEMPERATURE" placeholder="耳温" ng-disabled="DCshow5" ng-required="!DCshow5" style="text-align:center" /></div>
+                                        <div style="width:33%;float:left"><input type="text" ng-model="item5.PULSE" placeholder="脉搏" ng-disabled="DCshow5" ng-required="!DCshow5" style="text-align:center" /></div>
+                                        <div style="width:33%;float:left"><input type="text" ng-model="item5.BREATH" placeholder="呼吸" ng-disabled="DCshow5" ng-required="!DCshow5" style="text-align:center" /></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; color: black;">血压</td>
+                                    <td>
+                                        <div class="col-md-6"><input type="text" ng-model="item1.SBP" placeholder="低压" ng-disabled="DCshow1" ng-required="!DCshow1" style="text-align:center" /></div>
+                                        <div class="col-md-6"><input type="text" ng-model="item1.DBP" placeholder="高压" ng-disabled="DCshow1" ng-required="!DCshow1" style="text-align:center" /></div>
+                                    </td>
+                                    <td>
+                                        <div class="col-md-6"><input type="text" ng-model="item2.SBP" placeholder="低压" ng-disabled="DCshow2" ng-required="!DCshow2" style="text-align:center" /></div>
+                                        <div class="col-md-6"><input type="text" ng-model="item2.DBP" placeholder="高压" ng-disabled="DCshow2" ng-required="!DCshow2" style="text-align:center" /></div>
+                                    </td>
+                                    <td>
+                                        <div class="col-md-6"><input type="text" ng-model="item3.SBP" placeholder="低压" ng-disabled="DCshow3" ng-required="!DCshow3" style="text-align:center" /></div>
+                                        <div class="col-md-6"><input type="text" ng-model="item3.DBP" placeholder="高压" ng-disabled="DCshow3" ng-required="!DCshow3" style="text-align:center" /></div>
+                                    </td>
+                                    <td>
+                                        <div class="col-md-6"><input type="text" ng-model="item4.SBP" placeholder="低压" ng-disabled="DCshow4" ng-required="!DCshow4" style="text-align:center" /></div>
+                                        <div class="col-md-6"><input type="text" ng-model="item4.DBP" placeholder="高压" ng-disabled="DCshow4" ng-required="!DCshow4" style="text-align:center" /></div>
+                                    </td>
+                                    <td>
+                                        <div class="col-md-6"><input type="text" ng-model="item5.SBP" placeholder="低压" ng-disabled="DCshow5" ng-required="!DCshow5" style="text-align:center" /></div>
+                                        <div class="col-md-6"><input type="text" ng-model="item5.DBP" placeholder="高压" ng-disabled="DCshow5" ng-required="!DCshow5" style="text-align:center" /></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold;color:black;">药物名</td>
+                                    <td>
+                                        <textarea rows="3" ng-model="item1.MEDICINE"></textarea>
+                                    </td>
+                                    <td>
+                                        <textarea rows="3" ng-model="item2.MEDICINE"></textarea>
+                                    </td>
+                                    <td>
+                                        <textarea rows="3" ng-model="item3.MEDICINE"></textarea>
+                                    </td>
+                                    <td>
+                                        <textarea rows="3" ng-model="item4.MEDICINE"></textarea>
+                                    </td>
+                                    <td>
+                                        <textarea rows="3" ng-model="item5.MEDICINE"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="15px" style="font-weight: bold; color: black;">
+                                        安全措施
+                                    </td>
+                                    <td colspan="6">
+                                        <div class="col-md-6"><input type="text" ng-model="NURSE.SECURITYMEASURES" id="SECURITYMEASURES" placeholder="安全措施" input-select="DC03.001" style="width:92%" /></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="15px" style="font-weight: bold; color: black;" rowspan="5">
+                                        护理服务摘要
+                                    </td>
+                                    <td rowspan="5" style="font-weight: bold; color: black;">
+
+                                        <div class="col-md-12" style="margin-top:10px">
+                                            携带物品
+                                        </div>
+                                        <div class="col-md-12" style="margin-top:10px">
+                                            <input type="text" ng-model="NURSE.ARTICLESCARRIED" id="ARTICLESCARRIED" input-select="DC03.002" />
+                                        </div>
+                                        <div class="col-md-12" style="margin-top:10px">
+                                            <div class="col-md-2 tdlbl" style="text-align:left">  &nbsp;</div>
+                                            <div class="col-md-10 tdlbl" style="text-align:left">
+                                                &nbsp;
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" style="margin-top:10px">
+                                            <div class="col-md-2 tdlbl" style="text-align:left">  &nbsp;</div>
+                                            <div class="col-md-10 tdlbl" style="text-align:left">
+                                                &nbsp;
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" style="margin-top:10px">
+                                            <div class="col-md-2 tdlbl" style="text-align:left">  &nbsp;</div>
+                                            <div class="col-md-10 tdlbl" style="text-align:left">
+                                                &nbsp;
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td colspan="5">
+                                        <div class="col-md-12" style="margin-top:2px">
+                                            <div class="col-md-2 tdlbl" style="text-align:left">服药须知:</div>
+                                            <div class="col-md-10 tdlbl" style="text-align:left">
+                                                <input type="text" ng-model="NURSE.MEDICATIONINSTRUCTIONS" id="MEDICATIONINSTRUCTIONS" input-select="DC03.003" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" style="margin-top:2px">
+                                            <div class="col-md-2 tdlbl" style="text-align:left">活动摘要:</div>
+                                            <div class="col-md-10" style="text-align:left">
+                                                <input type="text" ng-model="NURSE.ACTIVITYSUMMARY" id="ACTIVITYSUMMARY" input-select="DC03.004" />
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" style="margin-top:2px">
+                                            <div class="col-md-2 tdlbl" style="text-align:left">问题行为:</div>
+                                            <div class="col-md-10" style="text-align:left">
+                                                <input type="text" ng-model="NURSE.QUESTIONBEHAVIOR" id="QUESTIONBEHAVIOR" input-select="DC03.005" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" style="margin-top:2px">
+                                            <div class="col-md-2 tdlbl" style="text-align:left;height:100px">其他:</div>
+                                            <div class="col-md-10 tdlbl" style="text-align:left;">
+                                                <textarea style="border: solid 1px #CCCCCC; " class="form-control" rows="4" ng-model="NURSE.REMARKS" placeholder="请输入..."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" style="margin-top:2px">
+                                            <div class="col-md-6 tdlbl" style="text-align:left">
+                                                护理人员签名:
+                                            </div>
+                                            <div class="col-md-6 tdlbl">部门主管</div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr></tr>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:80%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box border green">
+                            <div class="box-title">
+                                <h4>护理及生活照顾服务记录</h4>
+                            </div>
+                            <div class="box-body">
+                                <table class="table table-bordered" id="editTable">
+                                    <thead>
+                                        <tr>
+                                            <th>日字号</th>
+                                            <th>姓名</th>
+                                            <th>周数</th>
+                                            <th>时间区域</th>
+                                            <th>照服员</th>
+                                            <th>携带物品</th>
+                                            <th>服药须知</th>
+                                            <th>活动摘要</th>
+                                            <th>问题行为</th>
+                                            <th>其他</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="list in HistoryList">
+                                            <td>{{list.data.RESIDENTNO}}</td>
+                                            <td>{{list.data.REGNAME}}</td>
+                                            <td>{{list.data.WEEKNUMBER}}</td>
+                                            <td>{{list.data.WEEKSTARTDATE|date:'yyyy-MM-dd'}}~{{list.num}}</td>
+                                            <td>{{list.data.NURSEAIDES}}</td>
+                                            <td>{{list.data.ARTICLESCARRIED}}</td>
+                                            <td>{{list.data.MEDICATIONINSTRUCTIONS}}</td>
+                                            <td>{{list.data.ACTIVITYSUMMARY}}</td>
+                                            <td>{{list.data.QUESTIONBEHAVIOR}}</td>
+                                            <td>{{list.data.REMARKS}}</td>
+                                            <td>
+                                                <button class="btn btn-primary" ng-click="editNurseing(list.data)">编辑</button>
+                                                <a class="btn btn-danger" role="button" data-toggle="modal" ng-click="deleteReferral(list.data.ID)">删除</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                                <div id="pager"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{45277E7F-8FAB-4DCE-90A4-EEEC9991A0F8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KMHC.SLTC.WebAPI.Lib</RootNamespace>
+    <AssemblyName>KMHC.SLTC.WebAPI.Lib</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="KM.Common">
+      <HintPath>..\..\ThirdPartyLib\KM.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ThirdPartyLib\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ThirdPartyLib\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivityManage\GroupActivityCategoryEditController.cs" />
+    <Compile Include="ActivityManage\GroupActivityCategoryController.cs" />
+    <Compile Include="ActivityManage\ActivityController.cs" />
+    <Compile Include="AssessManage\AssessItemController.cs" />
+    <Compile Include="AssessManage\AssessTemplateController.cs" />
+    <Compile Include="Attribute\RoleBaseAuthorizeAttribute.cs" />
+    <Compile Include="BI\ChartsInfoController.cs" />
+    <Compile Include="Charges\BillController.cs" />
+    <Compile Include="Charges\CommodityItemController.cs" />
+    <Compile Include="Charges\ChargeItemController.cs" />
+    <Compile Include="Charges\PaymentController.cs" />
+    <Compile Include="Charges\FeeDetailController.cs" />
+    <Compile Include="Charges\CommodityTypeController.cs" />
+    <Compile Include="Component\CodeRuleController.cs" />
+    <Compile Include="FinancialManagement\RefundController.cs" />
+    <Compile Include="FinancialManagement\PaymentsController.cs" />
+    <Compile Include="Generation\ActivityNewController.cs" />
+    <Compile Include="BaseApiController.cs" />
+    <Compile Include="Generation\BedController.cs" />
+    <Compile Include="Generation\DepositController.cs" />
+    <Compile Include="Generation\DictionaryController.cs" />
+    <Compile Include="Generation\DictionaryItemController.cs" />
+    <Compile Include="Generation\FloorController.cs" />
+    <Compile Include="Generation\FunctionController.cs" />
+    <Compile Include="GuestService\ServiceAppController.cs" />
+    <Compile Include="GuestService\ComOrderController.cs" />
+    <Compile Include="Home\BriefInfoController.cs" />
+    <Compile Include="Hubs\ScreenDisplayHub.cs" />
+    <Compile Include="Monitor\LocationController.cs" />
+    <Compile Include="Monitor\MonitorItemController.cs" />
+    <Compile Include="Monitor\MonitorResultController.cs" />
+    <Compile Include="Monitor\MonitorTemplateController.cs" />
+    <Compile Include="Component\CommonDictionaryController.cs" />
+    <Compile Include="Component\CommonUseWordController.cs" />
+    <Compile Include="OrgManage\AreaController.cs" />
+    <Compile Include="OrgManage\CodeItemController.cs" />
+    <Compile Include="OrgManage\CodeTypeController.cs" />
+    <Compile Include="OrgManage\DeptController.cs" />
+    <Compile Include="OrgManage\EmployeeController.cs" />
+    <Compile Include="OrgManage\EvaluationController.cs" />
+    <Compile Include="OrgManage\GroupController.cs" />
+    <Compile Include="OrgManage\OrganizationController.cs" />
+    <Compile Include="Phone\MyPhoneController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\DayReportTempManageController.cs" />
+    <Compile Include="Report\EvaluationStatisticController.cs" />
+    <Compile Include="Report\MainStatisticController.cs" />
+    <Compile Include="Report\MonthReportTempManageController.cs" />
+    <Compile Include="Report\OrderStatisticController.cs" />
+    <Compile Include="Report\PrintReportController.cs" />
+    <Compile Include="Resident\ResidentAddressController.cs" />
+    <Compile Include="Resident\ResidentController.cs" />
+    <Compile Include="Generation\ResidentServicePlanController.cs" />
+    <Compile Include="Generation\ResidentServicePlanItemController.cs" />
+    <Compile Include="Sequence\AppDetailController.cs" />
+    <Compile Include="Sequence\AppStatisticsController.cs" />
+    <Compile Include="Sequence\CallPatientController.cs" />
+    <Compile Include="Sequence\ScreenDisplayController.cs" />
+    <Compile Include="Sequence\SerialAdjustmentController.cs" />
+    <Compile Include="Service\CallInfoController.cs" />
+    <Compile Include="UploadController.cs" />
+    <Compile Include="UserManage\PriorityRemarkController.cs" />
+    <Compile Include="UserManage\HabitController.cs" />
+    <Compile Include="UserManage\FamilyController.cs" />
+    <Compile Include="UserManage\DeviceController.cs" />
+    <Compile Include="UserManage\ContractController.cs" />
+    <Compile Include="UserManage\PersonController.cs" />
+    <Compile Include="UserManage\RoleController.cs" />
+    <Compile Include="Generation\RoomController.cs" />
+    <Compile Include="Generation\SerOrdSerItController.cs" />
+    <Compile Include="Service\ServiceGroupController.cs" />
+    <Compile Include="Service\ServiceItemCategoryController.cs" />
+    <Compile Include="Service\ServiceItemController.cs" />
+    <Compile Include="Service\ServiceOrderController.cs" />
+    <Compile Include="Generation\TaskController.cs" />
+    <Compile Include="UserManage\UserController.cs" />
+    <Compile Include="Generation\UserRelationController.cs" />
+    <Compile Include="Generation\WatchRecordController.cs" />
+    <Compile Include="ActivityManage\TimeStatisticsController.cs" />
+    <Compile Include="Watch\WatchController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KMHC.Infrastructure\KMHC.Infrastructure.csproj">
+      <Project>{0997f971-1d2f-4aa8-aa67-5b1683afdefd}</Project>
+      <Name>KMHC.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KMHC.SLTC.Business.Entity\KMHC.SLTC.Business.Entity.csproj">
+      <Project>{208d3a36-9507-4ff2-a3bf-374d718f0a11}</Project>
+      <Name>KMHC.SLTC.Business.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KMHC.SLTC.Business.Implement\KMHC.SLTC.Business.Implement.csproj">
+      <Project>{f1527c86-69f5-4f62-af10-753740868df9}</Project>
+      <Name>KMHC.SLTC.Business.Implement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KMHC.SLTC.Business.Interface\KMHC.SLTC.Business.Interface.csproj">
+      <Project>{5b2e2137-06d2-4adf-bc85-aa94984acc50}</Project>
+      <Name>KMHC.SLTC.Business.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KMHC.SLTC.Repository\KMHC.SLTC.Repository.csproj">
+      <Project>{22f072ac-cacf-4faa-9612-6f675019d187}</Project>
+      <Name>KMHC.SLTC.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.6.4.js" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

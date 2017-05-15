@@ -1,0 +1,99 @@
+﻿<style>
+    .select-address {
+        overflow: hidden;
+        position: fixed;
+        left: 50%;
+        z-index: 19911125;
+        transition: 0.3s;
+        box-shadow: 0 3px 12px rgba(0,0,0,.175);
+        background: #fff;
+        display: none;
+    }
+
+    .select-address.active {
+         top: 0 !important;
+    }
+
+    .select-address-container ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .select-address-container ul li {
+        width: 240px;
+        padding: 10px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .select-address-container ul li:nth-child(even) {
+        background: #eee;
+    }
+
+    .select-address-container ul li span {
+        font-size: 13px;
+        list-style: none;
+        display: inline-block;
+        margin: 5px 7px;
+        cursor: pointer;
+    }
+
+    .select-address-footer {
+        border-top: 1px solid #eee;
+        padding: 10px 15px;
+        overflow: hidden;
+    }
+
+    .select-address-footer input {
+        min-width: 50%;
+    }
+</style>
+
+<div class="select-address">
+    <div class="select-address-container">
+        <ul>
+            <li>
+                <!-- 省份 -->
+                <span ng-repeat="item in provinces"
+                      ng-click="aSet.p(item.areaName, item.areaId)"
+                      ng-class="{'label label-success': pId === item.areaId}">
+
+                    {{item.areaName}}
+
+                </span>
+            </li>
+
+            <li ng-if="cities">
+                <!-- 城市 -->
+                <span ng-repeat="item in cities"
+                      ng-click="aSet.c(item.areaName, item.areaId)"
+                      ng-class="{'label label-success': cId === item.areaId}">
+                    {{item.areaName}} {{x}}
+                </span>
+            </li>
+
+            <li ng-if="c">
+                <!-- 县级 -->
+                <span ng-repeat="item in dists"
+                      ng-click="aSet.a(item.areaName, item.areaId)"
+                      ng-class="{'label label-success': aId === item.areaId}">
+                    {{item.areaName}}
+                </span>
+                <h5 ng-if="!dists" class="text-muted text-center">没有县级资料</h5>
+            </li>
+        </ul>
+    </div>
+
+    <div class="select-address-footer">
+        <span class="pull-right">
+            <span ng-click="clear()" class="btn btn-sm btn-link">清空</span>
+            <span ng-click="changeData()" class="btn btn-sm btn-success" >确定</span>
+        </span>
+        <br/>
+        <strong class="text-danger">{{ p }} {{ c }} {{ a }}　</strong>
+        
+        <input ng-show="p" ng-model="d" class="form-control input-sm" type="text" placeholder="请输入具体街道..." />
+        <br />
+    </div>
+</div>

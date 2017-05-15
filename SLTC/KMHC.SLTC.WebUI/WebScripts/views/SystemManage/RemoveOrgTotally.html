@@ -1,0 +1,37 @@
+﻿<script type="text/javascript">
+    angular.module('sltcApp').controller('testCtrl', function() {});
+</script>
+
+        <!--编辑页面-->
+        <form role="form" class="form-horizontal" name="removeorgtotallyform" novalidate>
+            <div class="form-group">
+                <div class="col-lg-12">
+                    选择机构:
+                    <select class="form-control" ng-model="SelectedItem" ng-change="selectChanged(item)" ng-options="x.OrgName for x in Data.Orgs"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-8">
+                    <textarea class="form-control" ng-model="output" rows="30" placeholder=""></textarea>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <textarea class="form-control mgb10" rows="20" placeholder="">{{info}}</textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <textarea class="form-control" rows="9" placeholder="">{{error}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-12 text-center">
+                    <button class="btn btn-primary btn-block" ng-click="removeOrgTotally()" type="submit">{{buttonText}}</button>
+                </div>
+            </div>
+        </form>
+        <!--编辑页面-->

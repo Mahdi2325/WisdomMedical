@@ -1,0 +1,48 @@
+﻿<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-info"></i>会员档案
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label col-md-3">客户编号<span class="required">*</span></label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" ng-model="PersonNo" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label col-md-3">客户姓名<span class="required">*</span></label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" ng-model="PersonName" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix margin-bottom-20">
+        </div>
+        <div class="tabbable-custom">
+            <ul class="nav nav-tabs">                
+                <li ng-class="{true: 'active', false: ''}[activeTab('BasicInfo')]" data-toggle="tab"><a id="BasicInfo" ui-sref=".BasicInfo({id:PersonID})">会员信息</a></li>
+                <li ng-class="{true: 'active', false: ''}[activeTab('ServicePlan')]" data-toggle="tab"><a id="ServicePlan" ui-sref=".ServicePlan({residentId:ResidentID})">套餐管理</a></li>
+                <li ng-class="{true: 'active', false: ''}[activeTab('Device')]" data-toggle="tab"><a id="Device" ui-sref=".Device({id:PersonID})">仪器设备</a></li>
+                <li ng-class="{true: 'active', false: ''}[activeTab('Family')]" data-toggle="tab"><a id="Family" ui-sref=".Family({id:PersonID})">家属信息</a></li>
+                <li ng-class="{true: 'active', false: ''}[activeTab('HealthManage')]" data-toggle="tab"><a id="HealthManage" ui-sref=".HealthManage({id:PersonID,idCard:IdCard})">健康管理</a></li>
+                <li ng-class="{true: 'active', false: ''}[activeTab('Habit')]" data-toggle="tab"><a id="Habit" ui-sref=".Habit({id:PersonID})">生活习惯</a></li>
+                <li ng-class="{true: 'active', false: ''}[activeTab('PriorityRemark')]" data-toggle="tab"><a id="PriorityRemark" ui-sref=".PriorityRemark({id:PersonID})">优先备注</a></li>
+                <li ng-class="{true: 'active', false: ''}[activeTab('PrePayment')]"  data-toggle="tab"><a id="PrePayment" ui-sref=".PrePayment({residentId:ResidentID})">预收款管理</a></li>
+                <li ng-class="{true: 'active', false: ''}[activeTab('ConsumerDetail')]"  data-toggle="tab"><a id="ConsumerDetail" ui-sref=".ConsumerDetail({residentId:ResidentID})">消费明细</a></li>
+                <li ng-class="{true: 'active', false: ''}[activeTab('BillList')]" data-toggle="tab"><a id="BillList" ui-sref=".BillList({residentId:ResidentID})">账单管理</a></li>
+            </ul>
+            <div class="tab-content" style="padding: 20px">
+                <div ui-view=""></div>
+            </div>
+        </div>
+    </div>
+</div>

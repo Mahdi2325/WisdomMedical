@@ -1,0 +1,62 @@
+﻿
+
+<div style="width:500px" class="modal-content modal-lg" ng-controller="residentSetOrgCtrl">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-bars"></i>会员设置
+            </div>
+            <div class="tools">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form class="form-horizontal" role="form" name="ressetorgform">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">用户姓名</label>
+                    <div class="col-lg-9">
+                        <input type="text"  class="form-control" ng-model="currentItem.Name" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">性别</label>
+                    <div class="col-lg-9">
+                        <span class="form-control" select-code="A00.001" select-value="{{currentItem.Sex}}"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">身份证号码</label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control" ng-model="currentItem.IdCard" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">所属机构<span class="required">*</span></label>
+                    <div class="col-lg-9">
+                        <!--<select name="GroupId" class="form-control" ng-model="currentItem.ResidentOrg" ng-options="t.OrgNo as t.OrgName for t in Orgs" required></select>-->
+                        <input type="text" class="form-control" ng-model="Data.UserOrg.OrgName" readonly="readonly" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">所属区域</label>
+                    <div class="col-lg-9">
+                        <select name="AreaNo" class="form-control" ng-model="currentItem.AreaID" ng-options="t.AreaID as t.AreaName for t in Areas"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">会员类型<span class="required">*</span></label>
+                    <div class="col-lg-9">
+                        <select name="ResidentType" class="form-control" id="ResidentType" ng-model="currentItem.ResidentType" select-code="Q00.010" required></select>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <!-- ng-show="buttonShow"-->
+                    <button class="btn btn-primary" ng-click="saveItem(currentItem)" type="submit" ng-disabled="ressetorgform.$invalid">确定</button>
+                    <button type="button" class="btn btn-grey" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

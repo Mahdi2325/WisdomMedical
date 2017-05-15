@@ -1,0 +1,88 @@
+﻿<style type="text/css">
+    .selectedCor {
+        background-color: #dff8e7;
+    }
+
+    .resident-list-area {
+        min-width: 100px;
+        min-height: 400px;
+        max-height: 600px;
+        height: 100%;
+        overflow: auto;
+    }
+    .td-hide {
+        display: none;
+    }
+    .resident-tr:hover,
+    .resident-tr > td:hover {
+        background-color: #f5f5f5;
+    }
+</style>
+<div>
+    <!--照片和基本信息-->
+    <div class="row" style="height:130px;">
+        <div id="cardImgArea" class="col-md-6" style="height:120px">
+            <img alt="" src="{{currentResident.PhotoPath}}" style="height:100%;width: 100%">
+        </div>
+        <div style="font-size:18px;" class="col-md-6">
+            <p class="over-hidden font-blue bold">{{Commpent.Resident.PersonName}}</p><br />
+            <p>
+                性别： <span select-code="A00.001" select-value="{{Commpent.Resident.Sex}}"></span><br />
+                年龄： {{ Commpent.Resident.Birthdate | ageFormat}}<br />
+            </p>
+        </div>
+    </div>
+
+    <div class="row" style="padding:15px">
+            <p style="font-size:18px;padding-left: 10px;">
+                期初账户余额：¥{{Commpent.Resident.Amount}} &nbsp;&nbsp;<br />本期消费金额：¥{{Commpent.Resident.TotalConSpeMonth}}
+            </p>
+    </div>
+    <!--筛选条件-->
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal" name="residentselectform">
+                <div class="form-group">
+                    <label class="col-md-3 control-label"><span class="pull-left pdl10">姓名</span></label>
+                    <div class="col-md-9">
+                        <!--<label class="control-label"><span class="pull-left">姓名</span></label>-->
+                        <input class="form-control" type="text" ng-model="options.params['Data.Keywords']" lang="10" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"><span class="pull-left pdl10">性別</span></label>
+                    <div class="col-md-9">
+                        <select class="form-control" ng-model="options.params['Data.Sex']" select-code="A00.001"></select>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <!--会员列表-->
+    <div class="row">
+        <div class="col-md-12 resident-list-area">
+            <ui-data-table options="options">
+                <table id="residentTb" class="table  table-bordered">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>性別</th>
+                            <th>年龄</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-mouseover="over($event)" ng-mouseleave="out($event)" ng-click="rowClick(item,$event)" ng-repeat="item in Commpent.Residents">
+                            <td>{{item.PersonName}}</td>
+                            <td><span select-code="A00.001" select-value="{{item.Sex}}"></span></td>
+                            <td>{{item.Birthdate | ageFormat}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </ui-data-table>
+        </div>
+    </div>
+</div>
+
+
+

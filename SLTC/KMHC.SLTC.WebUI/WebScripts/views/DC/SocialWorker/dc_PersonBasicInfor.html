@@ -1,0 +1,279 @@
+﻿<!--收案-->
+<link href="../../../Content/socialworker.css" rel="stylesheet" />
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                <resident-list feeno={{FeeNo}} callback="residentSelected(resident)" />
+            </div>
+            <div class="col-md-10 marginTop5">
+       
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <button class="btn btn-primary" ng-disabled="buttonShow" ng-click="saveForm(currentItem)"><i class="fa fa-save"></i> 儲存資料</button>
+                                <!--<button class="btn btn-default" ng-disabled="buttonShow" ng-click="AddLife()"><i class="fa fa-plus"></i> 新增生活史</button>
+    <button class="btn btn-success" ng-disabled="buttonShow"><i class="fa fa-print"></i> 歷次記錄</button>-->
+                                <button class="btn btn-warning" ng-disabled="buttonShow" ng-click="PrintPreview()"><i class="fa fa-print"></i> 列印預覽</button>
+
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-horizontal tb" name="basicForm" role="form" novalidate>
+                                    <div class="col-md-12 marginBottom5">
+                                        <div style="">
+                                            <div class="panel-title h1 center font25">
+                                                <!--<span class="spantitle font25">
+                                                    {{Org}}老人日間照顧中心<br />
+                                                    基本资料<br />
+                                                </span>-->
+                                                <h3>
+                                                    <strong>{{Org}}老人日間照顧中心</strong>
+                                                </h3>
+                                                <h4>
+                                                    <strong>基本资料</strong>
+                                                </h4>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="div col-md-12">
+                                        <table class="col-md-12">
+                                            <tr>
+                                                <td class="col-md-1 tdlbl">個案姓名<span class="required">*</span></td>
+                                                <td class="col-md-2">
+                                                    <input type="text" class="form-control col-md-12 bottom_blue" name="個案姓名" ng-maxlength="20" ng-model="currentItem.RegName" placeholder="個案姓名" required />
+                                                </td>
+                                                <td class="col-md-1">性別<span class="required">*</span></td>
+                                                <td class="col-md-1">
+
+                                                    <div class="input-group">
+                                                        <label class="radio-inline"><input type="radio" class="" name="gender" ng-checked="true" ng-model="currentItem.Sex" value="男" />男</label>
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <label class="radio-inline"><input type="radio" name="gender" ng-model="currentItem.Sex" value="女" />女</label>
+                                                    </div>
+                                                </td>
+                                                <td class="col-md-1 tdlbl">暱稱</td>
+                                                <td class="col-md-1"><input type="text" class="form-control col-md-12 bottom_blue" ng-model="currentItem.NickName" ng-maxlength="20" placeholder="個案暱稱" /></td>
+                                                <td class="col-md-1 tdlbl">出生地</td>
+                                                <td class="col-md-1"><input type="text" class="form-control col-md-12 bottom_blue" ng-model="currentItem.BirthPlace" ng-maxlength="20" placeholder="請錄入出生地" /></td>
+                                                <td class="col-md-1 tdlbl">日字號</td>
+                                                <td class="col-md-2"><input type="text" class="form-control col-md-12 bottom_blue" ng-model="currentItem.ResidentNo" ng-maxlength="20" placeholder="填寫日字號" /></td>
+
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">收案日期<span class="required">*</span></td>
+                                                <td><input type="text" class="form-control col-md-12 bottom_blue" name="收案日期" ng-model="currentItem.InDate" ca-date-picker placeholder="選擇收案日期" required /></td>
+                                                <td class="tdlbl">籍貫</td>
+                                                <td><input type="text" class="form-control col-md-12 bottom_blue" ng-model="currentItem.OriginPlace" ng-maxlength="50" placeholder="個案籍貫" /></td>
+                                                <td class="tdlbl">生日<span class="required">*</span></td>
+                                                <td colspan="3">
+                                                    <input type="text" class="form-control col-md-10 bottom_blue" name="生日" ng-model="currentItem.BirthDate" ca-date-picker style="width:55%;" ng-change="changeBirthday(currentItem.BirthDate)" required />
+                                                    <input type="text" style="width:8%;font-size:14px;border:none;text-align:right" ng-model="currentItem.Age" /><span style="width:4%">岁</span>
+                                                </td>
+                                                <td class="tdlbl">身份證號<span class="required">*</span></td>
+                                                <td>
+                                                    <input type="text" ng-model="currentItem.IdNo" class="form-control col-md-12 bottom_blue" name="身份證號" ng-maxlength="10" ng-minlength="10" ng-keyup="keyup(currentItem.IdNo)" placeholder="如:P1234567890" required />
+
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">身份別</td>
+                                                <td colspan="7">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control col-md-12 bottom_blue" ng-model="currentItem.PType" ng-maxlength="10" id="PType" input-select="DC01.001" />
+                                                    </div>
+                                                    <!--<input type="text" style="border-style:none;height:36px;width:100%;margin-top:0;margin-left:-1px;" ng-model="currentItem.PType" select-items="身份別" placeholder="個案身份別" />-->
+                                                </td>
+                                                <td class="tdlbl">電話<span class="required">*</span></td>
+                                                <td><input type="text" class="form-control col-md-12 bottom_blue" name="電話" ng-maxlength="20" ng-model="currentItem.Phone" placeholder="如:0512-1234567" required pattern="^0$|^\+?[1-9]\d*$" /></td><!--ng-pattern="/^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/"-->
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">居住地址<span class="required">*</span></td>
+                                                <td colspan="9">
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control col-md-12 bottom_blue" name="居住地址" ng-maxlength="50" ng-model="currentItem.LivingAddress" placeholder="個案居住地址" required />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">戶籍地址</td>
+                                                <td colspan="9"><div class="col-sm-8"><input type="text" class="form-control col-md-12 bottom_blue" ng-maxlength="50" ng-model="currentItem.PermanentAddress" placeholder="個案戶籍地址" /></div></td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">溝通語言</td>
+                                                <td colspan="9">
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control col-md-12 bottom_blue" ng-model="currentItem.Language" id="Language" ng-maxlength="100" input-select="DC01.002" />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">教育程度</td>
+                                                <td colspan="9">
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control col-md-12" ng-model="currentItem.Education" id="Education" input-select="DC01.003" ng-maxlength="20" />
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">退休前職業</td>
+                                                <td colspan="9">
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control col-md-12" ng-model="currentItem.Profession" id="Profession" ng-maxlength="50" input-select="DC01.004" />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">婚姻狀況</td>
+                                                <td colspan="9">
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control col-md-12" ng-model="currentItem.MerryState" id="MerryState" ng-maxlength="20" input-select="DC01.005" />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">宗教信仰</td>
+                                                <td colspan="9">
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control col-md-12" ng-model="currentItem.Religion" ng-maxlength="20" id="Religion" input-select="DC01.006" />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">經濟來源</td>
+                                                <td colspan="9">
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control col-md-12" ng-model="currentItem.EconomicSources" ng-maxlength="50" id="EconomicSources" input-select="DC01.007" />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">居住狀況</td>
+                                                <td colspan="9">
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control col-md-12" ng-model="currentItem.LivCondition" id="LivCondition" ng-maxlength="50" input-select="DC01.008" />
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">個案來源</td>
+                                                <td colspan="9">
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control col-md-12" ng-model="currentItem.SourceType" id="SourceType" ng-maxlength="200" input-select="DC01.009" />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">手冊證明</td>
+                                                <td colspan="9">
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control col-md-12" ng-model="currentItem.ObstacleManual" id="ObstacleManual" ng-maxlength="100" input-select="DC01.010" />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="height50">
+                                                <td class="tdlbl">疾病狀況</td>
+                                                <td colspan="9">
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control col-md-12" ng-model="currentItem.DiseaseInfo" id="DiseaseInfo" ng-maxlength="300" input-select="DC01.011" />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:110px;" class="tdlbl">重要關係人</td>
+                                                <td colspan="9">
+                                                    <table class="col-sm-12 marginTop5 marginBottom5">
+                                                        <tr class="height50">
+                                                            <td class="col-sm-1"></td>
+                                                            <td class="col-sm-1 tdlbl">姓名</td>
+                                                            <td class="col-sm-1 tdlbl">年齡</td>
+                                                            <td class="col-sm-2 tdlbl">服務單位</td>
+                                                            <td class="col-sm-1 tdlbl">職稱</td>
+                                                            <td class="col-sm-2 tdlbl">聯絡地址</td>
+                                                            <td class="col-sm-2 tdlbl">Email</td>
+                                                            <td class="col-sm-1 tdlbl">電話</td>
+                                                            <td class="col-sm-1 tdlbl">手機</td>
+                                                        </tr>
+                                                        <tr class="height50">
+                                                            <td class="tdlbl">保證人</td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-maxlength="20" name="保證人姓名" ng-model="currentItem.SuretyName" placeholder="保證人" /></td>
+                                                            <td><input class="form-control bottom_blue" type="number" value="50" ng-model="currentItem.SuretyAge" placeholder="年齡" name="保證人年齡"  ng-pattern="/^\d+(\.\d+)?$/" /></td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.SuretyUnit" placeholder="填寫服務單位" name="保證人服務單位" ng-maxlength="50" /></td><!--需要加上这个字段/Title-->
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.SuretyTitle" placeholder="職稱" name="保證人職稱" ng-maxlength="20" /></td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.SuretyAddress" placeholder="聯絡地址" name="保證人聯絡地址" ng-maxlength="50" /></td><!--需要加上这个字段/Mail-->
+                                                            <td><input class="form-control bottom_blue" type="email" ng-model="currentItem.SuretyEmail" placeholder="Email" name="保證人郵箱" ng-maxlength="20" /></td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.SuretyPhone" placeholder="電話" name="保證人電話" ng-maxlength="20" pattern="^0$|^\+?[1-9]\d*$" /></td><!--需要加上这个字段/Mobile-->
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.SuretyMobile" placeholder="手機" name="保證人手機" ng-maxlength="20" pattern="^0$|^\+?[1-9]\d*$" /></td><!--需要加上这个字段/Mobile-->
+                                                        </tr>
+                                                        <tr class="height50">
+                                                            <td class="tdlbl">緊急聯絡人</td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-maxlength="20" ng-model="currentItem.ContactName1" name="緊急聯絡人1姓名" /></td>
+                                                            <td><input class="form-control bottom_blue" type="number" ng-model="currentItem.ContactAge1" name="緊急聯絡人1年齡" ng-pattern="/^\d+(\.\d+)?$/" /></td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.ContactUnit1" name="緊急聯絡人1服務單位" ng-maxlength="50" /></td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.ContactTitle1" name="緊急聯絡人1職稱" ng-maxlength="20" /></td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.ContactAddress1" name="緊急聯絡人1聯絡地址" ng-maxlength="50" /></td>
+                                                            <td><input class="form-control bottom_blue" type="email" ng-model="currentItem.ContactEmail1" name="緊急聯絡人1郵箱" ng-maxlength="20" /></td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.ContactPhone1" name="緊急聯絡人1電話" ng-maxlength="20" pattern="^0$|^\+?[1-9]\d*$" /></td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.ContactMobile1" pattern="^0$|^\+?[1-9]\d*$" /></td>
+                                                        </tr>
+                                                        <tr class="height50">
+                                                            <td class="tdlbl">緊急聯絡人</td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-maxlength="20" ng-model="currentItem.ContactName2" name="緊急聯絡人2姓名" /></td>
+                                                            <td><input class="form-control bottom_blue" type="number" ng-model="currentItem.ContactAge2" name="緊急聯絡人2年齡" ng-pattern="/^\d+(\.\d+)?$/" /></td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.ContactUnit2" name="緊急聯絡人2服務單位" ng-maxlength="50" /></td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.ContactTitle2" name="緊急聯絡人2職稱" ng-maxlength="20" /></td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.ContactAddress2" name="緊急聯絡人2聯絡地址" ng-maxlength="50" /></td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.ContactEmail2" name="緊急聯絡人2郵箱" ng-maxlength="20" /></td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.ContactPhone2" name="緊急聯絡人2電話" ng-maxlength="20" pattern="^0$|^\+?[1-9]\d*$" /></td>
+                                                            <td><input class="form-control bottom_blue" type="text" ng-model="currentItem.ContactMobile2" name="緊急聯絡人2手機" ng-maxlength="20" pattern="^0$|^\+?[1-9]\d*$" /></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="height60 trBgColor">
+                                                <td colspan="10" style="text-align:center">家庭生活評估</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="10">
+                                                    <!--<textarea ng-model="currentItem.EcologicalMap" rows="8"></textarea>-->
+                                                    <div class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <h3>生態圖</h3>
+                                                            </div><div class="col-sm-6"></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <img src="{{currentItem.EcologicalMap}}" class="photoImg" />
+                                                            </div>
+                                                            <div class="col-sm-6"></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-2">
+                                                                <div id="FamilyPathPicker" style="width:500px;height:300px;">選擇圖片</div>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <button type="button" class="btn btn-primary" ng-click="clear()">清除</button>
+                                                            </div>
+                                                            <div class="col-sm-8"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+               
+            </div>
+
+        </div>
+    </div>
+</div>

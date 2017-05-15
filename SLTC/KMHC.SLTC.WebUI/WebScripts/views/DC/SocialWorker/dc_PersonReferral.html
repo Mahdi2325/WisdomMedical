@@ -1,0 +1,301 @@
+﻿
+<!---->
+<link href="../../../Content/socialworker.css" rel="stylesheet" />
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                <resident-list feeno={{FeeNo}}  callback="residentSelected(resident)" />
+            </div>
+            <div class="col-md-10 marginTop5">
+
+                <div class="col-md-12">
+                    <form class="form-horizontal tb" name="rfrForm" role="form" novalidate>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                    
+                                <button class="btn btn-primary" ng-click="saveForm(currentItemReff)"><i class="fa fa-save"></i> 儲存資料</button>
+                                    <button class="btn btn-info" ng-disabled="buttonShow" ng-click="PrintPreview(currentItemReff.Id)"><i class="fa fa-print"></i> 列印預覽</button>
+                                    <!--<button class="btn btn-success" ng-disabled="buttonShow" ng-click="showHistory()"><i class="fa fa-list"></i> 歷次資料</button>-->
+                           
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+
+                                <div class="col-md-12 marginBottom5">
+                                    <div class="panel-title ch1 center font30">
+                                        <!--<span class="spantitle font25">
+                                   <br />
+                                    <br />
+                                </span>-->
+                                        <h3><strong>{{Org}}老人日間照顧中心</strong></h3>
+                                        <h4><strong>個案轉介</strong></h4>
+                                    </div>
+                                    <div class="col-md-12 marginTop5">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-1">轉介至:<span class="required">*</span></label>
+                                            <div class="col-md-10">
+                                                <input class="form-control bottom_blue" type="text" ng-model="currentItemReff.ReferralUnit" name="轉介推薦單位" ng-maxlength="50" required />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12 div">
+                                    <table class="col-md-12">
+                                        <tr class="height40">
+                                            <td class="col-md-2 tdlbl">個案姓名</td>
+                                            <td colspan="1" class="col-md-1" align="left" style="font-weight:400;color:#808080">
+                                                {{currentItem.RegName}}
+                                            </td>
+                                            <td class="col-md-1 tdlbl">暱稱</td>
+                                            <td class="col-md-1" align="left" style="font-weight:400;color:#808080">{{currentItem.NickName}}</td>
+                                            <td class="col-md-2 tdlbl">生日</td>
+                                            <td class="col-md-2" align="left" style="font-weight:400;color:#808080">
+                                                {{currentItem.BirthDate}} ({{currentItem.Age}})岁
+                                            </td>
+
+                                            <td class="col-md-1 tdlbl">收案日期</td>
+                                            <td class="col-md-2" align="left" style="font-weight:400;color:#808080">{{currentItem.InDate}}</td>
+                                        </tr>
+                                        <tr class="height40">
+                                            <td class="col-md-1 tdlbl">性別</td>
+                                            <td class="col-md-1" align="left" style="font-weight:400;color:#808080">
+                                                {{currentItem.Sex}}
+                                            </td>
+                                            <td class="tdlbl">籍貫</td>
+                                            <td align="left" style="font-weight:400;color:#808080">{{currentItem.OriginPlace}}</td>
+                                            <td class="tdlbl">身份證字號</td>
+                                            <td align="left" style="font-weight:400;color:#808080">
+                                                {{currentItem.IdNo}}
+                                            </td>
+                                            <td class="tdlbl">電話</td>
+                                            <td align="left" style="font-weight:400;color:#808080">{{currentItem.Phone}}</td>
+                                        </tr>
+
+                                        <tr class="height40">
+                                            <td class="tdlbl col-md-1">戶籍地址</td>
+                                            <td colspan="7" align="left" style="font-weight:400;color:#808080">{{currentItem.PermanentAddress}}</td>
+                                        </tr>
+                                        <tr class="height40">
+                                            <td class="tdlbl col-md-1">居住地址</td>
+                                            <td colspan="7" align="left" style="font-weight:400;color:#808080">{{currentItem.LivingAddress}}</td>
+                                        </tr>
+                                        <tr class="height40">
+                                            <td class="tdlbl">主要聯絡人</td>
+                                            <td colspan="2" align="left" style="font-weight:400;color:#808080">{{currentItem.SuretyName}}</td>
+                                            <td class="tdlbl">聯絡電話</td>
+                                            <td colspan="4" align="left" style="font-weight:400;color:#808080">{{currentItem.SuretyPhone}}</td>
+                                            <!--<td class="tdlbl">關係</td>
+                                    <td align="left" style="font-weight:400;color:#808080">{{currentItem.APPELLATION}}</td>-->
+                                            </t
+                                        </tr>
+                                        <tr class="height40">
+                                            <td class="tdlbl">溝通語言</td>
+                                            <td colspan="7" align="left" style="font-weight:400;color:#808080">
+                                                {{currentItem.Language}}
+                                            </td>
+                                        </tr>
+
+                                        <tr class="height40">
+                                            <td class="tdlbl">婚姻狀況</td>
+                                            <td colspan="7" align="left" style="font-weight:400;color:#808080">
+                                                {{currentItem.MerryState}}
+                                            </td>
+                                        </tr>
+                                        <tr class="height40">
+                                            <td class="tdlbl">宗教信仰</td>
+                                            <td colspan="7" align="left" style="font-weight:400;color:#808080">
+                                                {{currentItem.Religion}}
+                                            </td>
+                                        </tr>
+
+                                        <tr class="height40">
+                                            <td class="tdlbl">手冊別</td>
+                                            <td colspan="7" align="left" style="font-weight:400;color:#808080">
+                                                {{currentItem.ObstacleManual}}
+                                            </td>
+                                        </tr>
+                                        <tr class="height40">
+                                            <td class="tdlbl">疾病狀況</td>
+                                            <td colspan="7" align="left" style="font-weight:400;color:#808080">
+                                                {{currentItem.DiseaseInfo}}
+                                            </td>
+                                        </tr>
+                                        <tr class="height200">
+                                            <td class="tdlbl">生態圖</td>
+                                            <td colspan="3">
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <img src="{{currentItem.EcologicalMap}}" class="photoImg" />
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="tdlbl"><span class="required">*</span>生理概況</td>
+                                            <td colspan="3">
+                                                <textarea style="margin:2px auto" rows="9" ng-model="currentItemReff.SiologicalState" class="form-control bottom_blue" placeholder="請錄入個案生理概況" name="生理概況" ng-maxlength="100" required></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr class="height70">
+                                            <td class="tdlbl"><span class="required">*</span>個案問題陳述</td>
+                                            <td colspan="7">
+                                                <textarea style="margin:2px auto" ng-model="currentItemReff.ProblemStatement" class="form-control bottom_blue" placeholder="請錄入個案問題陳述" name="個案問題陳述" ng-maxlength="500" required></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr class="height70">
+                                            <td class="tdlbl"><span class="required">*</span>轉介目的</td>
+                                            <td colspan="3">
+                                                <textarea style="margin:2px auto" ng-model="currentItemReff.ReferralPurpose" ng-maxlength="50" class="form-control bottom_blue" placeholder="請錄入個案轉介目的" name="個案轉介目的" maxlength="50" required></textarea>
+                                            </td>
+                                            <td colspan="1" class="tdlbl">
+                                                檢附資料
+                                            </td>
+                                            <td colspan="3">
+                                                <textarea style="margin:2px auto" ng-model="currentItemReff.DocumentInfo" ng-maxlength="20" class="form-control bottom_blue" placeholder="個案檢附資料"></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr class="height60">
+                                            <td class="tdlbl"><span class="required">*</span>轉介日期:</td>
+                                            <td colspan="2">
+                                                <input class="form-control bottom_blue" type="text" ng-model="currentItemReff.ReferralDate" ca-date-picker placeholder="轉介日期" name="轉介日期" required />
+                                            </td>
+                                            <td>主責社工:</td>
+                                            <td colspan="2"></td>
+                                            <td>
+                                                督導/主任:
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="8"></td>
+                                        </tr>
+                                        <tr class="height40">
+                                            <td colspan="8" style="border:none;font-size:16px;font-weight:700;color:#000;text-align:left">
+                                                ※請於接受轉介單後儘可能在一週內，以電話或傳真將結果告訴我們，我們將再與您聯絡。謝謝！
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tdlbl">處理回覆</td>
+                                            <td colspan="7">
+                                                <table class="col-sm-8" style="border:none">
+                                                    <tr class="marginTop10 marginBottom5 height60">
+                                                        <td class="col-sm-2" style="border:none;font-weight:600;color:#000;" align="right">接案機構：</td>
+                                                        <td class="col-sm-10" style="border:none;text-align:left;font-weight:200">
+                                                            <input type="text" class="col-md-12 form-control bottom_blue" ng-maxlength="50" ng-model="currentItemReff.ReferralUnit" placeholder="請在這裡填寫接案機構" />
+                                                        </td>
+
+
+                                                    </tr>
+                                                    <tr class="marginTop5 marginBottom5">
+                                                        <td class="col-sm-2" style="border:none;font-weight:600;color:#000;" align="right">接案結果：</td>
+                                                        <td class="col-sm-10" style="border:none;text-align:left;font-weight:200">
+                                                            <input class="col-md-12 form-control bottom_blue" type="text" ng-maxlength="300" ng-model="currentItemReff.ReferralResult" placeholder="請在這裡填寫接案結果" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <table class="col-sm-8" style="border:none">
+                                                    <tr class="height60">
+                                                        <td class="col-sm-2" style="border:none;font-weight:600;color:#000;" align="right">回覆日期：</td>
+                                                        <td class="col-sm-4" style="border:none;text-align:left;font-weight:200">
+                                                            <input type="text" class="col-md-12 form-control bottom_blue" ng-model="currentItemReff.ReplyDate" ca-date-picker placeholder="請在這裡填寫回覆日期" />
+                                                        </td>
+                                                        <td class="col-sm-2" style="border:none;font-weight:600;color:#000;">接案者：</td>
+                                                        <td class="col-sm-4" style="border:none;text-align:left;font-weight:200">
+                                                            <input type="text" class="col-md-12 form-control bottom_blue" ng-maxlength="20" ng-model="currentItemReff.UnitContactor" placeholder="請在這裡填寫接案者" />
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr class="height40 marginBottom5">
+                                                        <td class="col-sm-2" style="border:none;font-weight:600;color:#000;" align="right">電話：</td>
+                                                        <td class="col-sm-3" style="border:none;text-align:left;font-weight:200">
+                                                            <input type="text" class="col-md-12 form-control bottom_blue" name="電話" ng-maxlength="11" ng-model="currentItemReff.UnitPhone" placeholder="請在這裡填寫電話" />
+                                                        </td>
+                                                        <td class="col-sm-2" style="border:none;font-weight:600;color:#000;">傳真：</td>
+                                                        <td class="col-sm-3" style="border:none;text-align:left;font-weight:200">
+                                                            <input type="text" class="col-md-12 form-control bottom_blue" ng-maxlength="20" ng-model="currentItemReff.UnitFax" placeholder="請在這裡填寫傳真" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="height35"></tr>
+                                                </table>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:80%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <!--<div ng-include="'/Views/Socialworker/AddProposalDisscuss.html'"></div>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box border green">
+                            <div class="box-title">
+                                <h4>個案轉介歷次記錄</h4>
+                            </div>
+                            <div class="box-body">
+                                <!--<ui-data-table options="options">-->
+                                <table class="table table-bordered" id="editTable">
+                                    <thead>
+                                        <tr>
+                                            <th>個案姓名</th>
+                                            <th>性别</th>
+                                            <th>收案日期</th>
+                                            <th>主要聯絡人</th>
+                                            <th>聯絡電話</th>
+                                            <th>轉介日期</th>
+                                            <th>轉介目的</th>
+                                            <th>生理概況</th>
+                                            <th>個案問題陳述</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="list in HistoryList">
+                                            <td>{{list.Name}}</td>
+                                            <td>{{list.Sex}}</td>
+                                           
+                                            <td>{{list.InDate | dateFormat}}</td>
+                                            <td>{{list.SuretyName}}</td>
+                                            <td>{{list.SuretyPhone}}</td>
+                                            <td>{{list.ReferralDate | dateFormat}}</td>
+                                            <td>{{list.ReferralPurpose}}</td>
+                                            <td>{{list.SiologicalState}}</td>
+                                            <td>{{list.ProblemStatement}}</td>
+                                            <td>
+                                                <button class="btn btn-primary" ng-click="editReferral(list)">编辑</button>
+                                                <a class="btn btn-danger" role="button" data-toggle="modal" ng-click="deleteReferral(list)">删除</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                                <!--</ui-data-table>-->
+                                <div id="pager"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

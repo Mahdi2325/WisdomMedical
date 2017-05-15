@@ -1,0 +1,209 @@
+html,body{
+    height: 100%!important;
+}
+
+body{
+    overflow: hidden;
+    background: linear-gradient(to bottom, #12ccb3 0%,#1cbfea 100%);
+
+    FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#44c67a,endColorStr=#2d9a5a);   /*IE 6 7 8*/
+    background: -ms-linear-gradient(to bottom, #44c67a,  #2d9a5a);                     /* IE 10 */
+    background: -moz-linear-gradient(to bottom,#44c67a,#2d9a5a);                       /*火狐*/
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#44c67a), to(#2d9a5a));   /*谷歌*/
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#44c67a), to(#2d9a5a));  /* Safari 4-5, Chrome 1-9*/
+    background: -webkit-linear-gradient(to bottom, #44c67a, #2d9a5a);                  /*Safari5.1 Chrome 10+*/
+    background: -o-linear-gradient(to bottom, #44c67a, #2d9a5a);                       /*Opera 11.10+*/
+}
+
+.wrapper-bg {
+    width: 100%;
+    height: 100%;
+    background:url("../img/login/img-login-bg.png") no-repeat;
+    background-position: center center;
+
+    border: 1px solid transparent;
+}
+
+.login-box{
+    width:  528px;
+    height: auto;
+    min-height: 400px;
+    margin-top: 70px;
+    border-radius: 5px;
+    background-color: rgba(255,255,255,0.3);
+}
+
+
+.input-username{
+    background: url("../img/login/icon-user.png") no-repeat;
+    background-position: 20px center;
+
+}
+
+.input-password{
+    background: url("../img/login/icon-lock.png") no-repeat;
+    background-position: 20px center;
+}
+
+.input-username,
+.input-password{
+    border: 1px solid #dadada;
+    width: 95%;
+    max-width: 342px;
+    height: 42px;
+    color: #818181;
+    font-size: 1.25em;
+    padding-left: 50px!important;
+    padding-right: 30px!important;;
+    border-radius: 50px!important;;
+    background-color: rgba(255,255,255,1)!important;
+    margin: 0 auto!important;
+}
+
+.input-username:hover,
+.input-username:focus,
+.input-password:hover,
+.input-password:focus{
+    border: 1px solid #3aba6f;
+}
+
+.icon-check {
+    position: relative;
+    right: -445px;
+    top: -32px;
+    width: 18px;
+    height: 18px;
+}
+
+.icon-correct{
+    background: url("../img/login/icon-correct.png") no-repeat center;
+}
+
+.icon-error{
+    background: url("../img/login/icon-error.png") no-repeat center;
+}
+
+.btn-login {
+    width: 338px;
+    height: 42px;
+    color: #FFF;
+    font-size: 20px;
+    margin-top: 25px;
+    cursor: pointer;
+    background-color: #1ba554;
+    border-radius: 50px;
+}
+
+.btn-login:hover,
+.btn-login:active{
+    background-color: #1faf5a;
+}
+
+.error-msg{
+    color: #fd6562;
+    padding-bottom: 20px;
+}
+
+.tips-name,
+.tips-password{
+    position: relative;
+    color: #f9d382;
+    font-size: 1em;
+    height: 25px;
+}
+
+.tips-name {
+    top: 0px;
+    left: 0px;
+}
+
+.tips-password{
+    top: 0px;
+    left: 0px;
+}
+
+
+
+.wrapper-copyright{
+    width: 100%;
+    color: white;
+    margin-top: 165px;
+    font-size: 0.8em;
+}
+
+
+/**---------------------------------------------------记住密码框-------------------------------------------------------*/
+.check-remember{
+    float: left;
+    margin-left: 100px;
+    color: white;
+    font-size: 13px;
+    line-height: 13px;
+
+}
+
+.check-remember input[type=checkbox]{
+    display: none;
+}
+
+.check-remember input[type=checkbox] + label{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background: url("../img/login/checkbox-unselect.png") no-repeat;
+}
+
+.check-remember input[type=checkbox] + label:active{
+
+}
+
+.check-remember input[type=checkbox] + label:hover {
+
+}
+
+.check-remember input[type=checkbox]:checked + label {
+    background: url("../img/login/checkbox-select.png") no-repeat;
+}
+
+.check-remember input[type=checkbox] + label:focus {
+}
+
+.txt-checkbox{
+    position: relative;
+    top: -8px;
+}
+
+/**---------------------------------------------------表单验证提示-------------------------------------------------------*/
+.help-block small{
+    color: #fd6562!important;
+    text-align: left;
+    padding-left: 125px;
+    font-size: 14px!important;
+}
+
+.form-control {
+    background-color: #fff!important;
+    background-image: none!important;
+    border: 1px solid #dadada;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0) inset!important;
+    color: #555!important;
+    display: block!important;
+    font-size: 14px!important;
+    height: 45px!important;
+    line-height: 45px!important;
+    padding: 6px 12px!important;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s!important;
+    vertical-align: middle!important;
+    width: 100%!important;
+}
+
+.form-control-feedback{
+    color: #fe514d;
+
+    margin-top: 8px;
+    margin-left: -25px;
+}
+
+.glyphicon-ok{
+    color: #3aba6f;
+}

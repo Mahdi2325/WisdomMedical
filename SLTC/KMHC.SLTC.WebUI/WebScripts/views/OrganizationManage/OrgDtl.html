@@ -1,0 +1,106 @@
+﻿
+<div class="row">
+    <div class="col-lg-12">
+        <!-- BOX -->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bars"></i>编辑机构
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="tabbable">
+                    <form class="form-horizontal w5c-form" w5c-form-validate role="form" name="orgdtlform" novalidate>
+                        <!--<ul class="nav nav-tabs">
+                            <li class="active"><a href="#box_tab4" data-toggle="tab"><i class="fa fa-home"></i> <span class="hidden-inline-mobile">机构基本信息</span></a></li>
+                            <li class=""><a href="#box_tab5" data-toggle="tab"><i class="fa fa-home"></i> <span class="hidden-inline-mobile">其他设置</span> </a></li>
+                        </ul>
+                        <div class="tab-content">-->
+
+                        <div class="tab-pane fade in active" id="box_tab4">
+                            <div class="divide-10"></div>
+                            <div class="form-group">
+                                <label class="col-lg-offset-2 col-lg-2 control-label">机构编号<span class="required">*</span></label>
+                                <div class="col-lg-4">
+                                    <input type="text" name="OrgNo" ng-disabled="!isCanDo" class="form-control" ng-model="Data.Org.OrgNo" ng-minlength="1" ng-maxlength="20" placeholder="请填入机构编号" ng-disabled="Data.Org.id" required />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-offset-2 col-lg-2 control-label">所属集团<span class="required">*</span></label>
+                                <div class="col-lg-4">
+                                    <select name="GroupId" ng-disabled="true" class="form-control" ng-model="Data.Org.GroupID" ng-options="t.GroupID as t.GroupName for t in Data.Groups" required></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-offset-2 col-lg-2 control-label">机构名称	<span class="required">*</span></label>
+                                <div class="col-lg-4">
+                                    <input type="text" name="OrgName" class="form-control" ng-model="Data.Org.OrgName" ng-minlength="1" ng-maxlength="100" placeholder="请填入机构名称" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-offset-2 col-lg-2 control-label">Logo图片</br>(<span class="red">需重新登陆方可显示</span>)</label>
+                                <div class="col-lg-4">
+                                    <img style="padding-bottom: 10px; width:150px " ng-src="{{(Data.Org.LogoPath != null && Data.Org.LogoPath != '') ? Data.Org.LogoPath : '/Images/0.png'}}" alt="" />
+                                    <div id="PicturePathPicker">选择机构Logo图片</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-offset-2 col-lg-2 control-label">负责人</label>
+                                <div class="col-lg-4">
+                                    <input class="form-control" name="Contact" ng-model="Data.Org.Contact" ng-maxlength="50" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-offset-2 col-lg-2 control-label">地址</label>
+                                <div class="col-lg-4" style="padding-top:0px">
+                                    <input-address id="txtRecordBy" callback="addressInput(address)" value="{{OrgAddressDetail}}" />
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-offset-2 col-lg-2 control-label">电话</label>
+                                <div class="col-lg-4">
+                                    <input class="form-control" name="Tel" ng-model="Data.Org.Tel" ng-maxlength="20" phone />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-offset-2 col-lg-2 control-label">电子邮箱</label>
+                                <div class="col-lg-4">
+                                    <input class="form-control" name="Email" type="email" ng-model="Data.Org.Email" ng-maxlength="50" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-offset-2 col-lg-2 control-label">传真</label>
+                                <div class="col-lg-4">
+                                    <input class="form-control" name="Fax" ng-model="Data.Org.Fax" ng-maxlength="20" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-offset-2 col-lg-2 control-label">机构网站</label>
+                                <div class="col-lg-4">
+                                    <input class="form-control" name="WebSite" type="url" ng-model="Data.Org.WebSite" ng-maxlength="200" />
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="submit" ng-disabled="orgdtlform.$invalid" ng-click="save();">保存</button> <!-- ng-disabled="formOrg.$invalid"-->
+                            <button class="btn btn-grey" ui-sref="OrgList">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+<div class="modal fade" id="modalInputAddress" tabindex="-1" role="dialog" aria-labelledby="modalCarryOutLabel" data-keyboard="false" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div ng-include="'/WebScripts/views/UserManage/AddressModal.html'"></div>
+    </div>
+</div>  

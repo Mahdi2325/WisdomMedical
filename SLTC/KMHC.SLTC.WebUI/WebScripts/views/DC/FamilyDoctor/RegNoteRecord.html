@@ -1,0 +1,39 @@
+﻿<div ng-controller="regNoteRecordCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading">關懷記錄</div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-1 control-label">姓名/昵稱</label>
+                <div class="col-sm-1">
+                    <span class="form-control">{{resident.Name}}</span>
+                </div>
+                <div class="col-sm-1">
+                    <span class="form-control">{{resident.NickName}}</span>
+                </div>
+                <label class="col-sm-1 control-label">性別</label>
+                <div class="col-sm-2">
+                    <span class="form-control">{{resident.Sex}}</span>
+                </div>
+                <label class="col-sm-1 control-label">身份證</label>
+                <div class="col-sm-2">
+                    <span class="form-control">{{resident.IdNo}}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">生日</label>
+                <div class="col-sm-2">
+                    <span class="form-control">{{resident.BirthDate | dateFormat}}</span>
+                </div>
+                <label class="col-sm-1 control-label">年齡</label>
+                <div class="col-sm-2">
+                    <span class="form-control">{{resident.BirthDate | ageFormat}}</span>
+                </div>
+                <div class="col-sm-2">
+                    <a class="btn btn-primary" ng-click="toggleDisplayMode()">{{displayMode == 'record' ? '設置關懷內容': '返回'}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-include="'/Views/DC/FamilyDoctor/RegNoteRecordList.html'" ng-show="displayMode == 'record'"></div>
+    <ng-include src="'/Views/DC/FamilyDoctor/Note.html'" ng-show="displayMode == 'note'"></ng-include>
+</div>

@@ -1,0 +1,273 @@
+.btn-toolbar{
+    margin-bottom: 10px;
+}
+
+.box.border .box-body, .box.solid .box-body{
+    padding: 0px;
+}
+
+/**---------------------------------------------网站基本颜色-----------------------------------------------------------*/
+.color-green{
+    background-color: #39bb6e;
+}
+
+.color-lightgreen{
+    background-color: #8cd8ad;
+}
+
+.color-darkgreen{
+    background-color: #1a994d!important;
+}
+
+.color-orange{
+    background-color: #efbd63;
+}
+
+/**---------------------------------------------文本气泡组件---------------------------------------------------------------*/
+.bubble{
+    position: absolute;
+    height: auto;
+    min-height: 30px;
+    line-height: 25px;
+    width: auto;
+    max-width: 300px;
+    border-radius: 0px;
+    padding: 5px;
+    font-size: 14px;
+    color: #949494;
+    background-color: #f8f8f8;
+    box-shadow: 0px 0px 6px gray;
+}
+
+.bubble-txt{
+    display: inline-block;
+    width: auto;
+    max-width: 160px;
+    height: 25px;
+    word-break: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+
+.hide{
+    display: none;
+}
+
+/**---------------------------------------------鼠标经过悬浮框组件---------------------------------------------------------------*/
+hover-popup{
+
+}
+
+.btn-popup{
+    width: auto;
+    padding:0 5px;
+    max-width: 100px;
+    height: 30px;
+    cursor: pointer;
+    line-height: 30px;
+    text-align: center;
+    color: #555555;
+    border-radius: 3px;
+    border: 1px solid #3aba6f;
+}
+
+.popup-div{
+    display: none;
+    width:auto;
+    height:auto;
+    position:absolute;
+    text-align: center;
+    background-color:#FFF;
+    border: 1px solid #3aba6f;
+    z-index: 1000;
+}
+
+.popup-div p{
+    margin-top: 10px;
+}
+
+.popup-div ul li{
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid #f8f8f8;
+}
+
+.popup-div ul li:first-child{
+    border-top: 1px solid #e5e5e5;
+}
+
+/**---------------------------------------------流程图1---------------------------------------------------------------*/
+.chart1{
+    width: 725px;
+    height: 908px;
+    background: url("../../img/chart/lines.png") no-repeat;
+    background-color: #FFF;
+    background-position: 65px 120px;
+    position: absolute;
+    border: 1px solid #3aba6f;
+}
+
+.chart1 a{
+    display: block;
+    width: 85px;
+    height: 105px;
+
+    color: #000;
+    text-decoration: none;
+    position: absolute;
+    text-align: center;
+}
+
+.chart1 .resident{
+    left: 250px;
+    top: 20px;
+}
+
+.chart1 .warnset{
+    left: 435px;
+    top: 20px;
+}
+
+.chart1 .health{
+    left: 40px;
+    top: 180px;
+}
+
+.chart1 .result{
+    left: 245px;
+    top: 177px;
+}
+
+.chart1 .warn{
+    left: 435px;
+    top: 182px;
+}
+
+.chart1 .result-classify{
+    left: 245px;
+    top: 335px;
+}
+
+.chart1 .danger-check{
+    left: 435px;
+    top: 330px;
+}
+
+.chart1 .danger-change{
+    left: 615px;
+    top: 325px;
+}
+
+.chart1 .normal{
+    left: 43px;
+    top: 485px;
+}
+
+.chart1 .illness{
+    left: 245px;
+    top: 485px;
+}
+
+.chart1 .high-risk{
+    left: 435px;
+    top: 485px;
+}
+
+.chart1 .plan{
+    left: 245px;
+    top: 640px;
+}
+
+.chart1 .feedback{
+    left: 245px;
+    top: 790px;
+}
+
+/**---------------------------------------------流程图2---------------------------------------------------------------*/
+.chart2{
+    width: 525px;
+    height: 898px;
+    background: url("../../img/chart/lines2.png") no-repeat;
+    background-color: #FFF;
+    background-position: 45px 120px;
+    position: absolute;
+    border: 1px solid #3aba6f;
+
+}
+
+.chart2 a{
+    display: block;
+    width: 85px;
+    height: 105px;
+    color: #000;
+    text-decoration: none;
+    position: absolute;
+    text-align: center;
+}
+
+.chart2 .resident{
+    left: 158px;
+    top: 20px;
+}
+
+.chart2 .warnset{
+    left: 295px;
+    top: 20px;
+}
+
+.chart2 .health{
+    left: 18px;
+    top: 180px;
+}
+
+.chart2 .result{
+    left: 162px;
+    top: 180px;
+}
+
+.chart2 .warn{
+    left: 292px;
+    top: 182px;
+}
+
+.chart2 .result-classify{
+    left: 155px;
+    top: 335px;
+}
+
+.chart2 .danger-check{
+    left: 290px;
+    top: 330px;
+}
+
+.chart2 .danger-change{
+    left: 430px;
+    top: 325px;
+}
+
+.chart2 .normal{
+    left: 20px;
+    top: 485px;
+}
+
+.chart2 .illness{
+    left: 155px;
+    top: 485px;
+}
+
+.chart2 .high-risk{
+    left: 295px;
+    top: 485px;
+}
+
+.chart2 .plan{
+    left: 155px;
+    top: 640px;
+}
+
+.chart2 .feedback{
+    left: 155px;
+    top: 793px;
+}

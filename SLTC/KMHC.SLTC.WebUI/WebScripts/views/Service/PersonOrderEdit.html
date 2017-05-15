@@ -1,0 +1,235 @@
+﻿
+<div class="row" ng-controller="PersonOrderEditCtrl">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-bars"></i>{{isAdd?"添加":"编辑"}}订单
+            </div>
+            <div class="tools">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form role="form" name="orderEditForm" class="w5c-form"  w5c-form-validate novalidate>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" class="form-control" id="SONo" name="SONo" ng-model="order.SONo" disabled>
+                            <label for="PersonName">服务订单编号：</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" class="form-control" id="PersonName" ng-model="order.PersonName" disabled>
+                            <label for="form_control_1">姓名：</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <select class="form-control" name="Priority" ng-model="order.Priority" select-code="Q00.005" required></select>
+                            <label for="Priority">优先级：</label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-md-radios">
+                            <label>订单类别</label>
+                            <div class="md-radio-inline">
+                                <label>
+                                    &nbsp;
+                                    <input type="radio" name="ServiceType" id="ServiceType1" ng-click="SelectST(1)" ng-model="order.ServiceType" required ng-disabled="!isAdd" value="1">服务预约
+                                </label>&nbsp;
+                                <label>
+                                    &nbsp;
+                                    <input type="radio" name="ServiceType" id="ServiceType2" ng-click="SelectST(2)" ng-model="order.ServiceType" required ng-disabled="!isAdd" value="2">商品购买
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" ng-show="order.ServiceType==1">
+                        <div class="form-group form-md-line-input">
+                            <input name="SIName" class="form-control" ng-model="order.SIName" style="background-color:white" placeholder="点击选择服务项目" ng-click="OpenSelServiceItem()" data-toggle="modal" data-target="#modalServiceItem" ng-maxlength="100" ng-disabled="!isAdd" ng-required="order.ServiceType==1" />
+                            <input ng-model="order.SINo" class="form-control" type="hidden" />
+                            <label for="PersonName">服务项目：</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" ng-show="order.OrderType!='Group'">
+                        <div class="form-group form-md-line-input">
+                            <select class="form-control" name="Payment" ng-model="order.Payment" ng-change="ChangePayment()" select-code="P00.006" ng-disabled="!isAdd" ng-required="order.OrderType!='Group'"></select>
+                            <label for="myAddress1">付款方式：</label>
+                            <span ng-show="selPayment" class="font-red">可用余额：{{RemainingMoney | number:2}}元</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" ng-show="order.ServiceType==2">
+                        <div class="form-group form-md-line-input">
+                            <select class="form-control" name="Delivery" ng-model="order.Delivery" select-code="P00.007" ng-required="order.ServiceType==2"></select>
+                            <label for="myAddress1">送货方式：</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input name="Otime" ng-model="order.Otime" class="form-control" ca-date-time-picker min="{{CurrentMinDate}}" required />
+                            <label for="Otime">预约时间：</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-hide="order.Delivery=='SelfPickup'">
+
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input">
+                            <div class="input-group">
+                                <div class="input-group-control">
+                                    <input name="myAddress1" id="myAddress1" class="form-control" ng-model="order.ServiceAddress" maxlength="200" readonly type="text" required>
+                                    <label for="form_control_1">服务地址</label>
+                                </div>
+                                <span class="input-group-btn btn-right">
+                                    <button class="btn green-haze" data-toggle="modal" data-target="#modalSelectAddress" type="button">选择地址</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" class="form-control" id="ContactName" name="ContactName" ng-model="order.ContactName" ng-maxlength="20" placeholder="请输入联系人姓名">
+                            <label for="ServicePhone">联系人：</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <div class="input-icon right">
+                                <input type="text" class="form-control" id="ContactPhone" name="ContactPhone" ng-model="order.ContactPhone" ng-maxlength="20" placeholder="请输入联系电话">
+                                <label for="ServicePhone">联系电话：</label>
+                                <i class="fa fa-phone"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row" ng-show="order.ServiceType==2">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <label for="InitPrice">商品列表</label>
+                            <div class="portlet light " style="box-shadow:none;padding:0px">
+                                <div class="portlet-body form">
+                                    <table class="table table-striped table-bordered table-advance table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>商品编码</th>
+                                                <th>商品名称</th>
+                                                <th>价格</th>
+                                                <th>数量</th>
+                                                <th>总价</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in order.CommodityItems">
+                                                <td>{{item.CINo}}</td>
+                                                <td>{{item.CIName}}</td>
+                                                <td>{{item.Price | currency:"¥"}}/{{item.Unit}}</td>
+                                                <td>{{item.Quantity}}</td>
+                                                <td>{{item.Quantity * item.Price | currency:"¥"}}</td>
+                                                <td class="text-left">
+                                                    <button type="button" class="btn btn-success btn-xs" ng-disabled="!isAdd" ng-click="charegeClick(item,$event)">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-xs" ng-disabled="!isAdd" ng-click="deleteCharegeDetl(item,$event)">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td>
+                                                    <input name="CINo" style="width:155px;background-color:white" class="form-control" ng-model="tempItem.CINo" placeholder="点击选择商品" ng-disabled="!isAdd" data-toggle="modal" data-target="#modalCommodityItem" ng-maxlength="20" />
+                                                </td>
+                                                <td>
+                                                    {{tempItem.CIName}}
+                                                </td>
+                                                <td>
+                                                    {{tempItem.Price| currency:"¥"}}/{{tempItem.Unit}}
+                                                </td>
+                                                <td><input name="Quantity" type="number" class="form-control" placeholder="数量" ng-model="tempItem.Quantity" ng-maxlength="11" /></td>
+                                                <td>{{(tempItem.Quantity * tempItem.Price)| currency:"¥" }}</td>
+                                                <td>
+                                                    <button type="button" id="chgGroupEditAdd" class="btn btn-primary btn-xs" ng-disabled="!isAdd || tempItem.Quantity==0 || !tempItem.Quantity" ng-click="saveChargeItem()">
+                                                        <span class="glyphicon glyphicon-plus"></span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" ng-show="order.OrderType!='Group'">
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <div class="input-icon right">
+                                <input name="InitPrice" ng-model="order.InitPrice" class="form-control" ng-maxlength="11" readonly />
+                                <label for="InitPrice">订单金额：</label>
+                                <i class="fa fa-money"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <div class="input-icon right">
+                                <input name="ServicePrice" ng-model="order.ServicePrice" type="number" ng-blur="CountFinalPrice()" ng-disabled="!isAdd" class="form-control" ng-maxlength="11" />
+                                <label for="ServicePrice">服务费：</label>
+                                <i class="fa fa-money"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <div class="input-icon right">
+                                <input name="Discount" ng-model="order.Discount" type="number" ng-blur="CountFinalPrice()" class="form-control" ng-disabled="!isAdd" ng-maxlength="11" />
+                                <label for="Discount">优惠金额：</label>
+                                <i class="fa fa-money"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <div class="input-icon right">
+                                <input name="Price" ng-model="order.Price" class="form-control font-red" ng-maxlength="11" readonly ng-required="order.OrderType!='Group'" />
+                                <label for="Price">实际支付金额：</label>
+                                <i class="fa fa-money"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <textarea name="Remark" ng-model="order.Remark" class="form-control" ng-maxlength="200" />
+                            <label for="myAddress1">备注：</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" w5c-form-submit="saveEdit(order)">确定</button>
+                    <button type="button" class="btn btn-grey" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+

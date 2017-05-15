@@ -1,0 +1,273 @@
+﻿
+<link href="/Content/HL.css" rel="stylesheet" />
+<div class="row" >
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                <resident-list feeno={{FeeNo}} callback="residentSelected(resident)" />
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="content_container searchsum_hits">
+                            <div class="content">
+                                <div class="btn toolbar">
+                                    <button class="btn btn-primary" ng-click="saveForm(AB)" ng-disabled="btn_s"><i class="fa fa-save"></i> 儲存資料</button>
+                                    <button class="btn btn-info" ng-disabled="btn_s" ng-click="PrintPreview()"><i class="fa fa-print"></i> 列印預覽</button>
+                                    <button class="btn btn-danger" ng-click="showhistroy()" ng-disabled="btn_s"><i class="fa fa-list"></i> 歷次資料</button>
+                                    <button class="btn btn-danger" ng-click="lastmonth()" ng-disabled="btn_s"><i class="fa fa-list">上月</i></button>
+                                    <button class="btn btn-info" ng-click="Tmonth()" ng-disabled="btn_s"><i class="fa fa-print"></i> 本月</button>
+                                    <button class="btn btn-primary" ng-click="nextmonth()" ng-disabled="btn_s"><i class="fa fa-list"></i> 下月</button>
+                                    <!-- 查看历史记录的 -->
+                                    <!--<input type="text" class="Wdate" id="d122" onfocus="WdatePicker({ isShowWeek: true, onpicked: function () { $dp.$('d122_1').value = $dp.cal.getP('W', 'W'); } })" />
+                                    <input type="text" id="d122_1" size="3">-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content_container item_details">
+                    <div class="content">
+                        <form class="form-horizontal tb" name="rfrForm" role="form" novalidate>
+                            <div style="margin-bottom:5px;" class="col-md-12">
+                                <div style="text-align:center;font-size:24px;font-weight:700;line-height:36px;font-family:DFKai-SB;">
+
+                                    <table style="width:100%;border:none;margin-top:5px;" class="col-md-12">
+                                        <tr>
+                                            <td style="border:none;" colspan="12">
+                                                <!--老人日間照顧中心<br />-->
+                                                <h3><strong>{{OrgName}}老人日間照顧中心</strong></h3>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:none;" colspan="12">
+                                                <!--護理及生活照顧服務記錄<br />-->
+                                                <h4><strong>問題行為與異常情緒記錄表</strong></h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:none;font-size:18px;" class="col-md-1">日字號:</td>
+                                            <td style="border: none; font-size:18px;" class="col-md-1"><input type="text" style="border-left-style:none;border-top-style:none;border-right-style:none;border-bottom-style:solid;border-bottom-width:2px" ng-model="AB.RESIDENTNO" ng-maxlength="20" ng-disabled="true" /></td>
+                                            <td style="border: none; font-size:18px;" class="col-md-1">姓名:</td>
+                                            <td style="border: none; font-size:18px;" class="col-md-1"><input type="text" style="border-left-style: none; border-top-style: none; border-right-style: none; border-bottom-style: solid; border-bottom-width: 2px" ng-model="AB.REGNAME" ng-maxlength="20" ng-disabled="true" /></td>
+                                            <td style="border: none; font-size:18px;" class="col-md-1">性別:</td>
+                                            <td style="border: none; font-size:18px;" class="col-md-1">
+                                                <div class="input-group">
+                                                    <input type="text" style="border-left-style: none; border-top-style: none; border-right-style: none; border-bottom-style: solid; border-bottom-width: 2px" ng-model="AB.SEX" ng-maxlength="10" ng-disabled="true" />
+                                            <!--<label class="radio-inline"><input type="radio" class="" name="gender" ng-checked="true" ng-model="AB.SEX" ng-maxlength="10" value="男" />男</label><label class="radio-inline"><input type="radio" name="gender" ng-model="AB.SEX" value="女"  ng-maxlength="10"/>女</label>-->
+                                                    </div>
+                                            </td>
+                                            <td style="border: none; font-size:18px;" class="col-md-1">照服員:</td>
+                                            <td style="border: none; font-size:18px;" class="col-md-1">
+                                                <select class="form-control" ng-model="AB.NURSEAIDES" ng-options="item.EmpName as item.EmpName+'('+item.EmpNo+')'  for item in NurseAides"></select>
+                                            </td>
+
+                                          
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                                <div style="text-align:center;line-height:36px;">
+                                    <table class="col-md-12" style="text-align:left">
+                                        <tr>
+                                            <td colspan="3" style="text-align:center">{{year}}.{{month}}</td>
+                                            <td ng-repeat="fx in fixcur">{{fx+1}}</td>
+                                            <td ng-repeat="cur in cursor">{{cur+29}}</td>  
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="3" style="width: 10px; font-weight: bold; color: black;">精神病症狀</td>
+                                            <td colspan="2">妄想 EX:被偷、被害、妒忌、被遺棄妄想</td>
+                                            <!--<td ng-repeat="ttt in tt"><input type="text" ng-model="ttt.yuefen" value="{{ttt.yuefen}}" ng-change="changeName(ttt)" /></td>-->
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].DELUSION" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].DELUSION" only-number /></td>
+                                        </tr>
+                                        <tr>                                            
+                                            <td colspan="2">幻覺 Ex:視、聽等幻覺</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].VISUALILLUSION" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].VISUALILLUSION" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">認錯 Ex:錯認不存在的人在房子裏、錯認現在住的房子不是自己的家、錯認親人配偶是別人或偽裝者、錯認為電視上的事件是真實、錯認鏡中的自己的影像是別人</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].MISDEEM" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].MISDEEM" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="14" style="font-weight: bold; color: black;">行為障礙</td>
+                                            <td rowspan="3" style="font-weight: bold; color: black;">重複現象</td>
+                                            <td >重複問同樣的問題</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].REPEATASKING" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].REPEATASKING" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>重複語言</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].REPEATLANGUAGE" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].REPEATLANGUAGE" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>重複行為</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].REPEATBEHAVIOR" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].REPEATBEHAVIOR" only-number /></td>
+                                        </tr>
+                                        <tr>    
+                                            <td rowspan="2" style="font-weight: bold; color: black;">暴力行為</td>
+                                            <td>言語攻擊行為 Ex:罵人或者詛咒人</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].VERBALATTACK" only-number/></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].VERBALATTACK" only-number/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>肢體攻擊行為</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].BODYATTACK" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].BODYATTACK" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">迷路 Ex:偷跑出去而走失</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].GETLOST" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].GETLOST" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">漫遊 Ex:遊走</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].ROAM" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].ROAM" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">睡眠障礙 Ex:白天嗜睡、黃昏症候群</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].SLEEPDISORDER" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].SLEEPDISORDER" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2" style="font-weight: bold; color: black;">貪食行為</td>
+                                            <td>忘記吃過、不停重複的吃東西</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].FORGETEAT" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].FORGETEAT" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>拒絕飲食</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].REFUSALTOEAT" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].REFUSALTOEAT" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="3" style="font-weight: bold; color: black;">不適當性行為</td>
+                                            <td>暴露身體隱私部位/不雅動作/不當脫衣褲</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].EXPOSEDBODYPARTS" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].EXPOSEDBODYPARTS" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>公共場所不穿衣服，穿著不合適</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].NOTWEARCLOTHES" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].NOTWEARCLOTHES" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>不適當的觸摸他人身體部位</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].INAPPROPRIATETOUCH" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].INAPPROPRIATETOUCH" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">病態收集Ex:收集衛生紙、食物、垃圾、雨傘及廣告紙</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].COLLECTION" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].COLLECTION" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="3" style="font-weight: bold; color: black;">異常情緒</td>
+                                          <td colspan="2">易怒</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].IRRITABILITY" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].IRRITABILITY" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">抱怨</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].COMPLAIN" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].COMPLAIN" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">不合作、堅持</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].NOTCOOPERATE" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].NOTCOOPERATE" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="4" style="">其他</td>
+                                            <td colspan="2">拒絕他人協助其個人衛生</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].REFUSEHYGIENE" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].REFUSEHYGIENE" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">對日常生活沒興趣</td>
+                                            <td ng-repeat="fx in fixcur"><input type="text" ng-model="fixedMonth[fx].NOINTEREST" only-number /></td>
+                                            <td ng-repeat="cur in cursor"><input type="text" ng-model="monthData[cur].NOINTEREST" only-number /></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td ng-repeat="fx in fixcur">&nbsp;</td>
+                                            <td ng-repeat="cur in cursor">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"></td>   
+                                            <td ng-repeat="fx in fixcur">&nbsp;</td>
+                                            <td ng-repeat="cur in cursor">&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                    <div class="col-md-12 tdlbl">
+                                        <div style="text-align:left" class="col-md-6">
+                                            照服員:
+                                        </div>
+                                        <div style="text-align:left" class="col-md-6">
+                                            護理師:
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:80%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box border green">
+                            <div class="box-title">
+                                <h4>日常生活照顧歷史記錄</h4>
+                            </div>
+                            <div class="box-body">
+                                <table class="table table-bordered" id="editTable">
+                                    <thead>
+                                        <tr>
+                                            <th>日字號</th>
+                                            <th>姓名</th>
+                                            <th>月份</th>
+                                            <th>年份</th>
+                                            <th>照服員</th>
+                                            <th>性别</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="list in HistoryList">
+                                            <td>{{list.RESIDENTNO}}</td>
+                                            <td>{{list.REGNAME}}</td>
+                                            <td>{{list.month}}</td>
+                                            <td>{{list.year}}</td>
+                                            <td>{{list.NURSEAIDES}}</td>
+                                            <td>{{list.SEX}}</td>
+                                            <td>
+                                                <button class="btn btn-primary" ng-click="editDayLife(list)">编辑</button>
+                                                <a class="btn btn-danger" role="button" data-toggle="modal" ng-click="deleteReferral(list.FEENO,list.year,list.month)">删除</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                                <div id="pager"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

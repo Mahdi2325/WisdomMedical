@@ -1,0 +1,86 @@
+﻿<style type="text/css">
+    .wapsex {
+        display: inline-flex;
+        line-height: 2;
+    }
+
+    .sex_002:after {
+        content: url("/Images/wap/women.png");
+    }
+
+    .sex_001:after {
+        content: url("/Images/wap/men.png");
+    }
+</style>
+<table class="table table-bordered">
+    <tbody>
+        <tr ng-repeat="item in residents" style="height: 120px;">
+            <td ng-repeat="res in item track by $index" style="width: 192px;">
+                <div class="row" ng-if="res" style="cursor: pointer; padding-top: 12px;" ng-click="edit(res)">
+                    <div class="col-xs-8 col-sm-6" style="padding-right: 0px;">
+                        <img ng-src="{{(res.PhotoPath != null && res.PhotoPath != '') ? res.PhotoPath : '/Images/wap/p1.png'}}" a alt="" class="img-circle img-fluid" onerror=" this.src = '/Images/wap/p1.png'; this.onerror = null " />
+                    </div>
+                    <div class="col-xs-4 col-sm-6" style="padding-top: 10px; padding-left: 5px; padding-right: 8px;">
+                        <span style="font-size: 16px; color: #545454;">{{res.PersonName}}</span><br />
+                        <span> 性別:<span class="wapsex sex_{{res.Sex}}" select-code="A00.001" select-value="{{res.Sex}}"></span></span><br />
+                        <span style="margin-top: -10px; position: absolute;"> 年齡:{{res.Age}}</span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<label ng-click="showCondition()" style="height: 28px; position: absolute; top: 40%; width: 14px; background-image: url('/Images/wap/btn.png')"></label>
+
+<!-- 搜索条件 -->
+<div class="modal fade" id="condition" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div style="width:450px" class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" name="prefrom">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">姓名</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" ng-model="condition.Name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">性别</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="selSex" ng-model="condition.Sex" select-code="A00.001" ></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">楼层</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" ng-model="condition.Floor" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">床位</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" ng-model="condition.BedNo" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">负责人</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" ng-model="condition.Carer" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="text-align: center;">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="search(condition)">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<ul class="pagination" style="position: absolute;right: 15px;bottom: 10px;">
+    <li><a href="#">&laquo;</a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">&raquo;</a></li>
+</ul>

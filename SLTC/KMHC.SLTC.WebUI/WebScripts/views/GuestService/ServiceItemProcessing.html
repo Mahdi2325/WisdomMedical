@@ -1,0 +1,47 @@
+﻿
+<div class="row" ng-controller="ServiceItemProcessingCtrl">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-bars"></i>项目进度
+            </div>
+            <div class="tools">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+        <div class="portlet-body">
+
+            <table class="table table-striped table-bordered  table-hover">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>项目编码</th>
+                        <th>项目名称</th>
+                        <th>收费状态</th>
+                        <th>检查状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in ServiceItems |  orderBy:'ServiceSerialNo'">
+                        <td>
+                            {{item.ServiceSerialNo}}
+                        </td>
+                        <td>{{item.SINo}}</td>
+                        <td>{{item.SIName}}</td>
+                        <td><span select-code="Q00.015" select-value="{{item.ChargeStatus}}"></span></td>
+                        <td><span select-code="C00.002" ng-hide="item.CheckStatus==5" select-value="{{item.CheckStatus}}"></span>
+                            <i ng-if="item.CheckStatus==5" title="已完检" class="glyphicon glyphicon-ok font-green-sharp"></i>
+                        </td>
+                        <td style="width:150px">
+                            <a ng-click="ReSyncToQueue(item)" ng-show="item.ChargeStatus==2" class="btn green" role="button"><i class="fa fa-arrow-right"></i>重新排队</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+

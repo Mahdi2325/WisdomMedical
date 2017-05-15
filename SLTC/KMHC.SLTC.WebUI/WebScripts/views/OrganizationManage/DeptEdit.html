@@ -1,0 +1,32 @@
+﻿
+<div class="row" ng-controller="deptEditCtrl">
+ 
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bars"></i>{{isAdd?"新增":"编辑"}}部门
+                </div>
+            </div>
+            <div class="portlet-body">
+
+                <form class="form-horizontal w5c-form" role="form" w5c-form-validate name="depteditform" novalidate>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">部门编号</label>
+                        <div class="col-sm-6">
+                            <input name="DeptNo" class="form-control" ng-model="Data.Dept.DeptNo" readonly ng-maxlength="10" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">部门名称</label>
+                        <div class="col-sm-6">
+                            <input name="DeptName" class="form-control" ng-model="Data.Dept.DeptName" ng-maxlength="100" required />
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <input type="submit" class="btn btn-primary" w5c-form-submit="save(Data.Dept);" value="保存" />
+                        <button class="btn btn-grey" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

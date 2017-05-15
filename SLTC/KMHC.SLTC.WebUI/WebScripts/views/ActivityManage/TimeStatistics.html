@@ -1,0 +1,174 @@
+﻿<div class="row">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-table"></i>时间银行汇总
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group mgt10">
+                            <label class="control-label col-sm-1">开始时间：</label>
+                            <div class="col-sm-2">
+                                <input class="form-control" ca-date-picker ng-model="startDate" placeholder="请输入开始时间" />
+                            </div>
+                            <label class="control-label col-sm-1">结束时间：</label>
+                            <div class="col-sm-2">
+                                <input class="form-control" ca-date-picker ng-model="endDate" placeholder="请输入结束时间" />
+                            </div>
+                            <label class="control-label col-sm-1">姓名：</label>
+                            <div class="col-sm-2">
+                                <input class="form-control" ng-model="personName" placeholder="请输入志愿者姓名" />
+                            </div>
+                            <a class="btn blue" ng-click="search()"><i class="fa fa-search"></i>查询</a>
+                            <a class="btn red" onclick="exportToExcel('timeStatistics')"><i class="glyphicon glyphicon-share"></i>导出Excel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tableDiv" class="table-scrollable">
+                <table id="timeStatistics" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th  class="text-center" colspan="{{SubGroupActivityItemList.length+3}}"><h3>时间银行汇总({{tStartDate | VolunteerTimeFormat}}-{{tEndDate | VolunteerTimeFormat}})</h3></th>
+                        </tr>
+                        <tr>
+                            <th style="border-top-width: 1px" class="text-center"><span>工作卡</span></th>
+                            <th style="border-top-width: 1px" rowspan="3" class="text-center"><span>姓名</span></th>
+                            <th style="border-top-width: 1px"  rowspan="3" class="text-center"><span>总时间（小时）</span></th>
+                            <th style="border-top-width: 1px; " colspan="{{SubGroupActivityItemList.length}}" class="text-center"><span>时间银行</span></th>
+                        </tr>
+                        <tr>
+
+                            <th class="text-center"><span></span></th>
+                            <th class="text-center" style="border-top-width: 1px; border-right-width: 1px;" ng-repeat="item  in GroupActivity" rowspan="{{item.GroupActivityItem.length==0?2:1}}" colspan="{{item.GroupActivityItem.length}}">{{item.CategoryName}}</th>
+                        </tr>
+                        <tr>
+                            <th style="border-top-width: 1px" class="text-center"><span>号码</span></th>
+                            <th class="text-center" style="border-top-width: 1px; border-right-width: 1px; " ng-repeat="subItem in GroupActivityItemList">{{subItem.ItemName}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="Volunteer in VolunteerList">
+                            <td class="text-center">#{{$index+1}}<!--{{Volunteer.EmployeeId}}--></td>
+                            <td class="text-center">{{Volunteer.EmpName}}</td>
+                            <td class="text-center">{{Volunteer.TotalHours | hourFix}}</td>
+                            <td class="text-center" ng-repeat="item in Volunteer.groupActivityItem">{{item.Hours | hourFix}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<a id="dlink"></a>
+<script type="text/javascript" language="javascript">
+    var idTmr;
+    function getExplorer() {
+        var explorer = window.navigator.userAgent;
+        //ie
+        if (explorer.indexOf("MSIE") >= 0) {
+            return 'ie';
+        }
+            //firefox
+        else if (explorer.indexOf("Firefox") >= 0) {
+            return 'Firefox';
+        }
+            //Chrome
+        else if (explorer.indexOf("Chrome") >= 0) {
+            return 'Chrome';
+        }
+            //Opera
+        else if (explorer.indexOf("Opera") >= 0) {
+            return 'Opera';
+        }
+            //Safari
+        else if (explorer.indexOf("Safari") >= 0) {
+            return 'Safari';
+        }
+            //IE11
+        else if (explorer.toLowerCase().indexOf("trident") > -1 && explorer.indexOf("rv") > -1) {
+            return 'ie';
+        }
+    }
+    function exportToExcel(tableid) {//整个表格拷贝到EXCEL中
+        if (getExplorer() == 'ie') {
+            var curTbl = document.getElementById(tableid);
+            var curTblDiv = document.getElementById('tableDiv');
+            try {
+                var oXL = new ActiveXObject("Excel.Application");
+            } catch (e) {
+                alert("无法启动Excel!\n\n如果您确信您的电脑中已经安装了Excel，" + "那么请调整IE的安全级别。\n\n具体操作：\n\n" + "工具 → Internet选项 → 安全 → 本地Internet → 自定义级别 → 对没有标记为安全的ActiveX进行初始化和脚本运行 → 启用");
+                return false;
+            }
+
+
+            //创建AX对象excel
+            var oWB = oXL.Workbooks.Add();
+            //获取workbook对象
+            var xlsheet = oWB.Worksheets(1);
+            xlsheet.name = "时间银行汇总";
+            //激活当前sheet
+            var sel = document.body.createTextRange();
+            sel.moveToElementText(curTblDiv);
+            //把表格中的内容移到TextRange中
+            sel.select();
+            //全选TextRange中内容
+            sel.execCommand("Copy");
+            //复制TextRange中内容
+            xlsheet.Paste();
+            //粘贴到活动的EXCEL中
+            oXL.Visible = true;
+            //设置excel可见属性
+
+            try {
+                var fname = oXL.Application.GetSaveAsFilename("时间银行汇总.xls", "Excel Spreadsheets (*.xls), *.xls");
+            } catch (e) {
+                print("Nested catch caught " + e);
+            } finally {
+
+                try {
+                    oWB.SaveAs(fname);
+
+                    oWB.Close(savechanges = false);
+                    //xls.visible = false;
+                    oXL.Quit();
+                    oXL = null;
+                    //结束excel进程，退出完成
+                    //window.setInterval("Cleanup();",1);
+                    idTmr = window.setInterval("Cleanup();", 1);
+                } catch (e) {
+                }
+
+            }
+
+        }
+        else {
+            tableToExcel(tableid)
+        }
+    }
+    function Cleanup() {
+        window.clearInterval(idTmr);
+        CollectGarbage();
+    }
+    var tableToExcel = (function () {
+        var uri = 'data:application/vnd.ms-excel;base64,',
+        template = '<html><head><meta charset="UTF-8"></head><body><table border="1">{table}</table></body></html>',
+          base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) },
+          format = function (s, c) {
+              return s.replace(/{(\w+)}/g,
+              function (m, p) { return c[p]; })
+          }
+        return function (table) {
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = { worksheet: "时间银行汇总" || 'Worksheet', table: table.innerHTML }
+            //window.location.href = uri + base64(format(template, ctx))
+
+            document.getElementById("dlink").href = uri + base64(format(template, ctx));
+            document.getElementById("dlink").download ="时间银行汇总";
+            document.getElementById("dlink").click();
+        }
+    })()
+</script>

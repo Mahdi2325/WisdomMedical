@@ -1,0 +1,342 @@
+﻿<link href="../../../../Content/DC/layout.css" rel="stylesheet" />
+<!--<link href="/Content/HL.css" rel="stylesheet" />-->
+<style>
+    .planTable {
+        border: solid #000;
+        border-width: 1px 0px 0px 1px;
+        width: 100%;
+    }
+
+        .planTable td {
+            border: solid #000;
+            border-width: 0px 1px 1px 0px;
+            padding: 0px 0px;
+        }
+
+            .planTable td textarea {
+                width: 100%;
+                border: none;
+                margin-top: 4px;
+                line-height: normal;
+            }
+
+    .bottom-signature {
+        border-bottom: 1px solid black;
+        border-left: 1px solid black;
+        margin-bottom: 14px;
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 17px;
+        font-weight: 600;
+        font-family: DFKai-SB;
+        border: none;
+    }
+
+        .bottom-signature td {
+            border-top: 1px solid black;
+            border-right: 1px solid black;
+            line-height: 26px;
+            padding: 0 3px 0 5px;
+            border: none;
+            border-top: none;
+            border-left: none;
+            border-bottom: none;
+        }
+
+    /*.close-btn {
+        width: 7px;
+        max-width:7px;
+        cursor: pointer;
+        height: 7px;
+        max-height:7px;
+        float: right;
+        z-index: 10;
+        margin: 6px 2px 0 10px;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAOCAYAAADjXQYbAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AUkSYqIQkQSoghodkVUcERRUUEG8igiAOOjoCMFVEsDIoK2AfkIaKOg6OIisr74Xuja9a89+bN/rXXPues852zzwfACAyWSDNRNYAMqUIeEeCDx8TG4eQuQIEKJHAAEAizZCFz/SMBAPh+PDwrIsAHvgABeNMLCADATZvAMByH/w/qQplcAYCEAcB0kThLCIAUAEB6jkKmAEBGAYCdmCZTAKAEAGDLY2LjAFAtAGAnf+bTAICd+Jl7AQBblCEVAaCRACATZYhEAGg7AKzPVopFAFgwABRmS8Q5ANgtADBJV2ZIALC3AMDOEAuyAAgMADBRiIUpAAR7AGDIIyN4AISZABRG8lc88SuuEOcqAAB4mbI8uSQ5RYFbCC1xB1dXLh4ozkkXKxQ2YQJhmkAuwnmZGTKBNA/g88wAAKCRFRHgg/P9eM4Ors7ONo62Dl8t6r8G/yJiYuP+5c+rcEAAAOF0ftH+LC+zGoA7BoBt/qIl7gRoXgugdfeLZrIPQLUAoOnaV/Nw+H48PEWhkLnZ2eXk5NhKxEJbYcpXff5nwl/AV/1s+X48/Pf14L7iJIEyXYFHBPjgwsz0TKUcz5IJhGLc5o9H/LcL//wd0yLESWK5WCoU41EScY5EmozzMqUiiUKSKcUl0v9k4t8s+wM+3zUAsGo+AXuRLahdYwP2SycQWHTA4vcAAPK7b8HUKAgDgGiD4c93/+8//UegJQCAZkmScQAAXkQkLlTKsz/HCAAARKCBKrBBG/TBGCzABhzBBdzBC/xgNoRCJMTCQhBCCmSAHHJgKayCQiiGzbAdKmAv1EAdNMBRaIaTcA4uwlW4Dj1wD/phCJ7BKLyBCQRByAgTYSHaiAFiilgjjggXmYX4IcFIBBKLJCDJiBRRIkuRNUgxUopUIFVIHfI9cgI5h1xGupE7yAAygvyGvEcxlIGyUT3UDLVDuag3GoRGogvQZHQxmo8WoJvQcrQaPYw2oefQq2gP2o8+Q8cwwOgYBzPEbDAuxsNCsTgsCZNjy7EirAyrxhqwVqwDu4n1Y8+xdwQSgUXACTYEd0IgYR5BSFhMWE7YSKggHCQ0EdoJNwkDhFHCJyKTqEu0JroR+cQYYjIxh1hILCPWEo8TLxB7iEPENyQSiUMyJ7mQAkmxpFTSEtJG0m5SI+ksqZs0SBojk8naZGuyBzmULCAryIXkneTD5DPkG+Qh8lsKnWJAcaT4U+IoUspqShnlEOU05QZlmDJBVaOaUt2ooVQRNY9aQq2htlKvUYeoEzR1mjnNgxZJS6WtopXTGmgXaPdpr+h0uhHdlR5Ol9BX0svpR+iX6AP0dwwNhhWDx4hnKBmbGAcYZxl3GK+YTKYZ04sZx1QwNzHrmOeZD5lvVVgqtip8FZHKCpVKlSaVGyovVKmqpqreqgtV81XLVI+pXlN9rkZVM1PjqQnUlqtVqp1Q61MbU2epO6iHqmeob1Q/pH5Z/YkGWcNMw09DpFGgsV/jvMYgC2MZs3gsIWsNq4Z1gTXEJrHN2Xx2KruY/R27iz2qqaE5QzNKM1ezUvOUZj8H45hx+Jx0TgnnKKeX836K3hTvKeIpG6Y0TLkxZVxrqpaXllirSKtRq0frvTau7aedpr1Fu1n7gQ5Bx0onXCdHZ4/OBZ3nU9lT3acKpxZNPTr1ri6qa6UbobtEd79up+6Ynr5egJ5Mb6feeb3n+hx9L/1U/W36p/VHDFgGswwkBtsMzhg8xTVxbzwdL8fb8VFDXcNAQ6VhlWGX4YSRudE8o9VGjUYPjGnGXOMk423GbcajJgYmISZLTepN7ppSTbmmKaY7TDtMx83MzaLN1pk1mz0x1zLnm+eb15vft2BaeFostqi2uGVJsuRaplnutrxuhVo5WaVYVVpds0atna0l1rutu6cRp7lOk06rntZnw7Dxtsm2qbcZsOXYBtuutm22fWFnYhdnt8Wuw+6TvZN9un2N/T0HDYfZDqsdWh1+c7RyFDpWOt6azpzuP33F9JbpL2dYzxDP2DPjthPLKcRpnVOb00dnF2e5c4PziIuJS4LLLpc+Lpsbxt3IveRKdPVxXeF60vWdm7Obwu2o26/uNu5p7ofcn8w0nymeWTNz0MPIQ+BR5dE/C5+VMGvfrH5PQ0+BZ7XnIy9jL5FXrdewt6V3qvdh7xc+9j5yn+M+4zw33jLeWV/MN8C3yLfLT8Nvnl+F30N/I/9k/3r/0QCngCUBZwOJgUGBWwL7+Hp8Ib+OPzrbZfay2e1BjKC5QRVBj4KtguXBrSFoyOyQrSH355jOkc5pDoVQfujW0Adh5mGLw34MJ4WHhVeGP45wiFga0TGXNXfR3ENz30T6RJZE3ptnMU85ry1KNSo+qi5qPNo3ujS6P8YuZlnM1VidWElsSxw5LiquNm5svt/87fOH4p3iC+N7F5gvyF1weaHOwvSFpxapLhIsOpZATIhOOJTwQRAqqBaMJfITdyWOCnnCHcJnIi/RNtGI2ENcKh5O8kgqTXqS7JG8NXkkxTOlLOW5hCepkLxMDUzdmzqeFpp2IG0yPTq9MYOSkZBxQqohTZO2Z+pn5mZ2y6xlhbL+xW6Lty8elQfJa7OQrAVZLQq2QqboVFoo1yoHsmdlV2a/zYnKOZarnivN7cyzytuQN5zvn//tEsIS4ZK2pYZLVy0dWOa9rGo5sjxxedsK4xUFK4ZWBqw8uIq2Km3VT6vtV5eufr0mek1rgV7ByoLBtQFr6wtVCuWFfevc1+1dT1gvWd+1YfqGnRs+FYmKrhTbF5cVf9go3HjlG4dvyr+Z3JS0qavEuWTPZtJm6ebeLZ5bDpaql+aXDm4N2dq0Dd9WtO319kXbL5fNKNu7g7ZDuaO/PLi8ZafJzs07P1SkVPRU+lQ27tLdtWHX+G7R7ht7vPY07NXbW7z3/T7JvttVAVVN1WbVZftJ+7P3P66Jqun4lvttXa1ObXHtxwPSA/0HIw6217nU1R3SPVRSj9Yr60cOxx++/p3vdy0NNg1VjZzG4iNwRHnk6fcJ3/ceDTradox7rOEH0x92HWcdL2pCmvKaRptTmvtbYlu6T8w+0dbq3nr8R9sfD5w0PFl5SvNUyWna6YLTk2fyz4ydlZ19fi753GDborZ752PO32oPb++6EHTh0kX/i+c7vDvOXPK4dPKy2+UTV7hXmq86X23qdOo8/pPTT8e7nLuarrlca7nuer21e2b36RueN87d9L158Rb/1tWeOT3dvfN6b/fF9/XfFt1+cif9zsu72Xcn7q28T7xf9EDtQdlD3YfVP1v+3Njv3H9qwHeg89HcR/cGhYPP/pH1jw9DBY+Zj8uGDYbrnjg+OTniP3L96fynQ89kzyaeF/6i/suuFxYvfvjV69fO0ZjRoZfyl5O/bXyl/erA6xmv28bCxh6+yXgzMV70VvvtwXfcdx3vo98PT+R8IH8o/2j5sfVT0Kf7kxmTk/8EA5jz/GMzLdsAAAAEZ0FNQQAAsY58+1GTAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABSSURBVHjahI7BCQAwCAOTzpThHMHh3Kl9CVos9XckFwQAuPtGuWTWwMwaczKzyHsqg6+5JqMJr28BABHRwmTWQFJjTmYWOU1L4tdck9GE17dnALGAS+kAR/u2AAAAAElFTkSuQmCC);
+        background-position: 0 -7px;
+        margin-left: 0;
+        background-repeat: no-repeat;
+        margin-left: 0;
+        display: block;
+        display: -moz-inline-box;
+        display: inline-block;
+        overflow: hidden;
+
+    }*/
+</style>
+<div class="row">
+    <form name="myForm">
+        <div class="col-md-2">
+            <div class="box border green">
+                <div class="box-title">
+                    <h4>
+                        <i class="fa fa-bars"></i>会员信息
+                    </h4>
+                </div>
+                <div class="box-body">
+                    <resident-select callback="residentSelected(resident)" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="formStyle">
+                <button class="btn btn-default" ng-disabled="btn_s" ng-click="AddPlanEval()"><i class="fa fa-plus default"></i> 新增资料</button>
+                <button class="btn btn-primary" ng-disabled="btn_s" ng-click="Save()"><i class="fa fa-save"></i> 储存数据</button>
+                <button class="btn btn-info" ng-disabled="btn_s" ng-click="ShowHistoryList()"><i class="fa fa-list"></i> 历次资料</button>
+            </div>
+            <tabs class="formStyle">
+                <pane title="服务计划表">
+                    <div class="content_container">
+                        <div style="width:100%">
+
+                            <div style="margin-bottom:5px;">
+                                <div style="text-align:center;font-size:24px;font-weight:700;font-family:DFKai-SB;">
+                                    <table style="width:100%;border:none;margin-top:5px;">
+                                        <tr>
+                                            <td style="border:none;font-size:25px;" colspan="4">
+                                                跨专业团队服务计划表<br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:none;font-size:18px;width:10%">长辈姓名:</td>
+                                            <td style="border:none; font-size: 18px; width:40%"><input type="text" disabled ng-model="residentInfo.Name" style="width:100%; border-left-style:none;border-top-style:none;border-right-style:none;border-bottom-style:solid;border-bottom-width:2px" /></td>
+                                            <td style="border: none; font-size: 18px;width: 10%">照服员:</td>
+                                            <td style="border: none; font-size: 18px; width: 40%">
+                                                <!--<select ng-model="Data.NURSEAIDES" style="width: 100%" ng-options="item.EmpNo as item.EmpName for item in NurseAides"></select>-->
+                                                <select class="form-control" ng-model="Data.NURSEAIDES" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')' for item in NurseAides" ng-maxlength="10"></select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div style="text-align:center;line-height:36px;">
+                                <table class="planTable">
+                                    <tr style="background-color:lightgray">
+                                        <td class="tdlbl" colspan="2" style="text-align: center;font-weight:bolder; font-size: 18px;">
+                                            家庭暨社会评估
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdlbl" style="text-align: left; width: 50%; font-weight: bold; color: black; ">
+                                            生态图
+                                        </td>
+                                        <td class="tdlbl" style="text-align: left; width: 50%; font-weight: bold; color: black; ">
+                                            个人史及收托现况
+                                        </td>
+                                    </tr>
+                                    <tr style="max-height:300px;">
+                                        <td class=" " style=" text-align:left;" rowspan="7">
+                                            <img src="{{Data.PlanEval.ECOLOGICALMAP}}" style="max-height:300px; width: 100%; height: 100%" />
+                                        </td>
+                                        <td><textarea ng-model="Data.PlanEval.PERSONALHISTORY" rows="2"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; color: black;text-align:left">心理部分</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <textarea ng-model="Data.PlanEval.PSYCHOLOGY" name="心理部分" ng-maxlength="1000" rows="2"></textarea>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="font-weight: bold; color: black;text-align:left">家庭关系及非正式支持系统</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <textarea ng-model="Data.PlanEval.FAMILYSUPPORT" name="家庭关系及非正式支持系统" ng-maxlength="1000" rows="2"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; color: black;text-align:left">目前使用之社会资源</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <textarea ng-model="Data.PlanEval.SOCIALRESOURCES" name="目前使用之社会资源" ng-maxlength="1000" rows="2"></textarea>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="planTable">
+                                    <tr style="background-color:lightgray">
+                                        <td class="tdlbl" colspan="2" style="text-align: center;font-weight: bolder; font-size: 18px;">
+                                            生理评估
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="font-weight: bold; color: black;text-align:left">
+                                            疾病状况：
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type="text" ng-model="Data.PlanEval.DISEASEINFO" id="diseaseInfo" name="疾病状况" ng-maxlength="100" input-select="DC01.011" />
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="text-align:left;color:black">
+                                            <span style="font-weight: bolder; font-size:61px; color:black;"></span><span style="font-size:18px">
+                                                MMSE: <input type="text" name="MMSE" ng-maxlength="6" only-int ng-model="Data.PlanEval.MMSESCORE" style="line-height:18px; border-left-style:none;border-top-style:none;border-right-style:none;border-bottom-style:none;width:100px" />分/30分;
+                                                IADL: <input type="text" name="IADL" ng-maxlength="6" only-int ng-model="Data.PlanEval.IADLSCORE" style="line-height: 18px; border-left-style: none; border-top-style: none; border-right-style: none; border-bottom-style: none; width: 100px" />分/24分;
+                                                ADL: <input type="text" name="ADL" ng-maxlength="6" only-int ng-model="Data.PlanEval.ADLSCORE" style="line-height: 18px; border-left-style: none; border-top-style: none; border-right-style: none; border-bottom-style: none; width: 100px" />分/100分;
+                                                GDS: <input type="text" name="GDS" ng-maxlength="6" only-int ng-model="Data.PlanEval.GODSSCORE" style="line-height: 18px; border-left-style: none; border-top-style: none; border-right-style: none; border-bottom-style: none; width: 100px" />分/15分;
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; color: black;text-align:left" colspan="2">情绪状态:</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type="text" ng-model="Data.PlanEval.MOOD" id="mood" name="情绪状态" ng-maxlength="200" input-select="DC01.018" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="font-weight: bold; color: black;text-align:left">行为:</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type="text" ng-model="Data.PlanEval.PROBLEMBEHAVIOR" id="problemBehavior" name="行为" ng-maxlength="200" input-select="DC01.019" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="font-weight: bold; color: black;text-align:left">社交能力:</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type="text" ng-model="Data.PlanEval.INTERPERSONAL" id="interpersonal" name="社交能力" ng-maxlength="200" input-select="DC01.024" />
+                                        </td>
+                                    </tr>
+
+                                </table>
+                                <!--<div  contenteditable="true" >
+                                    <span contenteditable="false" style="resize: none;" class="close-btn"></span>
+                                </div>-->
+                            </div>
+
+                        </div>
+
+                    </div>
+                </pane>
+                <pane title="照顾计划" ng-show="true">
+                    <div class="content_container">
+                        <div style="width:100%;padding-bottom:20px">
+                            <div style="margin-top:10px;">
+                                <span style="font-weight:bolder;font-size:18px">
+                                    长辈姓名：
+                                    <input type="text" style="border-left-style:none;border-top-style:none;border-right-style:none;border-bottom-style:solid" disabled ng-model="residentInfo.Name" />
+                                </span>
+                                <span style="font-weight:bolder;font-size:18px">
+                                    照服员：
+                                    <select ng-model="Data.NURSEAIDES" style="width:150px" ng-options="item.EmpNo as item.EmpName for item in NurseAides"></select>
+                                </span>
+                                <span style="font-weight:bolder;font-size:18px">
+                                    照顾计划日期：
+                                    <input type="text" style="border-left-style:none;border-top-style:none;border-right-style:none;border-bottom-style:solid" required name="照顾计划日期" ng-model="Data.EVALDATE" ca-date-picker />
+                                </span>
+                            </div>
+                        </div>
+
+                        <table class="planTable">
+                            <tr style="background-color:lightgray; text-align:center">
+                                <td width="10%" height="40px">专业人员</td>
+                                <td width="30%">处遇(照顾)类型</td>
+                                <td width="30%">处遇(照顾)计划</td>
+                                <td width="30%">追踪情况</td>
+                            </tr>
+                            <tr ng-repeat="plan in Data.CarePlan">
+                                <td style="text-align:center;font-size:large;font-weight:bolder">{{plan.MAJORTYPE}}</td>
+                                <td><textarea ng-model="plan.QUESTIONTYPE" name="处遇(照顾)类型" ng-maxlength="200" rows="5"></textarea></td>
+                                <td><textarea ng-model="plan.ACTIVITY" name="处遇(照顾)计划" ng-maxlength="200" rows="5"></textarea></td>
+                                <td><textarea ng-model="plan.TRACEDESC" name="追踪情况" ng-maxlength="200" rows="5"></textarea></td>
+                            </tr>
+                        </table>
+                        <div>
+                            <table class="bottom-signature">
+                                <tr>
+                                    <td>
+                                        个案管理师：
+                                    </td>
+                                    <td>
+                                        主任/督导：
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="padding-top:30px" ng-show="showRemarks">
+                            <span style="color:red;font-size:small">备注:{{Remarks}}</span>
+                        </div>
+
+                    </div>
+                </pane>
+
+            </tabs>
+        </div>
+    </form>
+
+</div>
+
+<div class="modal fade" role="dialog" id="transdisciplinaryHis" aria-labelledby="modalLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:80%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="formClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" style="background-color:white; margin-top:10px;height:90%;">
+                <div class="box border green">
+                    <div class="box-title">
+                        <h4>跨专业团队照顾计划历史记录</h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="dataTables_wrapper form-inline" role="grid">
+                            <ui-data-table options="options">
+                                <table class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>姓名</th>
+                                            <th>疾病状况</th>
+                                            <th>MMSE</th>
+                                            <th>IADL</th>
+                                            <th>ADL</th>
+                                            <th>GDS</th>
+                                            <th>情绪状态</th>
+                                            <th>行为</th>
+                                            <th>社交能力</th>
+                                            <th>评估次数</th>
+                                            <th><i class="fa fa-bars"></i> 操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in TransdisciplinaryHis">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{residentInfo.Name}}</td>
+                                            <td>{{item.DISEASEINFO}}</td>
+                                            <td>{{item.MMSESCORE}}</td>
+                                            <td>{{item.IADLSCORE}}</td>
+                                            <td>{{item.ADLSCORE}}</td>
+                                            <td>{{item.GODSSCORE}}</td>
+                                            <td>{{item.MOOD}}</td>
+                                            <td>{{item.PROBLEMBEHAVIOR}}</td>
+                                            <td>{{item.INTERPERSONAL}}</td>
+                                            <td>{{item.EVALNUMBER}}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                    <a class="btn btn-success" role="button" ng-click="EditSelectedHis(item.SEQNO)"><i class="fa fa-pencil"></i>编辑</a>
+                                                    <a class="btn btn-danger" role="button" ng-click="DeleteTransHis(item.SEQNO)"><i class="fa fa-times"></i>删除</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ui-data-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

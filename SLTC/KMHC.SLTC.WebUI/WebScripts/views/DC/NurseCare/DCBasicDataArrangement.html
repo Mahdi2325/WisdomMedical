@@ -1,0 +1,295 @@
+﻿<link href="../../../Content/DC/layout.css" rel="stylesheet" />
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                <resident-list feeno={{FeeNo}} callback="residentSelected(resident)" />
+            </div>
+            <div class="col-md-10">
+                <div class="formStyle">
+                    <div class="formStyle">
+                        <button class="btn btn-default" ng-disabled="buttonEditShow" ng-click="addBasicData()"><i class="fa fa-plus default"></i> 新增資料</button>
+                        <button class="btn btn-primary" ng-disabled="buttonSaveShow" ng-click="saveBasicData(currentItem)"><i class="fa fa-save"></i> 儲存資料</button>
+                        <button class="btn btn-info" ng-disabled="buttonHistoryShow" ng-click="showHistoryList()"><i class="fa fa-list"></i> 歷次資料</button>
+                        <button class="btn btn-warning" ng-disabled="buttonPrintShow" ng-click="PrintPreview()"><i class="fa fa-print"></i> 列印預覽</button>
+                    </div>
+                </div>
+                <div class="formStyle">
+                    <div id="header" class="headerStyle">
+                        <div><h3><strong>{{OrgName}}老人日間照顧中心</strong></h3></div>
+                        <div><h4><strong> 個別基本資料彙整表</strong></h4></div>
+                    </div>
+                    <div>
+                        <form name="BdFrom">
+                            <table class="tbStyle1">
+                                <thead>
+                                    <tr>
+                                        <th style="width:200px;text-align:center;">{{currentItem.RecordDate | dateFormat}}</th>
+                                        <th style="text-align:center;">（第&nbsp;{{currentItem.Cnt}}&nbsp;次）</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="spanStyleOne">個人編號/姓名</span></td>
+                                        <td><span class="spanStyleFive">{{currentItem.ResidentNo}}/{{currentItem.RegName}}</span></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">家屬姓名/電話</span></td>
+                                        <td><span class="spanStyleFive">{{currentItem.ContactName}}/{{currentItem.ContactPhone}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">住址</span></td>
+                                        <td><span class="spanStyleFive">{{currentItem.Address}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">出身年月日</span></td>
+                                        <td><span class="spanStyleFive">{{currentItem.BirthDate}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">主要語言</span></td>
+                                        <td><span class="spanStyleFive">{{currentItem.Language}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">V/S</span></td>
+                                        <td><span class="spanStyleFive">{{currentItem.Vs}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">工作</span></td>
+                                        <td><span class="spanStyleFive">{{currentItem.Job}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">宗教</span></td>
+                                        <td><span class="spanStyleFive">{{currentItem.Religion}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">婚姻</span></td>
+                                        <td><span class="spanStyleFive">{{currentItem.MerryState}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">學歷</span></td>
+                                        <td><span class="spanStyleFive">{{currentItem.Education}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">身高</span></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span class="spanStyleThree"><input class="form-control" name="身高" ng-model="currentItem.Height" ng-maxlength="20" /> </span><div class="input-group-addon">cm</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">體重</span></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span class="spanStyleThree"><input class="form-control" name="體重" ng-model="currentItem.Weight" ng-maxlength="20" /> </span><div class="input-group-addon">kg</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">BMI</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="BMI" ng-model="currentItem.Bmi" ng-maxlength="20" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">腰圍</span></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span class="spanStyleThree"><input class="form-control" name="腰圍" ng-model="currentItem.WaistLine" ng-maxlength="20" /></span>
+                                                <div class="input-group-addon">吋</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">疾病史、手術史</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="疾病史" ng-model="currentItem.DiseaseHistory" ng-maxlength="200" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">ADL</span></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span class="spanStyleThree"><input class="form-control" name="ADL" ng-model="currentItem.AdlScore" ng-maxlength="20" /> </span>
+                                                <div class="input-group-addon">分</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">IADL</span></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span class="spanStyleThree"><input class="form-control" name="IADL" ng-model="currentItem.IadlScore" ng-maxlength="20" /> </span>
+                                                <div class="input-group-addon">分</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">MMSE</span></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span class="spanStyleThree"><input class="form-control" name="MMSE" ng-model="currentItem.MmseScore" ng-maxlength="20" /> </span>
+                                                <div class="input-group-addon">分</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">憂鬱量表(GDS)</span></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span class="spanStyleThree"><input class="form-control" name="憂鬱量表" ng-model="currentItem.GdsScore" ng-maxlength="20" /> </span>
+                                                <div class="input-group-addon">分</div>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">上肢障礙</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="上肢障礙" ng-model="currentItem.UpperDisorder" ng-maxlength="20" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">下肢障礙</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="下肢障礙" ng-model="currentItem.LowerDisorder" ng-maxlength="20" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">失語</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="失語" ng-model="currentItem.Aphasia" ng-maxlength="20" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">視障</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="視障" ng-model="currentItem.VisuallyImpaired" ng-maxlength="20" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">聽障</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="聽障" ng-model="currentItem.HearingImpaired" ng-maxlength="20" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">假牙（上排）</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="假牙" ng-model="currentItem.FalseTeethu" ng-maxlength="20" /> </span></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">假牙（下排）</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="假牙" ng-model="currentItem.FalseTeethl" ng-maxlength="20" /> </span></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">不吃的食物</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="不吃的食物" ng-model="currentItem.NoteatFood" ng-maxlength="50" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">愛吃的食物</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="愛吃的食物" ng-model="currentItem.Likefood" ng-maxlength="50" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">問題行為</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="問題行為" ng-model="currentItem.Questionbehavior" ng-maxlength="50" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">這次體檢日</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="這次體檢日" ng-model="currentItem.Checkdate" ca-date-picker readonly="readonly" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">X-光報告 TB</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="X-光報告" ng-model="currentItem.Xray" ng-maxlength="50" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">梅毒</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="梅毒" ng-model="currentItem.Syphilis" ng-maxlength="50" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">艾滋</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="艾滋" ng-model="currentItem.Aids" ng-maxlength="50" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">HBsAg</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="HBsAg" ng-model="currentItem.Hbsag" ng-maxlength="50" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">阿米吧痢疾</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="阿米吧痢疾" ng-model="currentItem.AmibaDysentery" ng-maxlength="50" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">蟲卵</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="蟲卵" ng-model="currentItem.InsectEgg" ng-maxlength="50" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">桿菌性痢疾</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="桿菌性痢疾" ng-model="currentItem.BacillusDysentery" ng-maxlength="50" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">下次體檢日</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="下次體檢日" ng-model="currentItem.NextCheckdate" ca-date-picker readonly="readonly" /> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="spanStyleOne">口服藥</span></td>
+                                        <td><span class="spanStyleThree"><input class="form-control" name="口服藥" ng-model="currentItem.Medicine" ng-maxlength="50" /> </span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div style="margin-top:20px;">
+                                <span class="spanStyleOne">主責護理師：</span>
+                                <input type="text" class="inputStyleOne" ng-model="currentItem.Nurseno" ng-maxlength="10" />&nbsp;
+                                <span class="spanStyleOne">督導：</span>
+                                <input type="text" class="inputStyleOne" ng-model="currentItem.Supervisor" ng-maxlength="10" />&nbsp;
+                                <span class="spanStyleOne">主任：</span>
+                                <input type="text" class="inputStyleOne" ng-model="currentItem.Director" ng-maxlength="10" />&nbsp;
+                            </div>
+                        </form>
+                    </div>
+                    <div style="line-height:5em;text-align:right;padding-right:20px;">
+                        <button class="btn btn-primary" ng-disabled="buttonSaveShow" ng-click="saveBasicData(currentItem)"><i class="fa fa-save"></i> 儲存資料</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="modal fade" role="dialog" id="BasicDataArrangementList" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+        <div class="modal-dialog bs-example-modal-lg" role="document" style="width:80%;">
+            <div class="modal-content modal-lg">
+                <div class="modal-header bg-success">
+                    <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body" style="background-color:white; margin-top:10px;height:90%;">
+                    <div class="box border green">
+                        <div class="box-title">
+                            <h4>個別基本資料彙整記錄</h4>
+                        </div>
+                        <div class="box-body">
+                            <div class="dataTables_wrapper form-inline" role="grid">
+                                <ui-data-table options="options">
+                                    <table class="table table-striped table-bordered table-hover table-handler">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>姓名</th>
+                                                <th>日字號</th>
+                                                <th>出生日期</th>
+                                                <th>整理次數</th>
+                                                <th>創建日期</th>
+                                                <th><i class="fa fa-bars"></i> 操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in Data.BasicDataArrangementList">
+                                                <td>{{$index + 1}}</td>
+                                                <td>{{item.RegName}}</td>
+                                                <td>{{item.ResidentNo}}</td>
+                                                <td>{{item.BirthDate | dateFormat}}</td>
+                                                <td>{{item.Cnt}}</td>
+                                                <td>{{item.RecordDate | dateFormat}}</td>
+                                                <td>
+                                                    <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                        <a class="btn btn-success" role="button" ng-click="BasicDataArrangementSelected(item)"><i class="fa fa-pencil"></i>編輯</a>
+                                                        <!--<a class="btn btn-danger" role="button" ng-click="deleteItem(item)"><i class="fa fa-times"></i>刪除</a>-->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </ui-data-table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

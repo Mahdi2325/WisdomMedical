@@ -1,0 +1,278 @@
+﻿<style>
+    .panel-primary {
+        margin-bottom: 5px !important;
+    }
+</style>
+<div style="width:950px;padding:10px" class="modal-content modal-lg" ng-controller="ExamineResultCtrl">
+    <div id="myPrintArea" class="">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bars"></i>基本信息
+                </div>
+                <div class="tools">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-condensed" style="margin-bottom: 0px;">
+                    <tr>
+                        <td style="border-top: 0px;">姓名</td>
+                        <td style="border-top: 0px;">{{Info.Name}}</td>
+                        <td style="border-top: 0px;">性别</td>
+                        <td style="border-top: 0px;"><span select-code="A00.001" select-value="{{Info.Gender}}"></span></td>
+                        <td style="border-top: 0px;">检查时间</td>
+                        <td style="border-top: 0px;">{{Data.ExamDate}}</td>
+                    </tr>
+                    <tr>
+                        <td style="border-top: 0px;">民族</td>
+                        <td style="border-top: 0px;"><span select-code="K00.016" select-value="{{Info.Nationality}}"></span></td>
+                        <td style="border-top: 0px;">年龄</td>
+                        <td style="border-top: 0px;">{{Info.Age}}</td>
+                        <td style="border-top: 0px;">婚姻状况</td>
+                        <td style="border-top: 0px;"><span select-code="A00.011" select-value="{{Info.MarriageStatus}}"></span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bars"></i>检查信息
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">常规检查</div>
+                    <table class="table table-condensed">
+                        <tr>
+                            <th>检查项</th>
+                            <th>测量结果</th>
+                            <th>正常参考值</th>
+                            <th>检查项</th>
+                            <th>测量结果</th>
+                            <th>正常参考值</th>
+                        </tr>
+                        <tr>
+                            <td>身高</td>
+                            <td>{{ListItems.height}}</td>
+                            <td></td>
+                            <td>体重</td>
+                            <td>{{ListItems.weight}}</td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td>BMI</td>
+                            <td>{{ListItems.BMI}}</td>
+                            <td>18.5~24</td>
+                            <td>体温</td>
+                            <td>{{ListItems.Temperature}}</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">血压</div>
+                    <table class="table table-condensed">
+                        <tr>
+                            <th>检查项</th>
+                            <th>测量结果</th>
+                            <th>正常参考值</th>
+                            <th>检查项</th>
+                            <th>测量结果</th>
+                            <th>正常参考值</th>
+                        </tr>
+                        <tr>
+                            <td>收缩压</td>
+                            <td>{{ListItems.Systolic}}</td>
+                            <td>90-139</td>
+                            <td>舒张压</td>
+                            <td>{{ListItems.Diastolic}}</td>
+                            <td>60-89</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">血氧</div>
+                    <table class="table table-condensed">
+                        <tr>
+                            <th>检查项</th>
+                            <th>测量结果</th>
+                            <th>正常参考值</th>
+                            <th>检查项</th>
+                            <th>测量结果</th>
+                            <th>正常参考值</th>
+                        </tr>
+                        <tr>
+                            <td>脉率</td>
+                            <td>{{ListItems.pulseRate}}</td>
+                            <td></td>
+                            <td>血氧饱和度</td>
+                            <td>{{ListItems.spO2}}</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">血糖</div>
+                    <table class="table table-condensed">
+                        <tr>
+                            <th>检查项</th>
+                            <th>测量结果</th>
+                            <th>正常参考值</th>
+                            <th>检查项</th>
+                            <th>测量结果</th>
+                            <th>正常参考值</th>
+                        </tr>
+                        <tr>
+                            <td>血糖</td>
+                            <td>{{ListItems.bloodGlucose}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">心电</div>
+                    <table class="table table-condensed">
+                        <tr>
+                            <th rowspan="2" style="height: 100px; width: 40%">
+                                <img src="{{ListItems.Image}}" style="height: 100%; width: 100%" border="0" onerror="this.src = '/Images/0.png'; this.onerror = null" />
+                                <!--<img src="{{urlStart}}appImage/{{ListItems.Image}}" style="height:100%;width:100%" border="0" onerror="this.src = '/Images/0.png'; this.onerror = null"/>-->
+                            </th>
+                            <th>走速</th>
+                            <th>增益</th>
+                            <th>心率</th>
+                            <th>检测结果</th>
+                        </tr>
+                        <tr>
+                            <td>25.0mm/s</td>
+                            <td>10mm/mv</td>
+                            <td>{{ListItems.heartRate}}</td>
+                            <td>{{ListItems.Diagnosis}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">尿液</div>
+                    <table class="table table-condensed">
+                        <tr>
+                            <th>检查项</th>
+                            <th>测量结果</th>
+                            <th>正常参考值</th>
+                            <th>检查项</th>
+                            <th>测量结果</th>
+                            <th>正常参考值</th>
+                        </tr>
+                        <tr>
+                            <td>尿白细胞</td>
+                            <td>{{LabListItems.LEU}}</td>
+                            <td>阴性(-)</td>
+                            <td>尿亚硝酸盐</td>
+                            <td>{{LabListItems.NIT}}</td>
+                            <td>阴性(-)</td>
+                        </tr>
+                        <tr>
+                            <td>尿酮体</td>
+                            <td>{{LabListItems.KET}}</td>
+                            <td>阴性(-)</td>
+                            <td>尿胆原</td>
+                            <td>{{LabListItems.URO}}</td>
+                            <td>弱阳性</td>
+                        </tr>
+                        <tr>
+                            <td>尿胆红素</td>
+                            <td>{{LabListItems.BIL}}</td>
+                            <td>阴性(-)</td>
+                            <td>尿糖/td>
+                            <td>{{LabListItems.GLU}}</td>
+                            <td>阴性(-)</td>
+                        </tr>
+                        <tr>
+                            <td>尿蛋白</td>
+                            <td>{{LabListItems.PRO}}</td>
+                            <td>阴性(-)</td>
+                            <td>隐血</td>
+                            <td>{{LabListItems.BLD}}</td>
+                            <td>阴性(-)</td>
+                        </tr>
+                        <tr>
+                            <td>尿比重</td>
+                            <td>{{LabListItems.SG}}</td>
+                            <td>1.015-1.025</td>
+                            <td>维生素C</td>
+                            <td>{{LabListItems.VC}}</td>
+                            <td>阴性(-)</td>
+                        </tr>
+                        <tr>
+                            <td>肌酸酐</td>
+                            <td>{{LabListItems.CRE}}</td>
+                            <td></td>
+                            <td>钙</td>
+                            <td>{{LabListItems.CA}}</td>
+                            <td>2.0-2.5</td>
+                        </tr>
+                        <tr>
+                            <td>尿酸碱度</td>
+                            <td>{{LabListItems.PH}}</td>
+                            <td>5.5-7.4</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">中医体质检测</div>
+                    <div class="panel-body">
+                        <p class="text-left">{{ListItems.China_Med_Check}}</p>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">多参检测仪（可选项）</div>
+                    <table class="table table-condensed">
+                        <tr>
+                            <th>检查项</th>
+                            <th>测量结果</th>
+                            <th>正常参考值</th>
+                            <th>检查项</th>
+                            <th>测量结果</th>
+                            <th>正常参考值</th>
+                        </tr>
+                        <tr>
+                            <td>胆固醇</td>
+                            <td>{{ListItems.Chol}}</td>
+                            <td></td>
+                            <td>尿糖</td>
+                            <td>{{ListItems.UGLU}}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>尿酸</td>
+                            <td>{{ListItems.UA}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <p class="text-muted">免责申明:检测数据只用于健康评估和健康记录,不能替代专业医疗设备检测结果.正常参考值来自于仪器本身说明.</p>
+        <!-- <div class="col-md-12" style="text-align: center; margin-top: 10px;"> ui-sref="PersonInfoBackExa({id:Data.PageID,tab:'examination'})"
+            <button class="btn btn-primary" type="button" ng-click="GoBack()">返回</button>
+            <a class="btn btn-primary" href="{{urlStart}}ExamineReport?id={{Data.ExamId}}&pId={{Info.PersonId}}&doctor={{Data.Doctor}}&date={{Data.ExamDate}}">打印</a>
+        </div>-->
+    </div>
+            <div class="text-center">
+                <button class="btn btn-grey" data-dismiss="modal" type="button">关闭</button>
+                <button id="biuuu_button" class="btn btn-primary" type="button" ng-click="GoPrint()">打印</button>
+            </div>
+
+
+
+    </div>

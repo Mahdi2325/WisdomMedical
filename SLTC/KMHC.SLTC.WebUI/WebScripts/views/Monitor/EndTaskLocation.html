@@ -1,0 +1,84 @@
+﻿
+<div class="row">
+    <div class="col-sm-9">
+        <!-- BOX -->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bar-chart-o"></i>任务结束位置
+                </div>
+                <div class="tools">
+                    <a href="" class="fullscreen">
+                    </a>
+                </div>
+            </div>
+
+            <div class="portlet-body">
+
+                <!--<div class="form-group">
+                    <table style="width:100%;text-align:left;vertical-align:middle">
+                        <tr>
+                            <td style="width:20%">
+                                <input ng-model="pageData.EndTimeStart" class="form-control" placeholder="请选择起始任务开始时间" ca-date-time-picker />
+                            </td>
+                            <td style="width:20%">
+                                <input ng-model="pageData.EndTimeEnd" class="form-control" placeholder="请选择结束任务开始时间" ca-date-time-picker />
+                            </td>
+                            <td style="text-align:left">
+                                <span class="input-group-btn">
+                                    <a class="btn blue" ng-click="search()"><i class="fa fa-search"></i>查询</a>
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>-->
+                <!-- 图表1 -->
+                <div id="endTaskLocation" class="chart" style="height:750px"></div>
+                <!-- 图表2 -->
+            </div>
+        </div>
+        <!-- /BOX -->
+    </div>
+    <div class="col-md-3" style="height: 750px;">
+        <div class="form-group">
+            <div class="input-group col-md-12">
+                <input type="text" class="form-control" id="Keyword" ng-model="options.params['Data.Name']" ng-keyup="enterEvent($event,key)" placeholder=" 请输入会员姓名">
+                <span class="input-group-btn">
+                    <a class="btn blue" ng-click="queryTask()"><i class="fa fa-search"></i>查询</a>
+                </span>
+            </div>
+        </div>
+        <ui-map-table options="options">
+            <table class="table table-striped table-bordered table-hover table-handler">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="row clearfix">
+                                <div class="col-md-4 column ng-binding">服务人员</div>
+                                <div class="col-md-4 column ng-binding">服务项目</div>
+                                <div class="col-md-4 column"> 会员</div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in endTasks">
+                        <td>
+                            <a html="#" class="" ng-click="taskClick(item)">
+                                <div class="row clearfix">
+                                    <div class="col-md-4 column ng-binding">{{item.EmployeeName}}</div>
+                                    <div class="col-md-4 column ng-binding"> {{item.ServiceName}}</div>
+                                    <div class="col-md-4 column ng-binding"> {{item.PersonName}}</div>
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ui-map-table>
+    </div>
+</div>
+<script src="/Content/echarts/echarts.min.js"></script>
+
+
+

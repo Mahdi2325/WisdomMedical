@@ -1,0 +1,403 @@
+/******************公用CSS*************************/
+html, body {
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body
+{
+    background: #FFFFFF;
+    font-family: "Microsoft Yahei",Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    color: #6d6e70;
+}
+
+.block{
+    display: block;
+}
+
+.table{
+    display: table;
+}
+
+ul{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+.wryh{
+    font-family: "Microsoft Yahei";
+}
+
+.songti{
+    font-family: "仿宋" , "仿宋_GB2312";
+}
+
+a, a:link, a:visited {
+    color: #777777; text-decoration: none; cursor: pointer; line-height:26px; padding:0 6px;
+}
+
+a:hover {
+    text-decoration: none;
+    color:#ff5958;
+}
+
+a img {
+    border: 0;
+}
+
+.img-gray{
+    -webkit-filter: grayscale(1);/* Webkit */
+    filter:gray;      /* IE6-9 */
+    filter: grayscale(1);/* W3C */
+}
+
+.mouse_cursor{
+    cursor:pointer
+}
+
+.fw {
+    font-weight: bold;
+}
+
+.al{
+    text-align: left;
+}
+
+.ac{
+    text-align: center;
+}
+
+.ar{
+    text-align: right;
+}
+
+.marginauto{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.absolute{
+    position:absolute;
+}
+
+.over-hidden{
+    overflow: hidden;
+}
+
+.text-nowrap{
+    white-space: nowrap;
+}
+
+.border-red{
+    border:1px solid red;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+.cboth {
+    clear: both;
+}
+
+.fix {
+    position: fixed;
+}
+
+.fs-12{
+    font-size: 13px;
+}
+
+.fs-13{
+    font-size: 13px;
+}
+
+.fs-14{
+    font-size: 14px;
+}
+
+.fs-15{
+    font-size: 15px;
+}
+
+.fs-16{
+    font-size: 16px;
+}
+
+.fs-24{
+    font-size: 24px;
+}
+
+.lh30 {
+line-height: 30px;
+}
+
+.lh55 {
+line-height: 55px;
+}
+
+.pdl30{
+    padding-left: 30px;
+}
+
+.pdl60{
+    padding-left: 60px;
+}
+
+.pdl80{
+    padding-left: 80px;
+}
+
+.pdl100{
+    padding-left: 100px;
+}
+
+.pdt10{
+    padding-top: 10px;
+}
+
+.pdt20{
+    padding-top: 20px;
+}
+
+.pdt50{
+    padding-top: 50px;
+}
+
+.pdb10{
+    padding-bottom: 10px;
+}
+
+.pdb20{
+    padding-bottom: 20px;
+}
+
+.marginauto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mgl5{
+    margin-left: 5px;
+}
+
+.mgl10{
+    margin-left: 10px;
+}
+
+.mgl15{
+     margin-left: 15px;
+ }
+
+.mgl30{
+    margin-left: 30px;
+}
+
+.mgl50{
+    margin-left: 50px;
+}
+
+.mgl60{
+    margin-left: 60px;
+}
+
+.mgr5{
+    margin-right: 5px;
+}
+
+.mgr10{
+    margin-right: 10px;
+}
+
+.mgr60{
+    margin-right: 60px;
+}
+
+.mgr250{
+    margin-right: 250px;
+}
+
+.mgr-percent-20{
+    margin-right: 20%;
+}
+
+.mgt10{
+    margin-top: 10px;
+}
+
+.mgt20{
+     margin-top: 20px;
+ }
+
+.mgt30{
+    margin-top: 30px;
+}
+
+.mgt40{
+    margin-top: 40px;
+}
+
+.mgt90{
+    margin-top: 90px;
+}
+
+.mgt90_ie7{
+    *margin-top: 90px;
+}
+
+.mgt110{
+    margin-top: 110px;
+}
+
+.mgt150{
+    margin-top: 150px;
+}
+
+.mgt310{
+    margin-top: 310px;
+}
+
+.mgb1{
+    margin-bottom: 1px;
+}
+
+.mgb5{
+    margin-bottom: 5px;
+}
+
+.mgb10{
+    margin-bottom: 10px;
+}
+
+.mgb30 {
+    margin-bottom: 30px;
+}
+
+.mgb80 {
+    margin-bottom: 80px;
+}
+
+.mgb150{
+    margin-bottom: 150px;
+}
+
+.red{
+    color: red;
+}
+
+.gray{
+    color: #cccccc;
+}
+
+.white{
+    color: #FFFFFF;
+}
+
+.orange{
+    color: #ff6000;
+}
+
+.green{
+    color: #13b5b8;
+}
+
+.bg-gray{
+    background-color: #f5f5f5;
+}
+
+.border_top_gray{
+    border-top: 1px solid #cccccc;
+}
+
+.w-percent-10{
+    width: 10%;
+}
+
+.w-percent-14{
+    width: 14%;
+}
+
+.w-percent-19{
+    width: 19%;
+}
+
+.w-percent-31{
+    width: 31%;
+}
+
+.w-percent-40{
+    width: 40%;
+}
+
+.w-percent-98{
+    width: 98%;
+}
+
+.w-percent-100{
+    width: 100%;
+}
+
+/**-----------------------------翻页-----------------------------*/
+.pagination{
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-right: 15px;
+}
+
+.pagination span{
+    cursor: pointer;
+    color: #014ccc;
+    width: 21px;
+    height: 21px;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid #d9d9d9;
+}
+
+.pagination .pre{
+    width: 59px;
+    height: 21px;
+    color: #23b6bc;
+}
+
+.pagination .cur{
+
+    color: #ff5500;
+    border: none;
+}
+
+.pagination .next{
+    width: 59px;
+    height: 21px;
+    color: #23b6bc;
+}
+
+
+/**-----------------------------底部(共用)-----------------------------*/
+.bottom_wrapper{
+    font-size: 13px;
+    background-color: #FFFFFF;
+    width: 100%;
+    max-height: 80px;
+    height: 80px;
+}
+
+.copyright {
+    text-align: center;
+    min-width: 450px;
+}
+
+.bottom_link{
+    width: auto;
+    text-align: center;
+    min-width: 450px;
+}

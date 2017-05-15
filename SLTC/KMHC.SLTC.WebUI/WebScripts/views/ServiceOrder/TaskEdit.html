@@ -1,0 +1,156 @@
+﻿<style>
+    .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+    }
+
+        .btn-circle.btn-lg {
+            width: 50px;
+            height: 50px;
+            padding: 10px 16px;
+            font-size: 18px;
+            line-height: 1.33;
+            border-radius: 25px;
+        }
+
+        .btn-circle.btn-xl {
+            width: 100px;
+            height: 100px;
+            padding: 10px 16px;
+            font-size: 24px;
+            line-height: 1.33;
+            border-radius: 50px;
+        }
+</style>
+
+
+<div style="width:1100px;padding:10px" class="modal-content modal-lg" ng-controller="taskEditCtrl">
+    <div class="row" ng-if="isPhone">
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-bars"></i>任务签到
+                    </div>
+                </div>
+                <div class="portlet-body">
+
+                    <h3 class="form-title"> </h3>
+                    <form class="form-horizontal" role="form" name="taskeditrwform" ng-submit="sign()" novalidate>
+                        <div class="form-group">
+                            <div ng-hide="Task.ServiceType=='Commodity'" class="col-sm-2">
+                                <div ng-if="Task.BeginTime=='' || Task.BeginTime==undefine">
+                                    <input class="btn btn-circle btn-xl btn-primary" type="button" ng-click="TaskSign();" value="签到" />
+                                </div>
+                                <div ng-if="Task.BeginTime != '' && Task.BeginTime != undefine">
+                                    <input class="btn btn-circle btn-xl btn-success" style="margin-left:10px;" type="button" value="签到" ng-readonly="true" /><br />
+                                    <label class="text text-success" style="padding-top:5px;">{{Task.BeginTime | timeFormat}}</label>
+                                </div>
+
+                            </div>
+
+                            <div ng-hide="Task.ServiceType=='Commodity'" class="col-sm-2 divimg" style="padding-top:35px;padding-left10px;"><img src="/Images/wap//arrow.png"></div>
+                            <div class="col-sm-2">
+                                <div ng-if="Task.EndTime=='' || Task.EndTime==undefine">
+                                    <input class="btn btn-circle btn-xl btn-primary" type="button" ng-click="TaskComplate();" value="完成" />
+                                </div>
+                                <div ng-if="Task.EndTime != ''  && Task.EndTime != undefine">
+                                    <input class="btn btn-circle btn-xl btn-success" style="margin-left:10px;" type="button" value="完成" ng-readonly="true" /><br />
+                                    <label class="text text-success" style="padding-top:5px;">{{Task.EndTime | timeFormat}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-bars"></i>工单信息
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <h3 class="form-title"> </h3>
+                    <form class="form-horizontal" role="form" name="taskeditkhform" ng-submit="submit()" novalidate>
+                        <legend>客户基本信息</legend>
+                        <div class="form-group">
+
+                            <label class="col-sm-1 control-label">客户姓名</label>
+                            <div class="col-sm-4">
+                                <input name="SONo" class="form-control" ng-model="Task.PersonName" ng-readonly="true" />
+                            </div>
+                            <label class="col-sm-2 control-label">客户性别</label>
+                            <div class="col-sm-4">
+                                <select name="Sex" class="form-control" ng-model="Task.Sex" select-code="A00.001" ng-readonly="true" ng-disabled="true" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">服务项目</label>
+                            <div class="col-sm-4">
+                                <input name="Sex" class="form-control" ng-model="Task.ServiceName" ng-readonly="true" />
+                            </div>
+                            <label class="col-sm-2 control-label">预约服务时间</label>
+                            <div class="col-sm-4">
+                                <input class="form-control datepicker" type="text" ng-model="Task.AppointmentTime" ng-readonly="true" ca-date-time-picker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">客户地址</label>
+                            <div class="col-sm-4">
+                                <input name="Sex" class="form-control" ng-model="Task.Address" ng-readonly="true" />
+                            </div>
+                            <label class="col-sm-2 control-label">联系电话</label>
+                            <div class="col-sm-4">
+                                <input name="Sex" class="form-control" ng-model="Task.Phone" ng-readonly="true" />
+                            </div>
+                        </div>
+                        <legend><span>任务派遣<span>(<span select-code="P00.004" select-value="{{Task.Status}}"></span>)</legend>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">服务人员</label>
+                            <div class="col-sm-4">
+                                <input name="EmployeeNo" class="form-control" ng-model="Task.EmployeeName" ng-readonly="true" />
+                            </div>
+                            <label class="col-sm-2 control-label">服务时间</label>
+                            <div class="col-sm-4">
+                                <input class="form-control datepicker" type="text" ng-model="Task.BeginTime" ng-readonly="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">联系方式</label>
+                            <div class="col-sm-4">
+                                <input name="EmployeeNo" class="form-control" ng-model="Employee.Tel" ng-readonly="true" />
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">指派人</label>
+                            <div class="col-sm-4">
+                                <input name="Operator" class="form-control" ng-model="Task.Operator" ng-readonly="true" />
+                            </div>
+                            <label class="col-sm-2 control-label">指派时间</label>
+                            <div class="col-sm-4">
+                                <input class="form-control datepicker" type="text" ng-model="Task.OperatorTime" ng-readonly="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">备注</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control datepicker" ng-model="Task.Remark" ng-readonly="true" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

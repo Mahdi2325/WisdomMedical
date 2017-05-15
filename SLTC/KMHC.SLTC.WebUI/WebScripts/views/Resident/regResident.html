@@ -1,0 +1,196 @@
+﻿<!-- WIZARD -->
+<link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/bootstrap-wizard/wizard.css" />
+<!-- WIZARD -->
+<script src="/Content/CloudAdmin/js/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="/Content/CloudAdmin/js/bootstrap-wizard/form-wizard.js"></script>
+<!--ng-controller="regResidentCtrl"-->
+<div class="row" id="regResidentContent">
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BOX -->
+            <div class="box border green" id="formWizard">
+                <div class="box-title">
+                    <h4><i class="fa fa-bars"></i>会员服务起始登记 - <span class="stepHeader">步骤 1 of 2</span></h4>
+                    <div class="tools hidden-xs">
+                        <a href="javascript:;" class="collapse">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="box-body form">
+                    <form id="wizForm" name="regresform" class="form-horizontal" >
+                        <div class="wizard-form">
+                            <div class="wizard-content">
+                                <ul class="nav nav-pills nav-justified steps">
+                                    <li>
+                                        <a href="#basicInfo" data-toggle="tab" class="wiz-step">
+                                            <span class="step-number">1</span>
+                                            <span class="step-name"><i class="fa fa-check"></i>会员基本信息 </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#checkInInfo" data-toggle="tab" class="wiz-step active">
+                                            <span class="step-number">2</span>
+                                            <span class="step-name"><i class="fa fa-check"></i>会员信息</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div id="bar" class="progress progress-striped progress-sm active" role="progressbar">
+                                    <div class="progress-bar progress-bar-warning"></div>
+                                </div>
+                                <div class="tab-content">
+                                    <div class="alert alert-danger display-none">
+                                        <a class="close" aria-hidden="true" href="#" data-dismiss="alert">×</a>
+                                        有错误，请输入必填项！
+                                    </div>
+                                    <div class="alert alert-success display-none">
+                                        <a class="close" aria-hidden="true" href="#" data-dismiss="alert">×</a>
+                                        Your form validation is successful!
+                                    </div>
+                                    <div class="tab-pane active" id="basicInfo">
+                                        <input type="hidden" ng-model="person.PersonNo" />
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">姓名<span class="required">*</span></label>
+                                            <div class="col-md-4">
+                                                <input-resident-check callback="ResidentSelected(item,IsExistsName)" value="person.Name" />
+                                                <span class="error-span"></span>-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">性別</label>
+                                            <div class="col-md-4">
+                                                <select class="form-control" id="txtSex" ng-model="person.Sex" select-code="A00.001" required></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">身份证<span class="required">*</span></label>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" ng-maxlength="18" name="Idcard" ng-model="person.Idcard" required>
+                                                <span class="error-span"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="tab-pane" id="checkInInfo">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <input type="hidden" ng-model="resident.id" />
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">会员服务起始日期</label>
+                                                    <div class="col-sm-3">
+                                                        <input class="form-control" type="text" ng-model="resident.CheckinDate" ca-date-picker>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">套餐选择</label>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" ng-model="resident.ServicePlan" ng-options="item.id as item.SGName for item in chargeGroups" required></select>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">护理员</label>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" ng-model="resident.Carer" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')' for item in CarerData" required></select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">合同[附件]</label>
+                                                    <div class="col-sm-3">
+                                                        <input class="form-control" ng-click="chooseFile()" type="text" ng-model="resident.Contract" readonly="readonly" />
+                                                        <input style="display: none;" onchange=" residentSelectFile('#wizForm') " class="form-control" type="file" id="Contract">
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">入住类型</label>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" select-code="J00.010" ng-model="resident.ResidentType" required></select>
+                                                    </div>
+                                                    <label ng-if="resident.ResidentType==2" class="col-sm-1 control-label">老人地址</label>
+                                                    <div ng-if="resident.ResidentType==2" class="col-sm-3">
+                                                        <input class="form-control" type="text" ng-model="resident.PersonAddr" required />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-if="resident.ResidentType!=2">
+                                                    <div class="col-sm-5 col-sm-offset-1">
+                                                        <button class="btn btn-info col-sm-5" ng-click="chooseBed()" data-toggle="modal" data-target="#modalBed">安排床位</button>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-if="resident.ResidentType!=2">
+                                                    <label class="col-sm-1 control-label">房间号</label>
+                                                    <div class="col-sm-3">
+                                                        <input ng-model="resident.RoomNo" class="form-control" type="text" readonly="readonly" required>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">床号</label>
+                                                    <div class="col-sm-3">
+                                                        <input ng-model="resident.BedNo" class="form-control" type="text" readonly="readonly" required>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">床位名称</label>
+                                                    <div class="col-sm-3">
+                                                        <input ng-model="resident.BedName" class="form-control" type="text" readonly="readonly" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-if="resident.ResidentType!=2">
+                                                    <label class="col-sm-1 control-label">床位类别</label>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" ng-model="resident.Category" select-code="J00.003" readonly="readonly"></select>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">床位类型</label>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" ng-model="resident.BedType" select-code="J00.004" readonly="readonly"></select>
+                                                        <select class="form-control" ng-model="state" select-code="A00.080" style="display: none"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="wizard-buttons">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <a href="javascript:;" class="btn btn-default prevBtn">
+                                                <i class="fa fa-arrow-circle-left"></i> 后退
+                                            </a>
+                                            <a href="javascript:;" class="btn btn-primary nextBtn" ng-disabled="WaitAsync">
+                                                继续 <i class="fa fa-arrow-circle-right"></i>
+                                            </a>
+                                            <a href="javascript:;" ng-disabled="regresform.$invalid" class="btn btn-success submitBtn">
+                                                提交 <i class="fa fa-arrow-circle-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- /BOX -->
+        </div>
+    </div>
+    <!-- /SAMPLE -->
+    <div class="footer-tools">
+        <span class="go-top">
+            <i class="fa fa-chevron-up"></i> Top
+        </span>
+    </div>
+
+</div>
+
+
+
+
+<!-- 住民Modal -->
+<div class="modal fade" id="modalBed" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div style="width:850px" class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalBedLabel">床位信息</h4>
+            </div>
+            <div class="modal-body">
+                <div ng-include="'/WebScripts/views/OrganizationManage/BedModal.html'"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-grey" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>

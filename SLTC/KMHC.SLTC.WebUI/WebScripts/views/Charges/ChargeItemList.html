@@ -1,0 +1,52 @@
+﻿
+<div class="form-group">
+    <div class="input-group col-md-12">
+        <input type="text" class="form-control" ng-model="options.params['Data.CIName']" placeholder="请输入收费项目名称">
+        <span class="input-group-btn">
+            <a class="btn blue" ng-click="options.search()"><i class="fa fa-search"></i>查询</a>
+            <a class="btn red" ui-sref="ChargeItemAdd"><i class="fa fa-plus"></i>新增</a>
+        </span>
+    </div>
+</div>
+
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-table"></i>收费项目列表
+        </div>
+    </div>
+    <div class="portlet-body">
+        <ui-data-table options="options">
+            <table class="table table-striped table-bordered table-hover table-handler">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>收费项目编码</th>
+                        <th>收费项目名称</th>
+                        <th>项目分类</th>
+                        <th>单位</th>
+                        <th>单价</th>
+                        <th><i class="fa fa-bars"></i>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in chargeItems">
+                        <td>{{$index + 1}}</td>
+                        <td>{{item.CINo}}</td>
+                        <td>{{item.CIName}}</td>
+                        <td>{{item.CICategoryName}}</td>
+                        <td>{{item.Unit}}</td>
+                        <td>{{item.Price | currency:"¥"}}</td>
+                        <td class="text-right">
+                            <div class="btn-group btn-group-xs" role="group">
+                                <a class="btn btn-success" ui-sref="ChargeItemEdit({id:item.ChargeItemID})"><i class="fa fa-pencil"></i>编辑</a>
+                                <a class="btn btn-danger" ng-click="deleteItem(item)"><i class="fa fa-times"></i>删除</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ui-data-table>
+    </div>
+    <!--按钮-->
+</div>

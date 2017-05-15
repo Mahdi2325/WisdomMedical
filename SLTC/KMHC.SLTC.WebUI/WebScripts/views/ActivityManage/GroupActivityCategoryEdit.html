@@ -1,0 +1,81 @@
+﻿
+<div style="width:850px" class="modal-content modal-lg" ng-controller="GroupActivityCategoryEditCtrl">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-bars"></i>{{isAdd?"添加":"编辑"}}活动分类
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form role="form" class="form-horizontal w5c-form" name="sergroupeditform" w5c-form-validate novalidate>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">团体活动分类名称<span class="required">*</span></label>
+                    <div class="col-sm-10">
+                        <input name="CategoryName" class="form-control" ng-model="curItem.CategoryName" placeholder="" ng-maxlength="20" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">团体活动分类描述</label>
+                    <div class="col-sm-10">
+                        <textarea name="Remark" ng-model="curItem.Remark" class="form-control" ng-maxlength="200"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">团体活动分类内容</label>
+                    <div class="col-sm-10">
+                        <div class="portlet box blue">
+
+                            <div class="portlet-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>分类项目名称</th>
+                                            <th>分类项目描述</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in curItem.GroupActivityItem">
+                                            <td><input type="hidden" ng-model="curItem.hiddenId">{{$index + 1}}</td>
+                                            <td>{{item.ItemName}}</td>
+                                            <td>{{item.Remark}}</td>
+                                            <td class="text-left">
+                                                <button type="button" class="btn btn-success btn-xs" ng-click="charegeClick(item,$event)">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-xs" ng-click="deleteCharegeDetl(item,$event)">
+                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <input name="ItemName" class="form-control" placeholder="分类项目名称" ng-model="curChgItem.ItemName" style="width:100%" ng-maxlength="20" />
+                                            </td>
+                                            <td>
+                                                <input name="Remark" class="form-control" placeholder="分类项目描述" ng-model="curChgItem.Remark" style="width:100%" ng-maxlength="200" />
+                                            </td>
+                                            <td>
+                                                <button type="button" id="chgGroupEditAdd" class="btn btn-primary btn-xs" ng-click="saveTempItem()">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit" w5c-form-submit="saveEdit(curItem)" >保存</button>
+                    <button type="button" class="btn btn-grey" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

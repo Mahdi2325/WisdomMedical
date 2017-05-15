@@ -1,0 +1,90 @@
+﻿
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border green">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>账单设定信息</h4>
+                        </div>
+                        <div class="box-body big">
+                            
+                            <form class="form-horizontal" role="form" name="billseteditfrom" ng-submit="save()" novalidate>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">编号</label>
+                                    <div class="col-sm-6">
+                                        <input name="BSNo" class="form-control" ng-model="Data.BillSetting.BSNo" ng-readonly="!isAdd" required ng-maxlength="10" />
+                                    </div>
+                                    <div class="col-sm-3 control-label" style="text-align: left;">
+                                        <span class="text-danger " ng-show="form1.BSNo.$dirty && form1.BSNo.$error.required">编号必填</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">账单生成日期</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" rows="1" ng-model="Data.BillSetting.GenerateDate"></input>
+                                    </div>
+                                    <div class="col-sm-3 control-label" style="text-align: left;">
+                                        <span class="text-danger ">(每个月的固定日期)</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">通知模板</label>
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" rows="4" ng-model="Data.BillSetting.GenerateTemplate"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">缴费日期</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" rows="1" ng-model="Data.BillSetting.PaymentDate"></input>
+                                    </div>
+                                    <div class="col-sm-3 control-label" style="text-align: left;">
+                                        <span class="text-danger ">(每个月的固定日期)</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">通知模板</label>
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" rows="4" ng-model="Data.BillSetting.ChargeAdviceTemplate"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">欠费提醒次数</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" rows="1" ng-model="Data.BillSetting.DelinquencyRemindNum"></input>
+                                    </div>
+                                    <div class="col-sm-3 control-label" style="text-align: left;">
+                                        <span class="text-danger ">(单位：次)</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">欠费提醒间隔</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" rows="1" ng-model="Data.BillSetting.DelinquencyRemindDuring"></input>
+                                    </div>
+                                    <div class="col-sm-3 control-label" style="text-align: left;">
+                                        <span class="text-danger ">(单位：天)</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">欠费提醒模板</label>
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" rows="4" ng-model="Data.BillSetting.DelinquencyNotificationTemplate"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">所属机构</label>
+                                    <div class="col-sm-6">
+                                        <select name="billSettingCode" class="col-sm-12 form-control" ng-model="Data.BillSetting.OrgNo" ng-options="t.OrgNo as t.OrgName for t in Data.Orgs" ng-if="isAdd" required></select>
+                                        <input name="billSettingCode" class="col-sm-12 form-control" ng-model="Info.Org.OrgName" ng-if="!isAdd" required readonly />
+                                    </div>
+                                </div>
+
+                                <div class="form-group center">
+                                    <input type="submit" class="btn btn-info" ng-disabled="billseteditfrom.$invalid" value="保存" />
+                                    <button class="btn btn-grey" ui-sref="BillSettingList">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>

@@ -1,0 +1,98 @@
+﻿<style>
+    .panel-primary {
+        margin-bottom: 5px !important;
+    }
+</style>
+
+<div style="width:950px;padding:10px" class="modal-content modal-lg" ng-controller="ExamineSuggestCtrl">
+    <div id="myPrintArea" class="">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bars"></i>基本信息
+                </div>
+                <div class="tools">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-condensed" style="margin-bottom: 0px;">
+                    <tr>
+                        <td style="border-top: 0px;">姓名</td>
+                        <td style="border-top: 0px;">{{Info.Name}}</td>
+                        <td style="border-top: 0px;">性别</td>
+                        <td style="border-top: 0px;"><span select-code="A00.001" select-value="{{Info.Gender}}"></span></td>
+                        <td style="border-top: 0px;">检查时间</td>
+                        <td style="border-top: 0px;">{{Data.ExamDate}}</td>
+                    </tr>
+                    <tr>
+                        <td style="border-top: 0px;">民族</td>
+                        <td style="border-top: 0px;"><span select-code="K00.016" select-value="{{Info.Nationality}}"></span></td>
+                        <td style="border-top: 0px;">年龄</td>
+                        <td style="border-top: 0px;">{{Info.Age}}</td>
+                        <td style="border-top: 0px;">婚姻状况</td>
+                        <td style="border-top: 0px;"><span select-code="A00.011" select-value="{{Info.MarriageStatus}}"></span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bars"></i>健康建议
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-condensed">
+                    <tr>
+                        <th width="10%">检查项</th>
+                        <th width="10%">测量结果</th>
+                        <th width="20%">结果分类</th>
+                        <th width="60%">建议</th>
+                    </tr>
+                    <tr>
+                        <td>BMI</td>
+                        <td>{{Item.BMIRes}}</td>
+                        <td>{{Item.BMIType}}</td>
+                        <td>{{Item.BMIDesc}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>血压</td>
+                        <td>{{Item.BPRes}}</td>
+                        <td>{{Item.BPType}}</td>
+                        <td>{{Item.BPDesc}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>血糖</td>
+                        <td>{{Item.BGRes}}</td>
+                        <td>{{Item.BGType}}</td>
+                        <td>{{Item.BGDesc}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>体温</td>
+                        <td>{{Item.TemperatureRes}}</td>
+                        <td>{{Item.TemperatureType}}</td>
+                        <td>{{Item.TemperatureDesc}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>血氧</td>
+                        <td>{{Item.spO2Res}}</td>
+                        <td>{{Item.spO2Type}}</td>
+                        <td>{{Item.spO2Desc}}</td>
+
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <p class="text-muted">免责申明:检测数据只用于健康评估和健康记录,不能替代专业医疗设备检测结果.正常参考值来自于仪器本身说明.</p>
+    </div>
+        <div class="text-center">
+            <button class="btn btn-grey" data-dismiss="modal" type="button">关闭</button>
+            <button id="biuuu_button" class="btn btn-primary" type="button" ng-click="GoPrint()">打印</button>
+        </div>
+    </div>

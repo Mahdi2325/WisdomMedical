@@ -1,0 +1,1862 @@
+﻿<link href="../../../../Content/DC/layout.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-md-2">
+        <div class="box border green">
+            <div class="box-title">
+                <h4>
+                    <i class="fa fa-bars"></i>会员信息
+                </h4>
+            </div>
+            <div class="box-body">
+                <resident-select callback="residentSelected(resident)" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+    <div class="formStyle">
+        <button class="btn btn-primary" ng-disabled="buttonSaveShow" ng-click="saveNursing(currentItem)"><i class="fa fa-save"></i> 储存数据</button>
+        <button class="btn btn-default" ng-disabled="buttonEditShow" ng-click="addPlanEval()"><i class="fa fa-plus default"></i> 新增资料</button>
+        <button class="btn btn-info" ng-disabled="buttonHistoryShow" ng-click="showHistoryList()"><i class="fa fa-list"></i> 历次资料</button>
+    </div>
+        <tabs class="formStyle" gotopane="{{paneNum}}" fixedpane="{{fixedCurrentPage}}">
+            <pane title="需求评估">
+                <div class="headerStyle" style="clear:both;">
+                    <!--<h3><strong>{{OrgName}}老人日间照顾中心</strong></h3>-->
+                    <h3><strong>护理需求评估</strong></h3>
+                </div>
+                <div>
+                    <from name="RequirmentForm">
+                        <div>
+                            <div>
+                                <span class="spanStyleOne">日字号：</span>
+                                <input type="text" class="inputStyleOne" readonly="readonly" style="width:100px;text-align:center;" ng-model="currentResident.ResidentNo" />&nbsp;
+                                <span class="spanStyleOne">姓名：</span>
+                                <input type="text" class="inputStyleOne" readonly="readonly" style="width:100px;text-align:center;" ng-model="currentResident.Name" />&nbsp;
+                                <span class="spanStyleOne">性别：</span>
+                                <span select-code="A00.001" select-value="{{currentResident.Sex}}"></span>&nbsp;
+                                <span class="spanStyleOne">出生：</span>
+                                <input type="text" class="inputStyleOne" style="width:100px" readonly="readonly" ng-model="currentResident.BirthDay" />
+                                （<span style="font-size:16px;font-weight:400;">&nbsp;{{currentResident.Age}}&nbsp;</span>岁）
+                            </div>
+                            <div style="margin-top:10px;">
+                                <span class="spanStyleOne">
+                                    初评日期：
+                                </span>
+                                <input type="text" class="inputStyleOne" style="width:100px;" ng-model="currentItem.FirstevalDate" ca-date-picker ng-change="checkFirstevalDate()" />&nbsp;
+                                <span class="spanStyleOne">第</span>&nbsp;
+                                {{currentItem.EvalNumber}}&nbsp;
+                                <span class="spanStyleOne"> 次覆评,&nbsp;评估日期:</span><span class="required">*</span>
+                                <input type="text" class="inputStyleOne" style="width:100px;" ng-model="currentItem.EvalDate" ca-date-picker ng-change="checkEvalDate()" />
+                            </div>
+                        </div>
+                        <div id="mainBody" style="margin-top:20px; border:outset; ">
+                            <table border="1" style="width:100%;margin:1px">
+                                <tr style="background-color:#d9d9d9;">
+                                    <td colspan="4" style="text-align:center;padding-top:10px;padding-bottom:10px"> <span style="font-weight:bolder;font-size:18px;">需求评估<span style="font-weight:bolder;font-size:16px;float:right;">【收托日期：{{currentItem.InDate | dateFormat}}】 </span></span></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20px; text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br /> 健<br />康<br />认<br />知<br />处<br />理<br />
+                                        </span>
+                                    </td>
+                                    <td colspan="3" style="padding:10px;line-height:2em;">
+                                        <table class="tbOne">
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div>
+                                                        <span style="font-weight:bolder;"><u>紧急送医医院</u></span>：<input type="text" style="border-left-style:none;border-top-style:none;border-right-style:none;border-bottom-style:solid;width:300px" ng-model="currentItem.HospitalName" ng-maxlength="16" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <span style="font-weight:bolder;"><u>家属签名</u></span>：<input type="text" style="border-left-style:none;border-top-style:none;border-right-style:none;border-bottom-style:solid;width:120px" ng-model="currentItem.FamilySignature" ng-maxlength="6" />
+                                                        <span style="font-weight:bolder;">（视需要）</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:120px;"><span style="font-weight:bolder;"><u>疾病史</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.DiseaseInfo" id="DiseaseInfo" input-select="DC01.011" style="width:60%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>手术情形</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.OperationInfo" id="OperationInfo" input-select="DC02.001" style="width:60%" ng-maxlength="33" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>目前服药情形</u></span>：</td>
+                                                <td>
+                                                    <span class="spanStyleOne">中药：</span>
+                                                    <select ng-model="currentItem.Chinesedrugflag" ng-change="showChinesedrug()">
+                                                        <option value="false">无</option>
+                                                        <option value="true">有</option>
+                                                    </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span ng-show="ChinesedrugShow">药物名称：</span>
+                                                    <input type="text" class="inputStyleOne" ng-model="currentItem.Chinesedrug" ng-show="ChinesedrugShow" style="width:30%" ng-maxlength="66" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <span class="spanStyleOne">西药：</span>
+                                                    <select ng-model="currentItem.Westerndrugflag" ng-change="showWesterndrug()">
+                                                        <option value="false">无</option>
+                                                        <option value="true">有</option>
+                                                    </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span ng-show="WesterndrugShow">药物名称：</span>
+                                                    <input type="text" class="inputStyleOne" ng-model="currentItem.Westerndrug" style="width:30%" ng-show="WesterndrugShow" ng-maxlength="66" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>就医习惯</u></span>：</td>
+                                                <td>
+                                                    <input type="text" class="inputStyleOne" style="width:20%" ng-model="currentItem.VisitHospitalName" ng-maxlength="6" />
+                                                    &nbsp;<span class="spanStyleOne">
+                                                        医院  &nbsp;&nbsp; &nbsp;&nbsp;
+                                                        方式：<select ng-model="currentItem.VisitType">
+                                                            <option value="001">门诊</option>
+                                                            <option value="002">急诊</option>
+                                                            <option value="003">健康检查</option>
+                                                        </select>&nbsp;&nbsp; &nbsp;&nbsp;
+                                                    </span>
+                                                    &nbsp;<span class="spanStyleOne">时间：</span><input type="number" class="inputStyleOne" ng-model="currentItem.VisitNumber" style="width:40px" ng-blur="checkVisitNum(currentItem.VisitNumber)" /><!--mark1-->
+                                                    &nbsp;<span class="spanStyleOne">次/月</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br /> 心<br />肺<br />状<br />况<br />
+                                        </span>
+                                    </td>
+                                    <td colspan="3" style="padding:10px;line-height:2em;">
+                                        <table class="tbOne">
+                                            <tr>
+                                                <td style="width:100px;"><span style="font-weight:bolder;"><u>心律</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.HeartRate" id="HeartRate" input-select="DC02.004" style="width:60%" ng-maxlength="6" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>呼吸型态</u></span>：<br /></td>
+                                                <td><input type="text" ng-model="currentItem.BreathType" id="BreathType" input-select="DC02.005" style="width:60%" ng-maxlength="16" /></td>
+                                            </tr>
+                                        </table>
+                                        <br />
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />营<br />养<br />状<br />况<br />
+                                        </span>
+                                    </td>
+                                    <td colspan="3" style="padding:10px;line-height:2em;">
+                                        <table style="width:100%">
+                                            <tr>
+                                                <td style="width:80px;">
+                                                    <span style="font-weight:bolder;"><u>身高</u></span>：
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="inputStyleOne" style="width:60px;text-align:center;" ng-model="currentItem.Height" ng-blur="checkHeight(currentItem.Height)" ng-maxlength="5" /> <span style="font-weight:bolder;">cm</span>
+                                                </td>
+                                                <td style="width:80px;">
+                                                    <span style="font-weight:bolder;"><u>体重</u></span>：
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="inputStyleOne" style="width:60px;text-align:center;" ng-model="currentItem.Weight" ng-blur="checkHeight(currentItem.Weight)" ng-maxlength="5" />
+                                                    <span style="font-weight:bolder;">kg</span>
+                                                </td>
+                                                <td style="width:80px;">
+                                                    <span style="font-weight:bolder;"><u>腰围</u></span>：
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="inputStyleOne" style="width:60px;text-align:center;" ng-model="currentItem.WaistLine" ng-blur="checkWaistLine(currentItem.WaistLine)" ng-maxlength="5" />
+                                                    <span style="font-weight:bolder;">吋</span>
+                                                </td>
+                                                <td style="width:80px;">
+                                                    <span style="font-weight:bolder;text-align:center;"><u>BMI</u></span>：
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="inputStyleOne" style="width:60px;text-align:center;" ng-model="currentItem.BMI" ng-maxlength="5" readonly="readonly" />
+
+                                                </td>
+                                                <td style="width:100px;">
+                                                    <span style="font-weight:bolder;"><u>理想体重</u></span>：
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="inputStyleOne" style="width:60px;text-align:center;" ng-model="currentItem.IdealWeight" ng-blur="checkidealweight(currentItem.IdealWeight)" ng-maxlength=" 5" />
+                                                    <span style="font-weight:bolder;">kg</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table class="tbOne">
+                                            <tr>
+                                                <td style="width:100px;"><span style="font-weight:bolder;"><u>食欲</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.Appetite" id="Appetite" input-select="DC02.006" style="width:60%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>饮食习惯</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.FoodHabit" id="FoodHabit" input-select="DC02.007" style="width:60%" ng-maxlength="66" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>饮食种类</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.FoodType" id="FoodType" input-select="DC02.008" style="width:60%" ng-maxlength="66" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>进食的形式</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.EatType" id="EatType" input-select="DC02.009" style="width:60%" ng-maxlength="7" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>牙齿状况</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.TeethState" id="TeethState" input-select="DC02.010" style="width:60%" ng-maxlength="18" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>牙龈状况</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.GumsState" id="GumsState" input-select="DC02.011" style="width:60%" ng-maxlength="6" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>口腔黏膜</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.Oralmucosa" id="Oralmucosa" input-select="DC02.012" style="width:60%" ng-maxlength="18" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>吞咽能力</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.SwallowingAbility" id="SwallowingAbility" input-select="DC02.013" style="width:60%" ng-maxlength="16" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>咀嚼能力</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.MasticatoryAbility" id="MasticatoryAbility" input-select="DC02.014" style="width:60%" ng-maxlength="16" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>食物的摄取量</u></span>：</td>
+                                                <td>
+                                                    <table class="tbOne">
+                                                        <tr>
+                                                            <td style="width:80px;"><span class="spanStyleOne">主食:</span></td>
+                                                            <td><input type="text" ng-model="currentItem.StapleFood" id="StapleFood" input-select="DC02.015" style="width:40%" ng-maxlength="16" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span class="spanStyleOne">肉类:</span></td>
+                                                            <td><input type="text" ng-model="currentItem.Meat" id="Meat" input-select="DC02.016" style="width:40%" ng-maxlength="16" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span class="spanStyleOne">菜类:</span></td>
+                                                            <td><input type="text" ng-model="currentItem.Vegetables" id="Vegetables" input-select="DC02.016" style="width:40%" ng-maxlength="16" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span class="spanStyleOne">点心:</span></td>
+                                                            <td><input type="text" ng-model="currentItem.Snack" id="Snack" input-select="DC02.015" style="width:40%" ng-maxlength="16" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span class="spanStyleOne">汤品:</span></td>
+                                                            <td><input type="text" ng-model="currentItem.Soup" id="Soup" input-select="DC02.015" style="width:40%" ng-maxlength="16" /></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />皮<br />肤<br />状<br />况<br />
+                                        </span>
+                                    </td>
+                                    <td colspan="3" style="padding:10px;line-height:2em;">
+                                        <table class="tbOne">
+                                            <tr>
+                                                <td style="width:100px;"><span style="font-weight:bolder;"><u>外观</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.SkinState" id="SkinState" input-select="DC02.017" style="width:60%" ng-maxlength="16" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>颜色</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.SkinColor" id="SkinColor" input-select="DC02.018" style="width:60%" ng-maxlength="16" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>水肿</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.Edema" id="Edema" input-select="DC02.019" style="width:60%" ng-maxlength="66" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>完整性</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.SkinIntegrity" id="SkinIntegrity" input-select="DC02.020" style="width:60%" ng-maxlength="16" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <span class="spanStyleOne">部位</span>：<input type="text" class="inputStyleOne" ng-model="currentItem.SkinPart" style="width:200px;" ng-maxlength="6" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span class="spanStyleOne">大小</span>：<input type="text" class="inputStyleOne" ng-model="currentItem.SkinSize" style="width:60px;" ng-maxlength="6" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span class="spanStyleOne">级数</span>：<input type="text" class="inputStyleOne" ng-model="currentItem.SkinLevel" style="width:60px;" ng-maxlength="1" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><span class="spanStyleOne">级数请用数字(1.发红  2.伤及表皮  3.伤及皮下组织  4.伤及肌肉骨骼)</span>：</td>
+                                            </tr>
+                                        </table>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />排<br />泄<br />状<br />况<br />
+                                        </span>
+                                    </td>
+                                    <td colspan="3" style="padding:10px;line-height:2em;">
+                                        <table class="tbOne">
+                                            <tr>
+                                                <td style="width:100px;"><span style="font-weight:bolder;"><u>排便</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.Defecation" id="Defecation" input-select="DC02.021" style="width:60%" ng-maxlength="16" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <table style="width: 100%;padding: 12px;">
+                                                        <tr>
+                                                            <td style="width:150px"><span class="spanStyleOne">大便次数</span>:</td>
+                                                            <td><input class="inputStyleOne" type="number" style="width:100px;" ng-model="currentItem.ShitNumber" /><span class="spanStyleOne">&nbsp;次/天</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span class="spanStyleOne">大便性状</span>:</td>
+                                                            <td><input type="text" ng-model="currentItem.ShitNature" id="ShitNature" input-select="DC02.022" style="width:40%" ng-maxlength="6" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span class="spanStyleOne">大便量</span>:</td>
+                                                            <td><input type="text" ng-model="currentItem.ShitAmOut" id="ShitAmOut" input-select="DC02.023" style="width:40%" ng-maxlength="16" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span class="spanStyleOne">辅助排便方式</span>:</td>
+                                                            <td><input type="text" ng-model="currentItem.AssistedDefecation" id="AssistedDefecation" input-select="DC02.024" style="width:40%" ng-maxlength="18" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:100px"><span class="spanStyleOne">肠蠕动</span>:</td>
+                                                            <td><input type="text" ng-model="currentItem.IntestinalPeristalsis" id="IntestinalPeristalsis" input-select="DC02.025" style="width:40%" ng-maxlength="33" /></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:100px"><span style="font-weight:bolder;"><u>排尿情形</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.Micturition" id="Micturition" input-select="DC02.026" style="width:60%" ng-maxlength="6" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <table style="width: 100%;padding: 12px;">
+                                                        <tr>
+                                                            <td style="width:100px"><span class="spanStyleOne">小便性状</span>:</td>
+                                                            <td><input type="text" ng-model="currentItem.UrinationNature" id="UrinationNature" input-select="DC02.027" style="width:40%" ng-maxlength="6" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:100px"><span class="spanStyleOne">小便失禁</span>:</td>
+                                                            <td>
+                                                                <input type="text" ng-model="currentItem.AconuresisInfo" id="AconuresisInfo" input-select="DC02.028" style="width:40%" ng-maxlength="18" />
+                                                                <!--<select ng-model="currentItem.AconuresisFlag" ng-change="showAconuresis()">
+                                                                    <option value="false">无</option>
+                                                                    <option value="true">有</option>
+                                                                </select>-->
+                                                            </td>
+                                                            <!--<td ng-show="showAconuresisInfo" style="width:140px"><span class="spanStyleOne">小便失禁描述</span>:</td>
+                                                            <td ng-show="showAconuresisInfo">
+                                                            <input type="text" ng-model="currentItem.AconuresisInfo" id="AconuresisInfo" input-select="DC02.028" style="width:80%" />
+                                                            </td>-->
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:100px"><span class="spanStyleOne">排尿处置</span>:</td>
+                                                            <td><input type="text" ng-model="currentItem.UrinationDisposal" id="UrinationDisposal" input-select="DC02.029" style="width:40%" ng-maxlength="16" /></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" text-align:center;line-height:2em;" rowspan="3">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />肢<br />体<br />功<br />能<br />及<br />内<br />容<br />
+                                        </span>
+                                    </td>
+                                    <td colspan="3">
+                                        <table class="tbOne">
+                                            <tr>
+                                                <td style="border-right:1px solid black;width:55%;text-align:center;">
+                                                    <span style="font-weight:bolder;font-size:18px;">
+                                                        肌力
+                                                    </span>
+                                                </td>
+                                                <td style="text-align:center;">
+                                                    <span style="font-weight:bolder;font-size:18px;">
+                                                        肌肉关节
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <table class="tbOne">
+                                            <tr>
+                                                <td style="border-right:1px solid black; width:55%;">
+                                                    <table class="tbOne">
+                                                        <tr>
+                                                            <td>
+                                                                5分 正常     <br />
+                                                                4分 可抗阻力       <br />
+                                                                3分 可抗重力<br />
+                                                                2分 可于平面移动肢体<br />
+                                                                1分 肌肉收缩            <br />
+                                                                0分 无肌肉收缩<br />
+                                                            </td>
+                                                            <td>
+                                                                <table>
+                                                                    <tr>
+                                                                        <td> </td>
+                                                                        <td style="width:20px;">左</td>
+                                                                        <td style="width:80px;"> </td>
+                                                                        <td style="width:20px;">右</td>
+                                                                        <td> </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align:right;width:76px;"><span class="spanStyleOne">〈<input type="text" style="border-style:none; width:36px;text-align:center;" ng-maxlength="1" ng-model="currentItem.LeftMuscle1" ng-blur="checkLeftMuscle1(currentItem.LeftMuscle1)" />〉</span></td>
+                                                                        <td rowspan="3" colspan="3">
+                                                                            <img src="../../../Images/DC/nurse/Person.png" style="width:100px;height:125px" />
+                                                                        </td>
+                                                                        <td style="text-align:left;width:76px;"><span class="spanStyleOne">〈<input type="text" style="border-style:none; width:36px;text-align:center;" ng-maxlength="1" ng-model="currentItem.RightMuscle1" ng-blur="checkRightMuscle1(currentItem.RightMuscle1)" />〉</span></td>
+                                                                    </tr>
+                                                                    <tr style="height:40px;">
+                                                                        <td colspan="4"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align:right"><span class="spanStyleOne">〈<input type="text" style="border-style:none; width:36px;text-align:center;" ng-maxlength="1" ng-model="currentItem.LeftMuscle2" ng-blur="checkLeftMuscle2(currentItem.LeftMuscle2)" />〉</span></td>
+                                                                        <td style="text-align:left"><span class="spanStyleOne">〈<input type="text" style="border-style:none; width:36px;text-align:center;" ng-maxlength="1" ng-model="currentItem.RightMuscle2" ng-blur="checkRightMuscle2(currentItem.RightMuscle2)" />〉</span></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td>
+                                                    <table class="tbOne">
+                                                        <tr>
+                                                            <td>
+                                                                1.正常 <br />
+                                                                2.微僵硬  <br />
+                                                                3.僵硬<br />
+                                                                4.挛缩<br />
+                                                            </td>
+                                                            <td>
+                                                                <table>
+                                                                    <tr>
+                                                                        <td> </td>
+                                                                        <td style="width:20px;">左</td>
+                                                                        <td style="width:80px;"> </td>
+                                                                        <td style="width:20px;">右</td>
+                                                                        <td> </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align:right"><span class="spanStyleOne">〈<input type="text" style="border-style:none; width:36px;text-align:center;" ng-maxlength="1" ng-model="currentItem.LeftJoint1" ng-blur="checkLeftJoint1(currentItem.LeftJoint1)" />〉</span></td>
+                                                                        <td rowspan="3" colspan="3">
+                                                                            <img src="../../../Images/DC/nurse/Person.png" style="width:100px;height:125px" />
+                                                                        </td>
+                                                                        <td style="text-align:left"><span class="spanStyleOne">〈<input type="text" style="border-style:none; width:36px;text-align:center;" ng-maxlength="1" ng-model="currentItem.RightJoint1" ng-blur="checkRightJoint1(currentItem.RightJoint1)" />〉</span></td>
+                                                                    </tr>
+                                                                    <tr style="height:40px;">
+                                                                        <td colspan="4"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align:right"><span class="spanStyleOne">〈<input type="text" style="border-style:none; width:36px;text-align:center;" ng-maxlength="1" ng-model="currentItem.LeftJoint2" ng-blur="checkLeftJoint2(currentItem.LeftJoint2)" />〉</span></td>
+                                                                        <td style="text-align:left"><span class="spanStyleOne">〈<input type="text" style="border-style:none; width:36px;text-align:center;" ng-maxlength="1" ng-model="currentItem.RightJoint2" ng-blur="checkRightJoint2(currentItem.RightJoint2)" />〉</span></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="padding:10px;line-height:2em;">
+                                        <table class="tbOne">
+                                            <tr>
+                                                <td style="width:150px;"><span style="font-weight:bolder;"><u>步能</u></span>：</td>
+                                                <td colspan="2"><input type="text" ng-model="currentItem.Gait" id="Gait" input-select="DC02.030" style="width:60%" ng-maxlength="6" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>辅助用具</u></span>：</td>
+                                                <td colspan="2"><input type="text" ng-model="currentItem.AssistantTool" id="AssistantTool" input-select="DC02.031" style="width:60%" ng-maxlength="20" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td style="width:100px;"><span class="spanStyleOne"><u>安全性</u></span>：</td>
+                                                <td> <input type="text" ng-model="currentItem.AssistantSecurity" id="AssistantSecurity" input-select="DC02.032" style="width:40%" ng-maxlength="6" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><span class="spanStyleOne"><u>适用性</u></span>：</td>
+                                                <td> <input type="text" ng-model="currentItem.AssistantSuitability" id="AssistantSuitability" input-select="DC02.050" style="width:40%" ng-maxlength="6" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>日常休闲活动内容</u></span>：</td>
+                                                <td colspan="2"><input type="text" ng-model="currentItem.ActivityName" id="ActivityName" input-select="DC02.033" style="width:60%" ng-maxlength="16" /></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />跌<br />倒<br />评<br />估<br />
+                                        </span>
+                                    </td>
+                                    <td colspan="3" style="padding:10px;line-height:2em;">
+                                        <table class="tbOne">
+                                            <tr>
+                                                <td style="width:200px"><span style="font-weight:bolder;"><u>跌倒情形</u></span>：</td>
+                                                <td colspan="5"><input type="text" ng-model="currentItem.FallInfo" id="FallInfo" input-select="DC02.034" style="width:60%" ng-maxlength="6" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>近一年内有否跌倒</u></span>：</td>
+                                                <td>
+                                                    <select ng-model="currentItem.Fall1Year" ng-change="showInjured()">
+                                                        <option value="false">无</option>
+                                                        <option value="true">有</option>
+                                                    </select>
+                                                </td>
+                                                <td style="width:100px;" ng-show="showInj"><span class="spanStyleOne">是否受伤</span>：</td>
+                                                <td ng-show="showInj">
+                                                    <select ng-model="currentItem.Injuredflag" ng-change="showInjuredPart()">
+                                                        <option value="false">无</option>
+                                                        <option value="true">有</option>
+                                                    </select>
+                                                </td>
+                                                <td style="width:150px;" ng-show="showInjpart"><span class="spanStyleOne">受伤的部位</span>：</td>
+                                                <td ng-show="showInjpart"><input type="text" ng-model="currentItem.Injuredpart" id="Injuredpart" input-select="DC02.035" style="width:80%" ng-maxlength="66" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>过去跌倒情况</u></span>：</td>
+                                                <td colspan="5"><input class="inputStyleOne" type="text" style="width:60%" ng-model="currentItem.PastFallInfo" ng-maxlength="66" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>当时的受伤及处理情形</u></span>：</td>
+                                                <td colspan="5"><input class="inputStyleOne" type="text" style="width:60%" ng-model="currentItem.InjuryDisposalInfo" ng-maxlength="16" /></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:16px;">
+                                            <br />疼<br />痛<br />
+                                        </span>
+                                    </td>
+                                    <td colspan="3" style="padding:10px;line-height:2em;">
+                                        <table class="tbOne">
+                                            <tr>
+                                                <td style="width:150px;"><span style="font-weight:bolder;"><u>频率</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.PainFreq" id="PainFreq" input-select="DC02.036" style="width:60%" ng-maxlength="66" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>程度</u></span>：</td>
+                                                <td> <select ng-model="currentItem.PainLevel"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>部位</u></span>：</td>
+                                                <td><input class="inputStyleOne" type="text" style="width:60%" ng-model="currentItem.PainPart" ng-maxlength="6" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>性质</u></span>：</td>
+                                                <td><input class="inputStyleOne" type="text" ng-model="currentItem.PainNature" style="width:60%" ng-maxlength="6" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>持续时间</u></span>：</td>
+                                                <td><input class="inputStyleOne" type="text" ng-model="currentItem.DurationTime" style="width:60%" ng-maxlength="6" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>减轻疼痛的方法</u></span>：</td>
+                                                <td><input class="inputStyleOne" type="text" ng-model="currentItem.EasePainMethod" style="width:60%" ng-maxlength="66" /></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" text-align:center;line-height:2em;" rowspan="2">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />认<br />知<br />感<br />受<br />
+                                        </span>
+                                    </td>
+                                    <td style="width:30px; text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />视<br />力<br />
+                                        </span>
+                                    </td>
+                                    <td colspan="2" style="padding:10px;line-height:2em;">
+                                        <table class="tbOne">
+                                            <tr>
+                                                <td style="width:100px;"><span style="font-weight:bolder;"><u>视力状况</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.VisualAcuity" id="VisualAcuity" input-select="DC02.037" style="width:60%" ng-maxlength="66" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-weight:bolder;"><u>辅助物</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.AssistantTools" id="AssistantTools" input-select="DC02.038" style="width:60%" ng-maxlength="66" /></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />听<br />力<br />
+                                        </span>
+
+                                    </td>
+                                    <td colspan="2" style="padding:10px;line-height:2em;">
+                                        <table class="tbOne">
+                                            <tr>
+                                                <td style="width:100px;"><span style="font-weight:bolder;"><u>听力状况</u></span>：</td>
+                                                <td><input type="text" ng-model="currentItem.ListeningState" id="ListeningState" input-select="DC02.039" style="width:60%" ng-maxlength="66" /></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" text-align:center;line-height:2em;" rowspan="7">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />精<br />神<br />社<br />会<br />行<br />为<br />
+                                        </span>
+                                    </td>
+                                    <td style=" text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />妄<br />想<br />
+                                        </span>
+                                    </td>
+                                    <td style="padding:10px;line-height:2em;" colspan="2">
+                                        <input type="text" ng-model="currentItem.Delusion" id="Delusion" input-select="DC02.040" style="width:60%" ng-maxlength="66" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />外<br />观<br />
+                                        </span>
+                                    </td>
+                                    <td style="padding:10px;line-height:2em;" colspan="2">
+                                        <input type="text" ng-model="currentItem.PersonImage" id="PersonImage" input-select="DC02.041" style="width:60%" ng-maxlength="16" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />态<br />度<br />
+                                        </span>
+                                    </td>
+                                    <td style="padding:10px;line-height:2em;" colspan="2">
+                                        <input type="text" ng-model="currentItem.Attitude" id="Attitude" input-select="DC02.042" style="width:60%" ng-maxlength="16" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />情<br />绪<br />
+                                        </span>
+                                    </td>
+                                    <td style="padding:10px;line-height:2em;" colspan="2">
+                                        <table class="tbOne">
+                                            <tr><td colspan="2"><input type="text" ng-model="currentItem.EmotionState" id="EmotionState" input-select="DC02.043" style="width:60%" ng-maxlength="66" /></td></tr>
+                                            <tr><td style="width:180px;"><span class="spanStyleOne">常引发不安的情境</span>：</td><td><input class="inputStyleOne" type="text" ng-model="currentItem.DisturbingEnv" style="width:80%" ng-maxlength="16" /></td></tr>
+                                            <tr><td><span class="spanStyleOne">有效安抚情绪的方式</span>：</td><td><input class="inputStyleOne" type="text" ng-model="currentItem.SootheMotion" style="width:80%" ng-maxlength="16" /></td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />行<br />为<br />
+                                        </span>
+                                    </td>
+                                    <td style="padding:10px;line-height:2em;" colspan="2">
+                                        <input type="text" ng-model="currentItem.Behavior" id="Behavior" input-select="DC02.044" style="width:60%" ng-maxlength="66" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />沟<br />通<br />
+                                        </span>
+                                    </td>
+                                    <td style="padding:10px;line-height:2em;" colspan="2">
+                                        <table class="tbOne">
+                                            <tr>
+                                                <td style="width:100px;">
+                                                    <span style="font-weight:bolder;"><u>沟通方式</u></span>：
+                                                </td>
+                                                <td>
+                                                    <input type="text" ng-model="currentItem.CommunicationType" id="CommunicationType" input-select="DC02.045" style="width:60%" ng-maxlength="66" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span style="font-weight:bolder;"><u>沟通能力</u></span>：
+                                                </td>
+                                                <td>
+                                                    <input type="text" ng-model="currentItem.CommunicationSkill" id="CommunicationSkill" input-select="DC02.046" style="width:60%" ng-maxlength="16" />
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <br />
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" text-align:center;line-height:2em;">
+                                        <span style="font-weight:bolder;font-size:18px;">
+                                            <br />问<br />题<br />行<br />为<br />
+                                        </span>
+                                    </td>
+                                    <td style="padding:10px;line-height:2em;" colspan="2">
+                                        <input type="text" ng-model="currentItem.ProblemBehavior" id="ProblemBehavior" input-select="DC02.047" style="width:60%" ng-maxlength="66" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="line-height:5em;text-align:right;padding-right:20px;">
+                                <button class="btn btn-primary" ng-disabled="buttonSaveShow" ng-click="saveNursing(currentItem)"><i class="fa fa-save"></i> 储存数据</button>
+                            </div>
+                        </div>
+                    </from>
+                </div>
+            </pane>
+            <pane title="ADL评估">
+                <div ng-show="showEval">
+                    <div class="headerStyle">
+                        <!--<h3><strong>{{OrgName}}老人日间照顾中心</strong></h3>-->
+                        <h3><strong>ADL评估</strong></h3>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                <span class="spanStyleOne">日字号：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.ResidentNo}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">姓名：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.Name}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">性别：</span>
+                                <span class="spanStyleFour">
+                                    <span select-code="A00.001" select-value="{{currentResident.Sex}}"></span>
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">出生：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.BirthDay | dateFormat}}
+                                </span>
+                                （<span class="spanStyleFour">{{currentResident.Age}}</span>岁）
+                            </div>
+                            <div style="margin-top:10px;">
+                                <span class="spanStyleOne">
+                                    初评日期：
+                                </span>
+                                <span class="spanStyleFour">
+                                    {{currentItem.FirstevalDate | dateFormat}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">第</span>
+                                <span class="spanStyleFour">
+                                    {{currentItem.EvalNumber}}
+                                </span>
+                                <span class="spanStyleOne"> 次覆评,&nbsp;评估日期:</span>
+                                <span class="spanStyleFour">
+                                    {{currentItem.EvalDate | dateFormat}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                        </div>
+                        <div style="margin-top:20px; border:outset; ">
+                            <table border="1" style="width:100%;margin:1px;padding:5px;">
+                                <tr>
+                                    <td>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">题目</div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <div ng-repeat="Item in EvalAdlData.MakerItemList" style="padding-bottom:4px;">
+                                                            <div class="form-group">
+                                                                <div ng-if="($index+1)%2==1">
+                                                                    <div class="col-sm-4 form-group">
+                                                                        <label class="control-label">{{Item.MAKENAME}}</label>
+                                                                    </div>
+                                                                    <div class="col-sm-8 form-group">
+                                                                        <select class="form-control" ng-change="calcAdlResult()" ng-model="Item.LIMITEDVALUEID" ng-options="item.LIMITEDVALUEID as item.LIMITEDVALUENAME for item in Item.Answers"></select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div ng-repeat="Item in EvalAdlData.MakerItemList" style="padding-bottom:4px;">
+                                                            <div class="form-group">
+                                                                <div ng-if="($index+1)%2==0">
+                                                                    <div class="col-sm-4 form-group">
+                                                                        <label class="control-label">{{Item.MAKENAME}}</label>
+                                                                    </div>
+                                                                    <div class="col-sm-8 form-group">
+                                                                        <select class="form-control" ng-change="calcAdlResult()" ng-model="Item.LIMITEDVALUEID" ng-options="item.LIMITEDVALUEID as item.LIMITEDVALUENAME for item in Item.Answers"></select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">评估结果</div>
+                                            <div ng-if="EvalAdlData.SCOREFLAG">
+                                                <div class="form-group">
+                                                    <label for="lbScoreSummry" class="col-sm-1 control-label">分数小计</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" class="form-control" id="txtScoreSummry" ng-model="RegAdlQuestion.SCORE" readonly="readonly">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="panel-body">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="line-height:5em;text-align:right;padding-right:20px;">
+                                <button class="btn btn-primary" ng-disabled="buttonSaveShow" ng-click="saveAdlEditInfo()"><i class="fa fa-save"></i> 储存数据</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-hide="showEval">先完成需求评估</div>
+            </pane>
+            <pane title="MMSE评估">
+                <div ng-show="showEval">
+                    <div class="headerStyle">
+                        <!--<h3><strong>{{OrgName}}老人日间照顾中心</strong></h3>-->
+                        <h3><strong>MMSE评估</strong></h3>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                <span class="spanStyleOne">日字号：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.ResidentNo}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">姓名：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.Name}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">性别：</span>
+                                <span class="spanStyleFour">
+                                    <span select-code="A00.001" select-value="{{currentResident.Sex}}"></span>
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">出生：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.BirthDay | dateFormat}}
+                                </span>
+                                （<span class="spanStyleFour">{{currentResident.Age}}</span>岁）
+                            </div>
+                            <div style="margin-top:10px;">
+                                <span class="spanStyleOne">
+                                    初评日期：
+                                </span>
+                                <span class="spanStyleFour">
+                                    {{currentItem.FirstevalDate | dateFormat}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">第</span>
+                                <span class="spanStyleFour">
+                                    {{currentItem.EvalNumber}}
+                                </span>
+                                <span class="spanStyleOne"> 次覆评,&nbsp;评估日期:</span>
+                                <span class="spanStyleFour">
+                                    {{currentItem.EvalDate | dateFormat}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                        </div>
+                        <div style="margin-top:20px; border:outset; ">
+                            <table border="1" style="width:100%;margin:1px;padding:5px;">
+                                <tr>
+                                    <td>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">题目</div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div ng-repeat="Item in EvalMmseData.MakerItemList" style="padding-bottom:4px;">
+                                                            <div class="form-group">
+
+                                                                <div>
+                                                                    <div class="col-sm-9 form-group">
+                                                                        <label class="control-label">{{Item.MAKENAME}}</label>
+                                                                    </div>
+                                                                    <div class="col-sm-3 form-group">
+                                                                        <select class="form-control" ng-change="calcMmseResult()" ng-model="Item.LIMITEDVALUEID" ng-options="item.LIMITEDVALUEID as item.LIMITEDVALUENAME for item in Item.Answers"></select>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div><img src="../../../Images/DC/nurse/SeeSee.png" style="width:140px;height:60px" /></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">评估结果</div>
+                                            <div ng-if="EvalMmseData.SCOREFLAG">
+                                                <div class="form-group">
+                                                    <label for="lbScoreSummry" class="col-sm-1 control-label">分数小计</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" class="form-control" id="txtScoreSummry" ng-model="RegMmseQuestion.SCORE" readonly="readonly">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="line-height:5em;text-align:right;padding-right:20px;">
+                                <button class="btn btn-primary" ng-disabled="buttonSaveShow" ng-click="saveMmseEditInfo()"><i class="fa fa-save"></i> 储存数据</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-hide="showEval">先完成需求评估</div>
+            </pane>
+            <pane title="IADL评估">
+                <div ng-show="showEval">
+                    <div class="headerStyle">
+                        <!--<h3><strong>{{OrgName}}老人日间照顾中心</strong></h3>-->
+                        <h3><strong>IADL评估</strong></h3>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                <span class="spanStyleOne">日字号：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.ResidentNo}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">姓名：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.Name}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">性别：</span>
+                                <span class="spanStyleFour">
+                                    <span select-code="A00.001" select-value="{{currentResident.Sex}}"></span>
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">出生：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.BirthDay | dateFormat}}
+                                </span>
+                                （<span class="spanStyleFour">{{currentResident.Age}}</span>岁）
+                            </div>
+                            <div style="margin-top:10px;">
+                                <span class="spanStyleOne">
+                                    初评日期：
+                                </span>
+                                <span class="spanStyleFour">
+                                    {{currentItem.FirstevalDate | dateFormat}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">第</span>
+                                <span class="spanStyleFour">
+                                    {{currentItem.EvalNumber}}
+                                </span>
+                                <span class="spanStyleOne"> 次覆评,&nbsp;评估日期:</span>
+                                <span class="spanStyleFour">
+                                    {{currentItem.EvalDate | dateFormat}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                        </div>
+                        <div style="margin-top:20px; border:outset; ">
+                            <table border="1" style="width:100%;margin:1px;padding:5px;">
+                                <tr>
+                                    <td>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">题目</div>
+                                            <div class="panel-body">
+                                                <div ng-repeat="Item in EvaliAdlData.MakerItemList" style="padding-bottom:5px;">
+                                                    <!--<div class="form-group">-->
+
+                                                    <div class="col-sm-3 form-group">
+                                                        <label class="control-label">{{Item.MAKENAME}}</label>
+                                                    </div>
+                                                    <div class="col-sm-9 form-group">
+                                                        <select class="form-control" ng-change="calciAdlResult()" ng-model="Item.LIMITEDVALUEID" ng-options="item.LIMITEDVALUEID as item.LIMITEDVALUENAME for item in Item.Answers"></select>
+                                                    </div>
+
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">评估结果</div>
+                                            <div ng-if="EvaliAdlData.SCOREFLAG">
+                                                <div class="form-group">
+                                                    <label for="lbScoreSummry" class="col-sm-1 control-label">分数小计</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" class="form-control" id="txtScoreSummry" ng-model="RegiAdlQuestion.SCORE" readonly="readonly">
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="panel-body">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="line-height:5em;text-align:right;padding-right:20px;">
+                                <button class="btn btn-primary" ng-disabled="buttonSaveShow" ng-click="saveiAdlEditInfo()"><i class="fa fa-save"></i> 储存数据</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-hide="showEval">先完成需求评估</div>
+            </pane>
+            <pane title="GDS评估">
+                <div ng-show="showEval">
+                    <div class="headerStyle">
+                        <!--<h3><strong>{{OrgName}}老人日间照顾中心</strong></h3>-->
+                        <h3><strong>GDS评估</strong></h3>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                <span class="spanStyleOne">日字号：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.ResidentNo}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">姓名：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.Name}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">性别：</span>
+                                <span class="spanStyleFour">
+                                    <span select-code="A00.001" select-value="{{currentResident.Sex}}"></span>
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">出生：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.BirthDay | dateFormat}}
+                                </span>
+                                （<span class="spanStyleFour">{{currentResident.Age}}</span>岁）
+                            </div>
+                            <div style="margin-top:10px;">
+                                <span class="spanStyleOne">
+                                    初评日期：
+                                </span>
+                                <span class="spanStyleFour">
+                                    {{currentItem.FirstevalDate | dateFormat}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">第</span>
+                                <span class="spanStyleFour">
+                                    {{currentItem.EvalNumber}}
+                                </span>
+                                <span class="spanStyleOne"> 次覆评,&nbsp;评估日期:</span>
+                                <span class="spanStyleFour">
+                                    {{currentItem.EvalDate | dateFormat}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                        </div>
+                        <div style="margin-top:20px; border:outset; ">
+                            <table border="1" style="width:100%;margin:1px;padding:5px;">
+                                <tr>
+                                    <td>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">题目</div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <div ng-repeat="Item in EvalGdsData.MakerItemList" style="padding-bottom:4px;">
+                                                            <div class="form-group">
+                                                                <div ng-if="($index+1)%2==1">
+                                                                    <div class="col-sm-7 form-group">
+                                                                        <label class="control-label">{{Item.MAKENAME}}</label>
+                                                                    </div>
+                                                                    <div class="col-sm-5 form-group">
+                                                                        <select class="form-control" ng-change="calcGdsResult()" ng-model="Item.LIMITEDVALUEID" ng-options="item.LIMITEDVALUEID as item.LIMITEDVALUENAME for item in Item.Answers"></select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div ng-repeat="Item in EvalGdsData.MakerItemList" style="padding-bottom:4px;">
+                                                            <div class="form-group">
+                                                                <div ng-if="($index+1)%2==0">
+                                                                    <div class="col-sm-7 form-group">
+                                                                        <label class="control-label">{{Item.MAKENAME}}</label>
+                                                                    </div>
+                                                                    <div class="col-sm-5 form-group">
+                                                                        <select class="form-control" ng-change="calcGdsResult()" ng-model="Item.LIMITEDVALUEID" ng-options="item.LIMITEDVALUEID as item.LIMITEDVALUENAME for item in Item.Answers"></select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">评估结果</div>
+                                            <div ng-if="EvalGdsData.SCOREFLAG">
+                                                <div class="form-group">
+                                                    <label for="lbScoreSummry" class="col-sm-1 control-label">分数小计</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" class="form-control" id="txtScoreSummry" ng-model="RegGdsQuestion.SCORE" readonly="readonly">
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="panel-body">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="line-height:5em;text-align:right;padding-right:20px;">
+                                <button class="btn btn-primary" ng-disabled="buttonSaveShow" ng-click="saveGdsEditInfo()"><i class="fa fa-save"></i> 储存数据</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-hide="showEval">先完成需求评估</div>
+            </pane>
+            <pane title="照顾计划">
+                <div ng-show="showEval">
+                    <div class="formStyle">
+                        <button class="btn btn-default" ng-disabled="buttonEditShow" ng-click="addNursingPlan()"><i class="fa fa-plus default"></i> 新增计划</button>
+                        <button class="btn btn-default" ng-click="refresh('诊断')"><i class="fa fa-refresh default"></i> 刷新列表</button>
+                    </div>
+                    <div class="headerStyle">
+                        <!--<h3><strong>{{OrgName}}老人日间照顾中心</strong></h3>-->
+                        <h3><strong>照顾计划</strong></h3>
+                    </div>
+                    <div style="margin-bottom:10px;">
+                        <div>
+                            <div>
+                                <span class="spanStyleOne">日字号：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.ResidentNo}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">姓名：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.Name}}
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">性别：</span>
+                                <span class="spanStyleFour">
+                                    <span select-code="A00.001" select-value="{{currentResident.Sex}}"></span>
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="spanStyleOne">出生：</span>
+                                <span class="spanStyleFour">
+                                    {{currentResident.BirthDay | dateFormat}}
+                                </span>
+                                （<span class="spanStyleFour">{{currentResident.Age}}</span>岁）
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="margin-top:20px; border:outset; ">
+                            <table border="1" id="tabConent" class="tableStyleOne">
+                                <thead>
+                                    <tr><th colspan="6">健康问题及照护需求</th></tr>
+                                    <tr>
+                                        <th style="width:5%;text-align:center;">编号</th>
+                                        <th style="width:30%;text-align:center;">护理诊断</th>
+                                        <th style="width:10%;text-align:center;">开始时间</th>
+                                        <th style="width:10%;text-align:center;">完成时间</th>
+                                        <th style="width:10%;text-align:center;">计划结束否</th>
+                                        <th style="width:20%;text-align:center;">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in Data.regCplList">
+                                        <td style="text-align:center;">#{{$index+1}}</td>
+                                        <td style="text-align:center;">
+                                            {{item.CpDia}}
+                                        </td>
+                                        <td style="text-align:center;">
+                                            {{item.StartDate | dateFormat}}
+                                        </td>
+                                        <td style="text-align:center;">
+                                            {{item.FinishDate | dateFormat}}
+                                        </td>
+                                        <td style="text-align:center;">
+                                            {{item.FinishFlag==true?'已完成':'未完成'}}
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                <a class="btn caption" role="button" ng-click="editNursingPlan(item)"><i class="fa fa-pencil"></i>诊断管理</a>
+                                                <a class="btn caption" role="button" ng-click="editNursingPlanGoal(item)"><i class="fa fa-pencil"></i>目标</a>
+                                                <a class="btn caption" role="button" ng-click="editNursingPlanActivity(item)"><i class="fa fa-pencil"></i>措施</a>
+                                                <a class="btn caption" role="button" ng-click="editNursingPlanEval(item)"><i class="fa fa-pencil"></i>评值</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div ng-hide="showEval">先完成需求评估</div>
+            </pane>
+        </tabs>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="NursingList" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:80%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" style="background-color:white; margin-top:10px;height:90%;">
+                <div class="box border green">
+                    <div class="box-title">
+                        <h4>需求评估历史记录</h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="dataTables_wrapper form-inline" role="grid">
+                            <ui-data-table options="options">
+                                <table class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>姓名</th>
+                                            <th>日字号</th>
+                                            <th>性别</th>
+                                            <th>出生日期</th>
+                                            <th>评估次数</th>
+                                            <th>评估日期</th>
+                                            <th><i class="fa fa-bars"></i> 操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in Data.medicineList">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{item.RegName}}</td>
+                                            <td>{{item.ResidentNo}}</td>
+                                            <td><span select-code="A00.001" select-value="{{item.Sex}}"></span></td>
+                                            <td>{{item.BirthDate | dateFormat}}</td>
+                                            <td>{{item.EvalNumber}}</td>
+                                            <td>{{item.EvalDate | dateFormat}}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                    <a class="btn btn-success" role="button" ng-click="PlanEvalSelected(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                    <!--<a class="btn btn-danger" role="button" ng-click="deleteItem(item)"><i class="fa fa-times"></i>删除</a>-->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ui-data-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="NursingPlanAdd" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:68%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" style="background-color:white; margin-top:10px;height:90%;">
+                <div class="box border green">
+                    <div class="box-title">
+                        <h4>新增护理诊断</h4>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" role="form" name="NurseAddFrom" novalidate>
+                            <table border="0" style="width:100%;line-height:3em;">
+                                <tr>
+                                    <td style="width:33%;">
+                                        <div class="box border progress-bar-info" style="width:100%;">
+                                            <div class="box-title">
+                                                导因参考&nbsp;<span style="color:red;">※双击选择</span>
+                                            </div>
+                                            <div class="box-body">
+                                                <select class="form-control" ng-model="Causep" multiple="multiple" ng-dblclick="selectCausepItem(Causep)">
+                                                    <option ng-repeat="item in Data.causepList" value="{{item.Causep }}">
+                                                        {{item.Causep}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="box-title">
+                                                特征参考&nbsp;<span style="color:red;">※双击选择</span>
+                                            </div>
+                                            <div class="box-body">
+                                                <select class="form-control" ng-model="PrData" multiple="multiple" ng-dblclick="selectPrDataItem(PrData)">
+                                                    <option ng-repeat="item in Data.prDataList" value="{{item.PrData }}">
+                                                        {{item.PrData}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="width:2%;"></td>
+                                    <td style="width:65%;">
+                                        <table style="width:100%;">
+                                            <tr>
+                                                <td><span class="spanStyleOne">问题层面</span><span class="required">*</span></td>
+                                                <td>
+                                                    <select id="selProblemType" class="form-control" name="问题层面" style="margin-top:0px;" ng-model="nursingPlanItem.CpLevel" ng-change="changeLevel(nursingPlanItem.CpLevel)" required>
+                                                        <option value="">-- 请选择 --</option>
+                                                        <option ng-repeat="item in Data.problemList" value="{{item.LevelPr }}">
+                                                            {{item.LevelPr}}
+                                                        </option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:100px;">
+                                                    <span class="spanStyleOne">诊断问题</span><span class="required">*</span>
+                                                </td>
+                                                <td>
+                                                    <select id="selProblemType" class="form-control" name="诊断问题" style="margin-top:0px;" ng-model="CpDia" ng-change="changeDiaPr(CpDia)" required>
+                                                        <option value="">-- 请选择 --</option>
+                                                        <option ng-repeat="item in Data.diaPrList" value="{{item.CpNo }}">
+                                                            {{item.DiaPr}}
+                                                        </option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>导因</td>
+                                                <td><textarea class="form-control" rows="8" ng-model="nursingPlanItem.CpReason"> </textarea></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    特征
+                                                </td>
+                                                <td><textarea class="form-control" rows="8" ng-model="nursingPlanItem.NsDesc"> </textarea></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <table>
+                                                        <tr>
+                                                            <td style="width:100px;">
+                                                                <span class="spanStyleOne">
+                                                                    开始日期
+                                                                </span><span class="required">*</span>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" name="开始日期" class="form-control" ng-model="nursingPlanItem.StartDate" ca-date-picker required ng-change="checkStartDate()" />
+                                                            </td>
+                                                            <td style="width:40px;"></td>
+                                                            <td style="width:100px;">
+                                                                <span class="spanStyleOne">
+                                                                    需要天数
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <div class="input-group">
+                                                                    <input type="number" class="form-control" ng-model="nursingPlanItem.NeedDays" ng-blur="getEndDateP(nursingPlanItem.NeedDays)" /><div class="input-group-addon">天</div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <table>
+                                                        <tr>
+                                                            <td style="width:100px;">
+                                                                <span class="spanStyleOne">
+                                                                    预计完成日期
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control" ng-model="nursingPlanItem.TargetDate" />
+                                                            </td>
+                                                            <td colspan="3"></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div style="margin:10px;text-align:right;">
+                        <button class="btn btn-primary" ng-click="saveNursingAddPlan(nursingPlanItem)"><i class="fa fa-save"></i> 储存数据</button>
+                        <button class="btn btn-grey" ng-click="cancelNursingAddPlan()"><i class="fa fa-reply"></i> 取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="NursingPlanEdit" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:60%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" style="background-color:white; margin-top:10px;height:90%;">
+                <div class="box border green">
+                    <div class="box-title">
+                        <h4>护理诊断管理</h4>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" role="form" name="NurseEditFrom" novalidate>
+                            <table style="width:100%;line-height:3em;">
+                                <tr>
+                                    <td style="width:160px;">问题层面</td>
+                                    <td colspan="5"><input type="text" class="form-control" ng-model="nursingPlanItem.CpLevel" readonly="readonly" /> </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:160px;">诊断问题</td>
+                                    <td colspan="5"><input type="text" class="form-control" rows="6" ng-model="nursingPlanItem.CpDia" readonly="readonly" /></td>
+                                </tr>
+                                <tr>
+                                    <td>导因</td>
+                                    <td colspan="5"><textarea class="form-control" rows="6" ng-model="nursingPlanItem.CpReason"> </textarea></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:160px;">特征</td>
+                                    <td colspan="5"><textarea class="form-control" rows="6" ng-model="nursingPlanItem.NsDesc"> </textarea></td>
+                                </tr>
+
+                                <tr>
+                                    <td style="width:160px;">
+                                        <span class="spanStyleOne">
+                                            开始日期
+                                        </span><span class="required">*</span>
+                                    </td>
+                                    <td style="width:250px;">
+                                        <input type="text" class="form-control" name="开始日期" ng-model="nursingPlanItem.StartDate" ca-date-picker required ng-change="checkStartDate()" />
+                                    </td>
+                                    <td style="width:40px;"></td>
+                                    <td style="width:100px;">
+                                        <span class="spanStyleOne">
+                                            需要天数
+                                        </span>
+                                    </td>
+                                    <td style="width:250px;">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" ng-model="nursingPlanItem.NeedDays" ng-blur="getEndDateP(nursingPlanItem.NeedDays)" /><div class="input-group-addon">天</div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:160px;">
+                                        <span class="spanStyleOne">
+                                            预计完成日期
+                                        </span>
+                                    </td>
+                                    <td style="width:250px;">
+                                        <input type="text" class="form-control" ng-model="nursingPlanItem.TargetDate" ca-date-picker ng-change="checkEndDate()" />
+                                    </td>
+                                    <td colspan="4"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:160px;">
+                                        <span class="spanStyleOne">
+                                            护理计划结束否
+                                        </span>
+                                    </td>
+                                    <td style="width:250px;">
+                                        <div style="text-align:center;">
+                                            <input type="checkbox" class="checkbox-inline" ng-model="nursingPlanItem.FinishFlag" ng-click="getCurrentDate('诊断')" />
+                                            <span class="spanStyleOne">
+                                                完成
+                                            </span>
+                                        </div>
+
+                                    </td>
+                                    <td style="width:40px;"></td>
+                                    <td style="width:100px;" ng-show="nursingPlanItem.FinishFlag">
+                                        <span class="spanStyleOne">
+                                            完成日期
+                                        </span>
+                                    </td>
+                                    <td style="width:250px;" ng-show="nursingPlanItem.FinishFlag">
+                                        <input type="text" class="form-control" ng-model="nursingPlanItem.FinishDate" ca-date-picker />
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr ng-hide="nursingPlanItem.FinishFlag">
+                                    <td>
+                                        <span class="spanStyleOne">
+                                            未完成原因
+                                        </span>
+                                    </td>
+                                    <td colspan="5"><textarea class="form-control" name="未完成原因" ng-model="nursingPlanItem.UnfinishReason" ng-maxlength="20"></textarea></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div style="margin:10px;text-align:right;">
+                        <button class="btn btn-primary" ng-click="saveNursingEditPlan(nursingPlanItem)"><i class="fa fa-save"></i> 储存数据</button>
+                        <button class="btn btn-grey" ng-click="cancelNursingEditPlan()"><i class="fa fa-reply"></i> 取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="NursingPlanGoal" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:60%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" style="background-color:white; margin-top:10px;height:90%;">
+                <div class="box border green">
+                    <div class="box-title">
+                        <h4>护理诊断目标</h4>
+                    </div>
+                    <div class="box-body">
+                        <div>
+                            <button class="btn btn-default" ng-click="addGoalpInfo()"><i class="fa fa-plus default"></i> 新增</button>
+                            <button class="btn btn-default" ng-click="refresh('目标')"><i class="fa fa-refresh default"></i> 刷新</button>
+                        </div>
+                        <div ng-show="showGoalpEdit">
+                            <hr style="height:1px;border:none;border-top:1px solid #555555;" />
+                            <form name="goalpForm" novalidate>
+                                <table border="0" style="width:100%; line-height:3em;">
+                                    <tr>
+                                        <td width="100px;">
+                                            <span class="spanStyleOne">
+                                                目标
+                                            </span>
+                                            <span class="required">*</span>
+                                        </td>
+                                        <td width="250px;">
+                                            <select id="selProblemType" name="目标" class="form-control" style="margin-top:0px;" ng-model="goalpItem.CplGoal" required>
+                                                <option value="">-- 请选择 --</option>
+                                                <option ng-repeat="item in Data.goalpList" value="{{item.Goalp }}">
+                                                    {{item.Goalp}}
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td></td>
+                                        <td width="100px;">
+                                            <span class="spanStyleOne">
+                                                开始日期
+                                            </span>
+                                        </td>
+                                        <td width="200px;">
+                                            <input type="text" class="form-control" ng-model="goalpItem.RecDate" ca-date-picker />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <span class="spanStyleOne">
+                                                是否完成
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="checkbox-inline" ng-model="goalpItem.FinishFlag" ng-checked="goalpItem.FinishFlag==1" ng-click="getCurrentDate('目标')" />
+
+                                            完成
+
+                                        </td>
+                                        <td></td>
+                                        <td ng-show="goalpItem.FinishFlag">
+                                            <span class="spanStyleOne">
+                                                完成日期
+                                            </span>
+                                        </td>
+                                        <td ng-show="goalpItem.FinishFlag">
+                                            <input type="text" class="form-control" ng-model="goalpItem.FinishDate" ca-date-picker />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr ng-hide="goalpItem.FinishFlag">
+                                        <td>
+                                            <span class="spanStyleOne">
+                                                未完成原因
+                                            </span>
+                                        </td>
+                                        <td colspan="5"><textarea name="未完成原因" class="form-control" ng-model="goalpItem.UnfinishReason" ng-maxlength="200"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <div style="line-height:5em;text-align:right;padding-right:20px;">
+                                                <button class="btn btn-primary" ng-click="saveGoalpInfo(goalpItem)"><i class="fa fa-save"></i> 储存数据</button>
+                                                <button class="btn btn-grey" ng-click="cancelEditGoalpInfo()"><i class="fa fa-reply"></i> 取消</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                        <hr style="height:1px;border:none;border-top:1px solid #555555;" />
+                        <table class="table table-striped table-bordered table-hover table-handler">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>目标</th>
+                                    <th>开始日期</th>
+                                    <th>完成否</th>
+                                    <th>完成日期</th>
+                                    <th><i class="fa fa-bars"></i> 操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in Data.nsCplGoalpList">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{item.CplGoal}}</td>
+                                    <td>{{item.RecDate| dateFormat}}</td>
+                                    <td>{{item.FinishFlag=='1'?'完成':'未完成'}}</td>
+                                    <td>{{item.FinishDate | dateFormat}}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                            <a class="btn caption" role="button" ng-click="editGoalpInfo(item)"><i class="fa fa-pencil"></i>编辑</a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="NursingPlanActivity" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:60%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" style="background-color:white; margin-top:10px;height:90%;">
+                <div class="box border green">
+                    <div class="box-title">
+                        <h4>护理诊断措施</h4>
+                    </div>
+                    <div class="box-body">
+                        <div>
+                            <button class="btn btn-default" ng-click="addActivityInfo()"><i class="fa fa-plus default"></i> 新增</button>
+                            <button class="btn btn-default" ng-click="refresh('措施')"><i class="fa fa-refresh default"></i> 刷新</button>
+                        </div>
+                        <div ng-show="showActivityEdit">
+                            <hr style="height:1px;border:none;border-top:1px solid #555555;" />
+                            <form name="activityForm" novalidate>
+                                <table border="0" style="width:100%; line-height:3em;">
+                                    <tr>
+                                        <td width="100px;">
+                                            <span class="spanStyleOne">
+                                                措施
+                                            </span><span class="required">*</span>
+                                        </td>
+                                        <td width="250px;">
+                                            <select id="selProblemType" name="措施" required class="form-control" style="margin-top:0px;" ng-model="activityItem.CplActivity">
+                                                <option value="">-- 请选择 --</option>
+                                                <option ng-repeat="item in Data.activityList" value="{{item.Activity }}">
+                                                    {{item.Activity}}
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td></td>
+                                        <td width="100px;">
+                                            <span class="spanStyleOne">
+                                                开始日期
+                                            </span>
+                                        </td>
+                                        <td width="200px;">
+                                            <input type="text" class="form-control" ng-model="activityItem.RecDate" ca-date-picker />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <span class="spanStyleOne">
+                                                是否完成
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="checkbox-inline" ng-model="activityItem.FinishFlag" ng-checked="activityItem.FinishFlag==1" ng-click="getCurrentDate('措施')" />
+                                            完成
+                                        </td>
+                                        <td></td>
+                                        <td ng-show="activityItem.FinishFlag">
+                                            <span class="spanStyleOne">
+                                                完成日期
+                                            </span>
+                                        </td>
+                                        <td ng-show="activityItem.FinishFlag">
+                                            <input type="text" class="form-control" ng-model="activityItem.FinishDate" ca-date-picker />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr ng-hide="activityItem.FinishFlag">
+                                        <td>
+                                            <span class="spanStyleOne">
+                                                未完成原因
+                                            </span>
+                                        </td>
+                                        <td colspan="5"><textarea class="form-control" ng-model="activityItem.UnfinishReason"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <div style="line-height:5em;text-align:right;padding-right:20px;">
+                                                <button class="btn btn-primary" ng-click="saveActivityInfo(activityItem)"><i class="fa fa-save"></i> 储存数据</button>
+                                                <button class="btn btn-default" ng-click="cancelEditActivityInfo()"><i class="fa fa-reply"></i> 取消</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                        <hr style="height:1px;border:none;border-top:1px solid #555555;" />
+                        <table class="table table-striped table-bordered table-hover table-handler">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th style="max-width:50%">措施</th>
+                                    <th>开始日期</th>
+                                    <th>完成否</th>
+                                    <th>完成日期</th>
+                                    <th><i class="fa fa-bars"></i> 操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in Data.nsCplActivityList">
+                                    <td>{{$index + 1}}</td>
+                                    <td style="max-width:50%">{{item.CplActivity}}</td>
+                                    <td>{{item.RecDate | dateFormat}}</td>
+                                    <td>{{item.FinishFlag=='1'?'完成':'未完成'}}</td>
+                                    <td>{{item.FinishDate | dateFormat}}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                            <a class="btn caption" role="button" ng-click="editActivityInfo(item)"><i class="fa fa-pencil"></i>编辑</a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="NursingPlanEval" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:60%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" style="background-color:white; margin-top:10px;height:90%;">
+                <div class="box border green">
+                    <div class="box-title">
+                        <h4>护理诊断评值</h4>
+                    </div>
+                    <div class="box-body">
+                        <form name="AssessForm" novalidate>
+                            <table border="0" style="width:100%; line-height:3em;">
+                                <tr>
+                                    <td width="100px;">
+                                        <span class="spanStyleOne">
+                                            评值结果
+                                        </span><span class="required">*</span>
+                                    </td>
+                                    <td width="250px;">
+                                        <select id="selProblemType" name="评值结果" required class="form-control" style="margin-top:0px;" ng-model="assessItem.ValueDesc">
+                                            <option value="">-- 请选择 --</option>
+                                            <option ng-repeat="item in Data.assessvalueList" value="{{item.Assessvalue }}">
+                                                {{item.Assessvalue}}
+                                            </option>
+                                        </select>
+                                    </td>
+                                    <td></td>
+                                    <td width="100px;">
+                                        <span class="spanStyleOne">
+                                            评值日期
+                                        </span>
+                                    </td>
+                                    <td width="200px;">
+                                        <input type="text" class="form-control" ng-model="assessItem.RecDate" ca-date-picker />
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td width="100px;">
+                                        <span class="spanStyleOne">
+                                            记录者
+                                        </span>
+                                    </td>
+                                    <td width="200px;">
+                                        <input type="text" class="form-control" ng-model="assessItem.RecordBy" />
+                                    </td>
+                                    <td></td>
+                                    <td width="100px;">
+                                        <span class="spanStyleOne">
+                                            执行者
+                                        </span>
+                                    </td>
+                                    <td width="200px;">
+                                        <!--<input type="text" class="form-control" ng-model="assessItem.ExecuteBy" />-->
+                                        <input-staff id="txtRecordBy" callback="staffSelected(item)" value="{{assessItem.ExecuteBy}}" />
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">
+                                        <div style="line-height:5em;text-align:right;padding-right:20px;">
+                                            <button class="btn btn-primary" ng-click="saveAssessValueInfo(assessItem)"><i class="fa fa-save"></i> 储存数据</button>
+                                            <button class="btn btn-default" ng-click="cancleAssessValueInfo()"><i class="fa fa-reply"></i> 取消</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

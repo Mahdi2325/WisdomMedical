@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{208D3A36-9507-4FF2-A3BF-374D718F0A11}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KMHC.SLTC.Business.Entity</RootNamespace>
+    <AssemblyName>KMHC.SLTC.Business.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\BaseRequest.cs" />
+    <Compile Include="Base\BaseResponse.cs" />
+    <Compile Include="Model\ActivityManageModel\ActivityModel.cs" />
+    <Compile Include="Model\AppointStatisticsModel.cs" />
+    <Compile Include="Model\CallInfoModel.cs" />
+    <Compile Include="Model\CommodityItemModel.cs" />
+    <Compile Include="Model\DeptModel.cs" />
+    <Compile Include="Model\DispatchTaskModel.cs" />
+    <Compile Include="Model\EmpEvlModel.cs" />
+    <Compile Include="Model\EvaluatedTaskModel.cs" />
+    <Compile Include="Model\EvaluationModel.cs" />
+    <Compile Include="Model\FileUp.cs" />
+    <Compile Include="Model\FinancialManagement\RefundModel.cs" />
+    <Compile Include="Model\FinancialManagement\ServiceOrderChargeDtlModel.cs" />
+    <Compile Include="Model\GuestService\PNCModel.cs" />
+    <Compile Include="Model\FinancialManagement\PaymentsModel.cs" />
+    <Compile Include="Model\GuestService\SerAppSerItModel.cs" />
+    <Compile Include="Model\GuestService\ServiceAppointmentModel.cs" />
+    <Compile Include="Model\Home\BriefInfoModel.cs" />
+    <Compile Include="Model\Home\TodayInfoModel.cs" />
+    <Compile Include="Model\PriorityRemarkModel.cs" />
+    <Compile Include="Model\HabitModel.cs" />
+    <Compile Include="Model\FamilyModel.cs" />
+    <Compile Include="Model\DeviceModel.cs" />
+    <Compile Include="Model\ContractModel.cs" />
+    <Compile Include="Model\ChartInfoModel.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Enumerations.cs" />
+    <Compile Include="Filter\Filters.cs" />
+    <Compile Include="Filter\ReportFilter.cs" />
+    <Compile Include="Model\ActivityNewModel.cs" />
+    <Compile Include="Model\AreaModel.cs" />
+    <Compile Include="Model\BedModel.cs" />
+    <Compile Include="Model\BillModel.cs" />
+    <Compile Include="Model\ChargeItemModel.cs" />
+    <Compile Include="Model\CodeRuleModel.cs" />
+    <Compile Include="Model\DepositModel.cs" />
+    <Compile Include="Model\DictionaryItemModel.cs" />
+    <Compile Include="Model\DictionaryModel.cs" />
+    <Compile Include="Model\EmployeeModel.cs" />
+    <Compile Include="Model\FeedbackModel.cs" />
+    <Compile Include="Model\FloorModel.cs" />
+    <Compile Include="Model\FunctionModel.cs" />
+    <Compile Include="Model\GroupModel.cs" />
+    <Compile Include="Model\Menu.cs" />
+    <Compile Include="Model\MenuFunction.cs" />
+    <Compile Include="Model\MenuModel.cs" />
+    <Compile Include="Model\MonitorItemModel.cs" />
+    <Compile Include="Model\MonitorResultModel.cs" />
+    <Compile Include="Model\MonitorTemplateModel.cs" />
+    <Compile Include="Model\OrganizationModel.cs" />
+    <Compile Include="Model\PaymentModel.cs" />
+    <Compile Include="Model\PerformanceModel.cs" />
+    <Compile Include="Model\PersonModel.cs" />
+    <Compile Include="Model\ReportModel.cs" />
+    <Compile Include="Model\Report\EvaluationSummaryModel.cs" />
+    <Compile Include="Model\Report\OrderSummaryModel.cs" />
+    <Compile Include="Model\Report\OrderTaskRateModel.cs" />
+    <Compile Include="Model\Report\PaymentDistributeModel.cs" />
+    <Compile Include="Model\Report\PersonalOrderModel.cs" />
+    <Compile Include="Model\Report\ResidentAgeModel.cs" />
+    <Compile Include="Model\ResidentCareModel.cs" />
+    <Compile Include="Model\ResidentInfoModel.cs" />
+    <Compile Include="Model\ResidentModel.cs" />
+    <Compile Include="Model\ResidentPercentageModel.cs" />
+    <Compile Include="Model\ResidentServicePlanItemModel.cs" />
+    <Compile Include="Model\ScreenDisplayModel.cs" />
+    <Compile Include="Model\Sequence\PatientCollection.cs" />
+    <Compile Include="Model\Sequence\PatientQueueModel.cs" />
+    <Compile Include="Model\Sequence\PersonQueue.cs" />
+    <Compile Include="Model\ServiceGroupOrderModel.cs" />
+    <Compile Include="Model\ResidentServicePlanModel.cs" />
+    <Compile Include="Model\RoleModel.cs" />
+    <Compile Include="Model\RoomModel.cs" />
+    <Compile Include="Model\FeeDetailModel.cs" />
+    <Compile Include="Model\SerOrdSerItModel.cs" />
+    <Compile Include="Model\ServiceGroupModel.cs" />
+    <Compile Include="Model\CommodityTypeModel.cs" />
+    <Compile Include="Model\ServiceItemCategoryModel.cs" />
+    <Compile Include="Model\ResidentAddressModel.cs" />
+    <Compile Include="Model\ServiceItemModel.cs" />
+    <Compile Include="Model\ServiceOrderModel.cs" />
+    <Compile Include="Model\ServiceStatisticModel.cs" />
+    <Compile Include="Model\SOSDataModel.cs" />
+    <Compile Include="Model\TaskModel.cs" />
+    <Compile Include="Model\PhotoModel.cs" />
+    <Compile Include="Model\TaskNumber.cs" />
+    <Compile Include="Model\RefundRecordModel.cs" />
+    <Compile Include="Model\TaskRecordModel.cs" />
+    <Compile Include="Model\BeTimeModel.cs" />
+    <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Model\UserRelationModel.cs" />
+    <Compile Include="Model\ActivityManageModel\VolunteerModel.cs" />
+    <Compile Include="Model\EmpPlanModel.cs" />
+    <Compile Include="Model\WatchRecordModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KMHC.Infrastructure\KMHC.Infrastructure.csproj">
+      <Project>{0997f971-1d2f-4aa8-aa67-5b1683afdefd}</Project>
+      <Name>KMHC.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

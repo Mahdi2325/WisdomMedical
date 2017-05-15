@@ -1,0 +1,69 @@
+﻿
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <table style="width:100%;text-align:left;vertical-align:middle">
+                <tr>
+                    <td style="width:20%">
+                        <input name="ServiceDate" ng-model="currDate" class="form-control" ca-date-picker  />
+                    </td>
+                    <!--<td style="width:1%"></td>
+                    <td style="width:30%">
+                        <input type="text" class="form-control" id="Keywords" ng-model="options.params['Data.keywords']" placeholder="请输入用户姓名、电话号码或身份证号码进行查询">
+                    </td>-->
+                    <td style="text-align:left">
+                        <span class="input-group-btn">
+                            <a class="btn blue" ng-click="searchInfo()"><i class="fa fa-search"></i> 查询</a>
+                            <!--<a class="btn red" data-toggle="modal" data-target="#modalPreOrderEdit" ng-click="PreOrderEdit()"><i class="fa fa-plus"></i> 新增预约</a>-->
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-cogs"></i>预约统计
+				</div>
+			</div>
+            <div class="portlet-body">
+                <div >
+                <ui-data-table options="options">
+					<table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <!--<th>#</th>-->
+                            <th>服务项目名称</th>
+                            <th>上午</th>
+                            <th>下午</th>
+                            <th><i class="fa fa-bars"></i>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in appStatistics">
+                            <!--<td>{{$index + 1}}</td>-->
+                            <td>{{item.ServiceItemType}}</td>
+                            <td>{{item.MornCount}}</td>
+                            <td>{{item.NoonCount}}</td>
+                            <td style="text-align:left;width:500px">
+                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                    <a data-toggle="modal" data-target="#modalPreOrderEdit" ng-click="SevAppDtlMorn(item)" class="btn btn-success" role="button"><i class="fa fa-pencil"></i>上午预约人员</a>
+                                    <a data-toggle="modal" data-target="#modalPreOrderEdit" ng-click="SevAppDtlNoon(item)" class="btn btn-success" role="button"><i class="fa fa-pencil"></i>下午预约人员</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+				</ui-data-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 工单派发Modal -->
+<div class="modal fade" id="modalPreOrderEdit" tabindex="-1" role="dialog" aria-labelledby="modalCarryOutLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:80%; z-index: 90;">
+        <div ng-include="'/WebScripts/views/Sequence/AppointDtl.html'"></div>
+    </div>
+</div>

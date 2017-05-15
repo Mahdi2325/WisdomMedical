@@ -1,0 +1,51 @@
+﻿<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-offset-2 col-lg-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h1>{{curTemplate.ATName}} <br /> <small>{{curTemplate.Description}}</small></h1>
+                    </div>
+                    <div class=" panel-body">
+                        <form class="form-horizontal" name="assesstemppreform">
+                            <div class="panel" ng-repeat="section in curTemplate.Content.Sections">
+                                <div class="panel-heading">{{section.Title}}</div>
+                                <div class="panel-body">
+                                    <div class="form-group" ng-repeat="item in section.Items">
+                                        <label class="control-label col-lg-2"><span class="pull-left">{{item.AIName}}</span></label>
+                                        <any ng-switch="item.AIType">
+                                            <!--数值型-->
+                                            <any ng-switch-when="N">
+                                                <div class="col-lg-4">
+                                                    <input class="form-control" type="number" placeholder="" />
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="control-label">{{item.Remark}}</label>
+                                                </div>
+                                            </any>
+                                            <!--日期型-->
+                                            <any ng-switch-when="D">
+                                                <div class="col-lg-4">
+                                                    <input class="form-control datepicker" placeholder="" ca-date-picker ng-model="caDate" />
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="control-label">{{item.Remark}}</label>
+                                                </div>
+                                            </any>
+                                        </any>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class=" panel-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

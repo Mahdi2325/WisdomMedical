@@ -1,0 +1,37 @@
+﻿<div>
+    <div style="display:none">
+        <div class="col-sm-12">
+            <input type="radio" value="I" name="radStatus" ng-model="IpdFlag" ng-checked="true" />在院
+            <input type="radio" value="O" name="radStatus" ng-model="IpdFlag" />结案
+        </div>
+    </div>
+    <input class="form-control" type="text" ng-model="searchWords" ng-change="change()" onfocus="this.select();" placeholder="输入编号" ng-required={{required}} />
+    <table id="tb" class="table table-hover table-bordered input-select" ng-show="showList">
+        <thead>
+            <tr role="row">
+                <th>#</th>
+                <th>入住编号</th>
+                <th>老人编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>护理员</th>
+                <th>床位</th>
+                <th>入住日期</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in residents | filter:{ResidentNo:searchWords}" ng-click="rowCick(item)">
+                <td>{{$index + 1}}</td>
+                <td>{{item.ResidentNo}}</td>
+                <td>{{item.PersonNo}}</td>
+                <td>{{item.PersonName}}</td>
+                <td>{{item.Sex}}</td>
+                <td>{{item.Birthdate | ageFormat }}</td>
+                <td>{{item.Carer}}</td>
+                <td>{{item.BedNo}}</td>
+                <td>{{item.CheckinDate |date:'yyyy-MM-dd'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

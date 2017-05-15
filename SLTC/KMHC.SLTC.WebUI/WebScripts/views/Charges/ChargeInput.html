@@ -1,0 +1,47 @@
+﻿
+<div class="row" ng-controller="chargeInputCtrl">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    <input name="PayDateFrom" ng-model="options.params['Data.FeeDateFrom']" class="form-control" ca-date-picker placeholder="请起始消费日期" />
+                </div>
+                <div class="col-md-2">
+                    <input name="PayDateTo" ng-model="options.params['Data.FeeDateTo']" class="form-control" ca-date-picker placeholder="请结束消费日期" />
+                </div>
+                <div class="col-md-4">
+                    <span class="input-group-btn">
+                        <a class="btn blue" ng-click="options.search()"><i class="fa fa-search"></i> 查询</a>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        <ui-data-table options="options">
+            <table class="table table-striped table-bordered table-hover table-handler">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>收费代码</th>
+                        <th>收费项目</th>
+                        <th>费用时间</th>
+                        <th>总价</th>
+                        <th>是否生成账单</th>
+                        <th>是否缴费</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="charge in charges">
+                        <td>{{$index + 1}}</td>
+                        <td>{{charge.FeeNo}}</td>
+                        <td>{{charge.FeeName}}</td>
+                        <td>{{charge.FeeDate|date:'yyyy-MM-dd'}}</td>
+                        <td ng-class="{true: 'font-red', false: 'font-green'}[charge.TotalPrice>0]">{{charge.TotalPrice|customCurrency:"¥" }}</td>
+                        <td>{{charge.IsProduceBill=="1"?"已生成":"未生成"}}</td>
+                        <td>{{charge.IsPay=="1"?"是":"否"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ui-data-table>
+    </div>
+</div>

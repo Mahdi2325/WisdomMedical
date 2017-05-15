@@ -1,0 +1,225 @@
+﻿
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-bars"></i>服务预约
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-7" >
+                        <input-person id="txtRecordBy" callback="personSelected(person)" value="{{PersonID}}" />
+                    </div>
+                    <div class="col-md-5">
+                        <a class="btn blue" ui-sref="PersonList"><i class="fa fa-table"></i>客户管理</a>&nbsp;
+                        <a class="btn blue" data-toggle="modal" data-target="#modalPersonEdit" ng-click="isAdd=true"><i class="fa fa-plus"></i>客户添加</a>
+                    </div>
+                </div>
+
+                <div class="row" style="padding:15px 0 0 15px">
+
+                    <div class="portlet light bordered">
+                        <div class="portlet-body" >
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img style="height: 100px;" ng-src="{{(PersonInfo.PhotoPath != null && PersonInfo.PhotoPath != '') ? PersonInfo.PhotoPath : '/Images/0.png'}}" alt="" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">客户姓名：</label>
+                                                <span class="font-blue bold uppercase">
+                                                    {{PersonInfo.Name}}
+                                                </span>
+                                                <span ng-show="PersonInfo && PersonInfo.AuditState=='A' " class="font-green bold">{{"（"+ (PersonInfo.AuditState=="A"?"已认证":"未认证") +"）"}}</span>
+                                                <a class="font-red bold" ng-show="PersonInfo && PersonInfo.AuditState!='A'" data-toggle="modal" data-target="#modalAuthentication" ng-click="openAuthentication(PersonInfo)" style="cursor: pointer; outline: none" title="点击认证">（未认证）</a>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">性别：</label>
+                                                <span class="font-blue bold uppercase">
+                                                    <span select-code="A00.001" select-value="{{PersonInfo.Sex}}"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">电话：</label>
+                                                <span class="font-blue bold uppercase">
+                                                    {{PersonInfo.Phone}}
+                                                </span>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">身份证号码：</label>
+                                                <span class="font-blue bold uppercase">
+                                                    {{PersonInfo.IdCard}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">出生日期：</label>
+                                                <span class="font-blue bold uppercase">
+                                                    {{PersonInfo.Birthdate| dateFormat}}
+                                                </span>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">年龄：</label>
+                                                <span class="font-blue bold uppercase">
+                                                    {{PersonInfo.Birthdate| ageFormat}}
+                                                </span>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>                              
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">家庭住址：</label>
+                                        <span class="font-blue bold uppercase">                                            
+                                            {{PersonInfo.City}}{{PersonInfo.Address}}{{PersonInfo.HouseNumber}}
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">民族：</label>
+                                        <span class="font-blue bold uppercase">
+                                            <span select-code="K00.016" select-value="{{PersonInfo.Nationality}}"></span>
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">教育程度：</label>
+                                        <span class="font-blue bold uppercase">
+                                            <span select-code="A00.007" select-value="{{PersonInfo.EducationLevel}}"></span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">宗教信仰：</label>
+                                        <span class="font-blue bold uppercase">
+                                            <span select-code="Q00.006" select-value="{{PersonInfo.Faith}}"></span>
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">婚姻状况：</label>
+                                        <span class="font-blue bold uppercase">
+                                            <span select-code="A00.011" select-value="{{PersonInfo.MaritalStatus}}"></span>                                            
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">居住情况：</label>
+                                        <span class="font-blue bold uppercase">
+                                            <span select-code="Q00.007" select-value="{{PersonInfo.LivingStatus}}"></span>                                               
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">服务订单数：</label>
+                                        <span class="font-red bold uppercase">
+                                            {{ResidentInfo.OrderNumber}}
+                                        </span>次
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">电话记录：</label>
+                                        <span class="font-red bold uppercase">
+                                            {{ResidentInfo.CallNum}}
+                                        </span>次
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">交易金额：</label>
+                                        <span class="font-red bold uppercase">
+                                            {{ResidentInfo.ServiceAmount| number:2}}
+                                        </span>元
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">期初账户余额：</label>
+                                        <span class="font-red bold uppercase">
+                                            {{ResidentInfo.Amount| number:2}}
+                                        </span>元
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">本期消费金额：</label>
+                                        <span class="font-red bold uppercase">
+                                            {{ResidentInfo.TotalConSpeMonth | number:2}}
+                                        </span>元
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">剩余可用金额：</label>
+                                        <span class="font-red bold uppercase">
+                                            {{(ResidentInfo.Amount-ResidentInfo.TotalConSpeMonth) | number:2}}
+                                        </span>元
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 pd0">
+                <div class="portlet light" style=" box-shadow:none;padding:0px">
+                    <div class="portlet-title" style="padding:0px">
+                        <div class="caption">
+                            <i class="icon-home font-blue-sharp"></i>
+                            <span class="caption-subject font-blue-sharp bold uppercase">紧急联络人信息</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <table id="datatable1" class="table table-striped table-bordered table-hover table-handler">
+                            <thead>
+                                <tr>
+                                    <th>关系</th>
+                                    <th>家属姓名</th>
+                                    <th>手机</th>
+                                    <th>有无钥匙</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="family in Familys">
+                                    <td>{{family.Relation}}</td>
+                                    <td>{{family.Name}}</td>
+                                    <td>{{family.Phone}}</td>
+                                    <td>{{family.HasKey ?"有":"无" }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tabbable-custom" ng-if="PersonInfo">
+            <ul class="nav nav-tabs">
+                <li data-toggle="tab" ng-class="{true: 'active', false: ''}[activeTab('PriorityRemark')]"><a id="PriorityRemark" ui-sref=".PriorityRemark({id:PersonInfo.PersonID})">优先备注</a></li>
+                <li data-toggle="tab" ng-class="{true: 'active', false: ''}[activeTab('CallInfo')]"><a id="CallInfo" ui-sref=".CallInfo({id:PersonInfo.PersonID})">来电登记</a></li>
+                <li data-toggle="tab" ng-show="IsResident" ng-class="{true: 'active', false: ''}[activeTab('PersonOrder')]"><a id="PersonOrder" ui-sref=".PersonOrder({id:PersonInfo.PersonID,residentId:PersonInfo.ResidentID})">服务订单</a></li>
+                <li data-toggle="tab" ng-show="IsResident" ng-class="{true: 'active', false: ''}[activeTab('ServicePlan')]"><a id="ServicePlan" ui-sref=".ServicePlan({residentId:PersonInfo.ResidentID})">套餐管理</a></li>
+                <li data-toggle="tab" ng-class="{true: 'active', false: ''}[activeTab('Device')]"><a id="Device" ui-sref=".Device({id:PersonInfo.PersonID})">仪器设备</a></li>
+                <li data-toggle="tab" ng-class="{true: 'active', false: ''}[activeTab('Family')]"><a id="Family" ui-sref=".Family({id:PersonInfo.PersonID})">家属信息</a></li>
+                <li data-toggle="tab" ng-class="{true: 'active', false: ''}[activeTab('HealthManage')]"><a id="HealthManage" ui-sref=".HealthManage({id:PersonInfo.PersonID,idCard:PersonInfo.IdCard})">健康管理</a></li>
+                <li data-toggle="tab" ng-class="{true: 'active', false: ''}[activeTab('Habit')]"><a id="Habit" ui-sref=".Habit({id:PersonInfo.PersonID})">生活习惯</a></li>
+                <li data-toggle="tab" ng-class="{true: 'active', false: ''}[activeTab('HomePos')]"><a id="HomePos" ui-sref=".HomePos({id:PersonInfo.PersonID})">家庭位置</a></li>
+            </ul>
+            <div class="tab-content" style="padding: 20px">
+                <div ui-view=""></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAuthentication" tabindex="-1" role="dialog" aria-labelledby="modalCarryOutLabel"  data-keyboard="true" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div ng-include="'/WebScripts/views/UserManage/PersonAudit.html'"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalPersonEdit" tabindex="-1" role="dialog" aria-labelledby="modalCarryOutLabel" data-keyboard="false" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 70%; z-index: 90;">
+        <div ng-include="'/WebScripts/views/UserManage/PersonEditModal.html'"></div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿
+        <!--编辑页面-->
+        <form role="form" class="form-horizontal" name="servicegroupitembatchaddform"  novalidate>
+            <div class="form-group">
+                <div class="col-lg-8">
+                    <textarea class="form-control" ng-model="content" rows="30" placeholder="服务套餐列表JSON数组"></textarea>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <textarea class="form-control mgb5" rows="20" placeholder="">{{info}}</textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <textarea class="form-control" rows="9" placeholder="">{{error}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-12 text-center">
+                    <button class="btn btn-default btn-block" ng-click="saveItemBatch();" type="submit">保存</button>
+                </div>
+            </div>
+        </form>
+        <!--编辑页面-->

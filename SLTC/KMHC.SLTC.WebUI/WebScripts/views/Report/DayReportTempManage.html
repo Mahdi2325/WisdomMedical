@@ -1,0 +1,87 @@
+﻿<style>
+    #reportListTab table > thead > tr > th, #reportListTab table > tbody > tr > td, #reportListTab table > tfoot > tr > td {
+        word-wrap: break-word;
+        word-break: break-all;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    #reportListTab table > tbody > tr > td {
+        min-width: 100px;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <table style="width:100%;text-align:left;vertical-align:middle">
+                <tr>
+                    <td style="width:20%">
+                        <select name="Status" class="form-control" ng-model="reportType" placeholder="请选择报表名称">
+                            <option value="">请选择报表类型</option>
+                            <option value="Payment">日缴款报表</option>
+                        </select>
+                    </td>
+                    <td style="width:20%">
+                        <select name="Status" class="form-control" ng-model="operatorId" ng-options="item.UserID as item.DisplayName for item in userData" placeholder="请选择操作员">
+                            <option value="">请选择操作员</option>
+                        </select>
+                    </td>
+                    <td style="width:20%">
+                        <input type="text" class="form-control" ca-date-picker ng-model="date" placeholder="请选择日期">
+                    </td>
+                    <td style="text-align:left">
+                        <span class="input-group-btn">
+                            <a class="btn btn-primary" ng-click="Search()"><i class="icon-search"></i>查询</a>
+                            <!--<a class="btn btn-primary" ui-sref="BedAdd">新增</a>-->
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-table"></i>报表管理
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="reportList">
+                    <ui-data-table options="options">
+                        <div id="reportListTab"></div>
+                    </ui-data-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="Payment" type="text/x-handlebars-template">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>服务订单号</th>
+                <th>订单金额</th>
+                <th>预收款</th>
+                <th>现金</th>
+                <th>支付宝</th>
+                <th>微信</th>
+                <th>刷卡</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each Data}}
+            <tr>
+                <td>{{addOne @index}}</td>
+                <td>{{SONo}}</td>
+                <td>{{Price}}</td>
+                <td>{{PreAmount}}</td>
+                <td>{{#PaymentType PaymentType "1"}}{{ReceiveAmount}}{{/PaymentType}}</td>
+                <td>{{#PaymentType PaymentType "2"}}{{ReceiveAmount}}{{/PaymentType}}</td>
+                <td>{{#PaymentType PaymentType "3"}}{{ReceiveAmount}}{{/PaymentType}}</td>
+                <td>{{#PaymentType PaymentType "4"}}{{ReceiveAmount}}{{/PaymentType}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</script>
+

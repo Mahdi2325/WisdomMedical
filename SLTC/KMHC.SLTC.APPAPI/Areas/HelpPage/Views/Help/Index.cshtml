@@ -1,0 +1,62 @@
+@using System.Web.Http
+@using System.Web.Http.Controllers
+@using System.Web.Http.Description
+@using System.Collections.ObjectModel
+@using KMHC.SLTC.APPAPI.Areas.HelpPage.Models
+@model Collection<ApiDescription>
+
+@{
+    ViewBag.Title = "SLTC项目APP接口说明文档";
+
+    // Group APIs by controller
+    ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
+}
+
+<link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
+<header class="help-page">
+    <div class="content-wrapper">
+        <div class="float-left">
+            <h1>@ViewBag.Title</h1>
+        </div>
+        @*<div class="float-left">
+            <h1>API 请求说明</h1>
+        </div>
+        <div class="ApiDescription">
+            <h2>
+                认证方式：HTTP Basic Authentication
+            </h2>
+            <h4>
+                请求头要求：
+            </h4>
+            <h5>
+                <p>Authorization: "Basic 用户名和密码的base64加密字符串"</p>
+
+                <br />
+                base64加密字符串Java代码示例：<br />
+                <br />
+                function make_base_auth(user, password)<br /> { <br />
+                var tok = user + ':' + password;<br />
+                var hash = Base64.encode(tok);<br />
+                return "Basic " + hash;<br />
+                }
+
+            </h5>
+        </div>*@
+    </div>
+</header>
+<div id="body" class="help-page">
+    <section class="featured">
+        <div class="content-wrapper">
+            @*<h2>Introduction</h2>
+            <p>
+                Provide a general description of your APIs here.
+            </p>*@
+        </div>
+    </section>
+    <section class="content-wrapper main-content clear-fix">
+        @foreach (var group in apiGroups)
+        {
+            @Html.DisplayFor(m => group, "ApiGroup")
+        }
+    </section>
+</div>

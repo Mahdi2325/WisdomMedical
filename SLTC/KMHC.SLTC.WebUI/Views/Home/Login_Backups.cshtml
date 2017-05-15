@@ -1,0 +1,84 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>智能居家养老服务平台 | 登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- STYLESHEETS --><!--[if lt IE 9]><script src="js/flot/excanvas.min.js"></script><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/cloud-admin.css">
+
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/font-awesome/css/font-awesome.min.css">
+    <!-- DATE RANGE PICKER -->
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <!-- UNIFORM -->
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/js/uniform/css/uniform.default.min.css" />
+    <!-- ANIMATE -->
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/css/animatecss/animate.min.css" />
+    <!-- MainForm -->
+    <link rel="stylesheet" type="text/css" href="../../Content/MainForm/mainform.css" />
+</head>
+
+<body class="login" onload="">
+    <!-- PAGE -->
+    <section id="page">
+        <!-- LOGIN -->
+        <section id="login" class="visible">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="login-box-plain">
+                            <h2 class="bigintro">智能居家养老服务平台</h2>
+                            <div class="divide-40"></div>
+                            <form role="form" method="post" name="loginform">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">用戶名</label>
+                                    <i class="fa fa-user"></i>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" name="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">密码</label>
+                                    <i class="fa fa-lock"></i>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" name="pwd">
+                                </div>
+                                <div class="form-group">
+                                    @if (ViewBag.error == true)
+                                    {
+                                        @Html.ValidationMessage("Error")
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-lg btn-block" style="border: 0px;background:#008B8B">登录</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!--/LOGIN -->
+    </section>
+
+    <!--/PAGE -->
+    <!-- JAVASCRIPTS -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- JQUERY -->
+    <script src="../../Content/CloudAdmin/js/jquery/jquery-2.0.3.min.js"></script>
+    <!-- JQUERY UI-->
+    <script src="../../Content/CloudAdmin/js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- BOOTSTRAP -->
+    <script src="../../Content/CloudAdmin/bootstrap-dist/js/bootstrap.min.js"></script>
+    <!-- UNIFORM -->
+    <script type="text/javascript" src="../../Content/CloudAdmin/js/uniform/jquery.uniform.min.js"></script>
+    <!-- CUSTOM SCRIPT -->
+    <script src="../../Content/MainForm/mainform.js"></script>
+    <!-- /JAVASCRIPTS -->
+</body>
+</html>

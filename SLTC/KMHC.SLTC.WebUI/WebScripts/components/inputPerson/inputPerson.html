@@ -1,0 +1,23 @@
+﻿<div>
+    <input class="form-control" type="text" ng-model="searchWords" ng-blur="blur()" ng-focus="focus();" ng-change="change()" placeholder="请输入姓名首字母、身份证或电话号码进行查询" ng-keydown="keydown($event)" ng-disabled={{disabled}} ng-required ={{required}} />
+    <table id="tb" class="table table-hover table-bordered input-select" ng-show="showList" style="width:600px">
+        <thead>
+            <tr role="row">
+                <th>姓名</th>
+                <th>身份证号码</th>
+                <th>性別</th>
+                <th>年龄</th>
+                <th>电话</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items" style="cursor:pointer;border:1px" ng-click="rowClick(item)">
+                <td>{{item.Name}}</td>
+                <td>{{item.IdCard}}</td>
+                <td><span select-code="A00.001" select-value="{{item.Sex}}"></span></td>
+                <td>{{item.Birthdate| ageFormat}}</td>
+                <td>{{item.Phone}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

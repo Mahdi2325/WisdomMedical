@@ -1,0 +1,113 @@
+﻿<link rel="stylesheet" type="text/css" href="/WebScripts/components/cityNewSelect/city-picker.css" />
+<script src="/WebScripts/components/cityNewSelect/city-picker.data.js"></script>
+<script src="/WebScripts/components/cityNewSelect/city-picker.js"></script>
+<!--编辑页面-->
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-bars"></i>活动列表
+        </div>
+    </div>
+    <div class="portlet-body">
+        <form role="form" class="form-horizontal w5c-form" w5c-form-validate name="activityeditform" novalidate>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">活动分类<span class="required">*</span></label>
+                <div class="col-md-4">
+                    <select name="CategoryID" class="form-control" ng-change="selectCategory(activity.CategoryID)" ng-model="activity.CategoryID" ng-options="t.ID as t.CategoryName for t in activityCategoryList" required></select>
+                </div>
+                <label class="col-sm-2 control-label">活动项目</label>
+                <div class="col-md-4">
+                    <select name="ItemName" class="form-control" ng-model="activity.ItemID" ng-options="t.ID as t.ItemName for t in activityItemList"></select>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">活动标题<span class="required">*</span></label>
+                <div class="col-md-10">
+                    <input class="form-control" name="ActivityName" type="text" style="width:100%;" ng-model="activity.ActivityName" lang="50" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">活动内容</label>
+                <div class="col-sm-10">
+                    <textarea name="Remark" rows=10 ng-model="activity.ActivityContent" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">所属区域<span class="required">*</span></label>
+                <div class="col-md-4">
+                    <select name="AreaID" class="form-control" ng-change="selectArea(activity.AreaID)" ng-model="activity.AreaID" ng-options="t.AreaID as t.AreaName for t in areaList" required></select>
+                </div>
+                <label class="col-sm-2 control-label">活动地点<span class="required">*</span></label>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" style="width:100%;" ng-readonly="activity.AreaID!=-1" ng-model="activity.ActivityPlace" lang="50" ng-maxlength="200" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">开始时间<span class="required">*</span></label>
+                <div class="col-md-3">
+                    <input class="form-control" name="StartTime" type="text" ng-change="ChangeTime()" ng-model="activity.StartTime" ca-date-time-picker required />
+                </div>
+                <label class="col-sm-1 control-label">活动时长(小时)</label>
+                <div class="col-md-2">
+                    <input class="form-control" type="text" name="Hours" ng-change="ChangeHours()" ng-model="activity.Hours" />
+                </div>
+                <label class="col-sm-1 control-label">结束时间</label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" name="EndTime" ng-change="ChangeTime()" ng-model="activity.EndTime" ca-date-time-picker />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">参与员工</label>
+                <div class="col-md-8">
+                    <input name="EmployeeNames" style="background-color:white" ng-readonly class="form-control" ng-model="activity.EmployeeNames" placeholder="点击选择参与的员工" data-id="activity.EmployeeIDs" data-toggle="modal" data-target="#modalSelectEmployeeItem" />
+                </div>
+                <label class="col-sm-1 control-label">人数</label>
+                <div class="col-md-1">
+                    <input style="background-color:white" readonly class="form-control" readonly ng-model="activity.EmployeeCount" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">参与会员</label>
+                <div class="col-md-8">
+                    <input name="MemberNames" style="background-color:white" ng-readonly class="form-control" ng-model="activity.MemberNames" placeholder="点击选择参与的会员" data-id="activity.MemberIDs" data-toggle="modal" data-target="#modalSelectMemberItem" />
+                </div>
+                <label class="col-sm-1 control-label">人数</label>
+                <div class="col-md-1">
+                    <input style="background-color:white" readonly class="form-control" readonly ng-model="activity.MemberCount" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">其他参与人员</label>
+                <div class="col-md-8">
+                    <input name="OtherPersons" style="background-color:white" class="form-control" ng-model="activity.OtherPersons" placeholder="如有其他参与人员，请输入" />
+                </div>
+                <label class="col-sm-1 control-label">人数<span ng-show="activity.OtherPersons!='' && activity.OtherPersons!=null" class="required">*</span></label>
+                <div class="col-md-1">
+                    <input style="background-color:white" ng-required="activity.OtherPersons!='' && activity.OtherPersons!=null" class="form-control" ng-model="activity.OtherCount" />
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit" w5c-form-submit="saveEdit(activity)">保存</button>
+                <button type="button" class="btn btn-grey" ng-click="cancelEdit()">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- 员工Modal -->
+<div class="modal fade" id="modalSelectEmployeeItem" tabindex="-1" role="dialog" aria-labelledby="modalServiceItemLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="z-index: 90;">
+        <div ng-include="'/WebScripts/views/ActivityManage/SelectEmplyeeModal.html'"></div>
+    </div>
+</div>
+
+<!-- 会员Modal -->
+<div class="modal fade" id="modalSelectMemberItem" tabindex="-1" role="dialog" aria-labelledby="modalServiceItemLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="z-index: 90;">
+        <div ng-include="'/WebScripts/views/ActivityManage/SelectMemberModal.html'"></div>
+    </div>
+</div>
+<!--编辑页面-->

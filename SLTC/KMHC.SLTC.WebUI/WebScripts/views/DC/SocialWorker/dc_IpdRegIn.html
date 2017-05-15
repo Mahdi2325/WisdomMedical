@@ -1,0 +1,125 @@
+﻿<!--收案-->
+<link href="../../../Content/socialworker.css" rel="stylesheet" />
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="marginLeft5">
+                    <resident-list feeno={{FeeNo}} callback="residentSelected(resident)" />
+                </div>
+                
+            </div>
+            <div class="col-md-10 marginTop5">
+        
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <button class="btn btn-primary" ng-click="saveIn(currentItem)" ng-show="!resetSave"><i class="fa fa-save"></i> 儲存資料</button>
+                                <button class="btn btn-primary" ng-show="resetSave" ng-click="saveIn(currentItem)"><i class="fa fa-save"></i> 重新開案</button>
+                                <button class="btn btn-default" ng-click="addResident()"><i class="fa fa-plus"></i> 新增收案</button>
+                                <button class="btn btn-warning" ng-disabled="buttonShow" ng-click="PrintPreview(1)"><i class="fa fa-print"></i> 列印預覽</button>
+
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-horizontal tb" name="inForm" role="form" novalidate>
+                                    <div class="col-md-12 marginBottom5">
+                                        <div style="">
+                                            <div class="panel-title  center ">
+                                                <h3>
+                                                    <strong>{{Org}}老人日間照顧中心</strong> 
+                                                </h3>
+                                                <h4>
+                                                    <strong>個案收案表</strong>
+                                                </h4>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="div col-md-12">
+                                        <table class="col-md-12">
+                                            <tr>
+                                                <td class="col-md-1 tdlbl">姓名<span class="required">*</span></td>
+                                                <td class="col-md-2">
+                                                    <input type="text" class="form-control col-md-12 bottom_blue" name="個案姓名" ng-model="currentItem.RegName" placeholder="姓名" ng-maxlength="20" ng-disabled="IsDisabled" required />
+                                                    
+                                                </td>
+                                                <td class="col-md-2 tdlbl">身份證字號<span class="required">*</span></td>
+                                                <td class="col-md-2"><input class="form-control col-md-12 bottom_blue" type="text" name="身份證字號" ng-model="currentItem.IdNo" placeholder="身份證字號" ng-blur="checkIdNo();"  ng-disabled="IsDisabled" ng-minlength="10" ng-maxlength="10" required /></td>
+                                                <td class="col-md-1">性別<span class="required">*</span></td>
+                                                <td class="col-md-1">
+                                                    <div class="formgroup">
+                                                        <div class="input-group">
+                                                            <label class="radio-inline"><input type="radio" name="性別" ng-model="currentItem.Sex" value="男" ng-disabled="IsDisabled" />男</label>
+                                                        </div>
+
+                                                        <div class="input-group">
+                                                            <label class="radio-inline"><input type="radio" name="性別" ng-model="currentItem.Sex" value="女" ng-disabled="IsDisabled" />女</label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </td>
+                                                <td class="col-md-1 tdlbl">生日</td>
+                                                <td class="col-md-2"><input type="text" class="form-control col-md-12 bottom_blue" ng-model="currentItem.BirthDate" placeholder="出生日期" ng-disabled="IsDisabled" ca-date-picker /></td>
+
+                                            </tr>
+                                            <tr class="height60">
+                                                <td class="tdlbl">日字號</td>
+                                                <td><input type="text" ng-model="currentItem.ResidentNo" class="form-control col-md-12 bottom_blue" placeholder="日字號" name="日字號" ng-maxlength="20" /></td>
+                                                <td class="tdlbl">
+                                                    入託時間<span class="required">*</span>
+                                                </td>
+                                                <td colspan="2" align="left">
+                                                    <input type="text" class="form-control col-md-12 bottom_blue" name="入託時間" ng-model="currentItem.InDate" placeholder="入託時間"  ca-date-picker required />
+                                                </td>
+
+                                                <td class="tdlbl">區域<span class="required">*</span></td>
+                                                <td colspan="2" align="left">
+                                                    <select ng-model="currentItem.StationCode" class="form-control col-md-12 bottom_blue" name="區域" id=" stationcode" select-dcode="DC02.048" required ng-maxlength="10"></select>
+                                                </td>
+                                            </tr>
+                                            <tr class="height60">
+                                                <td class="tdlbl">
+                                                    主責社工
+                                                </td>
+                                                <td colspan="7" align="left">
+
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control  col-md-12" ng-model="currentItem.SocialWorker" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')'  for item in CarerData"></select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="height60">
+                                                <td class="tdlbl">
+                                                    照服員
+                                                </td>
+                                                <td colspan="7" align="left">
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" ng-model="currentItem.NurseAides" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')'  for item in NurseAides"></select>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="height60">
+                                                <td class="tdlbl">
+                                                    護理師
+                                                </td>
+                                                <td colspan="7" align="left">
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" ng-model="currentItem.NurseNo" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')'  for item in NurseNoData"></select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+            
+            </div>
+
+        </div>
+    </div>
+</div>

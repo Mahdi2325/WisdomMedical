@@ -1,0 +1,977 @@
+﻿<link href="../../../../Content/socialworker.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-md-2">
+        <div class="box border green">
+            <div class="box-title">
+                <h4>
+                    <i class="fa fa-bars"></i>会员信息
+                </h4>
+            </div>
+            <div class="box-body">
+                <resident-select callback="residentSelected(resident)" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <button class="btn btn-default" ng-disabled="buttonShow" ng-click="addEval()"><i class="fa fa-plus"></i> 新增评估</button>
+                        <button class="btn btn-primary" ng-disabled="buttonShow" ng-click="saveForm(currentItem)"><i class="fa fa-save"></i> 储存数据</button>
+                        <button class="btn btn-success" ng-disabled="buttonShow" ng-click="showHistory()"><i class="fa fa-list"></i> 历次记录</button>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#tab_1_1" data-toggle="tab"><i class="fa fa-home"></i> 社工评估</a></li>
+
+                                <li><a href="#tab_1_3" data-toggle="tab" ng-show="isShowTab3">工作目标及策略</a></li>
+                                <li><a href="#tab_1_2" data-toggle="tab" ng-show="isShowTab2">执行成效</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="tab_1_1">
+                                    <form class="form-horizontal tb" name="socialForm" role="form" novalidate>
+                                        <div class="divide-10"></div>
+                                        <div class="row">
+                                            <!--<div class="btn toolbar">                                                
+                                            </div>-->
+                                            <div class="col-md-12">
+
+                                                <div style="margin-bottom:5px;" class="col-md-12">
+                                                    <div style="text-align:center;font-size:24px;font-weight:700;line-height:36px;font-family: DFKai-SB;">
+
+                                                        <table style="width:100%;border:none;margin-top:5px;">
+                                                            <tr>
+                                                                <td colspan="2" style="border:none;">
+                                                                    <!--<h3><strong>{{Org}}老人日间照顾中心</strong></h3>-->
+                                                                    <h3><strong>社工个案评估及处遇计划表</strong></h3>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2" style="border:none;margin-top:10px;">
+                                                                    <table class="col-sm-10" style="border:none;border-left:none;border-top:none;border-right:none;border-bottom:none">
+                                                                        <tr>
+                                                                            <td style="border:none;" class="col-sm-2">日字号：{{currentItem.RESIDENTNO}}</td>
+
+                                                                            <td style="border:none;" class="col-sm-2">初评日期：</td>
+                                                                            <td style="border:none;" class="col-sm-2" align="left"><input type="text" class="col-sm-12" style="border-bottom:1px solid #000;border-left:none;border-top:none;border-right:none" ng-model="currentItem.EVALDATE " ng-change="changeEvalDate(currentItem.EVALDATE)" ca-date-picker /></td>
+                                                                            <td style="border:none; text-align:center" class="col-sm-2">第&nbsp;<span style="text-align:center">{{currentItem.EVALNUMBER}}</span>次覆评，</td>
+
+
+                                                                            <td style="border:none;" class="col-sm-1" align="right">评估日期：</td>
+                                                                            <td style="border:none;" class="col-sm-2" align="left"><input type="text" class="col-sm-12" style="border-bottom:1px solid #000;border-left:none;border-top:none;border-right:none" ng-model="currentItem.NEXTEVALDATE" ca-date-picker /></td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+                                                <div style="margin-bottom:5px;border:2px solid #000;padding:1px;" class="col-md-12">
+                                                    <div style="text-align:center;line-height:36px;">
+
+                                                        <table class="col-md-12">
+                                                            <tr class="height50 trBgColor">
+                                                                <td colspan="8" class="col-sm-12">
+                                                                    <div style="float:left;width:80%;text-align:center;font-size:22px;">壹、个案基本数据</div>
+                                                                    <div style="float:left;width:19%;text-align:right;font-size:16px;">【收托日期:<span ng-bind="currentItem.INDATE | dateFormat"></span>】</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height40">
+                                                                <td class="col-md-1 tdlbl">个案姓名</td>
+                                                                <td class="col-md-1 tdFont">
+                                                                    {{currentItem.REGNAME}}
+                                                                </td>
+                                                                <td class="col-md-1 tdlbl">性别</td>
+                                                                <td class="col-md-1 tdFont">
+                                                                    <span select-code="A00.001" select-value="{{currentItem.SEX}}"></span>
+                                                                </td>
+                                                                <td class="col-md-1 tdlbl">出生日期</td>
+                                                                <td class="col-md-1 tdFont">{{currentItem.BIRTHDATE | dateFormat}}</td>
+                                                                <td class="col-md-1 tdlbl">身份证字号</td>
+                                                                <td class="col-md-1 tdFont">{{currentItem.IDNO}}</td>
+                                                            </tr>
+                                                            <tr class="height40">
+                                                                <td class="col-md-1 tdlbl">紧急联系人</td>
+                                                                <td class="col-md-1 tdFont">
+                                                                    {{currentItem.CONTACTNAME}}
+                                                                </td>
+                                                                <td class="col-md-1 tdlbl">连络电话</td>
+                                                                <td colspan="3" class="col-md-1 tdFont">
+                                                                    手机:{{currentItem.CONTACTMOBILE}} / 电话：{{currentItem.CONTACTPHONE}}
+                                                                </td>
+                                                                <td class="col-md-1 tdlbl">称谓关系</td>
+                                                                <td class="col-md-1 tdFont">
+                                                                    <input type="text" class="form-control bottom_blue" ng-model="currentItem.APPELLATION" ng-maxlength="20" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height40">
+                                                                <td class="col-md-1 tdlbl">居住地址</td>
+                                                                <td colspan="7" class="col-md-11 tdFont">
+                                                                    {{currentItem.LIVINGADDRESS}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height40">
+                                                                <td class="col-md-1 tdlbl">身份别</td>
+                                                                <td colspan="7" class="col-md-11 tdFont">
+                                                                    {{currentItem.PTYPE}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height40">
+                                                                <td class="col-md-1 tdlbl">手册证明</td>
+                                                                <td colspan="7" class="col-md-11 tdFont">
+                                                                    {{currentItem.OBSTACLEMANUAL}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height40">
+                                                                <td class="col-md-1 tdlbl">个案来源</td>
+                                                                <td colspan="7" class="col-md-11 tdFont">
+                                                                    {{currentItem.SOURCETYPE}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height40">
+                                                                <td class="col-md-1 tdlbl">收托原因</td>
+                                                                <td colspan="7" class="col-md-11 tdFont">
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="col-sm-10" ng-model="currentItem.TAKECAREREASON" id="TAKECAREREASON" input-select="DC01.012" ng-maxlength="200" style="width:60%" />
+                                                                    </div>
+
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr class="height40">
+                                                                <td class="col-md-1 tdlbl">收托类型</td>
+                                                                <td colspan="7" class="col-md-11 tdFont">
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="col-sm-10" ng-model="currentItem.TAKECARETYPE" id="TAKECARETYPE" input-select="DC01.013" ng-maxlength="200" style="width:60%" />
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height40">
+                                                                <td class="col-md-1 tdlbl">服务型态</td>
+                                                                <td colspan="7" class="col-md-11 tdFont">
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="col-sm-10" ng-model="currentItem.SERVICETYPE" id="SERVICETYPE" input-select="DC01.014" ng-maxlength="50" style="width:60%" />
+                                                                    </div>
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr class="height40">
+                                                                <td class="col-md-1 tdlbl">疾病状况</td>
+                                                                <td colspan="7" class="col-md-11 tdFont">
+                                                                    {{currentItem.DISEASEINFO}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height40 trBgColor">
+                                                                <td colspan="8" class="col-sm-12">
+                                                                    <div style="float:left;width:80%;text-align:center;font-size:22px;">贰、社会支持网络</div>
+                                                                    <div style="float:left;width:19%;text-align:right;font-size:16px;"></div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="8">
+                                                                    <div class="col-sm-8">
+                                                                        <img src="{{currentItem.ECOLOGICALMAP}}" width="300" height="200" class="photoimg" />
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height40 trBgColor">
+                                                                <td colspan="8" class="col-sm-12">
+                                                                    <div style="float:left;width:80%;text-align:center;font-size:22px;">参、问题陈述</div>
+                                                                    <div style="float:left;width:19%;text-align:right;font-size:16px;"></div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height80">
+                                                                <td class="tdlbl">
+                                                                    一、个人史及收托现况
+                                                                </td>
+                                                                <td colspan="7" align="left" class="tdFont">
+                                                                    <textarea rows="2" ng-model="currentItem.PERSONALHISTORY" name="个人史及收托现况" class="form-control border_blue" placeholder="请输入......" maxlength="1000"></textarea>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height80">
+                                                                <td class="tdlbl">
+                                                                    二、生理部分
+                                                                </td>
+                                                                <td colspan="7" align="left" class="tdFont">
+                                                                    <textarea rows="2" ng-model="currentItem.PHYSIOLOGY" name="生理部分" class="form-control border_blue" placeholder="请输入......" maxlength="1000"></textarea>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height80">
+                                                                <td class="tdlbl">
+                                                                    三、心理部分
+                                                                </td>
+                                                                <td colspan="7" align="left" class="tdFont">
+                                                                    <textarea rows="2" ng-model="currentItem.PSYCHOLOGY" class="form-control border_blue" placeholder="请输入......" name="心理部分" maxlength="1000"></textarea>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height80">
+                                                                <td class="tdlbl">
+                                                                    四、家庭关系及非正式支持系统
+                                                                </td>
+                                                                <td colspan="7" align="left" class="tdFont">
+                                                                    <textarea rows="2" ng-model="currentItem.FAMILYSUPPORT" class="form-control border_blue" placeholder="请输入......" name="家庭关系及非正式支持系统" maxlength="1000"></textarea>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height80">
+                                                                <td class="tdlbl">
+                                                                    五、经济部分
+                                                                </td>
+                                                                <td colspan="7" align="left" class="tdFont">
+                                                                    <textarea rows="2" ng-model="currentItem.ECONOMICCAPACITY" class="form-control border_blue" placeholder="请输入......" name="经济部分" maxlength="1000"></textarea>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height80">
+                                                                <td class="tdlbl">
+                                                                    六、 目前使用之社会资源
+                                                                </td>
+                                                                <td colspan="7" align="left" class="tdFont">
+                                                                    <textarea rows="2" ng-model="currentItem.SOCIALRESOURCES" class="form-control border_blue" placeholder="请输入......" name="目前使用之社会资源" maxlength="1000"></textarea>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height80">
+                                                                <td class="tdlbl">
+                                                                    使用资源
+                                                                </td>
+                                                                <td colspan="7" align="left" class="tdFont">
+                                                                    <div style="margin-top:4px;">
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">社福资源</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" ng-model="currentItem.SOCIALRESOURCE" id="SocialResource" input-select="DC01.015" name="社福资源" ng-maxlength="200" style="width:60%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">目前补助</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" ng-model="currentItem.CURRENTSUBSIDY" id="CurrentSubsidy" input-select="DC01.016" name="目前补助" ng-maxlength="200" style="width:60%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">协助申请</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" ng-model="currentItem.ASSISTAPPLICATION" id="AssistApplication" input-select="DC01.017" name="协助申请" ng-maxlength="200" style="width:60%" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdlbl">
+                                                                    心理层面
+                                                                </td>
+                                                                <td colspan="7" align="left" class="tdFont">
+                                                                    <div class="marginTop5" style="">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-2 control-label">护理评估结果</label>
+                                                                            <div class="col-sm-10" style="margin-left:-5px;">
+
+                                                                                <div class="col-sm-2">
+                                                                                    <div class="input-group">
+                                                                                        <div class="input-group-addon">
+                                                                                            MMSE
+                                                                                        </div>
+                                                                                        <input type="text" class="form-control col-sm-12 border_blue" ng-model="currentItem.MMSE" name="MMSE" pattern="^0$|^\+?[1-9]\d*$" />
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-sm-2">
+                                                                                    <div class="input-group">
+                                                                                        <div class="input-group-addon">
+                                                                                            ADL
+                                                                                        </div>
+                                                                                        <input type="text" class="form-control col-sm-12  border_blue" ng-model="currentItem.ADL" name="ADL" pattern="^0$|^\+?[1-9]\d*$" />
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-sm-2">
+                                                                                    <div class="input-group">
+                                                                                        <div class="input-group-addon">
+                                                                                            IADL
+                                                                                        </div>
+                                                                                        <input type="text" class="form-control col-sm-12  border_blue" ng-model="currentItem.IADL" name="IADL" pattern="^0$|^\+?[1-9]\d*$" />
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="col-sm-2">
+                                                                                    <div class="input-group">
+                                                                                        <div class="input-group-addon">
+                                                                                            GDL
+                                                                                        </div>
+                                                                                        <input type="text" class="form-control col-sm-12  border_blue" ng-model="currentItem.GDS" name="GDS" pattern="^0$|^\+?[1-9]\d*$" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-2">
+                                                                                    <div class="input-group">
+                                                                                        <button class="btn btn-primary" ng-disabled="buttonShow" ng-click="getEvalQuestionVal()"><i class="fa fa-cloud-download"></i>带入最新一笔</button>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">情绪状态</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-12" ng-model="currentItem.EMOTIONSTATE" id="EmotionState" input-select="DC01.018" ng-maxlength="200" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">行为</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-12" ng-model="currentItem.BEHAVIOR" id="Behavior" input-select="DC01.019" ng-maxlength="200" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">态度</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-10" ng-model="currentItem.ATTITUDE" id="Attitude" input-select="DC01.020" ng-maxlength="200" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">注意力</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-10" ng-model="currentItem.PAYATTENTION" id="PayAttention" input-select="DC01.021" ng-maxlength="200" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">思考</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-10" ng-model="currentItem.THOUGHT" id="Thought" input-select="DC01.022" ng-maxlength="200" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">理解能力</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-10" ng-model="currentItem.UNDERSTANDABILITY" id="UnderStandAbility" input-select="DC01.023" ng-maxlength="200" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdlbl">
+                                                                    社会层面
+                                                                </td>
+                                                                <td colspan="7" align="left" class="tdFont">
+                                                                    <div style="margin-top:4px;">
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">社交能力</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-10" ng-model="currentItem.SOCIALABILITY" id="SocialAbility" input-select="DC01.024" ng-maxlength="200" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">视力</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-10" ng-model="currentItem.EYESIGHT" id="Eyesight" input-select="DC01.025" ng-maxlength="50" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">听力</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-10" ng-model="currentItem.HEARING" id="Hearing" input-select="DC01.026" ng-maxlength="50" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">表达</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-10" ng-model="currentItem.EXPRESSION" id="Expression" input-select="DC01.027" ng-maxlength="50" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">理解</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-10" ng-model="currentItem.UNDERSTANDING" id="Understanding" input-select="DC01.028" ng-maxlength="50" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">家人互动</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-10" ng-model="currentItem.FAMILYINTERACTION" id="FamilyNterAction" input-select="DC01.029" ng-maxlength="50" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">亲戚互动</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-10" ng-model="currentItem.RELATIVEINTERACTION" id="RelativeInterAction" input-select="DC01.030" ng-maxlength="50" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">朋友互动</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-10" ng-model="currentItem.FRIENDINTERACTION" id="FriendInterAction" input-select="DC01.031" ng-maxlength="50" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+
+                                                                            <div class="form-group">
+                                                                                <label for="txtCurrentSubsidy" class="col-sm-2 control-label">其他长辈互动【覆评】</label>
+                                                                                <div class="col-sm-10">
+                                                                                    <input type="text" class="col-sm-10" ng-model="currentItem.ELDERINTERACTION" id="ElderInterAction" input-select="DC01.032" ng-maxlength="50" style="width:80%" />
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="form-group">
+
+                                                                            <div class="form-group">
+                                                                                <label for="txtCurrentSubsidy" class="col-sm-2 control-label">中心适应状况【覆评】</label>
+                                                                                <div class="col-sm-10">
+                                                                                    <input type="text" class="col-sm-10" ng-model="currentItem.ADAPTIVESTATE" id="AdaptiveState" input-select="DC01.033" ng-maxlength="50" style="width:80%" />
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdlbl">
+                                                                    照顾者评估
+                                                                </td>
+                                                                <td colspan="7" align="left" class="tdFont">
+                                                                    <div style="margin-top:4px;">
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">居住状况</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-12" ng-model="currentItem.LIVINGCONDITION" id="LivingCondition" input-select="DC01.034" ng-maxlength="50" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="txtCurrentSubsidy" class="col-sm-2 control-label">就业状况</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="col-sm-10" ng-model="currentItem.JOBINFO" id="JobInfo" input-select="DC01.035" ng-maxlength="50" style="width:80%" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+
+                                                                            <div class="form-group">
+                                                                                <label for="txtCurrentSubsidy" class="col-sm-2 control-label">每天可照顾时间</label>
+                                                                                <div class="col-sm-10">
+                                                                                    <input type="text" class="col-sm-12" ng-model="currentItem.DAYTAKECAREHOUR" id="DayTakeCareHour" input-select="DC01.036" ng-maxlength="50" style="width:80%" />
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="form-group">
+
+                                                                            <div class="col-sm-12">
+                                                                                <label for="txtCurrentSubsidy" class="col-sm-7 lbLeft control-label ">除了个案外，案家是否有其他罹患重病的家人或15岁以下子女需要照顾</label>
+                                                                                <div class="col-sm-4">
+                                                                                    <input name="relativesneedcare" ng-model="currentItem.RELATIVESNEEDCARE" type="radio" value="true" ng-checked="currentItem.RELATIVESNEEDCARE==true"> 是
+                                                                                    <input name="relativesneedcare" ng-model="currentItem.RELATIVESNEEDCARE" type="radio" value="false" ng-checked="currentItem.RELATIVESNEEDCARE==false"> 否
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+
+                                                                            <div class="col-sm-12">
+                                                                                <label for="txtCurrentSubsidy" class="col-sm-7 control-label lbLeft">主要照顾者是否有其他可替代照顾人</label>
+                                                                                <div class="col-sm-4">
+
+                                                                                    <input name="replacement" ng-model="currentItem.REPLACEMENT" type="radio" value="true" ng-checked="currentItem.REPLACEMENT==true"> 是
+                                                                                    <input name="replacement" ng-model="currentItem.REPLACEMENT" type="radio" value="false" ng-checked="currentItem.REPLACEMENT==false"> 否
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+
+                                                                            <div class="col-sm-12">
+                                                                                <label for="txtCurrentSubsidy" class="col-sm-7 control-label lbLeft">照顾者认为个案至中心后，是否有协助其抒解照顾压力</label>
+                                                                                <div class="col-sm-4">
+                                                                                    <input name="easepressure" ng-model="currentItem.EASEPRESSURE" type="radio" value="true" ng-checked="currentItem.EASEPRESSURE==true"> 是
+                                                                                    <input name="easepressure" ng-model="currentItem.EASEPRESSURE" type="radio" value="false" ng-checked="currentItem.EASEPRESSURE==false"> 否
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdlbl">
+                                                                    照顾者负荷
+                                                                </td>
+                                                                <td colspan="7" align="left" class="tdFont">
+                                                                    <div style="margin-top:5px;">
+
+                                                                        <div class="form-group">
+                                                                            <label class="control-label col-md-4">参考家庭照顾者生活质量评估:</label>
+                                                                            <div class="col-sm-1">
+                                                                                <input type="text" class="form-control col-md-12 border_blue" ng-model="currentItem.LIFEQUALITY" ng-maxlength="3" name="参考家庭照顾者生活质量评估" pattern="^0$|^\+?[1-9]\d*$" />
+                                                                            </div>
+                                                                            <div class="control-label col-md-4" style="text-align:left">分【每半年评估一次】</div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="height80">
+                                                                <td class="tdlbl">
+                                                                    个案或家属对机构期待
+                                                                </td>
+                                                                <td colspan="7" align="left" class="tdFont">
+                                                                    <textarea rows="2" class="form-control border_blue" ng-model="currentItem.FAMILYEXPECT"></textarea>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-12" style="font-family: DFKai-SB;color:#000;">
+                                                    <div class="col-md-6 font18" style="font-weight:700;line-height:40px;">主责社工：</div>
+                                                    <div class="col-md-6 font18" style="font-weight:700;line-height:40px;">主任/督导核阅：</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="btn toolbar" style="position: relative;">
+                                            <button class="btn btn-primary" ng-disabled="buttonShow" ng-click="saveForm(currentItem)"><i class="fa fa-save"></i> 储存数据</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                                <div class="tab-pane fade" id="tab_1_2">
+                                    <div class="divide-10"></div>
+
+                                    <form class="form-horizontal tb" name="zxForm" role="form" novalidate>
+                                        <div style="margin-bottom:5px;" class="col-md-12">
+                                            <div style="text-align:center;font-size:24px;font-weight:700;line-height:36px;font-family: DFKai-SB;">
+
+                                                <table style="width:100%;border:none;margin-top:5px;">
+                                                    <tr>
+                                                        <td colspan="2" style="border:none;">
+                                                            <!--<h3><strong>{{Org}}老人日间照顾中心</strong></h3>-->
+                                                            <h3><strong>社工个案评估及处遇计划表</strong></h3>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" style="border:none;margin-top:10px;">
+                                                            <table class="col-sm-12" style="border:none;border-left:none;border-top:none;border-right:none;border-bottom:none">
+                                                                <tr>
+                                                                    <td style="border:none;" class="col-sm-2">日字号：{{currentItem.RESIDENTNO}}</td>
+
+                                                                    <td style="border:none;" class="col-sm-2">初评日期：</td>
+                                                                    <td style="border:none;" class="col-sm-2" align="left"><input type="text" class="col-sm-12" style="border-bottom:1px solid #000;border-left:none;border-top:none;border-right:none" ng-model="currentItem.EVALDATE " ng-change="changeEvalDate(currentItem.EVALDATE)" ca-date-picker /></td>
+                                                                    <td style="border:none; text-align:center" class="col-sm-1">第&nbsp;<span style="text-align:center">{{currentItem.EVALNUMBER}}</span></td>
+
+                                                                    <td style="border:none;" class="col-sm-3" align="left">次覆评，评估日期：</td>
+                                                                    <td style="border:none;" class="col-sm-2" align="left"><input type="text" class="col-sm-10" style="border-bottom:1px solid #000;border-left:none;border-top:none;border-right:none;" ng-model="currentItem.NEXTEVALDATE" ca-date-picker /></td>
+                                                                </tr>
+
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <div style="margin-bottom:5px;border:outset;padding:1px;" class="col-md-12">
+
+                                            <div style="text-align:center;line-height:36px;">
+
+                                                <table class="col-md-12">
+                                                    <tr class="height40 trBgColor">
+                                                        <td colspan="8" class="col-sm-12 font20" align="center">
+                                                            肆、上次工作目标及策略
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="8" align="left" class="">
+                                                            <table style="margin-top:7px;margin-bottom:5px;font-size:14px;" class="col-sm-12">
+
+                                                                <tr class="height40 font18">
+                                                                    <td class="col-sm-2 tdlbl lbCenter">需求类别</td>
+                                                                    <td class="col-sm-4 tdlbl lbCenter">处遇目标</td>
+                                                                    <td class="col-sm-2 tdlbl lbCenter">执行成效</td>
+                                                                    <td class="col-sm-4 tdlbl lbCenter">原因</td>
+                                                                </tr>
+
+                                                                <tr class="font18 height50" ng-repeat="evals in currentEval">
+                                                                    <td class="">
+                                                                        {{evals.QUESTIONTYPE}}
+                                                                        <span ng-bind="evals.MAJORTYPE" ng-show="false"></span>
+                                                                    </td>
+                                                                    <td class="">
+                                                                        {{evals.TREATMENTGOAL}}
+                                                                    </td>
+                                                                    <td class="tdlbl">
+                                                                        <select ng-model="evals.EVALUATIONVALUE" class="form-control" select-dcode="DC02.049" ng-change="changEvalVal(evals.EVALUATIONVALUE)"></select>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input ng-model="evals.UNFINISHREASON" type="text" class="col-sm-11 form-control border_blue" placeholder="如选择无法执行,可以输入原因..." name="执行成效原因" ng-maxlength="20" />
+                                                                    </td>
+
+                                                                </tr>
+
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+
+
+                                                </table>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-12" style="font-family: DFKai-SB;color:#000;">
+                                            <div class="col-md-6 font18" style="font-weight:700;line-height:40px;">主责社工：</div>
+                                            <div class="col-md-6 font18" style="font-weight:700;line-height:40px;">主任/督导核阅：</div>
+                                        </div>
+                                        <div class="btn toolbar">
+                                            <button class="btn btn-primary" ng-disabled="buttonShow" ng-click="saveEval(currentEval)"><i class="fa fa-save"></i> 储存数据</button>
+
+
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="tab-pane fade" id="tab_1_3">
+                                    <div class="divide-10"></div>
+                                    <div class="row">
+                                        <form class="form-horizontal tb" name="planForm" role="form" novalidate>
+                                            <div style="margin-bottom:5px;" class="col-md-12">
+                                                <div style="text-align:center;font-size:24px;font-weight:700;line-height:36px;font-family: DFKai-SB;">
+
+                                                    <table style="width:100%;border:none;margin-top:5px;">
+                                                        <tr>
+                                                            <td colspan="2" style="border:none;">
+                                                                <!--<h3><strong>{{Org}}老人日间照顾中心</strong></h3>-->
+                                                                <h3><strong>社工个案评估及处遇计划表</strong></h3>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2" style="border:none;margin-top:10px;">
+                                                                <table class="col-sm-12" style="border:none;border-left:none;border-top:none;border-right:none;border-bottom:none">
+                                                                    <tr>
+                                                                        <td style="border:none;" class="col-sm-2">日字号：{{currentItem.RESIDENTNO}}</td>
+
+                                                                        <td style="border:none;" class="col-sm-2">初评日期：</td>
+                                                                        <td style="border:none;" class="col-sm-2" align="left"><input type="text" class="col-sm-12" style="border-bottom:1px solid #000;border-left:none;border-top:none;border-right:none" ng-model="currentItem.EVALDATE " ng-change="changeEvalDate(currentItem.EVALDATE)" ca-date-picker /></td>
+                                                                        <td style="border:none; text-align:center" class="col-sm-1">第&nbsp;<span style="text-align:center">{{currentItem.EVALNUMBER}}</span></td>
+
+                                                                        <td style="border:none;" class="col-sm-3" align="left">次覆评，评估日期：</td>
+                                                                        <td style="border:none;" class="col-sm-2" align="left"><input type="text" class="col-sm-10" style="border-bottom:1px solid #000;border-left:none;border-top:none;border-right:none" ng-model="currentItem.NEXTEVALDATE" ca-date-picker /></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                            <div style="margin-bottom:5px;border:2px solid #000;padding:1px;" class="col-md-12">
+                                                <div style="text-align:center;line-height:36px;">
+
+                                                    <table class="col-md-12">
+                                                        <tr class="height40 trBgColor">
+                                                            <td colspan="8" class="col-sm-12 font20" align="center">
+                                                                伍、工作目标及策略
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="8" align="left">
+                                                                <div class="col-sm-12 marginTop5">
+
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-1 control-label">
+                                                                            需求类别<span class="required">*</span>
+                                                                        </label>
+                                                                        <div class="col-sm-2">
+                                                                            <select class="form-control font16" ng-model="QuestionTypeItem" ng-options="item as item.DiaPr  for item in problemList" ng-change="changLevel(QuestionTypeItem)" required>
+                                                                                <option>请选择需求类别</option>
+                                                                            </select>
+                                                                            <input type="hidden" ng-model="currentPlan.QUESTIONTYPE" />
+                                                                        </div>
+                                                                        <label class="col-sm-1 control-label">
+                                                                            项目<span class="required">*</span>
+                                                                        </label>
+                                                                        <div class="col-sm-2">
+                                                                            <select class="form-control font16" ng-model="currentPlan.CPDIA" ng-options="item.Causep as item.Causep  for item in activityList" required></select>
+                                                                        </div>
+                                                                        <div class="col-sm-4"></div>
+                                                                        <div class="col-sm-1">
+                                                                            <button class="btn btn-primary" ng-disabled="planForm.$invalid" ng-click="addPlan(currentPlan)"><i class="fa fa-plus"></i>  确认工作目标</button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="form">
+                                                                            <label class="col-sm-1 control-label">
+                                                                                问题描述
+                                                                            </label>
+                                                                            <div class="col-sm-2">
+                                                                                <textarea ng-model="currentPlan.QUESTIONDESC" placeholder="请在这里输入问题描述" rows="6" style="border:1px solid #cccccc;border-radius:3px 4px 5px 6px;border-bottom:1px solid #4B739A"></textarea>
+                                                                            </div>
+                                                                            <label class="col-sm-1 control-label">
+                                                                                处遇目标
+                                                                            </label>
+                                                                            <div class="col-sm-2">
+                                                                                <textarea ng-model="currentPlan.TREATMENTGOAL" rows="6" style="border:1px solid #cccccc;border-radius:3px 4px 5px 6px;border-bottom:1px solid #4B739A;word-wrap:break-word" class="form-control"></textarea>
+                                                                            </div>
+                                                                            <label class="col-sm-1 control-label">
+                                                                                阻助力分析
+                                                                            </label>
+                                                                            <div class="col-sm-2">
+                                                                                <textarea ng-model="currentPlan.QUESTIONANALYSIS" rows="6" style="border:1px solid #cccccc;border-radius:3px 4px 5px 6px;border-bottom:1px solid #4B739A"></textarea>
+                                                                            </div>
+                                                                            <label class="col-sm-1 control-label">
+                                                                                介入方式或资源连结
+                                                                            </label>
+                                                                            <div class="col-sm-2">
+                                                                                <textarea ng-model="currentPlan.PLANACTIVITY" rows="6" style="border:1px solid #cccccc;border-radius:3px 4px 5px 6px;border-bottom:1px solid #4B739A"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="8" align="left" class="">
+                                                                <table style="margin-top:7px;margin-bottom:5px;font-size:14px;" class="col-sm-12">
+                                                                    <thead>
+                                                                        <tr class="height40 font18">
+                                                                            <td class="col-sm-1 tdlbl">需求类别</td>
+                                                                            <td class="col-sm-2 tdlbl">项目</td>
+                                                                            <td class="col-sm-2 tdlbl">问题描述</td>
+                                                                            <td class="col-sm-2 tdlbl">处遇目标</td>
+                                                                            <td class="col-sm-2 tdlbl">阻助力分析</td>
+                                                                            <td class="col-sm-2 tdlbl">介入方式或资源连结</td>
+                                                                            <td class="col-sm-1"></td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr class="height35" ng-repeat="evals in currentEval">
+                                                                            <td>
+
+                                                                                {{evals.QUESTIONTYPE}}
+                                                                            </td>
+                                                                            <td>
+
+                                                                                {{evals.CPDIA}}
+                                                                            </td>
+                                                                            <td>
+
+                                                                                {{evals.QUESTIONDESC}}
+                                                                            </td>
+                                                                            <td>
+
+                                                                                {{evals.TREATMENTGOAL}}
+                                                                            </td>
+                                                                            <td>
+
+                                                                                {{evals.QUESTIONANALYSIS}}
+                                                                            </td>
+                                                                            <td>
+
+                                                                                {{evals.PLANACTIVITY}}
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="btn-group btn-group-xs">
+
+                                                                                    <a ng-click="editPlan(evals)" class=" btn btn-info" role="button"><i class="fa fa-pencil-square-o"></i> 编辑</a>
+                                                                                    <a ng-click="deletePlan(evals)" class=" btn btn-danger" role="button"><i class="fa fa-trash-o"></i> 删除</a>
+
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                        <div class="col-md-12" style="font-family: DFKai-SB;color:#000;">
+                                            <div class="col-md-6 font18" style="font-weight:700;line-height:40px;">主责社工：</div>
+                                            <div class="col-md-6 font18" style="font-weight:700;line-height:40px;">主任/督导核阅：</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:58%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <!--<div ng-include="'/Views/Socialworker/AddProposalDisscuss.html'"></div>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box border green">
+                            <div class="box-title">
+                                <h4>编辑工作目标及策略</h4>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-horizontal">
+                                    <div class="col-sm-12 marginTop5">
+
+                                        <div class="form-group" style="text-align:left">
+                                            <label class="col-sm-1 control-label">
+                                                需求类别:
+                                            </label>
+                                            <div class="col-sm-11 control-label">
+                                                <input type="text" class="col-sm-11 form-control border_blue" ng-model="eidt.QUESTIONTYPE" disabled />
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <div style="text-align:left"></div>
+                                            <label class="col-sm-1 control-label">
+                                                项目:
+                                            </label>
+                                            <div class="col-sm-11 control-label">
+                                                <input type="text" class="col-sm-11 form-control border_blue" ng-model="eidt.CPDIA" disabled />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">
+                                                问题描述
+                                            </label>
+                                            <div class="col-sm-11">
+                                                <textarea ng-model="eidt.QUESTIONDESC" rows="4" class="bottom_blue col-sm-12 form-control"></textarea>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">
+                                                处遇目标
+                                            </label>
+                                            <div class="col-sm-11">
+                                                <textarea ng-model="eidt.TREATMENTGOAL" rows="4" class="bottom_blue col-sm-12 form-control"></textarea>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">
+                                                阻助力分析
+                                            </label>
+                                            <div class="col-sm-11">
+                                                <textarea ng-model="eidt.QUESTIONANALYSIS" rows="4" class="bottom_blue col-sm-12 form-control"></textarea>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">
+                                                介入方式或资源连结
+                                            </label>
+                                            <div class="col-sm-11">
+                                                <textarea ng-model="eidt.PLANACTIVITY" rows="4" class="bottom_blue col-sm-12 form-control"></textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-offset-10">
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <button class="btn btn-primary" ng-disabled="buttonShow" ng-click="saveEdit(eidt)"><i class="fa fa-save"></i> 储  存</button>
+                                        <button class="btn btn-default" ng-disabled="buttonShow" ng-click="cancelEdit1()"><i class="fa fa-power-off"></i> 关  闭</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--显示历次记录-->
+<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:80%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <!--<div ng-include="'/Views/Socialworker/AddProposalDisscuss.html'"></div>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box border green">
+                            <div class="box-title">
+                                <h4>{{currentHistory.Name}} 历次评估记录</h4>
+                            </div>
+                            <div class="box-body">
+                                <div class="dataTables_wrapper form-inline" role="grid">
+                                    <ui-data-table options="options">
+                                        <table class="table table-striped table-bordered table-hover table-handler">
+                                            <thead>
+                                                <tr>
+                                                    <th>个案姓名</th>
+                                                    <th>性别</th>
+                                                    <th>生日</th>
+                                                    <th>身份证字号</th>
+                                                    <th>收案日期</th>
+                                                    <th>评估日期</th>
+                                                    <th>第几次评估</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="list in HistoryList">
+                                                    <td>{{list.REGNAME}}</td>
+                                                    <td>{{list.SEX}}</td>
+                                                    <td>{{list.BIRTHDATE | dateFormat }}</td>
+                                                    <td>{{list.IDNO}}</td>
+                                                    <td>{{list.INDATE | dateFormat}}</td>
+                                                    <td>{{list.NEXTEVALDATE| dateFormat }}</td>
+                                                    <td>{{list.EVALNUMBER}}</td>
+                                                    <td>
+                                                        <div class="btn-group btn-group-xs">
+
+                                                            <a ng-click="editEval(list.EVALPLANID)" class=" btn btn-info" role="button"><i class="fa fa-pencil-square-o"></i>编辑</a>
+                                                            <a ng-click="deleteEval(list)" class=" btn btn-danger" role="button"><i class="fa fa-times-circle"></i>删除</a>
+
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </ui-data-table>
+                                </div>
+
+                                <div class="col-sm-offset-10">
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <button class="btn btn-grey" ng-disabled="buttonShow" ng-click="cancelEdit()"><i class="fa fa-power-off"></i> 关  闭</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

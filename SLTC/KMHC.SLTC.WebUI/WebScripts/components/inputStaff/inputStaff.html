@@ -1,0 +1,17 @@
+﻿<div>
+    <input class="form-control" type="text" ng-model="searchWords" ng-blur="blur()" ng-focus="focus();" ng-change="change()" placeholder="输入编号,姓名" ng-keydown="keydown($event)" ng-required={{required}} />
+    <table id="tb" class="table table-hover table-bordered input-select" ng-show="showList" style="width:200px">
+        <thead>
+            <tr role="row">
+                <th>编号</th>
+                <th>姓名</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in empFiles | employeeFilter:searchWords" ng-click="rowClick(item)">
+                <td>{{item.EmpNo}}</td>
+                <td>{{item.EmpName}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

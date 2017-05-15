@@ -1,0 +1,193 @@
+﻿<style type="text/css">
+    .navibody {
+        background-size: 100% 100%;
+        /*background-image: url("../../../Images/dc_social.png");*/
+        /*background-color: #0072c6;*/
+        overflow: hidden;
+        font-size: 18px;
+    }
+
+    .piMainFrm {
+        width: 80%;
+        margin: 0px auto;
+    }
+
+    .piHead {
+        font-size: 36px;
+        font-weight: bolder;
+        text-align: center;
+        line-height: 60px;
+    }
+
+    .piToplace {
+        margin:5px 0;
+    }
+
+    .piInfoTab,.piProcessTab {
+        width: 100%;
+        border: 1px solid #000;
+        border-collapse: collapse;
+    }
+
+        .piInfoTab td,.piProcessTab td {
+            padding: 5px;
+            border: 1px solid #000;
+        }
+        .piLine{
+            margin:15px 0;
+            border:1px solid #000;
+
+        }
+        .piTip{
+            margin:5px 0;
+        }
+</style>
+
+<script type="text/javascript">
+    $('#socialNavi').height($(document).height());
+
+</script>
+
+<div id="socialNavi" class="navibody">
+    <div class="piMainFrm">
+        <div class="piHead">
+            <div>（服務單位全銜）老人日間照顧中心</div>
+            <div>個案轉介單</div>
+        </div>
+        <div class="piToplace">轉介至：</div>
+        <table class="piInfoTab">
+            <tr>
+                <td style="width: 200px;">個案姓名</td>
+                <td style="width: 200px;">
+                    <input type="text" />
+                </td>
+                <td style="width: 200px;">性別</td>
+                <td style="width: 200px;">
+                    <input name="sex" type="radio" checked id="rdMan" /><label for="rdMan">男</label>
+                    <input name="sex" type="radio" id="rdWoman" /><label for="rdWoman">女</label>
+                </td>
+                <td style="width: 200px;">籍貫</td>
+                <td style="width: 200px;">
+                    <input type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>生    日</td>
+                <td>
+                    <input type="text" /></td>
+                <td>收案日期</td>
+                <td>
+                    <input type="text" /></td>
+                <td>身分證字號</td>
+                <td>
+                    <input type="text" /></td>
+            </tr>
+            <tr>
+                <td>電     話</td>
+                <td colspan="5">
+                    <input type="text" /></td>
+            </tr>
+            <tr>
+                <td>戶籍地址</td>
+                <td colspan="5">
+                    <input type="text" /></td>
+            </tr>
+            <tr>
+                <td>居住住址</td>
+                <td colspan="5">
+                    <input type="text" /></td>
+            </tr>
+            <tr>
+                <td>主要聯絡人</td>
+                <td>
+                    <input type="text" /></td>
+                <td>聯絡電話</td>
+                <td>
+                    <input type="text" /></td>
+                <td>關     係</td>
+                <td>
+                    <input type="text" /></td>
+            </tr>
+            <tr>
+                <td>溝通語言</td>
+                <td colspan="5"></td>
+            </tr>
+            <tr>
+                <td>婚姻狀況</td>
+                <td colspan="5"></td>
+            </tr>
+            <tr>
+                <td>宗教信仰</td>
+                <td colspan="5"></td>
+            </tr>
+            <tr>
+                <td>手 冊 別</td>
+                <td colspan="5"></td>
+            </tr>
+            <tr>
+                <td>疾病狀況</td>
+                <td colspan="5"></td>
+            </tr>
+            <tr>
+                <td>家系圖/生態圖：</td>
+                <td colspan="2">
+                    <textarea rows="4"></textarea></td>
+                <td>生理概況</td>
+                <td colspan="2">
+                    <textarea rows="4"></textarea></td>
+            </tr>
+            <tr>
+                <td>個案問題陳述</td>
+                <td colspan="5">
+                    <textarea rows="4"></textarea></td>
+            </tr>
+            <tr>
+                <td>轉介目的</td>
+                <td colspan="2">
+                    <textarea rows="4"></textarea></td>
+                <td>檢附資料</td>
+                <td colspan="2">
+                    <textarea rows="4"></textarea></td>
+            </tr>
+            <tr>
+                <td>轉介日期：</td>
+                <td>
+                    <input type="text" /></td>
+                <td>主責社工：</td>
+                <td>
+                    <input type="text" /></td>
+                <td>督導/主任：</td>
+                <td>
+                    <input type="text" />
+                </td>
+            </tr>
+        </table>
+
+        <hr class="piLine" />
+
+        <div class="piTip">※請於接受轉介單後儘可能在一週內，以電話或傳真將結果告訴我們，我們將再與您聯絡。謝謝！</div>
+
+        <table class="piProcessTab">
+            <tr>
+                <td rowspan="3">處理回覆</td>
+                <td>接案機構：</td>
+                <td colspan="7"></td>
+            </tr>
+            <tr>
+                <td>接案結果：</td>
+                <td colspan="7"></td>
+            </tr>
+            <tr>
+                <td>回覆日期：</td>
+                <td><input type="text" /></td>
+                <td>接案者：</td>
+                <td><input type="text" /></td>
+                <td>電話：</td>
+                <td><input type="text" /></td>
+                <td>傳真：</td>
+                <td><input type="text" /></td>
+            </tr>
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,45 @@
+﻿    
+<style type="text/css">
+    #l-map {
+        height: 300px;
+        width: 100%;
+    }
+
+    #r-result {
+        width: 100%;
+    }
+    .tangram-suggestion-main {
+        z-index: 99999;
+    }
+</style>
+<div style="width:1100px" class="modal-content modal-lg" ng-controller="AddressInputCtrl">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bars"></i>地址编辑
+                </div>
+                <div class="tools">
+                    <button type="button" class="close" ng-click="HideModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form name="deviceEditForm" class="form-horizontal w5c-form" w5c-form-validate novalidate>
+                <div class="form-group text-right" style="padding-right:15px">
+                    <button type="button" class="btn btn-primary" w5c-form-submit="saveEdit()">确定</button>
+                    <button type="button" class="btn btn-grey" ng-click="HideModal()">关闭</button>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2  control-label">详细地址<span class="required">*</span></label>
+                    <div class="col-md-10">
+                        <div id="r-result">
+                            <input name="suggest" id="suggest" type="text" class="form-control" placeholder="直接搜索具体小区或街道" ng-model="Suggest" required /></div>
+                        <div id="searchResultPanel" style="border: 1px solid #C0C0C0; width: 100%; height: auto; display: none; z-index: 9999999999;"></div>
+                    </div>
+                </div>
+                <div class="form-group" style="padding:10px">
+                    <div id="l-map" class="chart" style="height: 400px"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

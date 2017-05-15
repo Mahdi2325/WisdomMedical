@@ -1,0 +1,198 @@
+﻿<link href="../../../Content/DC/layout.css" rel="stylesheet" />
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                <resident-list feeno={{FeeNo}} callback="residentSelected(resident)" />
+            </div>
+            <div class="col-md-10">
+
+                <div class="formStyle">
+                    <button class="btn btn-default" ng-disabled="buttonEditShow" ng-click="addItem()"><i class="fa fa-plus default"></i> 新增資料</button>
+                    <button class="btn btn-default" ng-disabled="buttonCancelEditShow" ng-click="cancelEdit()"><i class="fa fa-reply"></i> 取消編輯</button>
+                    <button class="btn btn-primary" ng-disabled="buttonSaveShow" ng-click="save(currentItem)"><i class="fa fa-save"></i> 儲存資料</button>
+                    <button class="btn btn-warning" ng-disabled="buttonPrintShow" ng-click="PrintPreview()"><i class="fa fa-print"></i> 列印預覽</button>
+                </div>
+                <div ng-hide="editItem" class="formStyle">
+                    <form name="medForm" novalidate>
+                        <table style="width:100%;line-height:3em;">
+                            <tr>
+                                <td>藥品名稱<span class="required">*</span></td>
+                                <td><input class="form-control" type="text" name="藥品名稱" ng-model="currentItem.MedicineName" ng-maxlength="16" required /></td>
+                                <!--<td>
+                                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                                          ng-show="medForm.MedicineName.$valid">
+                                    </span>
+                                </td>-->
+                                <td width="15px"></td>
+                                <td>開藥醫院</td>
+                                <td><input class="form-control text" type="text" name="開藥醫院" ng-model="currentItem.HospitalName" ng-maxlength="16" /></td>
+                                <!--<td>
+                                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                                          ng-show="medForm.HospitalName.$valid">
+                                    </span>
+                                </td>-->
+                                <td width="15px"></td>
+                                <td>科別</td>
+                                <td><input class="form-control text" type="text" name="科別" ng-model="currentItem.DeptName" ng-maxlength="16" /></td>
+                                <!--<td>
+                                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                                          ng-show="medForm.DeptName.$valid">
+                                    </span>
+                                </td>-->
+                                <td width="15px"></td>
+
+                            </tr>
+                            <tr>
+                                <td>劑量</td>
+                                <td><input class="form-control text" type="text" name="劑量" ng-model="currentItem.TakeQty" ng-maxlength="16" /></td>
+                                <!--<td>
+                                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                                          ng-show="medForm.TakeQty.$valid">
+                                    </span>
+                                </td>-->
+                                <td></td>
+                                <td>服藥途徑<span class="required">*</span></td>
+                                <td><input class="form-control text" type="text" name="服藥途徑" ng-model="currentItem.TakeProc" ng-maxlength="16" required /></td>
+                                <!--<td>
+                                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                                          ng-show="medForm.TakeProc.$valid">
+                                    </span>
+                                </td>-->
+                                <td></td>
+                                <td>用藥時間<span class="required">*</span></td>
+                                <td><input class="form-control" type="text" name="用藥時間" ng-model="currentItem.TakeDateTime" ng-maxlength="6" required /></td>
+                                <!--<td>
+                                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                                          ng-show="medForm.TakeDateTime.$valid">
+                                    </span>
+                                </td>-->
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>開始時間</td>
+                                <td><input class="form-control datepicker" type="text" name="開始時間" ng-model="currentItem.StartDate" ca-date-picker ng-change="checkStartDate()"   /></td>
+                                <!--<td>
+                                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                                          ng-show="medForm.StartDate.$valid">
+                                    </span>
+                                </td>-->
+                                <td></td>
+                                <td>結束時間</td>
+                                <td><input class="form-control datepicker" type="text" name="結束時間" ng-model="currentItem.EndDate" ca-date-picker ng-change="checkEndDate()"  /></td>
+                                <!--<td>
+                                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                                          ng-show="medForm.EndDate.$valid">
+                                    </span>
+                                </td>-->
+                                <td></td>
+                                <td>停用時間</td>
+                                <td><input class="form-control datepicker" type="text" name="停用時間" ng-model="currentItem.BreakDate" ca-date-picker  /></td>
+                                <!--<td>
+                                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                                          ng-show="medForm.BreakDate.$valid">
+                                    </span>
+                                </td>-->
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>停用原因</td>
+                                <td colspan="7"><input class="form-control text" type="text" name="停用原因" ng-model="currentItem.BreakReason" ng-maxlength="16" /></td>
+                                <!--<td>
+                                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                                          ng-show="medForm.BreakReason.$valid">
+                                    </span>
+                                </td>-->
+                                <td></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div id="drugManage" style="min-width:720px;" class="formStyle">
+                    <form>
+                        <div class="headerStyle">
+                            <h3><strong>{{OrgName}}老人日間照顧中心</strong></h3>
+                            <h4><strong>個案藥品管理</strong></h4>
+                        </div>
+                        <div>
+                            <span>
+                                日字號：
+                                <input type="text" class="inputStyleOne" readonly="readonly" style="width:100px;text-align:center;" ng-model="residentNo" />&nbsp;
+                            </span>
+                            <span>姓名：<input type="text" class="inputStyleOne" readonly="readonly" style="width:100px;text-align:center;" ng-model="residentName" />&nbsp; </span>
+                            <span>性别：</span><input type="text" class="inputStyleOne" readonly="readonly" style="width:40px;text-align:center;" ng-model="sex" />&nbsp;
+                            <span>出生：</span><span>
+                                <input type="text" class="inputStyleOne" style="width:100px;text-align:center;" readonly="readonly" ng-model="birthDate" />
+                                （<span style="font-size:16px;font-weight:400;">&nbsp;{{age}}&nbsp;</span>歲）
+                            </span>
+                        </div>
+                        <div id="mainBody" style="margin-top:20px;">
+                            <table border="1" style="width:100%" class="tbStyle">
+                                <thead style="text-align:center;font-weight:bolder;font-size:16px;">
+                                    <tr>
+                                        <!--<th style="text-align:center;width:3%;min-width:20px">
+                                            编号
+                                        </th>-->
+                                        <th style="text-align:center;width:12%;min-width:110px">
+                                            藥品名稱<br />
+                                            (學名/商品名)
+                                        </th>
+                                        <th style="text-align:center;width:10%;min-width:70px;">
+                                            開藥醫院
+                                        </th>
+                                        <th style="text-align:center;width:10%;min-width:30px;">
+                                            科別
+                                        </th>
+                                        <th style="text-align:center;width:5%;min-width:30px;">
+                                            劑量
+                                        </th>
+                                        <th style="text-align:center;width:5%;min-width:70px;">
+                                            服藥途徑
+                                        </th>
+                                        <th style="text-align:center;width:10%;min-width:70px;">
+                                            用藥時間
+                                        </th>
+                                        <th style="text-align:center;width:10%;min-width:70px;">
+                                            開始時間
+                                        </th>
+                                        <th style="text-align:center;width:10%;min-width:70px;">
+                                            結束時間
+                                        </th>
+                                        <th style="text-align:center;width:10%;min-width:70px;">
+                                            停用時間
+                                        </th>
+                                        <th style="text-align:center;width:10%;min-width:70px;">
+                                            停用原因
+                                        </th>
+                                        <th style="text-align:center;width:20%;min-width:70px;">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="text-align:center;font-family:宋体;font-size:16px;">
+                                    <tr ng-repeat="item in Data.items">
+                                        <!--<td>{{$index + 1}}</td>-->
+                                        <td>{{item.MedicineName}}</td>
+                                        <td>{{item.HospitalName}}</td>
+                                        <td>{{item.DeptName}}</td>
+                                        <td>{{item.TakeQty}}</td>
+                                        <td>{{item.TakeProc}}</td>
+                                        <td>{{item.TakeDateTime}}</td>
+                                        <td>{{item.StartDate | dateFormat}}</td>
+                                        <td>{{item.EndDate | dateFormat}}</td>
+                                        <td>{{item.BreakDate | dateFormat}}</td>
+                                        <td>{{item.BreakReason}}</td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                <a class="btn btn-success" role="button" ng-click="rowSelect(item)"><i class="fa fa-pencil"></i>編輯</a>
+                                                <a class="btn btn-danger" role="button" ng-click="deleteItem(item)"><i class="fa fa-times"></i>刪除</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

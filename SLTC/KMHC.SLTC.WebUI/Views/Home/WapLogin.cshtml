@@ -1,0 +1,145 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title> 日照管理系统 | 登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- STYLESHEETS --><!--[if lt IE 9]><script src="js/flot/excanvas.min.js"></script><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/cloud-admin.css">
+
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/font-awesome/css/font-awesome.min.css">
+    <!-- DATE RANGE PICKER -->
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <!-- UNIFORM -->
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/js/uniform/css/uniform.default.min.css" />
+    <!-- ANIMATE -->
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/css/animatecss/animate.min.css" />
+    <!-- MainForm -->
+    <link rel="stylesheet" type="text/css" href="../../Content/MainForm/mainform.css" />
+    <style type="text/css">
+        .waplogin {
+            background: url("../../Images/wap/login_bg.png") round scroll 0 0 rgba(0, 0, 0, 0);
+            height: 100%;
+            min-height: 100%;
+        }
+
+        .waplogin-box-plain {
+            border-radius: 7px 7px 7px 7px;
+            margin: 50px auto;
+            padding: 55px 60px 60px;
+            position: relative;
+            min-height: 300px;
+        }
+
+            .waplogin-box-plain input,
+            .waplogin-box-plain textarea {
+                background: none repeat scroll 0 0 #FFFFFF;
+                font-size: 15px;
+                margin: 0;
+                padding: 10px 8px 8px;
+                width: 100%;
+                border-radius: 6px;
+                box-shadow: none;
+                min-width: 0;
+                padding-left: 33px !important;
+            }
+
+            .waplogin-box-plain button {
+                width: 100%;
+            }
+
+            .waplogin-box form i,
+            .waplogin-box-plain form i {
+                color: #CCCCCC;
+                display: block !important;
+                font-size: 16px;
+                height: 16px;
+                margin: 9px 2px 4px 10px;
+                position: absolute !important;
+                text-align: center;
+                width: 16px;
+                z-index: 1;
+            }
+
+            .waplogin-box .social-login a,
+            .waplogin-box-plain .social-login a {
+                border: 0 none;
+                border-radius: 100% 100% 100% 100%;
+                height: 42px;
+                line-height: 42px;
+                margin: 0 5px;
+                padding: 0;
+                width: 42px;
+                text-decoration: none !important;
+            }
+            #fauser:before {
+                content: url("../../Images/wap/user.png");
+            }
+            #falock:before {
+                content: url("../../Images/wap/key.png");
+            }
+            #bigintro {
+                background: url("../../Images/wap/logo_login.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+            }
+    </style>
+</head>
+
+<body class="waplogin" onload="">
+    <!-- PAGE -->
+    <section id="page">
+        <!-- LOGIN -->
+        <section id="login" class="visible">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="waplogin-box-plain" style="width: 400px;">
+                            <div class="form-group">
+                                <a  href="#">
+                                    <img src="../../Images/wap/logo_login.png" alt="STLC Logo" class="img-responsive" style="margin: 0 auto;" height="34">
+                                </a>
+                            </div>
+                            <form role="form" method="post" name="waploginform">
+                                <div class="form-group">
+                                    <i class="fa fa-user" id="fauser"></i>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" name="name" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <i class="fa fa-lock" id="falock"></i>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" name="pwd" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-lg btn-block" style="border: 0px;background:#F1C239">Log in</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!--/LOGIN -->
+    </section>
+
+    <!--/PAGE -->
+    <!-- JAVASCRIPTS -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- JQUERY -->
+    <script src="../../Content/CloudAdmin/js/jquery/jquery-2.0.3.min.js"></script>
+    <!-- JQUERY UI-->
+    <script src="../../Content/CloudAdmin/js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- BOOTSTRAP -->
+    <script src="../../Content/CloudAdmin/bootstrap-dist/js/bootstrap.min.js"></script>
+    <!-- UNIFORM -->
+    <script type="text/javascript" src="../../Content/CloudAdmin/js/uniform/jquery.uniform.min.js"></script>
+    <!-- CUSTOM SCRIPT -->
+    <script src="../../Content/MainForm/mainform.js"></script>
+    <!-- /JAVASCRIPTS -->
+</body>
+</html>

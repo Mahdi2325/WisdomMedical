@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>报表预览</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="/Content/FlexPaper/flexpaper.css" />
+    <script src="/Content/CloudAdmin/js/jquery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="/Content/FlexPaper/flexpaper.js"></script>
+    <script type="text/javascript" src="/Content/FlexPaper/flexpaper_handlers.js"></script>
+    <style type="text/css" media="screen">
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: auto;
+        }
+
+        #flashContent {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="documentViewer" class="flexpaper_viewer" style="position: absolute; left: 10px; top: 10px; width: 100%; height: 100%"></div>
+
+    <script type="text/javascript">
+        function getDocumentUrl(document){
+            return "/api/PrintReport/View?doc={doc}&format={format}&page={page}".replace("{doc}", document);
+        }
+
+        function getDocQueryServiceUrl(document){
+            return "services/swfsize.ashx?doc={doc}&page={page}".replace("{doc}",document);
+        }
+
+        var startDocument = "@ViewBag.StartDocument";
+        $('#documentViewer').FlexPaperViewer(
+          { config : {
+
+              DOC : escape(getDocumentUrl(startDocument)),
+              Scale : 0.6,
+              ZoomTransition : 'easeOut',
+              ZoomTime : 0.5,
+              ZoomInterval : 0.2,
+              FitPageOnLoad : true,
+              FitWidthOnLoad : false,
+              FullScreenAsMaxWindow : false,
+              ProgressiveLoading : false,
+              MinZoomSize : 0.2,
+              MaxZoomSize : 5,
+              SearchMatchAll : false,
+              InitViewMode : 'Portrait',
+              //RenderingOrder : '<%=(configManager.getConfig("renderingorder.primary") + ',' + configManager.getConfig("renderingorder.secondary")) %>',
+
+              ViewModeToolsVisible : true,
+              ZoomToolsVisible : true,
+              NavToolsVisible : true,
+              CursorToolsVisible : true,
+              SearchToolsVisible : true,
+
+              //DocSizeQueryService : 'services/swfsize.ashx?doc=' + startDocument,
+              jsDirectory: '/Content/FlexPaper/',
+
+              JSONDataType : 'jsonp',
+              //key : '<%=configManager.getConfig("licensekey") %>',
+
+              localeChain: 'en_US'
+
+          }}
+        );
+    </script>
+</body>
+</html>
+

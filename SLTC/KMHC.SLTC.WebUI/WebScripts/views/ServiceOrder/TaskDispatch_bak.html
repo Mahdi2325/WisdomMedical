@@ -1,0 +1,381 @@
+﻿<style>
+    .split_devider {
+        width: 100%;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .item_margin {
+        margin-left: 1px;
+        margin-top: 10px;
+        margin-right: 1px;
+        margin-bottom: 10px;
+    }
+
+    .item_margin_10 {
+        margin-left: 10px;
+        margin-top: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+
+            <div class="row">
+                <div class="col-sm-2" style="margin-left:-16px;margin-top:-1px;">
+                    <div id="content" class="panel panel-default">
+                        <div class="panel-heading" style="height:45px;padding:5px 5px;background:#ffffff;">
+                            <div class="panel-title">
+                                <h4><i class="fa fa-bars"></i>任务信息</h4>
+                            </div>
+                        </div>
+                        <div class="panel-body" >
+                            
+                            <!-- SEARCH BAR -->
+                            <div class="input-group" style="margin:0px 10px 0px 0px;">
+                                <input type="text" id="newItem" ng-model="options.params.ServiceItemName" placeholder="任务查询..." class="form-control">
+                                <span class="input-group-btn"> <button id="addItem" ng-click="search();" class="btn btn-default" type="button"><i class="fa fa-search search-icon"></i></button></span>
+                            </div>
+                            <div class="divide-20"></div>
+                            
+                            <div class="scroller" style=" width: auto; height: 720px;  margin-left:-10px;margin-right:-10px;margin-bottom:-60px;">
+                                <table class="table table-striped table-bordered table-hover table-handler">
+
+                                    <tr ng-repeat="task in Data.Tasks  | filter:{SIName:options.params.ServiceItemName}" class="info" ng-click="ItemClick(task);">
+                                        <td>
+                                            <div>
+                                                <div class="item_margin col-sm-12">
+
+                                                    <!--<div ng-repeat="t in Data.ServiceItems | filter:{SIName:options.params.taskName}">-->
+                                                    <div class="text-left " style="font-size:20px;color:#555555;">
+                                                        {{task.SIName}}
+
+                                                    </div>
+                                                    <!--</div>-->
+
+                                                    <div class="text-left" style="color:#555555;">
+                                                        <!--客户名称：{{getEmpName(task.orderItem)}}-->
+
+                                                    </div>
+
+
+                                                    <div class="text-left" style="color:#555555;">订单编号：{{task.orderItem.SONo}}</div>
+                                                    <div class="text-left" style="color:#555555;">服务时间：{{task.orderItem.Otime}}</div>
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-7" style="margin-top:30px;">
+                    <div class="box border green">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>任务信息</h4>
+                        </div>
+                        <div class="box-body big">
+                            <div class="split_devider"></div>
+                            <legend>订单信息</legend>
+                            <h1>{{Data.Task.Resident.PersonName}}</h1>
+                            <h5 class="form-title">订单编号：{{Data.Task.SONo}}</h5>
+                            <h5 class="form-title">订单生成时间：{{Data.Task.orderItem.CreateTime}}</h5>
+                            <h5 class="form-title">预约时间：{{Data.Task.orderItem.Otime}}</h5>
+                            <h5 class="form-title">服务项目：{{Data.Task.ServiceItem.SIName}}</h5>
+                            <h5 class="form-title">服务地址：{{Data.Task.orderItem.ServiceCity + " " + Data.Task.orderItem.ServiceAddress}}</h5>
+                            <h5 class="form-title">备注：{{Data.Task.orderItem.Remark}}</h5>
+                            <div class="split_devider"></div>
+                            <form class="form-horizontal" role="form" name="taskdispatchabakform" ng-submit="submit()" novalidate>
+                                <legend>任务派遣</legend>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">服务人员：</label>
+                                    <div class="col-sm-7 ">
+
+                                        <div id="droptoggle" class="form-control" style="height:50px;margin-top:-10px;"></div>
+                                        <!--<select name="EmployeeNo" class="form-control" ng-model="Data.Task.EmployeeNo" ng-options="t.EmpNo as t.EmpName for t in Data.emps" required></select>-->
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">指派人<span class="required">*</span></label>
+                                    <div class="col-sm-9">
+                                        <!--<select name="EmployeeNo" class="form-control" ng-model="Data.Task.Operator" ng-options="t.EmpNo as t.EmpName for t in Data.emps" required></select>-->
+                                        <span>{{UserEmp.EmpName}}</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">服务备注</label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control datepicker" ng-model="Data.Task.Remark" />
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="form-group center" ng-show="Data.Task.Status < 1">
+                                    <input type="submit" class="btn btn-info" value="任务派发" />
+                                    <button class="btn btn-grey" ui-sref="TaskList">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3" style="margin-top:30px;" ng-show="Data.Task != ''">
+                    <div class="box border green col-md-12">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>服务人员</h4>
+                        </div>
+
+                        <div class="box-body big " data-ng-init="checkLast();">
+                            
+                            <div class="input-group" style="margin-left:10px;margin-right:30px;">
+                                <input type="text" id="newItem" ng-model="options.params.ServicePerson" placeholder="请输入服务人员姓名..." class="form-control">
+                                <span class="input-group-btn"> <button id="addItem" class="btn btn-default" type="button" disabled><i class="fa fa-search search-icon"></i></button></span>
+                            </div>
+                            <div class="divide-20"></div>
+                            <div class="row" style="width: auto; height: 650px; overflow-y: scroll;">
+                                <div class="col-md-12" >
+                                    <div id="modules" ng-repeat="t in Data.ServicePersons | filter:{EmpName:options.params.ServicePerson}" on-finish-render>
+                                        <div class="item_margin_10 success" style="height:100%;">
+                                            <div class="panel panel-primary panel-warning col-md-12 " style="background: #5e87b0;">
+                                                <div class="drag">
+                                                    <div class="panel-body">
+                                                        <div show="true" class="bg-danger" style="height:100%;width:100%;color:#e5e5e5"><h4>{{t.EmpName}}</h4></div>
+                                                        <div class="col-md-6" style="margin-left: -15px; color: #e5e5e5">编号：<span idno="true">{{t.EmpNo}}</span></div>
+                                                        <div class="col-md-6" style="margin-left: -15px; color: #e5e5e5">性别：<span select-code="A00.001" select-value="{{t.Sex}}"></span></div>
+                                                        <div class="col-md-12" style="margin-left: -15px; color: #e5e5e5">年龄：{{t.Birthdate | ageFormat}}</div>
+                                                        <div class="col-md-12" style="margin-left: -15px; color: #e5e5e5">联系电话：{{t.Tel}}</div>
+                                                        <div class="col-md-12" style="margin-left: -15px; color: #e5e5e5">描述：{{t.JobTitle}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        //debugger;
+        //var scope = angular.element("#content").scope();
+        //debugger;
+        //scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
+        //    alert($("#modules1"))
+        //    handleDrag(); //Initialise plugins and elements
+        //})
+        //handleDrag(); //Initialise plugins and elements
+
+    });
+
+    function handleDrag() {
+
+        $('#modules div.drag').draggable({
+            appendTo: 'body',
+            helper: 'clone',
+            activate: function (e, ui) {
+                alert(111);
+            }
+        });
+
+        $('#droptoggle').droppable({
+            activeClass: 'active',
+            hoverClass: 'hover',
+            accept: ":not(.ui-sortable-helper)", // Reject clones generated by sortable
+            drop: function (e, ui) {
+                var $el = $('<div class="drop-item"><details><summary>' + ui.draggable.text() + '</summary><div><label>More Data</label><input type="text" /></div></details></div>');
+                $el.append($('<button type="button" class="btn btn-default btn-xs remove"><span class="glyphicon glyphicon-trash"></span></button>').click(function () { $(this).parent().detach(); }));
+                $(this).append($el);
+            },
+            activate: function (e, ui) {
+                // alert(111);
+            },
+            over: function (event, ui) {
+                // alert(222);
+            }
+        }).sortable({
+            items: '.drop-item',
+            sort: function () {
+                // gets added unintentionally by droppable interacting with sortable
+                // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
+                $(this).removeClass("active");
+            }
+        });
+
+        /* initialize the external events
+		//-----------------------------------------------------------------*/
+
+        //var initDrag = function (el) {
+
+        //    // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+        //    // it doesn't need to have a start or end
+        //    var eventObject = {
+        //        title: $.trim(el.text()) // use the element's text as the event title
+        //    };
+
+        //    // store the Event Object in the DOM element so we can get to it later
+        //    el.data('eventObject', eventObject);
+
+        //    // make the event draggable using jQuery UI
+        //    el.draggable({
+        //        connectToSortable: "#droptoggle",
+        //        zIndex: 999,
+        //        helper: "clone",
+        //        revert: true,      // will cause the event to go back to its
+        //        revertDuration: 0  //  original position after the drag
+        //    });
+
+        //}
+
+
+        //var addEvent = function (title) {
+
+        //    title = title.length == 0 ? "Untitled Event" : title;
+        //    var html = $('<div class="external-event">' + title + '</div>');
+        //    jQuery('#event-box').append(html);
+        //    initDrag(html);
+        //}
+
+        //$('#external-events div.external-event').each(function () {
+        //    initDrag($(this))
+        //});
+
+        //$('#add-event').unbind('click').click(function () {
+        //    var title = $('#event-title').val();
+        //    addEvent(title);
+        //});
+        //$('#droptoggle').sortable({
+        //    revert: true
+        //});
+
+
+
+
+
+        ///* initialize the calendar
+        //-----------------------------------------------------------------*/
+        //var date = new Date();
+        //var d = date.getDate();
+        //var m = date.getMonth();
+        //var y = date.getFullYear();
+
+        //var calendar = $('#calendar').fullCalendar({
+        //    header: {
+        //        left: 'prev,next today',
+        //        center: 'title',
+        //        right: 'month,agendaWeek,agendaDay'
+        //    },
+        //    selectable: true,
+        //    selectHelper: true,
+        //    select: function (start, end, allDay) {
+        //        var title = prompt('Event Title:');
+        //        if (title) {
+        //            calendar.fullCalendar('renderEvent',
+        //				{
+        //				    title: title,
+        //				    start: start,
+        //				    end: end,
+        //				    allDay: allDay
+        //				},
+        //				true // make the event "stick"
+        //			);
+        //        }
+        //        calendar.fullCalendar('unselect');
+        //    },
+        //    editable: true,
+        //    editable: true,
+        //    droppable: true, // this allows things to be dropped onto the calendar !!!
+        //    drop: function (date, allDay) { // this function is called when something is dropped
+
+        //        // retrieve the dropped element's stored Event Object
+        //        var originalEventObject = $(this).data('eventObject');
+
+        //        // we need to copy it, so that multiple events don't have a reference to the same object
+        //        var copiedEventObject = $.extend({}, originalEventObject);
+
+        //        // assign it the date that was reported
+        //        copiedEventObject.start = date;
+        //        copiedEventObject.allDay = allDay;
+
+        //        // render the event on the calendar
+        //        // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+        //        $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+
+        //        // is the "remove after drop" checkbox checked?
+        //        if ($('#drop-remove').is(':checked')) {
+        //            // if so, remove the element from the "Draggable Events" list
+        //            $(this).remove();
+        //        }
+
+        //    },
+        //    events: [
+        //		{
+        //		    title: 'All Day Event',
+        //		    start: new Date(y, m, 1),
+        //		    backgroundColor: Theme.colors.blue,
+        //		},
+        //		{
+        //		    title: 'Long Event',
+        //		    start: new Date(y, m, d - 5),
+        //		    end: new Date(y, m, d - 2),
+        //		    backgroundColor: Theme.colors.red,
+        //		},
+        //		{
+        //		    id: 999,
+        //		    title: 'Repeating Event',
+        //		    start: new Date(y, m, d - 3, 16, 0),
+        //		    allDay: false,
+        //		    backgroundColor: Theme.colors.yellow,
+        //		},
+        //		{
+        //		    id: 999,
+        //		    title: 'Repeating Event',
+        //		    start: new Date(y, m, d + 4, 16, 0),
+        //		    allDay: false,
+        //		    backgroundColor: Theme.colors.primary,
+        //		},
+        //		{
+        //		    title: 'Meeting',
+        //		    start: new Date(y, m, d, 10, 30),
+        //		    allDay: false,
+        //		    backgroundColor: Theme.colors.green,
+        //		},
+        //		{
+        //		    title: 'Lunch',
+        //		    start: new Date(y, m, d, 12, 0),
+        //		    end: new Date(y, m, d, 14, 0),
+        //		    allDay: false,
+        //		    backgroundColor: Theme.colors.red,
+        //		},
+        //		{
+        //		    title: 'Birthday Party',
+        //		    start: new Date(y, m, d + 1, 19, 0),
+        //		    end: new Date(y, m, d + 1, 22, 30),
+        //		    allDay: false,
+        //		    backgroundColor: Theme.colors.gray,
+        //		},
+        //		{
+        //		    title: 'Click for Google',
+        //		    start: new Date(y, m, 28),
+        //		    end: new Date(y, m, 29),
+        //		    url: 'http://google.com/',
+        //		    backgroundColor: Theme.colors.green,
+        //		}
+        //    ]
+        //});
+
+    }
+</script>

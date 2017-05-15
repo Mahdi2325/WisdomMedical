@@ -1,0 +1,17 @@
+﻿<div ng-mouseleave="mouseleave()">
+    <input class="form-control" type="text" ng-model="searchWords" ng-change="change()" placeholder="輸入关键字" ng-focus="focus()" ng-keydown="keydown()" ng-required={{required}} />
+    <table class="table table-hover table-bordered input-select" ng-show="showList">
+        <thead>
+            <tr role="row">
+                <th>國際分類</th>
+                <th>傷病名稱</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items | filter:filterItems" ng-click="rowClick(item)">
+                <td>{{item.IcdCode}}</td>
+                <td>{{item.EngName}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

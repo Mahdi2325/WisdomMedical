@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5B2E2137-06D2-4ADF-BC85-AA94984ACC50}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KMHC.SLTC.Business.Interface</RootNamespace>
+    <AssemblyName>KMHC.SLTC.Business.Interface</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivityManage\IGroupActivityCategoryEditService.cs" />
+    <Compile Include="ActivityManage\IGroupActivityCategoryService.cs" />
+    <Compile Include="ActivityManage\IActivityService.cs" />
+    <Compile Include="baiduTTS\IBaiduTTSService.cs" />
+    <Compile Include="Component\ICodeRuleService.cs" />
+    <Compile Include="FinancialManagement\IRefundService.cs" />
+    <Compile Include="FinancialManagement\IPaymentsService.cs" />
+    <Compile Include="Generation\IActivityNewService.cs" />
+    <Compile Include="Generation\IBriefInfoService.cs" />
+    <Compile Include="Generation\ICallInfoService.cs" />
+    <Compile Include="Generation\ICommodityItemService.cs" />
+    <Compile Include="Generation\IDeptService.cs" />
+    <Compile Include="Generation\IEvaluationService.cs" />
+    <Compile Include="Generation\IPriorityRemarkService.cs" />
+    <Compile Include="Generation\IHabitService.cs" />
+    <Compile Include="Generation\IFamilyService.cs" />
+    <Compile Include="Generation\IDeviceService.cs" />
+    <Compile Include="Generation\IContractService.cs" />
+    <Compile Include="Generation\IAreaService.cs" />
+    <Compile Include="Generation\IBedService.cs" />
+    <Compile Include="Generation\IBillService.cs" />
+    <Compile Include="Generation\IChargeItemService.cs" />
+    <Compile Include="Generation\IChartService.cs" />
+    <Compile Include="Generation\IDepositService.cs" />
+    <Compile Include="Generation\IDictionaryItemService.cs" />
+    <Compile Include="Generation\IDictionaryService.cs" />
+    <Compile Include="Generation\IEmployeeService.cs" />
+    <Compile Include="Generation\IFloorService.cs" />
+    <Compile Include="Generation\IFunctionService.cs" />
+    <Compile Include="Generation\IGroupService.cs" />
+    <Compile Include="Generation\IMonitorItemService.cs" />
+    <Compile Include="Generation\IMonitorResultService.cs" />
+    <Compile Include="Generation\IMonitorTemplateService.cs" />
+    <Compile Include="Generation\IResidentAddressService.cs" />
+    <Compile Include="Generation\IOrganizationService.cs" />
+    <Compile Include="Generation\IPaymentService.cs" />
+    <Compile Include="Generation\IPersonService.cs" />
+    <Compile Include="Generation\IReportManageService.cs" />
+    <Compile Include="Generation\IBaseService.cs" />
+    <Compile Include="Generation\IResidentCareService.cs" />
+    <Compile Include="Generation\IResidentService.cs" />
+    <Compile Include="Generation\IResidentServicePlanItemService.cs" />
+    <Compile Include="Generation\IResidentServicePlanService.cs" />
+    <Compile Include="Generation\IRoleService.cs" />
+    <Compile Include="Generation\IRoomService.cs" />
+    <Compile Include="Generation\IFeeDetailService.cs" />
+    <Compile Include="Generation\ISerOrdSerItService.cs" />
+    <Compile Include="Generation\IServiceGroupService.cs" />
+    <Compile Include="Generation\ICommodityTypeService.cs" />
+    <Compile Include="Generation\IServiceItemCategoryService.cs" />
+    <Compile Include="Generation\IServiceItemService.cs" />
+    <Compile Include="Generation\IServiceOrderService.cs" />
+    <Compile Include="Generation\ITaskService.cs" />
+    <Compile Include="Generation\IUserRelationService.cs" />
+    <Compile Include="Generation\IUserService.cs" />
+    <Compile Include="ActivityManage\IVolunteerService.cs" />
+    <Compile Include="Generation\IWatchRecordService.cs" />
+    <Compile Include="GuestSevice\IComOrderService.cs" />
+    <Compile Include="GuestSevice\IServiceAppService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\IEvaluationReportService.cs" />
+    <Compile Include="Report\IOrderReportService.cs" />
+    <Compile Include="Report\IReportTempManageService.cs" />
+    <Compile Include="Sequence\IAppStatisticsService.cs" />
+    <Compile Include="Sequence\IScreenSequenceService.cs" />
+    <Compile Include="Sequence\ISequenceService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KMHC.Infrastructure\KMHC.Infrastructure.csproj">
+      <Project>{0997F971-1D2F-4AA8-AA67-5B1683AFDEFD}</Project>
+      <Name>KMHC.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KMHC.SLTC.Business.Entity\KMHC.SLTC.Business.Entity.csproj">
+      <Project>{208d3a36-9507-4ff2-a3bf-374d718f0a11}</Project>
+      <Name>KMHC.SLTC.Business.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KMHC.SLTC.Business.Interceptor\KMHC.SLTC.Business.Interceptor.csproj">
+      <Project>{23a3026e-dc64-45c1-a5bf-dc3b857d4eeb}</Project>
+      <Name>KMHC.SLTC.Business.Interceptor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KMHC.SLTC.Persistence\KMHC.SLTC.Persistence.csproj">
+      <Project>{3a0737ce-99b6-429f-9b11-85b49fad1de2}</Project>
+      <Name>KMHC.SLTC.Persistence</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

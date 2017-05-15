@@ -1,0 +1,163 @@
+﻿
+
+<div class="row">
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li><a ui-sref="EvaluationList">团体评估信息</a></li>
+                            <li class="active">团体评估信息</li>
+                        </ul>
+                        <div class="clearfix">
+                            <h3 class="content-title pull-left">SLTC</h3>
+                        </div>
+                        <div class="description">团体评估信息</div>
+                    </div>
+                </div>
+            </div>
+            <form class="form-horizontal" role="form" name="evalsheeteditform">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box border green">
+                            <div class="box-title">
+                                <h4><i class="fa fa-columns"></i><span class="hidden-inline-mobile">团体评估信息 - {{Data.resident.name}}</span></h4>
+                            </div>
+
+                            <div class="box-body">
+
+                                <div class="tab-pane " id="tbBasic">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">评估编号</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" class="form-control"  ng-model="RegQuestion.EnvNo">
+                                                </div>
+                                                <label class="col-sm-1 control-label">评估人员</label>
+                                                <div class="col-sm-2">
+                                                    <select ng-model="RegQuestion.evaluateby" class="form-control" ng-options="item.EmpNo as item.EmpName  for item in EmpList"></select>
+                                                </div>
+                                                <label for="txtEvaluDate" class="col-sm-1 control-label">评估日期</label>
+                                                <div class="col-sm-2">
+                                                    <input id="txttValuationDate" ng-model="RegQuestion.Evaldate" class="form-control" required type="text" ca-date-picker>
+                                                </div>
+                                                <label for="txtEvaluGap" class="col-sm-1 control-label">间隔天数</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" id="selGap" ng-model="RegQuestion.Gap" ng-options="gap.ITEMCODE as gap.ITEMNAME  for gap in EvalDateGap" ng-change="setNextValDate(RegQuestion.Gap)"></select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">下次评估日期</label>
+                                                <div class="col-sm-2">
+                                                    <input class="form-control" ng-model="RegQuestion.Nextevaldate" type="text" ca-date-picker>
+                                                </div>
+                                                <label for="txtNextEvalBy" class="col-sm-1 control-label">下次受托评估</label>
+                                                <div class="col-sm-2">
+                                                    <select ng-model="RegQuestion.Nextevaluateby" class="form-control" ng-options="item.EmpNo as item.EmpName  for item in EmpList"></select>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">问卷评估</div>
+                                        <div class="panel-body">
+                                            
+                                                <fieldset>
+                                                    <legend></legend>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <div ng-repeat="Item in Data.QAs">
+                                                                <div class="form-group">
+                                                                    <div ng-if="($index+1)%2==1">
+                                                                        <div class="col-sm-4">
+                                                                            <label class="control-label">{{"0" + ($index+1)+". " + Item.typename}}</label>
+                                                                        </div>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control" ng-change="calcResult(Item, Item.LIMITEDVALUEID)" ng-model="Item.LIMITEDVALUEID" ng-options="item.ITEMCODE as ('0' + item.ORDERSEQ + ' ' + item.ITEMNAME) for item in Item.items">
+                                                                                <option value="0">--请选择--</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 clear">
+                                                            <div ng-repeat="Item in Data.QAs">
+                                                                <div class="form-group">
+                                                                    <div ng-if="($index+1)%2==0">
+                                                                        <div class="col-sm-4">
+                                                                            <label class="control-label">{{"0" + ($index+1)+". " + Item.typename}}</label>
+                                                                        </div>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control" ng-change="calcResult(Item, Item.LIMITEDVALUEID)" ng-model="Item.LIMITEDVALUEID" ng-options="item.ITEMCODE as ('0'+item.ORDERSEQ + ' ' + item.ITEMNAME) for item in Item.items">
+                                                                                <option value="0">--请选择--</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">评估结果</div>
+                                        <div class="panel-body">
+                                            <!--<div ng-if="Data.SCOREFLAG">-->
+                                                <div class="form-group">
+                                                    <label for="lbScoreSummry" class="col-sm-1 control-label">评估分数</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" class="form-control" id="txtScoreSummry" ng-model="RegQuestion.Score" readonly="readonly">
+                                                    </div>
+                                                    <label for="lbEvaluResult" class="col-sm-1 control-label">评估结果</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" class="form-control" id="txtEvaluResult" ng-model="RegQuestion.Envresults" readonly="readonly">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input type="button" class="form-control btn btn-info" ng-click="calcResult()" value="更新结果">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="lbResultRefer" class="col-sm-1 control-label">参考标准</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" ng-model="Reference" ng-options="item.ITEMCODE as item.ITEMNAME for item in Data.QuestionResult.items"></select>
+                                                    </div>
+                                                </div>
+                                            <!--</div>-->
+                                            <div class="form-group">
+                                                <div class="col-sm-1 col-sm-offset-4">
+                                                    <input type="button" class="form-control btn btn-primary" ng-click="Save()" value="保存">
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <a class="form-control btn btn-primary" role="button" ui-sref="EvalSheetList">返回列表</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="footer-tools">
+                <span class="go-top">
+                    <i class="fa fa-chevron-up"></i> Top
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div>

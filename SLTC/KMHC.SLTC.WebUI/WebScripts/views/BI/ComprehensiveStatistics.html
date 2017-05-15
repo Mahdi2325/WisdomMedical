@@ -1,0 +1,94 @@
+﻿<style>
+    .chart {
+        width: 100%;
+        height: 360px;
+        margin: 0 auto;
+        margin-top: 15px;
+    }
+
+    .wrapper-select {
+        width: 50%;
+        float: right;
+        text-align: right;
+    }
+
+    select {
+        color: #767676;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- BOX -->
+        <div class="box border green">
+            <div class="box-title">
+                <h4><i class="fa fa-bar-chart-o"></i>机构档案统计</h4>
+                <!--<div class="wrapper-select">
+                    <select ng-change="changeChart1(x)" ng-model="x">
+                        <option value="0">所有机构</option>
+                        <option value="1">社区1</option>
+                        <option value="2">社区2</option>
+                        <option  value="3">社区3</option>
+                    </select>
+                    <select ng-change="changeChart1(x)" ng-model="x">
+                        <option  value="1">所有病人类型</option>
+                        <option  value="2">病人类型1</option>
+                        <option  value="3">病人类型2</option>
+                        <option  value="4">病人类型3</option>
+                    </select>
+                </div>-->
+            </div>
+            <div class="box-body dataTables_wrapper form-inline">
+                <!-- 图表1 -->
+                <div id="chart1" class="chart"></div>
+                <!-- 图表2 -->
+            </div>
+        </div>
+        <!-- /BOX -->
+    </div>
+
+    <div class="col-md-6">
+        <!-- BOX -->
+        <div class="box border green">
+            <div class="box-title">
+                <h4><i class="fa fa-bar-chart-o"></i>机构会员统计</h4>
+            </div>
+            <div class="box-body dataTables_wrapper form-inline">
+                <!-- 图表1 -->
+                <div id="chart2" class="chart"></div>
+                <!-- 图表2 -->
+            </div>
+        </div>
+        <!-- /BOX -->
+    </div>
+
+    <div class="col-md-6">
+        <!-- BOX -->
+        <div class="box border green">
+            <div class="box-title">
+                <h4><i class="fa fa-bar-chart-o"></i>机构服务订单统计</h4>
+            </div>
+            <div class="box-body dataTables_wrapper form-inline">
+                <!-- 图表1 -->
+                <div id="chart3" class="chart"></div>
+                <!-- 图表2 -->
+            </div>
+        </div>
+        <!-- /BOX -->
+    </div>
+
+    <div class="col-md-6">
+        <!-- BOX -->
+        <div class="box border green">
+            <div class="box-title">
+                <h4><i class="fa fa-bar-chart-o"></i>机构服务工单统计</h4>               
+            </div>
+            <div class="box-body dataTables_wrapper form-inline">
+                <!-- 图表1 -->
+                <div id="chart4" class="chart"></div>
+                <!-- 图表2 -->
+            </div>
+        </div>
+        <!-- /BOX -->
+    </div>
+</div>

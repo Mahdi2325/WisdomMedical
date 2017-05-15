@@ -1,0 +1,642 @@
+﻿<style type="text/css">
+    .content {
+        background-color: white;
+        margin-top: 0;
+        min-height: 800px;
+        border-left: 1px solid #cdd2d2;
+        padding-bottom: 30px;
+    }
+
+    .control-element {
+        float: left;
+        padding-left: 15px;
+        font-size: large;
+    }
+
+    table.table-note th {
+        color: #a6a6a6;
+        font-size: large;
+        font-weight: 100;
+    }
+
+    table.table-note thead {
+        background-color: #f7f7f7;
+        font-family: 'Microsoft YaHei';
+    }
+
+    table.table-note td {
+        word-break: break-all;
+        word-wrap: break-word;
+    }
+
+    .task_operation {
+        float: left;
+        height: 25px;
+        width: 25px;
+        background-image: url(../../../../Images/DC/operation.png);
+    }
+
+    .task_reallocate {
+        float: left;
+        height: 25px;
+        width: 25px;
+        margin-left: 10px;
+        background-image: url(../../../../Images/DC/allocate.png);
+    }
+
+    .task_operation:hover {
+        background-image: url(../../../../Images/DC/operation_hover.png);
+    }
+
+    .task_save {
+        display: none;
+        float: left;
+        height: 25px;
+        width: 25px;
+        background-image: url(../../../../Images/DC/save.png);
+    }
+
+    .task_cancel {
+        display: none;
+        float: left;
+        height: 25px;
+        width: 25px;
+        background-image: url(../../../../Images/DC/cancel.png);
+    }
+
+    .task_present {
+        display: block;
+    }
+
+    .task_edit {
+        display: none;
+    }
+
+    .chart_2 {
+        float: left;
+        width: 50%;
+    }
+    /*.tickLabel {
+        -o-transform: rotate(-60deg);
+        -moz-transform: rotate(-60deg);
+        -webkit-transform: rotate(-60deg);
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    }*/
+    /*.tickLabel  {
+         background-color:White;
+         color:black;
+
+    }*/
+</style>
+<div class="row content">
+    <div class="col-lg-12">
+        <div class="row" style="background-color: #1370aa">
+            <div style="padding-left: 15px; margin-right: 0px; background-color: #1370aa">
+                <div class="chart_2" style="margin-right:0px;">
+                    <!-- BOX -->
+                    <div id="chart_1" class="chart"></div>
+                    <!-- /BOX -->
+                </div>
+                <div class="chart_2">
+                    <!-- BOX -->
+                    <div id="chart_2" class="chart"></div>
+                    <!-- /BOX -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="row" style="height:60px;background-color:#f7f7f7;  border-bottom:solid 1px #d6d6d6; ">
+            <div style="height: 60px; width: 120px; background-color: #3dc7a1; text-align: center">
+                <label style="line-height:60px;font-size:large;color:white">工作提醒</label>
+            </div>
+        </div>
+        <div class="row" style="padding:26px 0px">
+
+            <form class="form-horizontal" role="form">
+                <label class="control-label control-element" style="color:#b6b6b6">开始日期</label>
+                <div class="control-element">
+                    <input type="text" class="form-control" ng-model="filter.AssignStartDate" ca-date-picker>
+                </div>
+                <label class="control-label control-element" style="color:#b6b6b6">结束日期</label>
+                <div class="control-element">
+                    <input type="text" class="form-control " ng-model="filter.AssignEndDate" ca-date-picker>
+                </div>
+                <div class="control-element">
+                    <input type="button" class="form-control btn btn-primary" ng-click="Search()" value="查询">
+                </div>
+                <div class="control-element">
+                    <input type="button" class="form-control btn btn-primary" ng-click="SearchUnFinish()" value="未完成">
+                </div>
+                <div class="control-element">
+                    <input type="button" class="form-control btn btn-primary" ng-click="SearchFinish()" value="已完成">
+                </div>
+                <div class="control-element">
+                    <input type="button" class="form-control btn btn-primary" ng-click="SearchAll()" value="全部">
+                </div>
+
+            </form>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ui-data-table options="options">
+                    <table class="table  table-hover table-handler table-note">
+                        <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th><i class="fa fa-user"></i>个案姓名</th>
+                                <th>交付日期</th>
+                                <th>交付者</th>
+                                <th>交付内容</th>
+                                <th>应执行日期</th>
+                                <th>完成</th>
+                                <th>完成日期</th>
+                                <th>完成情形说明</th>
+                                <th><i class="fa fa-bars"></i> 操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="Item in Data">
+                                <td>{{Item.ID}}</td>
+                                <td>{{Item.ResidentName}}</td>
+                                <td>{{Item.AssignDate |date:'yyyy-MM-dd'}}</td>
+                                <td>{{Item.AssignedName}}</td>
+                                <td style="max-width:450px">
+                                    <a ng-show="Item.URL!=null" href="{{Item.URL+Item.FeeNo}}"><label class="">{{Item.Content}}</label></a>
+                                    <label ng-show="Item.URL==null">{{Item.Content}}</label>
+                                </td>
+                                <td>
+                                    <label class="task_present">{{Item.PerformDate | date:'yyyy-MM-dd'}}</label>
+                                    <input type="text" class="form-control task_edit" ng-model="Item.PerformDate" ca-date-picker />
+                                </td>
+                                <td>
+                                    <input type="checkbox" id="{{Item.ID}}" class="chk_1" ng-checked="{{Item.RecStatus}}" ng-click="ChangeStatus($event,Item)" value="{{Item.RecStatus}}" /><label for="{{Item.ID}}"></label>
+                                <td>
+                                    <label class="task_present">{{Item.FinishDate | date:'yyyy-MM-dd'}}</label>
+                                    <input type="text" class="form-control task_edit" ng-model="Item.FinishDate" ca-date-picker />
+                                </td>
+                                <td style="max-width:250px">
+                                    <label class="task_present">{{Item.UnFinishReason}}</label>
+                                    <input type="text" class="form-control task_edit" style=" border: 1px solid #3bc7a1;" maxlength="200" ng-model="Item.UnFinishReason" />
+                                </td>
+                                <td>
+                                    <div style=" display:inline-block; ">
+                                        <div class="task_operation task_present" onclick="EditTask(this)" ng-click="BeforeEdit(Item)"></div>
+                                        <div class="task_reallocate task_present" data-toggle="modal" data-target="#modalAssignEmp" ng-click="ShowModal(Item.ID)"></div>
+                                        <div class="task_save task_edit" onclick="CancelTask(this)" ng-click="SaveTask(Item)"></div>
+                                        <div class="task_cancel task_edit" onclick="CancelTask(this)" ng-click="RestoreBeforeEdit(Item)"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ui-data-table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" style="border-left:0px" id="modalAssignEmp" tabindex="-1" role="dialog" aria-labelledby="modalEmpLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div style="width:850px" class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div ng-include="'/WebScripts/Views/DC/Resident/AssignTaskEmpModal.html'"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var option = {
+            url: "/dc/DC_Charts/GetDailyUUTrend",
+            type: 'Post',
+            cache: false,
+            dataType: 'json',
+            data: {}, //发送服务器数据
+            success: function (res) {  //成功事件
+                charts_data = res.data;
+                AccumulateUU(charts_data);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) { //发送失败事件
+                alert(textStatus);
+            }
+        };
+        $.ajax(option);
+
+        var option1 = {
+            url: "/dc/DC_Charts/GetDiseaseDistribution",
+            type: 'Post',
+            cache: false,
+            dataType: 'json',
+            data: {}, //发送服务器数据
+            success: function (res) {  //成功事件
+                charts_data = res.data;
+                DiseaseDistribution(charts_data);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) { //发送失败事件
+                alert(textStatus);
+            }
+        };
+        $.ajax(option1);
+
+    });
+
+
+    function EditTask(e) {
+        $(e).closest("tr").find(".task_present").hide();
+        $(e).closest("tr").find(".task_edit").show();
+    }
+    function CancelTask(e) {
+        $(e).closest("tr").find(".task_present").show();
+        $(e).closest("tr").find(".task_edit").hide();
+    }
+
+    function AccumulateUU(data) {
+        var charts_data = data;
+
+        var d1 = [];
+        var d2 = [];
+
+
+        for (var i = 0; i < charts_data.length; i++) {
+            d1.push([charts_data[i].Date, charts_data[i].AccumulateUU]);
+            d2.push([charts_data[i].Date, charts_data[i].AccumulateClosedUU]);
+        }
+
+        $('#chart_1').highcharts({
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: '在院/结案人数趋势图'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: [],
+                labels: {
+                    step: 3
+                }
+                //tickInterval: 2 * 24 * 3600 * 1000
+            },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    lineWidth: 1,
+                    marker: {
+                        enabled: false
+                    },
+                    shadow: false,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                }
+            },
+            exporting: { enabled: false },
+            yAxis: {
+                title: {
+                    text: '人数'
+                },
+                min: 0
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br>',
+                pointFormat: '{point.name}: {point.y} 人'
+            },
+
+            series: [{
+                name: '在院',
+                data: d1
+            }, {
+                name: '结案',
+                data: d2
+            }]
+        });
+    }
+
+    function DiseaseDistribution(data) {
+        var charts_data = data;
+        var d1 = [];
+        var arr = [];
+
+        for (var i = 0; i < charts_data.length; i++) {
+            d1.push([charts_data[i].UUCount]);
+            arr.push([charts_data[i].DiseaseName]);
+        }
+
+
+        $('#chart_2').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '院内患病人数按病种分布图'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: arr
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '人数'
+                }
+            },
+            exporting: { enabled: false },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">人数: </td>' +
+                    '<td style="padding:0"><b>{point.y} </b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: '病种名称',
+                data: d1
+
+            }]
+        });
+
+    }
+
+    Highcharts.theme = {
+        colors: ["#DDDF0D", "#7798BF", "#55BF3B", "#DF5353", "#aaeeee", "#ff0066", "#eeaaee",
+            "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+        chart: {
+            backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    //[0, 'rgb(96, 96, 96)'],
+                    //[1, 'rgb(16, 16, 16)']
+                        [0, '#1370aa'],
+                    [1, '#1370aa']
+                ]
+            },
+            borderWidth: 0,
+            borderRadius: 0,
+            plotBackgroundColor: null,
+            plotShadow: false,
+            plotBorderWidth: 0
+        },
+        title: {
+            style: {
+                color: '#FFF',
+                font: '16px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+            }
+        },
+        subtitle: {
+            style: {
+                color: '#DDD',
+                font: '12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+            }
+        },
+        xAxis: {
+            gridLineWidth: 0,
+            lineColor: '#999',
+            tickColor: '#999',
+            labels: {
+                style: {
+                    //color: '#999',
+                    color: 'white',
+                    fontWeight: 'bold'
+                }
+            },
+            title: {
+                style: {
+                    color: '#AAA',
+                    font: 'bold 12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            alternateGridColor: null,
+            minorTickInterval: null,
+            gridLineColor: 'rgba(255, 255, 255, .1)',
+            minorGridLineColor: 'rgba(255,255,255,0.07)',
+            lineWidth: 0,
+            tickWidth: 0,
+            labels: {
+                style: {
+                    color: 'white',
+                    fontWeight: 'bold'
+                }
+            },
+            title: {
+                style: {
+                    color: '#AAA',
+                    font: 'bold 12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+                }
+            }
+        },
+        legend: {
+            itemStyle: {
+                color: '#CCC'
+            },
+            itemHoverStyle: {
+                color: '#FFF'
+            },
+            itemHiddenStyle: {
+                color: '#333'
+            }
+        },
+        labels: {
+            style: {
+                color: '#CCC'
+            }
+        },
+        tooltip: {
+            backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    [0, 'rgba(96, 96, 96, .8)'],
+                    [1, 'rgba(16, 16, 16, .8)']
+                ]
+            },
+            borderWidth: 0,
+            style: {
+                color: '#FFF'
+            }
+        },
+
+
+        plotOptions: {
+            series: {
+                nullColor: '#444444'
+            },
+            line: {
+                dataLabels: {
+                    color: '#CCC'
+                },
+                marker: {
+                    lineColor: '#333'
+                }
+            },
+            spline: {
+                marker: {
+                    lineColor: '#333'
+                }
+            },
+            scatter: {
+                marker: {
+                    lineColor: '#333'
+                }
+            },
+            candlestick: {
+                lineColor: 'white'
+            }
+        },
+
+        toolbar: {
+            itemStyle: {
+                color: '#CCC'
+            }
+        },
+
+        navigation: {
+            buttonOptions: {
+                symbolStroke: '#DDDDDD',
+                hoverSymbolStroke: '#FFFFFF',
+                theme: {
+                    fill: {
+                        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                        stops: [
+                            [0.4, '#606060'],
+                            [0.6, '#333333']
+                        ]
+                    },
+                    stroke: '#000000'
+                }
+            }
+        },
+        // scroll charts
+        rangeSelector: {
+            buttonTheme: {
+                fill: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0.4, '#888'],
+                        [0.6, '#555']
+                    ]
+                },
+                stroke: '#000000',
+                style: {
+                    color: '#CCC',
+                    fontWeight: 'bold'
+                },
+                states: {
+                    hover: {
+                        fill: {
+                            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                            stops: [
+                                [0.4, '#BBB'],
+                                [0.6, '#888']
+                            ]
+                        },
+                        stroke: '#000000',
+                        style: {
+                            color: 'white'
+                        }
+                    },
+                    select: {
+                        fill: {
+                            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                            stops: [
+                                [0.1, '#000'],
+                                [0.3, '#333']
+                            ]
+                        },
+                        stroke: '#000000',
+                        style: {
+                            color: 'yellow'
+                        }
+                    }
+                }
+            },
+            inputStyle: {
+                backgroundColor: '#333',
+                color: 'silver'
+            },
+            labelStyle: {
+                color: 'silver'
+            }
+        },
+
+        navigator: {
+            handles: {
+                backgroundColor: '#666',
+                borderColor: '#AAA'
+            },
+            outlineColor: '#CCC',
+            maskFill: 'rgba(16, 16, 16, 0.5)',
+            series: {
+                color: '#7798BF',
+                lineColor: '#A6C7ED'
+            }
+        },
+
+        scrollbar: {
+            barBackgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+					[0.4, '#888'],
+					[0.6, '#555']
+                ]
+            },
+            barBorderColor: '#CCC',
+            buttonArrowColor: '#CCC',
+            buttonBackgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+					[0.4, '#888'],
+					[0.6, '#555']
+                ]
+            },
+            buttonBorderColor: '#CCC',
+            rifleColor: '#FFF',
+            trackBackgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    [0, '#000'],
+                    [1, '#333']
+                ]
+            },
+            trackBorderColor: '#666'
+        },
+        // special colors for some of the demo examples
+        legendBackgroundColor: 'rgba(48, 48, 48, 0.8)',
+        background2: 'rgb(70, 70, 70)',
+        dataLabelsColor: '#444',
+        textColor: '#E0E0E0',
+        maskColor: 'rgba(255,255,255,0.3)'
+    };
+    // Apply the theme
+    var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
+
+</script>

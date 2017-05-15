@@ -1,0 +1,117 @@
+﻿
+.headerStyle {
+    text-align: center;
+}
+
+.formStyle {
+    margin: 5px 0px 5px 5px;
+    padding: 10px;
+    background-color: white;
+    font-family: DFKai-SB;
+    font-size: 16px;
+    min-width: 800px;
+}
+
+.spanStyleOne {
+    font-size: 16px;
+    font-family: DFKai-SB;
+}
+
+.spanStyleTwo {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: DFKai-SB;
+}
+
+.spanStyleThree {
+    font-size: 16px;
+    font-weight: 100;
+    font-family: DFKai-SB;
+}
+
+.spanStyleFour {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: DFKai-SB;
+    border-bottom: 1px solid;
+}
+
+.spanStyleFive {
+    font-size: 16px;
+    font-weight: 100;
+    font-family: DFKai-SB;
+    padding-left: 10px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.inputStyleOne {
+    border-left-style: none;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: solid;
+    font-size: 16px;
+}
+
+.tableStyleOne {
+    width: 100%;
+}
+
+    .tableStyleOne thead tr th {
+        text-align: center;
+    }
+
+.tableStyleTwo {
+}
+
+.tbOne {
+    width: 100%;
+    border: none;
+}
+
+.tbTwo {
+    width: 100%;
+    margin: 1px;
+}
+
+    .tbTwo table {
+        width: 100%;
+        padding: 12px;
+    }
+
+.tbStyle1 {
+    width: 100%;
+    margin: 1px;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-collapse: collapse;
+}
+
+    .tbStyle1 td {
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+    }
+
+    .tbStyle1 th {
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+    }
+
+.tbStyle2 {
+    width: 100%;
+    margin: 1px;
+}
+
+    .tbStyle2 td {
+        border: none;
+    }
+
+.tbStyle3 {
+    width: 100%;
+    border-style: dotted;
+}
+
+    .tbStyle3 td {
+        text-align: left;
+        padding-left: 4px;
+    }

@@ -1,0 +1,129 @@
+﻿<style type="text/css">
+    #content {
+        background-color: white;
+        margin-top: 0;
+        min-height: 800px;
+        border-left: 1px solid #cdd2d2;
+        padding-bottom: 30px;
+    }
+</style>
+<div class="row">
+    <div id="content" class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-2">
+                <resident-list callback="residentSelected(resident)" />
+            </div>
+            <div class="col-sm-10 box-shadow-3 navi-container-div">
+                <div class="navi-container-div1">
+                    <div class="navi-container-div2">
+                        <div>
+                            <table cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td style="width:64px"></td>
+                                    <td class="navi-image-td"> </td>
+                                    <td> </td>
+                                    <td colspan="3">
+                                        <div class="navi-image-td navi-nurse-row1">
+                                            <div style="cursor:pointer;float:left" ng-click="NavigateLink('NurseRequirementEval')">
+                                                <img src="../../Images/DC/nurse/rz_nursing_demand.png" alt="" /><br><label>護理需求評估及照顧計劃表</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                    <td class="navi-image-td"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td>
+                                        <div class="navi-image-td">
+                                            <img src="../../Images/DC/arrow.png" alt="" />
+                                        </div>
+                                    </td>
+                                    <td colspan="4"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td colspan="3">
+                                        <div class="navi-image-td navi-nurse-row3">
+                                            <div style="cursor:pointer;float:left" id="NursingDiag" ng-click="NavigateLink('NursingDiag')">
+                                                <img src="../../Images/DC/nurse/rz_nursing_personnursing.png" alt="" /><br><label>個案護理診斷一覽表</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td>
+                                        <div class="navi-image-td">
+                                            <img src="../../Images/DC/arrow.png" alt="" />
+                                        </div>
+                                    </td>
+                                    <td colspan="4"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td colspan="3">
+                                        <div class="navi-image-td navi-nurse-row4">
+                                            <div style="cursor:pointer;float:left" ng-click="NavigateLink('AdjuvantTherapy')">
+                                                <div style="float:left">
+                                                    <img src="../../Images/DC/nurse/rz_nursing_excipients.png" alt="" /><br><label>個別化活動需求評估及計劃表</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td>
+                                        <div class="navi-image-td">
+                                            <img src="../../Images/DC/arrow.png" alt="" />
+                                        </div>
+                                    </td>
+                                    <td colspan="4"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td colspan="3">
+                                        <div class="navi-image-td navi-nurse-row5">
+                                            <div style="cursor:pointer;float:left" ng-click="NavigateLink('DCBasicDataArrangement')">
+                                                <div style="float:left">
+                                                    <img src="../../Images/DC/nurse/rz_nursing_basic.png" alt="" /><br><label>個別基本資料彙整表</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td>
+                                        <div class="navi-image-td">
+                                            <img src="../../Images/DC/arrow.png" alt="" />
+                                        </div>
+                                    </td>
+                                    <td colspan="4"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td colspan="3">
+                                        <div class="navi-image-td navi-nurse-row6">
+                                            <div style="cursor:pointer;float:left" ng-click="NavigateLink('RegMedcine')">
+                                                <div style="float:left">
+                                                    <img src="../../Images/DC/nurse/rz_nursing_drugs.png" alt="" /><br><label>個案藥品管理</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td colspan="3"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

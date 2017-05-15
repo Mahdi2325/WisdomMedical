@@ -1,0 +1,162 @@
+﻿@using KMHC.SLTC.WebUI.Models
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html ng-app="sltcApp">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>SLTC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/cloud-admin.css">
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/themes/default.css" id="skin-switcher">
+    <link href="/Content/CloudAdmin/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/Index/css")
+    <!-- uploadify -->
+    <link href="/Content/uploadify/uploadify.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="navbar clearfix" id="header">
+        @{
+            string id = string.Empty;
+            string defaultPage = string.Empty;
+            string name = "请登录";
+            if (Session["User"] != null)
+            {
+                var user = Session["User"] as UserModel;
+                if (user != null)
+                {
+                    id = user.Id;
+                    defaultPage = user.DefaultPage;
+                    name = user.UserName;
+                }
+            }
+        }
+        <div class="container">
+            <div class="navbar-brand">
+                <!-- COMPANY LOGO -->
+                <a href="#">
+                    <img src="../../Content/URS/image/home_logo.png" alt="STLC Logo" class="img-responsive" />
+                </a>
+                <!-- /COMPANY LOGO -->
+                <!-- TEAM STATUS FOR MOBILE -->
+                <div class="visible-xs">
+                    <a href="#" class="team-status-toggle switcher btn dropdown-toggle">
+                        <i class="fa fa-users"></i>
+                    </a>
+                </div>
+                <!-- /TEAM STATUS FOR MOBILE -->
+                <!-- SIDEBAR COLLAPSE -->
+                <div id="sidebar-collapse" class="sidebar-collapse btn">
+                    <i class="fa fa-bars"
+                       data-icon1="fa fa-bars"
+                       data-icon2="fa fa-bars"></i>
+                </div>
+                <!-- /SIDEBAR COLLAPSE -->
+            </div>
+
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <ul class="nav navbar-nav pull-right">
+                <li class="dropdown" id="header-tasks" ng-controller="indexPageCtrl">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 26px 10px 11px;">
+                        <i class="fa fa-tasks"></i>
+                        <span class="badge" ng-if="CurrentTasks.length>0">{{CurrentTasks.length}}</span>
+                    </a>
+                    <ul class="dropdown-menu tasks">
+                        <li class="dropdown-title">
+                            <span><i class="fa fa-check"></i> 当前任务</span>
+                        </li>
+                        <li>
+                            <a href="#" ui-sref="TaskEdit({id:item.id,flag:'1'})" ng-repeat="item in CurrentTasks">
+                                <span class="header clearfix">
+                                    <span class="pull-left">{{item.TaskNo}}</span>
+                                    <span class="pull-right">{{item.orderItem.Otime|dateFormat}}</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="footer">
+                            <a href="#" ui-sref="ProTaskManager">查看所有任务 <i class="fa fa-arrow-circle-right"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown user" id="header-user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img alt="" src="/Images/person_default.png" />
+                        <span class="username">@name</span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @*<li><a href="#"><i class="fa fa-user"></i> 我的个人资料</a></li>*@
+                        <li><a href="#" ui-sref="AccountSet"><i class="fa fa-cog"></i> 账号设置</a></li>
+                        <li><a href="#" ui-sref="UserBasicInfoSet"><i class=" fa fa-eye"></i> 个人信息管理</a></li>
+                        <li><a id="logout" href="#"><i class="fa fa-power-off"></i> 退出</a></li>
+                    </ul>
+                </li>
+                <!-- END USER LOGIN DROPDOWN -->
+            </ul>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </header>
+    <!-- PAGE -->
+    <section id="page">
+        <!-- SIDEBAR -->
+        <div id="sidebar" class="sidebar" ng-controller="menuCtr">
+            <div class="sidebar-menu nav-collapse">
+                <div class="divide-20"></div>
+                <!-- SEARCH BAR -->
+                @*<div id="search-bar">
+                        <input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
+                    </div>*@
+                <!-- /SEARCH BAR -->
+                <!-- SIDEBAR MENU -->
+                <ul>
+                    <li ng-class="{true: 'has-sub open', false: 'has-sub'}[active(menu)]" ng-repeat="menu in menus | filter:{SuperModuleId:'00'}:true| orderBy:'Sort':true">
+                        <a href="javascript:;" class="" ng-click="menuClick($event)">
+                            <i class="fa fa-bookmark-o fa-fw"></i> <span ng-class="{true: 'menu-text', false: 'sub-menu-text'}">{{menu.ModuleName}}</span>
+                            <span ng-class="{true: 'arrow open', false: 'arrow'}"></span>
+                        </a>
+                        <ul class="sub" ng-style="{true:displayblock, false:displaynone}[active(menu)]">
+                            <li ng-class="{true: 'active', false: ''}[active(subMenu)]" ng-repeat="subMenu in menus | filter:{SuperModuleId:menu.ModuleId}:true| orderBy:'Sort':true">
+                                <a class="" href="javascript:;" ng-click="subMenuClick($event,subMenu.Url,subMenu.Target)"><span class="sub-menu-text">{{subMenu.ModuleName}}</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- /SIDEBAR MENU -->
+            </div>
+        </div>
+        <!-- /SIDEBAR -->
+        <div id="main-content">
+            <div class="container" ui-view>
+            </div>
+        </div>
+    </section>
+
+    @Scripts.Render("~/Content/Index/js")
+    <!-- DATE PICKER -->
+    <script src="/Content/laydate/laydate.js"></script>
+    <!-- uploadify -->
+    <script src="/Content/uploadify/jquery.uploadify.min.js"></script>
+    <!-- CUSTOM SCRIPT -->
+    <script src="/Content/CloudAdmin/js/script.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            App.init(); //Initialise plugins and elements
+        });
+        this.currentUser = { UserId: '@id', DefaultPage: '@defaultPage' };
+        $("#logout").click(function () {
+            window.currentUser = null;
+            window.location.replace("/Home/logout");
+        });
+    </script>
+    <!-- /JAVASCRIPTS -->
+    @Scripts.Render("~/Scripts/angular")
+    @Scripts.Render("~/Scripts/AppCommon")
+    @Scripts.Render("~/Scripts/DC")
+</body>
+</html>

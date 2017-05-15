@@ -1,0 +1,335 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 100%;
+     border: 1px solid #cccccc;
+  
+    float: none;
+    font-family: arial,"宋体";
+    font-size: 14px;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #f0ad4e;
+}
+.ApiDescription p {
+    font-weight: bold;
+    border-bottom: solid 1px #f0ad4e; 
+}
+/******** font embed ****************/
+@font-face {
+    font-family: 'bariol_regular';
+    src: url('../Content../fonts/bariol/bariol_regular-webfont.eot');
+    src: url('../fonts/bariol/bariol_regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/bariol/bariol_regular-webfont.woff') format('woff'), url('../fonts/bariol/bariol_regular-webfont.ttf') format('truetype'), url('../fonts/bariol/bariol_regular-webfont.svg#bariol_regularregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'bariol_bold';
+    src: url('../fonts/bariol/bariol_bold-webfont.eot');
+    src: url('../fonts/bariol/bariol_bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/bariol/bariol_bold-webfont.woff') format('woff'), url('../fonts/bariol/bariol_bold-webfont.ttf') format('truetype'), url('../fonts/bariol/bariol_bold-webfont.svg#bariol_boldbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'bariol_light';
+    src: url('../fonts/bariol/bariol_light-webfont.eot');
+    src: url('../fonts/bariol/bariol_light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/bariol/bariol_light-webfont.woff') format('woff'), url('../fonts/bariol/bariol_light-webfont.ttf') format('truetype'), url('../fonts/bariol/bariol_light-webfont.svg#bariol_lightlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'bariolregular_italic';
+    src: url('../fonts/bariol/bariol_regular_italic-webfont.eot');
+    src: url('../fonts/bariol/bariol_regular_italic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/bariol/bariol_regular_italic-webfont.woff') format('woff'), url('../fonts/bariol/bariol_regular_italic-webfont.ttf') format('truetype'), url('../fonts/bariol/bariol_regular_italic-webfont.svg#bariolregular_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'bariol regular';
+    src: url('../fonts/bariol/bariol_regular-webfont.eot');
+    src: url('../fonts/bariol/bariol_regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/bariol/bariol_regular-webfont.woff') format('woff'), url('../fonts/bariol/bariol_regular-webfont.ttf') format('truetype'), url('../fonts/bariol/bariol_regular-webfont.svg#bariol_regularregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'bariol bold';
+    src: url('../fonts/bariol/bariol_bold-webfont.eot');
+    src: url('../fonts/bariol/bariol_bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/bariol/bariol_bold-webfont.woff') format('woff'), url('../fonts/bariol/bariol_bold-webfont.ttf') format('truetype'), url('../fonts/bariol/bariol_bold-webfont.svg#bariol_boldbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'bariol light';
+    src: url('../fonts/bariol/bariol_light-webfont.eot');
+    src: url('../fonts/bariol/bariol_light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/bariol/bariol_light-webfont.woff') format('woff'), url('../fonts/bariol/bariol_light-webfont.ttf') format('truetype'), url('../fonts/bariol/bariol_light-webfont.svg#bariol_lightlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'bariolregular italic';
+    src: url('../fonts/bariol/bariol_regular_italic-webfont.eot');
+    src: url('../fonts/bariol/bariol_regular_italic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/bariol/bariol_regular_italic-webfont.woff') format('woff'), url('../fonts/bariol/bariol_regular_italic-webfont.ttf') format('truetype'), url('../fonts/bariol/bariol_regular_italic-webfont.svg#bariolregular_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+    font-family: bariol regular !important;
+}
+
+/***********layout header begin***************/
+.strip {
+    height: 10px;
+    background-image: url("../Content/Images/login-header-bar.png");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-color: rgb(245, 129, 36);
+}
+
+.header-inr {
+    width: 1000px;
+    padding: 25px 0 0 120px;
+    text-align: left;
+    font-family: 'Brandon Grotesque', Helvetica, Arial, Sans-Serif;
+    font-weight: bold;
+    font-size: 26pt;
+    color: #F07144;
+    /*color: #002c76;*/
+}
+
+#header {
+    height: 100px !important;
+}
+
+/*#header-logo .logo {
+    padding-bottom: 10px;
+}*/
+
+#navigation-logo {
+    padding-left: 5px;
+    display: inline-block;
+    float: left;
+    z-index: 1000;
+}
+
+#logo-text {
+    color: #f07100;
+    font-size: 16px;
+    display: inline-block;
+    float: left;
+    margin-top: 33px;
+    padding-left: 7px;
+    z-index: 1000;
+    font-family: 'dejarip', Arial, Helvetica, sans-serif;
+}
+
+/***********layout header end********/
+
+/*******footer css begin*************/
+#wrapper {
+    min-height: 100%;
+    padding-bottom: 92px;
+    position: relative;
+}
+
+#footer {
+    font-family: bariol bold, bariol_bold,Helvetica, Arial, Sans-Serif;
+    text-align: right;
+    /*font-size: 10px;*/
+    /*position: absolute;*/
+    bottom: 0px;
+    width: 100%;
+    /*min-width: 1250px;*/
+    height: 90px;
+    /*background-image: url('../Content/images/login-footer-bg.png');*/
+    background-repeat: repeat-x;
+}
+
+    #footer div {
+        margin-right: 130px;
+        margin-top: 20px;
+    }
+/********footer css end***********/
+
+/****************progress begin*******************/
+#divProgress {
+    margin-bottom: 40px;
+}
+
+    #divProgress td {
+        text-align: center;
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+        height: 35px;
+    }
+
+    #divProgress .tooltip-inner {
+        max-width: 200px;
+        padding: 3px 8px;
+        color: #ffffff;
+        text-align: center;
+        text-decoration: none;
+        background: #E66F60;
+        border-radius: 4px;
+    }
+
+    #divProgress .tooltip.bottom .tooltip-arrow {
+        top: 0;
+        left: 50%;
+        margin-left: -5px;
+        border-bottom-color: #E66F60;
+        border-width: 0 5px 5px;
+    }
+
+    #divProgress .tooltip.top .tooltip-arrow {
+        bottom: 0;
+        left: 50%;
+        margin-left: -5px;
+        border-top-color: #E66F60;
+        border-width: 5px 5px 0;
+    }
+
+.progress-step-ing {
+    background: url("../Content/images/step-ing.png") no-repeat right;
+    width: 35px;
+}
+
+.progress-spliter-ing {
+    display: inline-block;
+    height: 10px;
+    background: #F67704;
+    width: 65px;
+    vertical-align: central;
+    margin-top: 5px;
+    z-index: -1;
+    margin-left: -1px;
+    margin-right: -1px;
+}
+
+.progress-step {
+    background: url("../Content/images/step.png") no-repeat right;
+    width: 35px;
+}
+
+.step-font {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.step-name {
+    font-weight: 700;
+}
+
+.progress-spliter {
+    display: inline-block;
+    height: 10px;
+    background: #E1E6EB;
+    width: 65px;
+    margin-top: 5px;
+    z-index: -1;
+    margin-left: -1px;
+    margin-right: -1px;
+}
+
+/****************progress end*********************************/
+
+/* common */
+a {
+    color: #00a3dc;
+    outline: none;
+    text-decoration: none;
+    vertical-align: bottom;
+}
+
+    a:link, a:visited, a:active, a:hover {
+        color: #00a3dc;
+    }
+
+    a:hover {
+        color: #ffa200;
+    }
+
+h1 {
+    font-weight: normal;
+    font-family: bariol bold, bariol_bold;
+}
+
+/* layout*/
+html, body {
+    font-family: bariol regular, bariol_regular,Helvetica, Arial, Sans Serif;
+    font-size: 15px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+
+#hpBg {
+    background: url("../Content/images/headerShadow.png") repeat-x scroll center top rgba(0, 0, 0, 0);
+    height: 6px;
+    left: 0;
+    width: 100%;
+    min-width: 900px;
+    z-index: 2000;
+}
+
+#content {
+    margin-top: 36px;
+    margin-bottom: 30px;
+}
+
+
+
+.help-page h1 {
+    font-weight: 100;
+    color: #f07100;
+}
+
+.help-page h2 {
+    font-weight: bolder;
+    color: rgb(12, 12, 12);
+}
+
+#td {
+    padding-left: 0px;
+}
+
+#testClientDialog h5 {
+    padding: 8px 4px 8px ;
+     border-radius: 4px;
+}
+
+    #testClientDialog h5 input[type="checkbox"] {
+        margin: 0 0 0;
+       
+    }

@@ -1,0 +1,51 @@
+﻿@using KMHC.SLTC.WebUI.Models
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html ng-app="sltcApp">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>BI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/cloud-admin.css">
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/themes/default.css" id="skin-switcher">
+    <link rel="stylesheet" type="text/css" href="/Content/report.css">
+    <link href="/Content/CloudAdmin/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/Index/css")
+</head>
+<body style="min-width:1100px;">
+    <!-- HEADER -->
+    <header class="navbar clearfix" style="height: 70px;">
+        <div id="homeMapHeader" style="display: none; height: 70px; text-align: center; color: #FFFFFF; background-color: #000000; font-size: 36px;">康美健康云智慧医养中心分布图</div>
+        <div id="orgHomeHeader" style="display:none;" class="container nav">
+            <ul>
+                <li id="nav_home"><a href="/Report/HomeStatistic/">首页</a></li>
+                <li id="nav_member"><a href="/Report/MemberStatistic/">会员信息</a></li>
+                <li id="nav_care"><a href="/Report/CareStatistic/">养护服务</a></li>
+                @*<li id="nav_health"><a href="#">健康管理</a></li>*@
+                <li id="nav_familydoctor"><a href="/Report/FamilyDoctorStatistic/">家庭医生签约</a></li>
+                <li id="nav_chinesemedicine"><a href="/Report/ChinesemedicineStatistic/">中医体质分析</a></li>
+                <li id="nav_chronicdisease"><a href="/Report/ChronicdiseaseStatistic/">慢病统计</a></li>
+            </ul>
+            <ul style="float: right;">
+                <li id="nav_return"><a href="/Report/HomeMap/">返回</a></li>
+            </ul>
+        </div>
+        <div style="height:1px; clear:both;"></div>
+    </header>
+    <!-- PAGE -->
+    <section>
+        <div class="container" ui-view ng-swipe-left="someFunction($event,'left')" ng-swipe-right="someFunction($event,'right')">
+            @*填充的内容*@
+        </div>
+    </section>
+    <script src="/Content/CloudAdmin/js/jquery/jquery-2.0.3.min.js"></script>
+    @Scripts.Render("~/BI/Scripts/angular")
+    @Scripts.Render("~/Scripts/Report")
+</body>
+</html>

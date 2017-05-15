@@ -1,0 +1,85 @@
+﻿<link href="../../../Content/DC/layout.css" rel="stylesheet" />
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                <resident-list feeno={{FeeNo}} callback="residentSelected(resident)" />
+            </div>
+            <div class="col-md-10">
+                <div class="formStyle">
+                    <button class="btn btn-warning" ng-disabled="buttonPrintShow" ng-click="PrintPreview()"><i class="fa fa-print"></i> 列印預覽</button>
+                </div>
+                <div class="formStyle">
+                    <div id="header" class="hearderStyle">
+                        <div><h3><strong>{{OrgName}}老人日間照顧中心</strong></h3></div>
+                        <div><h4><strong> 個案護理診斷問題一覽表</strong></h4></div>
+
+                    </div>
+                    <div id="body" class="bodyStyle">
+                        <div style="margin:6px;"><span>姓名：</span> <span class="spanStyleFour">{{currentResident.Name}}</span></div>
+                        <table id="tabConent">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="width:10%">編號</th>
+                                    <th rowspan="2" style="width:50%">護理診斷或問題</th>
+                                    <th colspan="2" style="width:45%">起止日期</th>
+                                </tr>
+                                <tr>
+                                    <th>起</th>
+                                    <th>止</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in Data.RegCPLList">
+                                    <td>#{{$index + 1}}</td>
+                                    <td>{{item.CpDia}}</td>
+                                    <td>{{item.StartDate | dateFormat}}</td>
+                                    <td>{{item.FinishDate | dateFormat}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div id="footer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <style>
+        .hearderStyle {
+            text-align: center;
+        }
+
+        .bodyStyle {
+        }
+
+            .bodyStyle span {
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            .bodyStyle table {
+                width: 100%;
+                border-bottom: 1px solid black;
+                border-left: 1px solid black;
+                border-collapse: collapse;
+            }
+
+                .bodyStyle table th {
+                    border-top: 1px solid black;
+                    border-right: 1px solid black;
+                    text-align: center;
+                    font-weight: bolder;
+                    font-size: 16px;
+                }
+
+                .bodyStyle table td {
+                    border-top: 1px solid black;
+                    border-right: 1px solid black;
+                    text-align: center;
+                    font-size: 16px;
+                    line-height: 2em;
+                }
+    </style>

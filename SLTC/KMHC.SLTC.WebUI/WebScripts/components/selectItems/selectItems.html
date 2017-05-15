@@ -1,0 +1,39 @@
+﻿<!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
+<div class="modal fade" id="selectItems" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <!--<h4 class="modal-title">列表</h4>-->
+                <input ng-model="selectItems.keyWord" class="form-control" placeholder="請輸入名稱" type="text">
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr class="success">
+                            <th>
+                                <input type="hidden" ng-model="selectItems.filterItems" />
+                            </th>
+                            <th>名稱</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in selectItems.CommonUseWords|filter:{'ItemName':selectItems.keyWord}">
+                            <td class="col-md-1">
+                                <input type="checkbox" id={{item.TypeCode}} name="{{item.ItemName}}" ng-click="updateSelection($event,item.TypeCode)" ng-model="item.checked" />
+                            </td>
+                            <td class="col-md-11">{{item.ItemName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" ng-click="selectItems.add()">傳回取代</button>
+                <button type="button" class="btn btn-info" ng-click="selectItems.append()">傳回累加</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-info" ng-click="selectItems.chkAll(selectItems.chkall)">{{selectItems.buttonText}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /SAMPLE BOX CONFIGURATION MODAL FORM-->

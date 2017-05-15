@@ -1,0 +1,25 @@
+<div class="swiper-wrapper">
+    <div class="swiper-slide" ng-repeat="item in dataSwiper">
+        <ul class="datacon-tab datacon-tab-con">
+            <li ng-class="{odd:$odd,last:$last}">
+                <div class="datacon-idx">{{item.CheckNumber}}</div>
+                <div class="datacon-name">{{item.ResidentName}}</div>
+                <div class="datacon-num">{{item.SerialNumber}}</div>
+                <!--<div class="datacon-curroom">{{todo.name}}</div>
+                <div class="datacon-cursts">{{todo.name}}</div>
+                <div class="datacon-nextroom">{{todo.name}}</div>-->
+            </li>
+        </ul>
+    </div>
+</div>
+<!--<div class="swiper-wrapper">
+    <div class="swiper-slide" ng-repeat="item in dataSwiper">
+        <ul class="datacon-tab datacon-tab-con">
+            <li ng-repeat="todo in item">
+                <div class="datacon-idx">{{todo.CheckNumber}}</div>
+                <div class="datacon-name">{{todo.ResidentName}}</div>
+                <div class="datacon-num">{{todo.SerialNumber}}</div>
+            </li>
+        </ul>
+    </div>
+</div>-->

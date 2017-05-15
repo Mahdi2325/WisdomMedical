@@ -1,0 +1,69 @@
+﻿
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bars"></i>系统功能编辑
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form class="form-horizontal" role="form" name="funeditform" ng-submit="saveFunction()">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12 mgt20">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">功能编号<span class="required">*</span></label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" ng-model="Functions.FunctionNo" ng-maxlength="20" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">名称<span class="required">*</span></label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" ng-model="Functions.FunctionName" ng-maxlength="100" placeholder="请输入功能名称" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">URL<span class="required">*</span></label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" ng-model="Functions.Url" ng-maxlength="200" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">模块名称<span class="required">*</span></label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" ng-model="Functions.ModuleName" ng-maxlength="100" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">排序编号</label>
+                                    <div class="col-md-4">
+                                        <input type="number" class="form-control" ng-model="Functions.OrderSeq" ng-maxlength="11" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">功能说明</label>
+                                    <div class="col-md-6">
+                                        <textarea rows="5" class="form-control" ng-model="Functions.Description" ng-maxlength="200"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">是否独立功能点</label>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" class="uniform" ng-model="Functions.IsIndependent" />
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-primary" type="submit" ng-disabled="funeditform.$invalid">保存</button>
+                                    <button class="btn btn-grey" ui-sref="Functions">取消</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>

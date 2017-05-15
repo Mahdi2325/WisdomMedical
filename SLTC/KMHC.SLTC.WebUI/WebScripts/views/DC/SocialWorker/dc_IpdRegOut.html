@@ -1,0 +1,141 @@
+﻿<!--收案-->
+<link href="../../../Content/socialworker.css" rel="stylesheet" />
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                <resident-list feeno={{FeeNo}} callback="residentSelected(resident)" />
+            </div>
+            <div class="col-md-10 marginTop5">
+
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                      
+                                <button class="btn btn-primary" ng-disabled="buttonShow" ng-click="saveOut(currentItem)"><i class="fa fa-save"></i> 儲存資料</button>
+                                    <!--<button class="btn btn-default" ng-disabled="buttonShow" ng-click="AddLife()"><i class="fa fa-plus"></i> 新增生活史</button>-->
+                                    <button class="btn btn-info" ng-disabled="buttonShow" ng-click="PrintPreview(2)"><i class="fa fa-print"></i> 列印預覽</button>
+                                    <!--<button class="btn btn-success" ng-disabled="buttonShow"><i class="fa fa-list"></i> 歷次記錄</button>-->
+
+                             
+
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-horizontal tb" name="outForm" role="form" novalidate>
+                                    <div class="col-md-12 marginBottom5">
+                                        <div style="">
+                                            <div class="panel-title h1 center font25">
+                                                <!--<span class="spantitle font25">
+                                                    <br />
+                                                    <br />
+                                                </span>-->
+                                                <h3><strong>{{Org}}老人日間照顧中心</strong></h3>
+                                                <h4><strong>個案结案表</strong></h4>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="div col-md-12">
+                                        <table class="col-md-12">
+
+                                            <tr class="height40">
+                                                <td class="col-md-1 tdlbl">姓名</td>
+                                                <td class="col-md-1 tdFont" align="left">
+
+                                                    {{currentItem.RegName}}
+                                                </td>
+                                                <td class="col-md-1 tdlbl">性別</td>
+                                                <td class="col-md-1 ">
+                                                    <span ng-bind="currentItem.Sex" class="tdFont"></span>
+                                                </td>
+                                                <td class="col-md-1 tdlbl">出生日期</td>
+                                                <td class="col-md-1 tdFont">{{currentItem.BirthDate | dateFormat}}</td>
+                                                <td class="col-md-1 tdlbl">身份證字號</td>
+                                                <td class="col-md-1 tdFont">{{currentItem.IdNo}}</td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td class="tdlbl">
+                                                    婚姻狀況<input type="hidden" ng-model="currentItem.StationCode"></input>
+                                                </td>
+                                                <td colspan="5" align="left" class="tdFont">
+                                                    {{currentItem.MerryState}}
+                                                    <!--<textarea id="txtMerryState" input-select="DC.055" rows="4" ng-model="currentItem.MerryState"></textarea>-->
+                                                </td>
+                                                <td class="tdlbl">聯絡電話</td>
+                                                <td align="left" class="tdFont">{{currentItem.Phone}}</td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td class="tdlbl">
+                                                    居住地址
+                                                </td>
+                                                <td colspan="7" align="left" class="tdFont">
+                                                    {{currentItem.PermanentAddress}}
+                                                </td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td class="tdlbl">
+                                                    戶籍地址
+                                                </td>
+                                                <td colspan="7" align="left" class="tdFont">
+                                                    {{currentItem.LivingAddress}}
+                                                </td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td class="tdlbl">
+                                                    <span class="required">*</span>服務時間
+                                                </td>
+                                                <td colspan="3">
+                                                    <div class="" style="float:left;">
+                                                        <span class="tdFont"> {{currentItem.InDate | dateFormat}}</span>
+                                                        <!--<input type="text" ng-model="currentBasic.InDate | dateFormat" ca-date-picker placeholder="服務開始日期" />-->
+                                                    </div>
+                                                    <div class="" style="float:left;text-align:center;">～</div>
+                                                    <div class="" style="float:left;"><input type="text" class="form-control bottom_blue" ng-model="currentItem.OutDate" ca-date-picker placeholder="请选择服務結束日期" name="服務結束日期" required /></div>
+                                                </td>
+                                                <td class="tdlbl">
+                                                    <span class="required">*</span>提供服務
+                                                </td>
+                                                <td colspan="3" align="left">
+                                                    <textarea id="txtProvideService" class="form-control bottom_blue col-md-11" input-select="DC01.037" rows="4" ng-model="currentItem.ProvideService" name="提供服務" ng-maxlength="100" required></textarea>
+                                                </td>
+                                            </tr>
+
+                                            <tr style="height:60px;">
+                                                <td class="tdlbl">
+                                                    <span class="required">*</span>結案原因
+                                                </td>
+                                                <td colspan="7" align="left">
+                                                    <textarea class="col-md-11" id="txtCloseReason" input-select="DC01.038" rows="4" ng-model="currentItem.CloseReason" name="結案原因" ng-maxlength="254" required ></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr class="height400">
+                                                <td class="tdlbl">
+                                                    <span class="required">*</span>簡易服務摘要
+                                                </td>
+                                                <td colspan="7" align="left" class="tdFont">
+                                                    <textarea class="form-control bottom_blue col-md-11" rows="14" ng-model="currentItem.SvrContent" name="簡易服務摘要" ng-maxlength="3000" required></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr class="height35">
+                                                <td class="tdlbl">
+                                                    <span class="required">*</span>结案日期
+                                                </td>
+                                                <td align="left" colspan="7">
+                                                    <input type="text" style="border-top:none;border-left:none;border-right:none;border-bottom:none" ng-model="currentItem.OutDate" ca-date-picker placeholder="结案日期" readonly="readonly" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+       
+
+            </div>
+
+        </div>
+    </div>
+</div>

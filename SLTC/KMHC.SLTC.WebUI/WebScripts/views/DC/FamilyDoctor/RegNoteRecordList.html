@@ -1,0 +1,102 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">查詢</div>
+    <div class="panel-body form-horizontal">
+        <label class="control-label col-md-1">關懷日期</label>
+        <div class="col-md-2">
+            <input class="form-control" type="text" ca-date-picker ng-model="options.params.startDate" max="{{options.params.endDate}}" />
+        </div>
+        <div class="col-md-2">
+            <input class="form-control" type="text" ca-date-picker ng-model="options.params.endDate" min="{{options.params.startDate}}" />
+        </div>
+        <div class="col-md-7">
+            <a class="btn btn-primary" ng-click="options.search()"><i class="fa fa-search"></i>查詢</a>
+            <a class="btn btn-primary" ng-click="openModal('noteRecordModal')"><i class="fa fa-add"></i>添加</a>
+            <a class="btn btn-grey" ng-click="backTo()">返回</a>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">查询结果</div>
+    <div class="panel-body">
+        <ui-data-table options="$parent.options">
+            <table class="table table-striped table-bordered table-hover table-handler">
+                <thead>
+                    <tr>
+                        <th>關懷日期</th>
+                        <th>操作用戶</th>
+                        <th>關懷內容</th>
+                        <th>是否已查看</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in RegNoteRecordList">
+                        <td>{{item.NoteDate | dateFormat}}</td>
+                        <td>{{item.ActionUserName}}</td>
+                        <td>{{item.NoteContent}}</td>
+                        <td>{{item.ViewStatus ? "已查看" : "未查看"}}</td>
+                        <td>
+                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                <a ng-click="openModal('noteRecordModal', item)" class="btn btn-success" href="">編輯</a>
+                                <a ng-click="delete('record',item)" class="btn btn-danger" href="">刪除</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ui-data-table>
+    </div>
+</div>
+<div class="modal fade" id="noteRecordModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tab-pane " id="tbBasic">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">添加關懷記錄</div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">關懷日期</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" ng-model="Data.NoteDate" type="text" ca-date-picker required />
+                                            </div>
+                                            <label class="col-sm-2 control-label">操作用戶</label>
+                                            <div class="col-sm-4">
+                                                <span class="form-control">{{Data.ActionUserName}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">常用關懷內容</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control" ng-model="Data.Note" ng-change="change(Data.Note)" ng-options="item as item.NoteName for item in $parent.SelectNoteList"></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">關懷內容</label>
+                                            <div class="col-sm-10">
+                                                <textarea class="form-control" ng-model="Data.NoteContent" required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-grey" data-dismiss="modal">關閉</button>
+                <button type="button" class="btn btn-primary" id="btnOk" ng-click="save('noteRecordModal',Data)">確定</button>
+            </div>
+        </div>
+    </div>
+</div>

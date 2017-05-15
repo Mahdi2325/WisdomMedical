@@ -1,0 +1,56 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="input-group col-md-10">
+                <input type="text" class="form-control" ng-model="options.keyWord" placeholder="请输入监测模版名称">
+                <span class="input-group-btn">
+                    <a class="btn btn-primary"><i class="fa fa-search"></i> 查询</a>
+                    <a class="btn btn-primary" ui-sref="MonitorResultAdd"><i class="fa fa-plus"></i> 新增</a>
+                    <a class="btn btn-primary" ng-click="LoadData()" ng-disabled="loadState"><i class="fa fa-plus"></i> {{loadBtn}}</a>
+                </span>
+            </div>
+        </div>
+        <!-- BOX -->
+        <div class="box border green">
+            <div class="box-title">
+                <h4><i class="fa fa-table"></i>监测结果列表</h4>
+            </div>
+            <div class="box-body dataTables_wrapper form-inline">
+                <table id="datatable1" class="table table-striped table-bordered table-hover table-handler">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>结果编号</th>
+                            <th>模版编号</th>
+                            <th>模版名称</th>
+                            <th>老人姓名</th>
+                            <th>身份证</th>
+                            <th>监测时间</th>
+                            <th>数据来源</th>
+                            <th>监测项目</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in MonitorResult | filter:{MTName:options.keyWord}">
+                            <td>{{$index + 1}}</td>
+                            <td>{{item.MRNo}}</td>
+                            <td>{{item.MTNo}}</td>
+                            <td>{{item.MTName}}</td>
+                            <td>{{item.PersonName}}</td>
+                            <td>{{item.Idcard|idcardFormat}}</td>
+                            <td>{{item.MRDatetime|dateFormat}}</td>
+                            <td><span select-code="M00.001" select-value="{{item.SourceType}}"></span></td>
+                            <td>
+                                <div ng-repeat="mi in item.MRItems">
+                                    {{mi.MIName}}:{{mi.Result}}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <!-- /BOX -->
+    </div>
+</div>

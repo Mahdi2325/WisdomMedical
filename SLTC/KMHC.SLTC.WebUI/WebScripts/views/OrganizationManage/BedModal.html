@@ -1,0 +1,81 @@
+﻿
+<div class="container-fluid" ng-controller="bedModalPopuCtrl">
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="input-group col-md-10">
+                    <input type="text" class="form-control" ng-model="keyword" placeholder="請輸入樓層或房間號">
+                    <span class="input-group-btn">
+                        <a class="btn btn-primary" ng-click="search()"><i class="icon-search"></i>搜索</a>
+                    </span>
+                </div>
+            </div>
+            <div class="box border green">
+                <div class="box-title">
+                    <h4><i class="fa fa-table"></i>床位訊息</h4>
+                    <div class="tools">
+                        <a href="javascript:;" class="reload" ca-reload ng-click="reload()">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table  table-bordered ">
+                        <thead>
+                            <tr>
+                                <!--<th>編號</th>-->
+                                <th>狀態</th>
+                                <!--<th>所在樓層</th>-->
+                                <th>所在房間</th>
+                                <th>床号</th>
+                                <th>床位名称</th>
+                                <!--<th>所屬科別</th>-->
+                                <th>床位形態</th>
+                                <!--<th>病床形態</th>-->
+                                <th>病床種類</th>
+                                <!--<th>姓名</th>
+                                <th>性别</th>
+                                <th>年龄</th>
+                                <th>语言</th>
+                                <th>星座</th>
+                                <th>宗教</th>
+                                <th>血型</th>
+                                <th>婚姻狀況</th>
+                                <th>管制標識</th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in Data.Beds" ng-class="{'modal-disable':item.BedState!='E'}" ng-click="rowClick(item)">
+                                <!--<td>{{item.BedNo}}</td>-->
+                                <td><span select-code="J00.002" select-value="{{item.BedState}}"></span></td>
+                                <!--<td>{{item.OrgId}}</td>-->
+                                <!--<td>{{item.FloorName}}</td>-->
+                                <td>{{item.RoomNo}}</td>
+
+                                <td>{{item.BedNo}}</td>
+                                <td>{{item.BedName}}</td>
+                                <!--<td>{{item.RoomName}}</td>-->
+                                <!--<td>{{Dic.DeptNos.toText(item.DeptNo)}}</td>-->
+                                <td><span select-code="J00.003" select-value="{{item.BedType}}"></span></td>
+                                <!--<td><span select-code="J00.003" select-value="{{item.BedType}}"></span></td>-->
+                                <td><span select-code="J00.004" select-value="{{item.Category}}"></span></td>
+                                <!--<td>{{item.ResidentName}}</td>
+                                <td><span select-code="A00.001" select-value="{{item.Sex}}"></span></td>
+                                <td>{{item.Age}}</td>
+                                <td>{{item.Language}}</td>
+                                <td><span select-code="A00.046" select-value="{{item.Constellations}}"></span></td>
+                                <td><span select-code="A00.008" select-value="{{item.Religioncode}}"></span></td>
+                                <td><span select-code="A00.014" select-value="{{item.Bloodtype}}"></span></td>
+                                <td><span select-code="A00.011" select-value="{{item.Merryflag}}"></span></td>
+                                <td>{{item.Language?"是":"否"}}</td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

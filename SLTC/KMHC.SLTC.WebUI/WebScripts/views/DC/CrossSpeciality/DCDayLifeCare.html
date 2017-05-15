@@ -1,0 +1,633 @@
+﻿<script src="../../../../Content/MyDatePicker/WdatePicker.js"></script>
+<link href="../../../../Content/HL.css" rel="stylesheet" />
+
+<!---->
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="box border green">
+            <div class="box-title">
+                <h4>
+                    <i class="fa fa-bars"></i>会员信息
+                </h4>
+            </div>
+            <div class="box-body">
+                <resident-select callback="residentSelected(resident)" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="content_container searchsum_hits">
+                    <div class="content">
+                        <div class="btn toolbar" style="position: relative; z-index: 0;">
+                            <button class="btn btn-primary" ng-click="saveForm(item1,item2,item3,item4,item5,DAYLIFE)" ng-disabled="btn_s"><i class="fa fa-save"></i> 储存数据</button>
+                            <button class="btn btn-danger" ng-click="showhistroy()" ng-disabled="btn_s"><i class="fa fa-list"></i> 历次资料</button>
+                            <button class="btn btn-info" ng-click="week()" ng-disabled="btn_s"><i class="fa fa-print"></i> 本周</button>
+                            <button class="btn btn-danger" ng-click="lastweek()" ng-disabled="btn_s"><i class="fa fa-list"></i> 上周</button>
+                            <button class="btn btn-primary" ng-click="nextweek()" ng-disabled="btn_s"><i class="fa fa-list"></i> 下周</button>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content_container item_details">
+            <div class="content">
+                <form class="form-horizontal tb" name="rfrForm" role="form" novalidate>
+                    <div style="margin-bottom:5px;" class="col-md-12">
+                        <div style="text-align:center;font-size:24px;font-weight:700;line-height:36px;font-family:DFKai-SB;">
+
+                            <table style="width:100%;border:none;margin-top:5px;">
+                                <!--<tr>
+                                    <td style="border:none;" colspan="12">
+                                    <h3><strong>{{OrgName}}老人日间照顾中心</strong></h3>
+                                    </td>
+                                </tr>-->
+                                <tr>
+                                    <td style="border:none;" colspan="12">
+                                        <!--护理及生活照顾服务记录<br />-->
+                                        <h3><strong>日常生活照顾记录表</strong></h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none; font-size: 18px; min-width: 80px">日字号:</td>
+                                    <td style="border: none; font-size:18px;"><input type="text" style="border-left-style:none;border-top-style:none;border-right-style:none;border-bottom-style:solid;border-bottom-width:2px" ng-model="DAYLIFE.RESIDENTNO" ng-disabled="true" /></td>
+                                    <td style="border: none; font-size: 18px; min-width: 60px">姓名:</td>
+                                    <td style="border: none; font-size: 18px;">
+                                        <input type="text" style="border-left-style: none; border-top-style: none; border-right-style: none; border-bottom-style: solid; border-bottom-width: 2px" ng-model="DAYLIFE.REGNAME" ng-disabled="true" />
+                                    </td>
+                                    <td style="border: none; font-size: 18px; min-width: 60px">性别:</td>
+                                    <td style="border: none; font-size: 18px; min-width: 100px">
+                                        <div class="input-group">
+                                            <select style="border-left-style: none; border-top-style: none; border-right-style: none; border-bottom-style: solid; border-bottom-width: 2px" ng-model="DAYLIFE.SEX" select-code="A00.001" ng-disabled="true"></select>
+                                            <!--<input type="text" style="border-left-style: none; border-top-style: none; border-right-style: none; border-bottom-style: solid; border-bottom-width: 2px" ng-model="DAYLIFE.SEX" ng-maxlength="10" ng-disabled="true"/>-->
+                                            <!--<label class="radio-inline"><input type="radio" class="" name="gender" ng-checked="true" ng-model="DAYLIFE.SEX" value="男"/>男</label><label class="radio-inline"><input type="radio" name="gender" ng-model="DAYLIFE.SEX" value="女"/>女</label>-->
+                                        </div>
+                                    </td>
+                                    <td style="border: none; font-size: 18px; min-width: 80px; text-align: left;">照服员:</td>
+                                    <td style="border: none; font-size: 18px;min-width: 160px; ">
+                                        <!--<input type="text" style="border-left-style: none; border-top-style: none; border-right-style: none; border-bottom-style: solid; border-bottom-width: 2px" ng-model="DAYLIFE.NURSEAIDES" />-->
+                                        <select class="form-control" ng-model="DAYLIFE.NURSEAIDES" ng-options="item.EmpName  as item.EmpName+'('+item.EmpNo+')' for item in NurseAides" ng-maxlength="10"></select>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div style="padding:1px; border:2px solid black" class="col-md-12">
+                        <div style="text-align:center;line-height:36px;">
+
+                            <table class="zebra">
+                                <tr>
+                                    <td colspan="3" class="col-md-2 tdlbl">
+                                        <div class="col-md-12" style="text-align:right">日期</div>
+                                        <div class="col-md-12" style="text-align:left">项目</div>
+                                    </td>
+                                    <td class="col-md-2 tdlbl" style="height:50px">
+                                        <input type="text" style="text-align:center" ng-model="item1.DAYOFWEEK" />
+                                        <div style="width:50%;float:left;text-align:right">
+                                            星期一
+                                        </div>
+                                        <div style=" width:49%;float:right;margin-left:1px">
+                                            <div style="width:60%; float:left;text-align:right">休假</div>
+                                            <div style="width:40%;float:left;text-align:right;margin-top:2px"><input type="checkbox" class="uniform" ng-checked="DCWeekshow1" ng-disabled="DCtimedisabled1" ng-click="fun(1)" ng-model="item1.HOLIDAYFLAG"></div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2 tdlbl" style="height:50px">
+                                        <input type="text" style="text-align:center" ng-model="item2.DAYOFWEEK" />
+
+                                        <div style="width:50%;float:left;text-align:right">
+                                            星期二
+                                        </div>
+                                        <div style=" width:49%;float:right;margin-left:1px">
+                                            <div style="width:60%; float:left;text-align:right">休假</div>
+                                            <div style="width:40%;float:left;text-align:right;margin-top:2px"><input type="checkbox" ng-click="fun(2)" class="uniform" ng-disabled="DCtimedisabled2" ng-checked="DCWeekshow2" ng-model="item2.HOLIDAYFLAG"></div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2 tdlbl" style="height:50px">
+                                        <input type="text" style="text-align:center" ng-model="item3.DAYOFWEEK" />
+                                        <div style="width:50%;float:left;text-align:right">
+                                            星期三
+                                        </div>
+                                        <div style=" width:49%;float:right;margin-left:1px">
+                                            <div style="width:60%; float:left;text-align:right">休假</div>
+                                            <div style="width:40%;float:left;text-align:right;margin-top:2px"><input type="checkbox" class="uniform" ng-click="fun(3)" ng-disabled="DCtimedisabled3" ng-checked="DCWeekshow3" ng-model="item3.HOLIDAYFLAG"></div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2 tdlbl" style="height:50px">
+                                        <input type="text" style="text-align:center" ng-model="item4.DAYOFWEEK" />
+
+                                        <div style="width:50%;float:left;text-align:right">
+
+                                            星期四
+                                        </div>
+                                        <div style=" width:49%;float:right;margin-left:1px">
+                                            <div style="width:60%; float:left;text-align:right">休假</div>
+                                            <div style="width:40%;float:left;text-align:right;margin-top:2px"><input type="checkbox" class="uniform" ng-click="fun(4)" ng-disabled="DCtimedisabled4" ng-checked="DCWeekshow4" ng-model="item4.HOLIDAYFLAG"></div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2 tdlbl" style="height:50px">
+                                        <input type="text" style="text-align:center" ng-model="item5.DAYOFWEEK" />
+
+                                        <div style="width:50%;float:left;text-align:right">
+                                            星期五
+                                        </div>
+                                        <div style=" width:49%;float:right;margin-left:1px">
+                                            <div style="width:60%; float:left;text-align:right">休假</div>
+                                            <div style="width:40%;float:left;text-align:right;margin-top:2px"><input type="checkbox" class="uniform" ng-click="fun(5)" ng-disabled="DCtimedisabled5" ng-checked="DCWeekshow5" ng-model="item5.HOLIDAYFLAG"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="6" style="width:5px;" class="col-md-2 tdlbl">
+                                        餐
+
+                                        饮
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="col-md-6 tdlbl" style="text-align:left">茶水</div>
+                                        <div class="col-md-6 tdlbl" style="text-align:left">9:00</div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <input type="text" ng-model="item1.TEA9" id="TEA91" name="Ditem1" class="form-control" input-select="DC03.006" ng-maxlength="200" />
+                                        </div>
+                                    </td>
+                                    <td><input type="text" ng-model="item2.TEA9" id="TEA92" name="Ditem2" class="form-control" input-select="DC03.006" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item3.TEA9" id="TEA93" name="Ditem3" class="form-control" input-select="DC03.006" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item4.TEA9" id="TEA94" name="Ditem4" class="form-control" input-select="DC03.006" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item5.TEA9" id="TEA95" name="Ditem5" class="form-control" input-select="DC03.006" ng-maxlength="200" /></td>
+                                </tr>
+                                <tr>
+
+                                    <td colspan="2">
+                                        <div class="col-md-12 tdlbl" style="text-align:left">点心/茶水</div>
+                                        <div class="col-md-12 tdlbl" style="text-align:left">9:00</div>
+
+                                    </td>
+                                    <td><input type="text" ng-model="item1.SNACKTEA9" id="SNACKTEA91" name="Ditem1" class="form-control" input-select="DC03.007" ng-readonly="DCshow1" ng-maxlength="200" /></td>
+                                    <!--<td><input type="text" name="Ditem1"></td>-->
+                                    <td><input type="text" ng-model="item2.SNACKTEA9" id="SNACKTEA92" name="Ditem2" class="form-control" input-select="DC03.007" ng-readonly="DCshow2" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item3.SNACKTEA9" id="SNACKTEA93" name="Ditem3" class="form-control" input-select="DC03.007" ng-readonly="DCshow3" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item4.SNACKTEA9" id="SNACKTEA94" name="Ditem4" class="form-control" input-select="DC03.007" ng-readonly="DCshow4" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item5.SNACKTEA9" id="SNACKTEA95" name="Ditem5" class="form-control" input-select="DC03.007" ng-readonly="DCshow5" ng-maxlength="200" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="col-md-12 tdlbl" style="text-align:left">午餐量</div>
+                                        <div class="col-md-12 tdlbl" style="text-align:left">(盘/碗)</div>
+
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item1.LUNCH" id="LUNCH1" name="Ditem1" class="form-control" input-select="DC03.008" ng-readonly="DCshow1" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item2.LUNCH" id="LUNCH2" name="Ditem2" class="form-control" input-select="DC03.008" ng-readonly="DCshow2" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item3.LUNCH" id="LUNCH3" name="Ditem3" class="form-control" input-select="DC03.008" ng-readonly="DCshow3" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item4.LUNCH" id="LUNCH4" name="Ditem4" class="form-control" input-select="DC03.008" ng-readonly="DCshow4" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item5.LUNCH" id="LUNCH5" name="Ditem5" class="form-control" input-select="DC03.008" ng-readonly="DCshow5" ng-maxlength="200" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="col-md-12 tdlbl" style="text-align:left">汤量</div>
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item1.SOUPAMOUNT" name="Ditem1" id="SOUPAMOUNT1" class="form-control" input-select="DC03.009" ng-readonly="DCshow1" ng-maxlength="200" />
+                                    </td>
+                                    <td><input type="text" ng-model="item2.SOUPAMOUNT" name="Ditem2" id="SOUPAMOUNT2" class="form-control" input-select="DC03.009" ng-readonly="DCshow2" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item3.SOUPAMOUNT" name="Ditem3" id="SOUPAMOUNT3" class="form-control" input-select="DC03.009" ng-readonly="DCshow3" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item4.SOUPAMOUNT" name="Ditem4" id="SOUPAMOUNT4" class="form-control" input-select="DC03.009" ng-readonly="DCshow4" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item5.SOUPAMOUNT" name="Ditem5" id="SOUPAMOUNT5" class="form-control" input-select="DC03.009" ng-readonly="DCshow5" ng-maxlength="200" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="col-md-6 tdlbl" style="text-align:left">茶水</div>
+                                        <div class="col-md-6 tdlbl" style="text-align:left">14:00</div>
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item1.TEA14" id="TEA141" name="Ditem1" class="form-control" input-select="DC03.010" ng-readonly="DCshow1" />
+                                    </td>
+                                    <td><input type="text" ng-model="item2.TEA14" id="TEA142" name="Ditem2" class="form-control" input-select="DC03.010" ng-readonly="DCshow2" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item3.TEA14" id="TEA143" name="Ditem3" class="form-control" input-select="DC03.010" ng-readonly="DCshow3" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item4.TEA14" id="TEA144" name="Ditem4" class="form-control" input-select="DC03.010" ng-readonly="DCshow4" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item5.TEA14" id="TEA145" name="Ditem5" class="form-control" input-select="DC03.010" ng-readonly="DCshow5" ng-maxlength="200" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="col-md-12 tdlbl" style="text-align:left">点心/茶水</div>
+                                        <div class="col-md-12 tdlbl" style="text-align:left">15:30</div>
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item1.SNACKTEA1530" name="Ditem1" class="form-control" id="SNACKTEA15301" input-select="DC03.011" ng-readonly="DCshow1" ng-maxlength="200" />
+                                    </td>
+                                    <td><input type="text" ng-model="item2.SNACKTEA1530" name="Ditem2" class="form-control" id="SNACKTEA15302" input-select="DC03.011" ng-readonly="DCshow2" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item3.SNACKTEA1530" name="Ditem3" class="form-control" id="SNACKTEA15303" input-select="DC03.011" ng-readonly="DCshow3" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item4.SNACKTEA1530" name="Ditem4" class="form-control" id="SNACKTEA15304" input-select="DC03.011" ng-readonly="DCshow4" ng-maxlength="200" /></td>
+                                    <td><input type="text" ng-model="item5.SNACKTEA1530" name="Ditem5" id="SNACKTEA15305" input-select="DC03.011" ng-readonly="DCshow5" /></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="3">
+                                        <div class="col-md-12 " style="text-align:center">
+                                            <div class="col-md-6 tdlbl" style="text-align:center">午</div>
+                                            <div class="col-md-6 tdlbl" style="text-align:center">休</div>
+
+                                        </div>
+
+
+                                        <div class="col-md-12 tdlbl" style="text-align:center">(12:30-14:00)</div>
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item1.NOONBREAK" name="Ditem1" id="NOONBREAK1" class="form-control" input-select="DC03.012" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item2.NOONBREAK" name="Ditem2" id="NOONBREAK2" class="form-control" input-select="DC03.012" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item3.NOONBREAK" name="Ditem3" id="NOONBREAK3" class="form-control" input-select="DC03.012" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item4.NOONBREAK" name="Ditem4" id="NOONBREAK4" class="form-control" input-select="DC03.012" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item5.NOONBREAK" name="Ditem5" id="NOONBREAK5" class="form-control" input-select="DC03.012" ng-maxlength="200" />
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td rowspan="3" style="font-weight:bold;color:black">
+                                        个人清洁
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="col-md-12 tdlbl" style="text-align:center">刷牙、漱口</div>
+                                        <div class="col-md-12 tdlbl" style="text-align:center">(主动/协助)</div>
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item1.BRUSHINGTEETH" name="Ditem1" class="form-control" id="BRUSHINGTEETH1" input-select="DC03.013" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item2.BRUSHINGTEETH" name="Ditem2" class="form-control" id="BRUSHINGTEETH2" input-select="DC03.013" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item3.BRUSHINGTEETH" name="Ditem3" class="form-control" id="BRUSHINGTEETH3" input-select="DC03.013" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item4.BRUSHINGTEETH" name="Ditem4" class="form-control" id="BRUSHINGTEETH4" input-select="DC03.013" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item5.BRUSHINGTEETH" name="Ditem5" class="form-control" id="BRUSHINGTEETH5" input-select="DC03.013" ng-maxlength="200" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="col-md-12 tdlbl" style="text-align:center">会阴 冲洗</div>
+                                        <div class="col-md-12 tdlbl" style="text-align:center">(次数/时间)</div>
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item1.PERINEALWASHING" name="Ditem1" id="PERINEALWASHING1" class="form-control" input-select="DC03.014" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item2.PERINEALWASHING" name="Ditem2" id="PERINEALWASHING2" class="form-control" input-select="DC03.014" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item3.PERINEALWASHING" name="Ditem3" id="PERINEALWASHING3" class="form-control" input-select="DC03.014" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item4.PERINEALWASHING" name="Ditem4" id="PERINEALWASHING4" class="form-control" input-select="DC03.014" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item5.PERINEALWASHING" name="Ditem5" id="PERINEALWASHING5" class="form-control" input-select="DC03.014" ng-maxlength="200" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="col-md-6 tdlbl">其</div>
+                                        <div class="col-md-6 tdlbl">他</div>
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item1.OTHERCLEAN" name="Ditem1" id="OTHERCLEAN1" class="form-control" input-select="DC03.015" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item2.OTHERCLEAN" name="Ditem2" id="OTHERCLEAN2" class="form-control" input-select="DC03.015" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item3.OTHERCLEAN" name="Ditem3" id="OTHERCLEAN3" class="form-control" input-select="DC03.015" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item4.OTHERCLEAN" name="Ditem4" id="OTHERCLEAN4" class="form-control" input-select="DC03.015" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item5.OTHERCLEAN" name="Ditem5" id="OTHERCLEAN5" class="form-control" input-select="DC03.015" ng-maxlength="200" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td rowspan="8" style="font-weight:bold;color:black">
+
+                                        排
+                                        泄
+
+                                    </td>
+                                    <td rowspan="3" style="font-weight: bold; color: black; width: 5px">
+                                        大
+                                        便
+                                    </td>
+                                    <td style="font-weight: bold; color: black;">量</td>
+                                    <td>
+                                        <input type="text" ng-model="item1.SHITAMOUNT" name="Ditem1" id="SHITAMOUNT1" class="form-control" input-select="DC03.016" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item2.SHITAMOUNT" name="Ditem2" id="SHITAMOUNT2" class="form-control" input-select="DC03.016" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item3.SHITAMOUNT" name="Ditem3" id="SHITAMOUNT3" class="form-control" input-select="DC03.016" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item4.SHITAMOUNT" name="Ditem4" id="SHITAMOUNT4" class="form-control" input-select="DC03.016" ng-maxlength="200" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item5.SHITAMOUNT" name="Ditem5" id="SHITAMOUNT5" class="form-control" input-select="DC03.016" ng-maxlength="200" />
+                                    </td>
+                                </tr>
+                                <tr>
+
+
+                                    <td style="font-weight: bold; color: black;">颜色</td>
+                                    <td>
+                                        <input type="text" ng-model="item1.SHITCOLOR" name="Ditem1" id="SHITCOLOR1" class="form-control" input-select="DC03.017" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item2.SHITCOLOR" name="Ditem2" id="SHITCOLOR2" class="form-control" input-select="DC03.017" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item3.SHITCOLOR" name="Ditem3" id="SHITCOLOR3" class="form-control" input-select="DC03.017" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item4.SHITCOLOR" name="Ditem4" id="SHITCOLOR4" class="form-control" input-select="DC03.017" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item5.SHITCOLOR" name="Ditem5" id="SHITCOLOR5" class="form-control" input-select="DC03.017" ng-maxlength="50" />
+                                    </td>
+                                </tr>
+                                <tr>
+
+
+                                    <td style="font-weight: bold; color: black;">性质</td>
+                                    <td>
+                                        <input type="text" ng-model="item1.SHITNATURE" name="Ditem1" id="SHITNATURE1" class="form-control" input-select="DC03.018" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item2.SHITNATURE" name="Ditem2" id="SHITNATURE2" class="form-control" input-select="DC03.018" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item3.SHITNATURE" name="Ditem3" id="SHITNATURE3" class="form-control" input-select="DC03.018" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item4.SHITNATURE" name="Ditem4" id="SHITNATURE4" class="form-control" input-select="DC03.018" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item5.SHITNATURE" name="Ditem5" id="SHITNATURE5" class="form-control" input-select="DC03.018" ng-maxlength="50" />
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td style="font-weight: bold; color: black;">
+                                        小
+                                        便
+                                    </td>
+                                    <td style="font-weight: bold; color: black;">颜色</td>
+                                    <td>
+                                        <input type="text" ng-model="item1.URINECOLOR" name="Ditem1" id="URINECOLOR1" class="form-control" input-select="DC03.019" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item2.URINECOLOR" name="Ditem2" id="URINECOLOR2" class="form-control" input-select="DC03.019" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item3.URINECOLOR" name="Ditem3" class="form-control" id="URINECOLOR3" input-select="DC03.019" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item4.URINECOLOR" name="Ditem4" class="form-control" id="URINECOLOR4" input-select="DC03.019" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item5.URINECOLOR" name="Ditem5" class="form-control" id="URINECOLOR5" input-select="DC03.019" ng-maxlength="50" />
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td colspan="2" style="font-weight: bold; color: black;">如厕情况</td>
+                                    <td>
+                                        <input type="text" ng-model="item1.TOILET" id="TOILET1" name="Ditem1" class="form-control" input-select="DC03.020" ng-readonly="DCshow1" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item2.TOILET" id="TOILET2" name="Ditem2" class="form-control" input-select="DC03.020" ng-readonly="DCshow2" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item3.TOILET" id="TOILET3" name="Ditem3" class="form-control" input-select="DC03.020" ng-readonly="DCshow3" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item4.TOILET" id="TOILET4" name="Ditem4" class="form-control" input-select="DC03.020" ng-readonly="DCshow4" ng-maxlength="50" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="item5.TOILET" id="TOILET5" name="Ditem5" c input-select="DC03.020" ng-readonly="DCshow5" ng-maxlength="50" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" rowspan="3" style="font-weight: bold; color: black;">如厕时间</td>
+                                    <td>
+                                        <div style="width:50%;float:left;"><input type="text" ng-model="item1.TOILETTIME1" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" placeholder="开始时间" name="Ditem1" readonly="readonly" /></div>
+                                        <!--<div style="width:49%; float: left"><input type="text" ng-model="item1.TOILETTIME2" placeholder="结束时间" class="form-control"  name="Ditem1" /></div>-->
+                                        <div style="width:49%; float: left"> <input type="text" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" placeholder="结束时间" ng-model="item1.TOILETTIME2" readonly="readonly" /></div>
+
+                                    </td>
+                                    <td>
+                                        <div style="width: 50%; float: left"><input type="text" ng-model="item2.TOILETTIME1" placeholder="开始时间" onchange="" onfocus="WdatePicker({dateFmt:'HH:mm'})" class="Wdate" name="Ditem2" readonly="readonly" /></div>
+                                        <div style="width: 49%; float: left; "><input type="text" ng-model="item2.TOILETTIME2" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem2" readonly="readonly" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width: 50%; float: left"><input type="text" ng-model="item3.TOILETTIME1" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem3" readonly="readonly" /></div>
+                                        <div style="width: 49%; float: left"><input type="text" ng-model="item3.TOILETTIME2" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem3" readonly="readonly" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width: 50%; float: left"><input type="text" ng-model="item4.TOILETTIME1" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem4" readonly="readonly"></div>
+                                        <div style="width: 49%; float: left"><input type="text" ng-model="item4.TOILETTIME2" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem4" readonly="readonly" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width: 50%; float: left"><input type="text" ng-model="item5.TOILETTIME1" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem5" readonly="readonly" /></div>
+                                        <div style="width: 49%; float: left"><input type="text" ng-model="item5.TOILETTIME2" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem5" readonly="readonly" /></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="width: 50%; float: left"><input type="text" ng-model="item1.TOILETTIME3" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem1" readonly="readonly" /></div>
+                                        <div style="width: 49%; float: left"><input type="text" ng-model="item1.TOILETTIME4" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem1" readonly="readonly" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width: 50%; float: left"><input type="text" ng-model="item2.TOILETTIME3" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem2" readonly="readonly" /></div>
+                                        <div style="width: 49%; float: left"><input type="text" ng-model="item2.TOILETTIME4" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem2" readonly="readonly" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width: 50%; float: left"><input type="text" ng-model="item3.TOILETTIME3" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem3" readonly="readonly" /></div>
+                                        <div style="width: 49%; float: left"><input type="text" ng-model="item3.TOILETTIME4" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem3" readonly="readonly" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width: 50%; float: left"><input type="text" ng-model="item4.TOILETTIME3" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem4" readonly="readonly" /></div>
+                                        <div style="width: 49%; float: left"><input type="text" ng-model="item4.TOILETTIME4" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem4" readonly="readonly" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width: 50%; float: left"><input type="text" ng-model="item5.TOILETTIME3" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem5" readonly="readonly" /></div>
+                                        <div style="width: 49%; float: left"><input type="text" ng-model="item5.TOILETTIME4" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem5" readonly="readonly" /></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="width: 50%; float: left"><input type="text" ng-model="item1.TOILETTIME5" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem1" readonly="readonly" /></div>
+                                        <div style="width: 49%; float: left"><input type="text" ng-model="item1.TOILETTIME6" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem1" readonly="readonly" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width: 50%; float: left"><input type="text" ng-model="item2.TOILETTIME5" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem2" readonly="readonly" /></div>
+                                        <div style="width: 49%; float: left"><input type="text" ng-model="item2.TOILETTIME6" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem2" readonly="readonly" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width: 50%; float: left"><input type="text" ng-model="item3.TOILETTIME5" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem3" readonly="readonly" /></div>
+                                        <div style="width: 49%; float: left"><input type="text" ng-model="item3.TOILETTIME6" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem3" readonly="readonly" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width: 50%; float: left"><input type="text" ng-model="item4.TOILETTIME5" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem4" readonly="readonly" /></div>
+                                        <div style="width: 49%; float: left"><input type="text" ng-model="item4.TOILETTIME6" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem4" readonly="readonly" /></div>
+                                    </td>
+                                    <td>
+                                        <div style="width: 50%; float: left"><input type="text" ng-model="item5.TOILETTIME5" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem5" readonly="readonly" /></div>
+                                        <div style="width: 49%; float: left"><input type="text" ng-model="item5.TOILETTIME6" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'HH:mm'})" onchange="" class="Wdate" name="Ditem5" readonly="readonly" /></div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="font-weight: bold; color: black;">复健</td>
+                                    <td colspan="2" style="font-weight: bold; color: black;">复健器材</td>
+                                    <td>
+                                        <input type="text" ng-model="item1.EQUIPMENT" id="EQUIPMENT1" input-select="DC03.021" class="form-control" ng-maxlength="200" name="Ditem1" />
+                                    </td>
+                                    <td><input type="text" ng-model="item2.EQUIPMENT" id="EQUIPMENT2" input-select="DC03.021" class="form-control" ng-maxlength="200" name="Ditem2" /> </td>
+                                    <td><input type="text" ng-model="item3.EQUIPMENT" id="EQUIPMENT3" input-select="DC03.021" class="form-control" ng-maxlength="200" name="Ditem3" /> </td>
+                                    <td><input type="text" ng-model="item4.EQUIPMENT" id="EQUIPMENT4" input-select="DC03.021" class="form-control" ng-maxlength="200" name="Ditem4" /> </td>
+                                    <td><input type="text" ng-model="item5.EQUIPMENT" id="EQUIPMENT5" input-select="DC03.021" class="form-control" ng-maxlength="200" name="Ditem5" /> </td>
+                                </tr>
+                                <tr>
+
+                                    <td colspan="3" style="font-weight: bold; color: black;">照顾服务员签名</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        <div class="col-md-12 tdlbl" style="text-align:left">
+                                            联络事项:
+                                            <textarea rows="4" ng-model="DAYLIFE.CONTACTMATTERS"></textarea>
+                                        </div>
+                                        <div class="col-md-12 tdlbl" style="text-align:right; padding-right:100px">社工人员签名名:</div>
+
+                                    </td>
+                                    <td colspan="3">
+
+                                        <div class="col-md-12 tdlbl" style="text-align:left">
+                                            家属留言:
+                                            <textarea rows="4" ng-model="DAYLIFE.FAMILYMESSAGE"></textarea>
+                                        </div>
+                                        <div class="col-md-12 tdlbl" style="text-align: right; padding-right:100px;">家属签名:</div>
+
+                                    </td>
+
+                                </tr>
+
+                            </table>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:80%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <!--<div ng-include="'/Views/Socialworker/AddProposalDisscuss.html'"></div>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box border green">
+                            <div class="box-title">
+                                <h4>日常生活照顾历史记录</h4>
+                            </div>
+                            <div class="box-body">
+                                <!--<ui-data-table options="options">-->
+                                <table class="table table-bordered" id="editTable">
+                                    <thead>
+                                        <tr>
+                                            <th>日字号</th>
+                                            <th>姓名</th>
+                                            <th>周数</th>
+                                            <th>时间区域</th>
+                                            <th>照服员</th>
+                                            <th>联络事项</th>
+                                            <th>家属  留言</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="list in HistoryList">
+                                            <td>{{list.data.RESIDENTNO}}</td>
+                                            <td>{{list.data.REGNAME}}</td>
+                                            <td>{{list.data.WEEKNUMBER}}</td>
+                                            <td>{{list.data.WEEKSTARTDATE|date:'yyyy-MM-dd'}}~{{list.num}}</td>
+                                            <td>{{list.data.NURSEAIDES}}</td>
+                                            <td>{{list.data.CONTACTMATTERS}}</td>
+                                            <td>{{list.data.FAMILYMESSAGE}}</td>
+                                            <td>
+                                                <button class="btn btn-primary" ng-click="editDayLife(list.data)">编辑</button>
+                                                <a class="btn btn-danger" role="button" data-toggle="modal" ng-click="deleteReferral(list.data.ID)">删除</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                                <!--</ui-data-table>-->
+                                <div id="pager"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script>
+
+    function funyc()
+    {
+        $("#TEA91").attr("disabled", false);
+    }
+
+    function funzd() {
+        $("#TEA91").attr("disabled", true);
+    }
+
+</script>-->

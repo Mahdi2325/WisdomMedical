@@ -1,0 +1,56 @@
+﻿
+        <!--编辑页面-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border green">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars">
+                            </i>
+                            评估模板
+                        </h4>
+                    </div>
+                    <div class="box-body big">
+                        <form role="form" class="form-horizontal" name="assesstempeditform" ng-submit="saveEdit(curItem)" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">模板编号</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="curItem.ATNo" placeholder="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">模板名称</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="curItem.ATName" placeholder="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">模板说明</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="curItem.Description" placeholder="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">模板内容</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" ng-model="curContentString" placeholder="" rows="20"></textarea>
+                                    <button class="btn btn-primary pull-right mgt10" type="button">预览模板</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button class="btn btn-primary" type="submit" ng-disabled="assesstempeditform.$invalid">保存</button>
+                                    <button type="button" class="btn btn-grey" ng-click="cancelEdit()">取消</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--编辑页面-->

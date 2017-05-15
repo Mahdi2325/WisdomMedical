@@ -1,0 +1,62 @@
+﻿
+<div style="width:500px" class="modal-content modal-lg" ng-controller="userEditCtrl">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-bars"></i>账号设置
+            </div>
+            <div class="tools">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form w5c-form-validate role="form" class="w5c-form" name="usereditform">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" ng-disabled="Data.User.UserID" class="form-control" name="username" ng-model="Data.User.AccountName" pattern="^\w{5,18}$" placeholder="请输入登录帐号" required />
+                            <label for="DeviceType">用户名<span class="required">*</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" class="form-control" name="DisplayName" ng-maxlength="36" ng-model="Data.User.DisplayName" placeholder="系统显示名称" required />
+                            <label for="DeviceType">显示名称<span class="required">*</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <input class="form-control" w5c-dynamic-element name="password" type="password" autocomplete="off" ng-minlength="6" placeholder="******" ng-model="Data.User.Password" ng-required="!Data.User.UserID" ng-maxlength="36" />
+                            <label for="DeviceType">密码<span class="required">*</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <input class="form-control" name="repeatPassword" w5c-repeat="password" w5c-dynamic-element type="password" placeholder="******" autocomplete="off" ng-model="Data.User.confirmPassword" ng-required="!Data.User.UserID" />
+                            <label for="DeviceType">确认密码<span class="required">*</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <select name="GroupId" class="form-control" ng-model="Data.User.Role.RoleID" ng-options="t.RoleID as t.RoleName for t in Data.Roles| filter:{ RoleNo: '!R100'} | filter:{ RoleNo: '!R000'}" required></select>
+                            <label for="DeviceType">角色<span class="required">*</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit" w5c-form-submit="save()">保存</button>
+                    <button type="button" class="btn btn-grey" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

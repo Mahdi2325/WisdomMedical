@@ -1,0 +1,363 @@
+﻿<!--受托长辈适应程度评估表-->
+<!---->
+<link href="../../../../Content/HF.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-md-2">
+        <div class="box border green">
+            <div class="box-title">
+                <h4>
+                    <i class="fa fa-bars"></i>会员信息
+                </h4>
+            </div>
+            <div class="box-body">
+                <resident-select callback="residentSelected(resident)" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <form class="form-horizontal " name="rfrForm" role="form" novalidate>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <button class="btn btn-default" ng-disabled="buttonShow" ng-click="addEval()"><i class="fa fa-plus"></i> 新增评估表</button>
+                            <button class="btn btn-primary" ng-disabled="buttonShow" ng-click="saveForm(Data)"><i class="fa fa-save"></i> 储存数据</button>
+                            <!--<button class="btn btn-warning" ng-disabled="buttonShow" ng-click="PrintPreview(currentItem.EvalRecId)"><i class="fa fa-print"></i> 打印预览</button>-->
+                            <button class="btn btn-success" ng-disabled="buttonShow" ng-click="showHistory()"><i class="fa fa-list"></i> 历次记录</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div style="margin-bottom: 5px;" class="col-md-12">
+                                <div style="text-align: center; font-size: 18px; font-weight: 700; font-family: DFKai-SB;">
+                                    <table style="width: 100%; border: none; margin-top: 5px;">
+                                        <tr>
+                                            <td colspan="2" style="border: none; font-size: 25px;">
+                                                <!--<h3><strong>{{Org}}老人日间照顾中心</strong></h3>-->
+                                                <h3><strong>受托长辈适应程度评估表</strong></h3>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="border: none; margin-top: 10px;">
+                                                <table class="col-sm-10 tb tbNonBorder">
+                                                    <tr>
+                                                        <td colspan="9" class="tdBord_A font18 tdlbl" style="border: none;" align="left">
+                                                            壹、个案基本数据
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="font16">
+                                                        <td class="col-sm-2" align="right">日字号：</td>
+                                                        <td class="col-sm-2 td"><input type="text" class="input-bottom" ng-model="currentItem.ResidentNo" readonly /></td>
+                                                        <td class="col-sm-2" align="right">收托日期：</td>
+                                                        <td class="col-sm-2 td"><input type="text" class="input-bottom" ng-model="currentItem.InDate " readonly="readonly" /></td>
+
+                                                    </tr>
+                                                    <tr class="font16">
+                                                        <td class="col-sm-2" align="right">个案姓名：</td>
+                                                        <td class="col-sm-2 td"><input type="text" class="input-bottom" ng-model="currentItem.RegName" readonly /></td>
+                                                        <td class="col-sm-1" align="right">性别：</td>
+                                                        <td class="col-sm-1 td">
+                                                            <select class="input-bottom" ng-model="currentItem.Sex" select-code="A00.001" ng-disabled="true"></select>
+                                                        </td>
+                                                        <td class="col-sm-1" align="right">年龄</td>
+                                                        <td class="col-sm-1 td" align="left"><input type="text" class="input-bottom" ng-model="currentItem.Age" readonly="readonly" /></td>
+                                                        <td class="col-sm-1" align="left">岁</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="9" style="border: none; height: 20px;"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="9" class="tdBord_A font18 marginTop5 tdlbl" style="border: none;" align="left">
+                                                            贰、以下项目直接询问长辈(无法受访之长辈直接填写第参、肆大项)
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="height40">
+                                                        <td colspan="9" class="tdBord_A font18 marginTop5 tdlbl" style="border: none;" align="left">
+                                                            一、环境适应部份
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="height40">
+                                                        <td colspan="9" class="tdBord_A font18 marginTop5 tdlbl" style="border: none;" align="left">
+                                                            <table class="col-sm-12">
+                                                                <tr class="height40 trBgColor">
+                                                                    <td style="border-right: none"></td>
+                                                                    <td class="col-sm-4" align="center">环境位置与功能</td>
+                                                                    <td class="col-sm-2" align="center">分值</td>
+                                                                    <td class="col-sm-5" align="center">说明</td>
+                                                                </tr>
+                                                                <tr ng-repeat="item in Data[0].QuestionItem" class="height40">
+                                                                    <td>{{item.SHOWNUMBER}}</td>
+                                                                    <td class="col-sm-5">{{item.ITEMNAME}}</td>
+                                                                    <td class="col-sm-2">
+                                                                        <select class="form-control" ng-model="item.ITEMVALUE" ng-options="val.VALUE as val.VALUE  for val in Data[0].QuestionValue" ng-change="calScore0(0)"></select>
+                                                                    </td>
+                                                                    <td class="col-sm-5">
+                                                                        <input type="text" class="col-sm-12" />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="height40">
+                                                                    <td colspan="2" align="right">合计:</td>
+                                                                    <td colspan="2" align="left">{{currentScore0}}分</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="height40">
+                                                        <td colspan="9" class="tdBord_A font18 marginTop5 tdlbl" style="border: none;" align="left">
+                                                            二、作息适应
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="height40">
+                                                        <td colspan="9" class="tdBord_A font18 marginTop5 tdlbl" style="border: none;" align="left">
+                                                            <table class="col-sm-12">
+                                                                <tr class="height40 trBgColor">
+                                                                    <td style="border-right: none"></td>
+                                                                    <td class="col-sm-4" align="center"></td>
+                                                                    <td class="col-sm-2" align="center">分值</td>
+                                                                    <td class="col-sm-5" align="center">说明</td>
+                                                                </tr>
+                                                                <tr ng-repeat="item in Data[1].QuestionItem" class="height40">
+                                                                    <td>{{item.SHOWNUMBER}}</td>
+                                                                    <td class="col-sm-5">{{item.ITEMNAME}}</td>
+                                                                    <td class="col-sm-2">
+                                                                        <select class="form-control" ng-model="item.ITEMVALUE" name="chk" ng-options="val.VALUE as val.VALUE  for val in Data[1].QuestionValue" ng-change="calScore1(1)"></select>
+                                                                    </td>
+                                                                    <td class="col-sm-5">
+                                                                        <input type="text" class="col-sm-12" />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="height40">
+                                                                    <td colspan="2" align="right">合计:</td>
+                                                                    <td colspan="2" align="left">{{currentScore1}}分</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="height40">
+                                                        <td colspan="9" class="tdBord_A font18 marginTop5 tdlbl" style="border: none;" align="left">
+                                                            三、住民与他人关系：是否熟悉(接纳)以下人员
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="height40">
+                                                        <td colspan="9" class="tdBord_A font18 marginTop5 tdlbl" style="border: none;" align="left">
+                                                            <table class="col-sm-12">
+                                                                <tr class="height40 trBgColor">
+                                                                    <td style="border-right: none"></td>
+                                                                    <td class="col-sm-4" align="center"></td>
+                                                                    <td class="col-sm-5" align="center">熟悉(接纳)</td>
+                                                                </tr>
+                                                                <tr ng-repeat="item in Data[2].QuestionItem" class="height35">
+                                                                    <td>{{item.SHOWNUMBER}}</td>
+                                                                    <td class="col-sm-5">{{item.ITEMNAME}}</td>
+                                                                    <td class="col-sm-5">
+                                                                        <input type="checkbox" ng-model="item.ITEMVALUE" ng-change="selectVal(this)" ng-true-value="1" ng-false-value="0" />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="height40">
+                                                                    <td colspan="2" align="right">合计:</td>
+                                                                    <td colspan="2" align="left">{{currentScore2}}分</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="height40">
+                                                        <td colspan="9" class="tdBord_A font18 marginTop5 tdlbl" style="border: none;" align="left">
+                                                            参、以下项目由工作人员观察
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="height40">
+                                                        <td colspan="9" class="tdBord_A font18 marginTop5 tdlbl" style="border: none;" align="left">
+                                                            <table class="col-sm-12">
+                                                                <tr class="height40 trBgColor">
+                                                                    <td style="border-right: none"></td>
+                                                                    <td class="col-sm-4" align="center"></td>
+                                                                    <td class="col-sm-2" align="center">分值</td>
+                                                                    <td class="col-sm-5" align="center">说明</td>
+                                                                </tr>
+                                                                <tr ng-repeat="item in Data[3].QuestionItem" class="height40">
+                                                                    <td>{{item.SHOWNUMBER}}</td>
+                                                                    <td class="col-sm-5">{{item.ITEMNAME}}</td>
+                                                                    <td class="col-sm-2">
+                                                                        <select class="form-control" ng-model="item.ITEMVALUE" ng-options="val.VALUE as val.VALUE  for val in Data[3].QuestionValue" ng-change="calScore3(3)"></select>
+                                                                    </td>
+                                                                    <td class="col-sm-5">
+                                                                        <input type="text" class="col-sm-12" />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="height40">
+                                                                    <td colspan="2" align="right">合计:</td>
+                                                                    <td colspan="2" align="left">{{currentScore3}}分</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="height40">
+                                                        <td colspan="9" class="tdBord_A font18 marginTop5 tdlbl" style="border: none;" align="left">
+                                                            肆、以下项目询问家属
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="height40">
+                                                        <td colspan="9" class="tdBord_A font18 marginTop5 tdlbl" style="border: none;" align="left">
+                                                            <table class="col-sm-12">
+                                                                <tr class="height40 trBgColor">
+                                                                    <td style="border-right: none"></td>
+                                                                    <td class="col-sm-4" align="center"></td>
+                                                                    <td class="col-sm-2" align="center">分值</td>
+                                                                    <td class="col-sm-5" align="center">说明</td>
+                                                                </tr>
+                                                                <tr ng-repeat="item in Data[4].QuestionItem" class="height40">
+                                                                    <td>{{item.SHOWNUMBER}}</td>
+                                                                    <td class="col-sm-5">{{item.ITEMNAME}}</td>
+                                                                    <td class="col-sm-2">
+                                                                        <select class="form-control" ng-model="item.ITEMVALUE" ng-options="val.VALUE as val.VALUE  for val in Data[4].QuestionValue" ng-change="calScore4(4)"></select>
+                                                                    </td>
+                                                                    <td class="col-sm-5">
+                                                                        <input type="text" class="col-sm-12" />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="height40">
+                                                                    <td colspan="2" align="right">合计:</td>
+                                                                    <td colspan="2" align="left">{{currentScore4}}分</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="height40">
+                                                        <td colspan="9" class="tdBord_A font18 marginTop5 tdlbl" style="border: none;" align="left">
+                                                            伍、评估
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="height40">
+                                                        <td colspan="9" class="tdBord_A font18 marginTop5 tdlbl" style="border: none;" align="left">
+                                                            <table class="col-sm-12">
+                                                                <tr class="height35">
+                                                                    <td>
+                                                                        <input type="checkbox" name="total" ng-model="item.EVALRESULT" ng-checked="totalCheck1" />
+                                                                    </td>
+                                                                    <td>
+                                                                        已适应(总分80分以上)，按中心服务流程提供服务
+                                                                    </td>
+
+                                                                </tr>
+                                                                <tr class="height35">
+                                                                    <td>
+                                                                        <input type="checkbox" name="total" ng-model="item.EVALRESULT" ng-checked="totalCheck2" />
+                                                                    </td>
+                                                                    <td>
+                                                                        未适应(总分80分以下)，请拟订个案辅导计划(可邀请重要他人共同拟订)
+                                                                    </td>
+
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="left">
+                                                            总得分：{{_totalScore}}
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="height35"></tr>
+                                                    <tr class="height40">
+                                                        <td colspan="9" class="tdBord_A font18 marginTop5 tdlbl" style="border: none;" align="left">
+                                                            <table class="col-sm-12">
+                                                                <tr class="height35">
+                                                                    <td colspan="2">
+                                                                        注：计分方式说明
+                                                                    </td>
+
+                                                                </tr>
+                                                                <tr class="height35">
+                                                                    <td>
+                                                                        <div>第一类计分方式：长辈可答第贰大项者</div>
+                                                                        <div>第贰大项：总分＝（一＋二）*0.5+三*4</div>
+                                                                        <div>【第三项：熟悉者得1分】</div>
+                                                                        <div>第参大项：总分＝合计50分＊0.5</div>
+                                                                        <div>第肆大项：总分＝合计30分＊0.5</div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div>第二类计分方式：长辈无法答第贰大项一和二者</div>
+                                                                        <div>第二大类之三：总分＝合计5*4</div>
+                                                                        <div>第参大项：总分50分</div>
+                                                                        <div>第肆大项：总分30分</div>
+                                                                    </td>
+
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="col-md-12" style="font-family: DFKai-SB; color: #000;">
+                                <div class="col-md-3 font18" style="font-weight: 700; line-height: 40px;">主责社工：</div>
+                                <div class="col-md-3 font18" style="font-weight: 700; line-height: 40px;">主任/督导核阅：</div>
+                                <div class="col-md-3 font18" style="font-weight: 700; line-height: 40px; text-align: right">评估日期：{{EVALDATE}}</div>
+                                <!--<div class="col-md-2"><input type="text" class="form-control bottom_blue" ng-model="EVALDATE" ca-date-picker/></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:80%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <!--<div ng-include="'/Views/Socialworker/AddProposalDisscuss.html'"></div>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box border green">
+                            <div class="box-title">
+                                <h4>受托长辈适应程度评估历次记录</h4>
+                            </div>
+                            <div class="box-body">
+                                <!--<ui-data-table options="options">-->
+                                <table class="table table-bordered" id="editTable">
+                                    <thead>
+                                        <tr>
+                                            <th>个案姓名</th>
+                                            <th>评估日期</th>
+                                            <th>总分</th>
+                                            <th>评估结果</th>
+
+                                            <th>打印预览</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="list in HistoryList">
+                                            <td>{{list.Name}}</td>
+                                            <td>{{list.EvalDate | dateFormat}}</td>
+                                            <th>{{list.Score}}</th>
+                                            <td>{{list.EvalResult}}</td>
+                                            <td><button class="btn btn-group-sm btn-warning" ng-click="PrintPreview(list.EvalRecId)"><i class="fa fa-print"></i>  列 印</button></td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                                <!--</ui-data-table>-->
+                                <div id="pager"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

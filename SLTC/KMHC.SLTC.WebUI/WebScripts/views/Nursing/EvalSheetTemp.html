@@ -1,0 +1,172 @@
+﻿<form class="form-horizontal" name="myForm" role="form">
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="box border green">
+                <div class="box-title">
+                    <h4>
+                        <i class="fa fa-bars"></i>会员信息
+                    </h4>
+                </div>
+                <div class="box-body">
+                    <resident-select callback="residentSelected(resident)" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <div class="box border green">
+                <div class="box-title">
+                    <h4><i class="fa fa-columns"></i><span class="hidden-inline-mobile">{{Data.QUESTIONNAME}} </span></h4>
+                </div>
+                <div class="box-body">
+                    <div class="tab-pane " id="tbBasic">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">评估人员</label>
+                                    <div class="col-sm-2">
+                                        <select ng-model="RegQuestion.EVALUATEBY" class="form-control" ng-options="item.EmpNo as item.EmpName  for item in EmpList"></select>
+                                    </div>
+                                    <label class="col-sm-1 control-label">评估日期<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <input id="txttValuationDate" ng-model="RegQuestion.EVALDATE" class="form-control" required name="评估日期" type="text" ca-date-picker>
+                                    </div>
+                                    <label class="col-sm-1 control-label">间隔天数</label>
+                                    <div class="col-sm-2">
+                                        <input ng-model="RegQuestion.Gap" class="form-control" ng-change="setNextValDate(RegQuestion.Gap)" only-int type="text">
+                                        <!--<select class="form-control" id="selGap" ng-model="RegQuestion.Gap" ng-options="gap.ITEMCODE as gap.ITEMNAME  for gap in EvalDateGap" ng-change="setNextValDate(RegQuestion.Gap)"></select>-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">下次评估日期</label>
+                                    <div class="col-sm-2">
+                                        <input class="form-control" ng-model="RegQuestion.NEXTEVALDATE" ng-change="ChangeNextEvalDate()" type="text" ca-date-picker>
+                                    </div>
+                                    <label class="col-sm-1 control-label">下次受托者</label>
+                                    <div class="col-sm-2">
+                                        <select ng-model="RegQuestion.NEXTEVALUATEBY" class="form-control" ng-options="item.EmpNo as item.EmpName  for item in EmpList"></select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="button" ng-show="IsNewCreate" ng-click="GetLatestEvlRecord()" class="form-control btn btn-info" value="带入最新一笔评估记录">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">题目</div>
+                            <div class="panel-body">
+                                <div ng-repeat="maker in MakerItemByCategory">
+                                    <fieldset>
+                                        <legend>{{maker.CATEGORY}}</legend>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <div ng-repeat="Item in maker.data">
+                                                    <div class="form-group">
+                                                        <div ng-if="($index+1)%2==1">
+                                                            <div class="col-sm-4">
+                                                                <label class="control-label">{{Item.MAKENAME}}</label>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <select class="form-control" ng-change="calcResult()" ng-model="Item.LIMITEDVALUEID" ng-options="item.LIMITEDVALUEID as item.LIMITEDVALUENAME for item in Item.Answers"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 clear">
+                                                <div ng-repeat="Item in maker.data">
+                                                    <div class="form-group">
+                                                        <div ng-if="($index+1)%2==0">
+                                                            <div class="col-sm-4">
+                                                                <label class="control-label">{{Item.MAKENAME}}</label>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <select class="form-control" ng-change="calcResult()" ng-model="Item.LIMITEDVALUEID" ng-options="item.LIMITEDVALUEID as item.LIMITEDVALUENAME for item in Item.Answers"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">评估结果</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div ng-if="Data.SCOREFLAG">
+
+                                        <label class="col-sm-1 control-label">分数小计</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control" id="txtScoreSummry" ng-model="RegQuestion.SCORE" readonly="readonly">
+                                        </div>
+                                        <label class="col-sm-1 control-label">评估结果</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control" id="txtEvaluResult" ng-model="RegQuestion.ENVRESULTS" readonly="readonly">
+                                        </div>
+                                        <div class="col-sm-4" ng-show="Data.QuestionResult.length>0">
+                                            <label class="col-sm-4 control-label">参考标准</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" ng-model="Reference" ng-options="item.RESULTNAME as item.LOWBOUND+'~'+item.UPBOUND+'.'+item.RESULTNAME for item in Data.QuestionResult"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <input type="button" class="form-control btn btn-primary" ng-click="Save()" value="储存">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="box border green">
+                        <div class="box-title" style="font-weight: 700">
+                            历次资料
+                        </div>
+                        <div class="box-body">
+                            <table id="tbEvalList" class="table table-striped table-bordered table-hover table-handler">
+                                <thead>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>评估日期</th>
+                                        <th>评估人员</th>
+                                        <th>总分</th>
+                                        <th>评估结果</th>
+                                        <th>下次评估日期</th>
+                                        <!--<th>无法施测之原因</th>
+                                        <th>备注</th>-->
+                                        <th><i class="fa fa-bars"></i> 操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in QuestionList">
+                                        <td>{{item.RECORDID}}</td>
+                                        <td>{{item.EVALDATE | date:'yyyy-MM-dd'}}</td>
+                                        <td>{{item.EVALUATEBY}}</td>
+                                        <td>{{item.SCORE}}</td>
+                                        <td>{{item.ENVRESULTS}}</td>
+                                        <td>{{item.NEXTEVALDATE | date:'yyyy-MM-dd'}}</td>
+                                        <!--<td>{{item.NOTEVALREASON}}</td>
+                                        <td>{{item.DESCRIPTION}}</td>-->
+                                        <td class="center">
+                                            <button class="btn btn-warning" ng-click="Delete(item)">删除</button>
+                                            <button class="btn btn-primary" ng-click="Edit(item)">编辑</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div id="pager" class="pull-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>

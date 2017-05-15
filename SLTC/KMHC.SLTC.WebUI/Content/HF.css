@@ -1,0 +1,112 @@
+﻿.content_container {
+        position: relative;
+        padding: 10px;
+        margin-top:4px;
+        margin-right: 4px;
+        margin-bottom: 4px;
+        margin-left: 4px;
+        width: auto;
+        float: none;
+        overflow: hidden;
+    }
+.content {
+  position:relative;
+  padding-top:10px;
+  padding-right:10px;
+  padding-bottom:10px;
+  padding-left:10px;
+  margin:0px;
+  overflow:auto;
+  background-color:#ffffff;
+  /* CSS Content Borders
+  border:4px solid #979797;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;
+  */
+}
+/* detail page */
+.searchsum_hits .content p {
+ padding:0px;
+ margin:0px;
+ width:80%;
+}
+.top_edge {
+    position: absolute;
+    height: 20px;
+    top: 0px;
+    left: 20px;
+    right: 20px;
+    background-image: url('Images/top_edge.png');
+    background-repeat: repeat-x;
+}
+
+.right_edge {
+  position:absolute;
+  width:20px;
+  top:20px;
+  right:0px;
+  bottom:20px;
+  background-image:url(Images/right_edge.png);
+  background-repeat:repeat-y;
+}
+
+.bottom_edge {
+  position:absolute;
+  height:20px;
+  bottom:0px;
+  left:20px;
+  right:20px;
+  background-image:url(Images/bottom_edge.png);
+  background-repeat:repeat-x;
+}
+
+.left_edge {
+  position:absolute;
+  width:20px;
+  top:20px;
+  left:0px;
+  bottom:20px;
+  background-image:url(Images/left_edge.png);
+  background-repeat:repeat-y;
+}
+
+.top_left {
+  position:absolute;
+  width:20px;
+  height:20px;
+  top:0px;
+  left:0px;
+  background-image:url(Images/top_left.png);
+  background-repeat:no-repeat;
+}
+
+.top_right {
+  position:absolute;
+  width:20px;
+  height:20px;
+  top:0px;
+  right:0px;
+  background-image:url(Images/top_right.png);
+  background-repeat:no-repeat;
+}
+
+.bottom_left {
+  position:absolute;
+  width:20px;
+  height:20px;
+  bottom:0px;
+  left:0px;
+  background-image:url(Images/bottom_left.png);
+  background-repeat:no-repeat;
+}
+
+.bottom_right {
+  position:absolute;
+  width:20px;
+  height:20px;
+  bottom:0px;
+  right:0px;
+  background-image:url(Images/bottom_right.png);
+  background-repeat:no-repeat;
+}

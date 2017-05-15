@@ -1,0 +1,35 @@
+﻿
+        <!--编辑页面-->
+<div style="width:600px" class="modal-content modal-lg" ng-controller="commodityTypeEditCtrl">
+
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-bars"></i>{{isAdd?"添加":"编辑"}}商品分类
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form role="form" class="form-horizontal w5c-form" name="seritmecateditform" w5c-form-validate novalidate>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">商品分类名称<span class="required">*</span></label>
+                    <div class="col-sm-9">
+                        <input name="CTypeName" type="text" class="form-control" ng-model="curItem.CTypeName" placeholder="" ng-maxlength="100" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">排序</label>
+                    <div class="col-sm-9">
+                        <input name="OrderBy" type="number" class="form-control" ng-model="curItem.OrderBy" />
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit" ng-click="SaveOrEdit(curItem);" ng-disabled="seritmecateditform.$invalid">保存</button>
+                    <button type="button" class="btn btn-grey" data-dismiss="modal" aria-label="Close">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+        <!--编辑页面-->

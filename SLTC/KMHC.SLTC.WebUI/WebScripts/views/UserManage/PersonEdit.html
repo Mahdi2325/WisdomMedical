@@ -1,0 +1,161 @@
+﻿
+<div class="row" ng-controller="PersonEditCtrl">
+
+    <form role="form" name="personeditform" class="w5c-form" w5c-form-validate>
+        <div class="alert alert-danger display-hide">
+            <button class="close" data-close="alert"></button>
+            表单中存在错误，请检查
+        </div>
+        <div class="form-actions noborder text-right">
+            <a class="btn blue" href="#"  w5c-form-submit="saveEdit(curItem)" >保存</a>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group form-md-line-input">
+                    <div id="divFile" class="form-control form-control-static">
+                        <img style="height: 100px;" ng-src="{{(curItem.PhotoPath != null && curItem.PhotoPath != '') ? curItem.PhotoPath : '/Images/0.png'}}" alt="" />
+                    </div>
+                    <label for="form_control_1">会员头像</label>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group form-md-line-input">
+                    <div class="form-control form-control-static">
+                        <div id="PicturePathPicker">上传</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" class="form-control" id="PersonNo" name="PersonNo" ng-model="curItem.PersonNo" disabled ng-maxlength="20" readonly placeholder="请输入客户编号">
+                            <label for="PersonNo">客户编号</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" ng-model="curItem.Name" name="Name" class="form-control" ng-maxlength="20" required placeholder="请输入客户姓名">
+                            <label for="Name">客户姓名<span class="required">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input">
+
+                            <div class="input-group">
+                                <input name="IdCard" class="form-control" ng-model="curItem.IdCard" ng-change="createBirthdate(curItem.IdCard)"
+                                       w5c-unique-check="{url:'/home/CheckCard?id='+curItem.IdCard+'&personid='+curItem.PersonID,isExists:true}" idcard required />
+                                <span class="input-group-btn">
+                                    <button ng-show="personeditform.$error.w5cuniquecheck" id="basic-addon2" type="button" ng-click="getHltRecordInfo(curItem.IdCard)" class="btn blue">点击获取信息</button>
+                                </span>
+                                <label for="IdCard">身份证号<span class="required">*</span></label>
+                                <!--<span style="cursor: pointer;" class="input-group-addon" id="basic-addon2" ng-click="getHltRecordInfo(curItem.IdCard)">点击获取信息</span>-->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <select name="Sex" class="form-control" id="selSex" ng-model="curItem.Sex" select-code="A00.001" required></select>
+                            <label for="selSex">性别<span class="required">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <div class="input-icon right">
+                                <input type="text" class="form-control" id="Phone" name="Phone" ng-model="curItem.Phone" ng-maxlength="20" phone required placeholder="请输入客户手机">
+                                <label for="Phone">手机<span class="required">*</span></label>
+                                <i class="fa fa-mobile-phone"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <div class="input-icon right">
+                                <input type="text" class="form-control" id="Tel" name="Tel" ng-model="curItem.Tel" ng-maxlength="20" phone placeholder="请输入客户座机">
+                                <label for="Phone">客户座机</label>
+                                <i class="fa fa-phone"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input name="Birthdate" class="form-control" id="Birthdate" ng-model="curItem.Birthdate" placeholder="请输入生日" readonly />
+                            <label for="Birthdate">生日</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group form-md-line-input">
+                    <input name="CensusAddressName" class="form-control" id="CensusAddressName" ng-model="curItem.CensusAddressName" />
+                    <label for="CensusAddressName">户籍地址</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group form-md-line-input">
+                    <div class="form-control form-control-static" style="padding-top:0px">
+                        <input-address id="txtRecordBy" callback="addressInput(address)" value="{{AddressDetail}}" />
+                    </div>
+                    <label for="myAddress1">现在住址</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group form-md-line-input">
+                    <input id="HouseNumber" name="HouseNumber" type="text" class="form-control" ng-model="curItem.HouseNumber" placeholder="门牌号" maxlength="20" />
+                    <label for="MaritalStatus">门牌号</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group form-md-line-input">
+                    <select name="MaritalStatus" class="form-control" id="MaritalStatus" ng-model="curItem.MaritalStatus" select-code="A00.011"></select>
+                    <label for="MaritalStatus">婚姻状况</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group form-md-line-input">
+                    <select name="Nationality" class="form-control" ng-model="curItem.Nationality" id="Nationality" select-code="K00.016"></select>
+                    <label for="Nationality">民族</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group form-md-line-input">
+                    <select name="EducationLevel" class="form-control" ng-model="curItem.EducationLevel" id="EducationLevel" select-code="A00.007"></select>
+                    <label for="EducationLevel">文化程度</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group form-md-line-input">
+                    <select name="LivingStatus" class="form-control" ng-model="curItem.LivingStatus" id="LivingStatus" select-code="Q00.007"></select>
+                    <label for="LivingStatus">居住情况</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group form-md-line-input">
+                    <select name="Faith" class="form-control" ng-model="curItem.Faith" id="Faith" select-code="Q00.006"></select>
+                    <label for="Faith">宗教信仰</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="form-group form-md-line-input">
+                    <textarea name="Description" ng-model="curItem.Description" rows="6" class="form-control" id="Description"></textarea>
+                    <label for="Description">备注</label>
+                </div>
+
+            </div>
+        </div>
+    </form>
+  
+</div>

@@ -1,0 +1,154 @@
+﻿<style type="text/css">
+    .x {
+        width: 180px;
+        height: 40px;
+        position: relative;
+        background-color: transparent;
+    }
+
+        .x:before {
+            position: absolute;
+            top: 0px;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            border-bottom: 40px solid #dddddd;
+            border-left: 180px solid transparent;
+            content: "";
+        }
+
+        .x:after {
+            position: absolute;
+            left: 1px;
+            right: 0;
+            top: 1px;
+            bottom: 0;
+            border-bottom: 40px solid white;
+            border-left: 179px solid transparent;
+            content: "";
+        }
+
+    .x-p-span {
+        top: 10px;
+        left: 10px;
+        position: absolute;
+        z-index: 500;
+    }
+
+    .x-e-span {
+        bottom: 5px;
+        right: 10px;
+        position: absolute;
+        z-index: 500;
+    }
+
+    .x-error {
+        background-color: red;
+        z-index: 1000;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        position: absolute;
+        filter: alpha(Opacity=80);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="input-group col-md-10">
+                <input type="text" class="form-control" id="Keyword"  ng-model="options.params['Data.PersonName']" placeholder="请输入会员姓名">
+                <span class="input-group-btn">
+                    <a class="btn btn-primary" ng-click="options.search()"><i class="icon-search"></i>查询</a>
+                </span>
+            </div>
+
+        </div>
+        <div class="box border green">
+            <div class="box-title">
+                <h4><i class="fa fa-table"></i>血压血糖一览表</h4>                
+            </div>
+
+            <div class="box-body clear-fix">
+                <div id="filter-items" class="row isotope">
+                    <div class="col-md-12">
+                        <ui-data-table options="options">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th style="text-align: center;">姓名</th>
+                                        <th style="text-align: center;">性別</th>
+                                        <th style="text-align: center;">年龄</th>
+                                        <th style="text-align: center;">所属区域</th>
+                                        <th style="text-align: center;">血压</th>
+                                        <th style="text-align: center;">血压</th>
+                                        <th style="text-align: center;">血压</th>
+                                        <th style="text-align: center;">血糖</th>
+                                        <th style="text-align: center;">血糖</th>
+                                        <th style="text-align: center;">血糖</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tr ng-repeat="item in residents | filter:{Status:'I'}:true" style="cursor: pointer;">
+                                    <td>{{$index + 1}}</td>
+                                    <td><a ng-click="openPersonInfo(item.PersonID)">{{item.PersonName}}</a></td>
+                                    <td><span select-code="A00.001" select-value="{{item.Sex}}"></span></td>
+                                    <td>{{item.Birthdate|ageFormat}}</td>
+                                    <td>{{showArea(item.AreaID)}}</td>
+
+                                    <td style="height: 42px; padding: 0px; width: 180px;" ng-click="showDetail(item)">
+                                        <div ng-if="item.sp.length>=1" class="x">
+                                            <div class="x-p-span"><span title="时间">{{item.sp[0].Time}}</span></div>
+                                            <div class="x-e-span" title="收缩压/舒张压">{{item.sp[0].Value}}/{{item.dp[0].Value}}</div>
+                                            <div ng-if="!(item.sp[0].Status&&item.dp[0].Status)" class="x-error"></div>
+                                        </div>
+                                    </td>
+                                    <td style="height: 42px; padding: 0px; width: 180px;" ng-click="showDetail(item)">
+                                        <div ng-if="item.sp.length>=2" class="x">
+                                            <div class="x-p-span"><span title="时间">{{item.sp[1].Time}}</span></div>
+                                            <div class="x-e-span" title="收缩压/舒张压">{{item.sp[1].Value}}/{{item.dp[1].Value}}</div>
+                                            <div ng-if="!(item.sp[1].Status&&item.dp[1].Status)" class="x-error"></div>
+                                        </div>
+                                    </td>
+                                    <td style="height: 42px; padding: 0px; width: 180px;" ng-click="showDetail(item)">
+                                        <div ng-if="item.sp.length>=3" class="x">
+                                            <div class="x-p-span"><span title="时间">{{item.sp[2].Time}}</span></div>
+                                            <div class="x-e-span" title="收缩压/舒张压">{{item.sp[2].Value}}/{{item.dp[2].Value}}</div>
+                                            <div ng-if="!(item.sp[2].Status&&item.dp[2].Status)" class="x-error"></div>
+                                        </div>
+                                    </td>
+                                    <td style="height: 42px; padding: 0px; width: 180px;" ng-click="showDetail(item)">
+                                        <div ng-if="item.glu.length>=1" class="x">
+                                            <div class="x-p-span"><span title="时间">{{item.glu[0].Time}}</span></div>
+                                            <div class="x-e-span" title="血糖">{{item.glu[0].Value}}</div>
+                                            <div ng-if="!item.glu[0].Status" class="x-error"></div>
+                                        </div>
+                                    </td>
+                                    <td style="height: 42px; padding: 0px; width: 180px;" ng-click="showDetail(item)">
+                                        <div ng-if="item.glu.length>=2" class="x">
+                                            <div class="x-p-span"><span title="时间">{{item.glu[1].Time}}</span></div>
+                                            <div class="x-e-span" title="血糖">{{item.glu[1].Value}}</div>
+                                            <div ng-if="!item.glu[1].Status" class="x-error"></div>
+                                        </div>
+                                    </td>
+                                    <td style="height: 42px; padding: 0px; width: 180px;" ng-click="showDetail(item)">
+                                        <div ng-if="item.glu.length>=3" class="x">
+                                            <div class="x-p-span"><span title="时间">{{item.glu[2].Time}}</span></div>
+                                            <div class="x-e-span" title="血糖">{{item.glu[2].Value}}</div>
+                                            <div ng-if="!item.glu[2].Status" class="x-error"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ui-data-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

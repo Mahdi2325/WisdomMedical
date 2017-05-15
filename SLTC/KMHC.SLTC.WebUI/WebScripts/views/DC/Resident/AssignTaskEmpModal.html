@@ -1,0 +1,50 @@
+﻿    <style type="text/css" > 
+        .content-modal {
+        background-color: white;
+        margin-top: 0;
+        min-height: 600px;
+        /*border-left: 1px solid #cdd2d2;*/
+        padding-bottom: 30px;
+        /* Page Header */
+    }
+    .emp-group-div {
+        padding: 15px 0px;
+    }
+
+    .emp-task-text {
+        font-size: 18px;
+        font-family: 'Microsoft YaHei';
+        font-weight: 100;
+    }
+    .emp-hack-border {
+        border-bottom: 1px solid #d6d6d6;
+    }
+</style>
+<div class="container-fluid" ng-controller="assignTaskEmpModalCtr">
+    <div class="row">
+        <div class="col-sm-12 content-modal">
+            <div class="emp-group-div"><label class="emp-task-text">請選擇照會人員：</label></div>
+            <div  class="hack emp-hack-border"></div>
+            <div class="col-sm-12 emp-group-div" ng-repeat="group in EmpGroup">
+                <div class="col-sm-1 emp-group-div">{{group.EmpGroupName}}</div>
+                <div class="col-sm-11">
+                    <div class="col-sm-12">
+                        <div ng-repeat="Item in group.data">
+                            <div class="col-sm-3 emp-group-div ">
+                                <input style="" type="checkbox" id="{{Item.EmpNo}}" ng-checked="{{Item.Checked}}" ng-click="ChangeStatus($event,Item)" class="chk_1" checked /><label for="{{Item.EmpNo}}"></label>
+                                <label style="position:absolute;top:18px">{{Item.EmpName}}</label>
+                            </div>
+                        </div>
+                        <div class="hack emp-hack-border"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" ng-click="AssignTask()" id="btnOk">儲存</button>
+
+            <button type="button" class="btn btn-grey" data-dismiss="modal">關閉</button>
+        </div>
+    </div>
+</div>
+

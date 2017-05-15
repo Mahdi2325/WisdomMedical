@@ -1,0 +1,74 @@
+﻿<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="row" >
+                        <div id="personalOrderDistribute" style="height:400px"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row" ng-controller="orderSummaryDistributeCtrl">
+                        <div id="orderSummaryDistribute" style="height:400px"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control" id="Keyword" ng-model="options.params['Data.SearchWords']" ng-keyup="enterEvent($event,key)" placeholder=" 请输入服务人员姓名">
+                            <span class="input-group-btn">
+                                <a class="btn blue" ng-click="search()"><i class="fa fa-search"></i>查询</a>
+                            </span>
+                        </div>
+                    </div>
+                    <ui-map-table options="options">
+                        <table class="table table-striped table-bordered table-hover table-handler">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <div class="row clearfix">
+                                        <div class="col-md-4 column ng-binding">姓名</div>
+                                        <div class="col-md-3 column ng-binding">
+                                            性别
+                                        </div>
+                                        <div class="col-md-5 column">
+                                            人员编号
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in employeeList">
+                                <td>
+                                    <a html="#" class="" ng-click="employeeClick(item)">
+                                        <div class="row clearfix">
+                                            <div class="col-md-4 column ng-binding">{{item.EmpName}}</div>
+                                            <div class="col-md-3 column ng-binding">
+                                                <span select-code="A00.001" select-value="{{item.Sex}}" class="ng-isolate-scope"></span>
+                                            </div>
+                                            <div class="col-md-5 column">
+                                                {{item.EmpNo}}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </ui-map-table>
+                </div>
+                <div class="col-md-6">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

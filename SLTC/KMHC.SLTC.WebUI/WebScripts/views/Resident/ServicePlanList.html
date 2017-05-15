@@ -1,0 +1,43 @@
+﻿
+
+<div class="row" ng-controller="residentServicePlanCtrl">
+
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="input-group col-md-10">
+                <a class="btn red" data-toggle="modal" data-target="#modalSetServicePlan"><i class=" fa fa-plus"></i> 新增</a>
+            </div>
+        </div>
+        <ui-data-table options="options">
+            <table id="datatable1" class="table table-striped table-bordered table-hover table-handler">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>套餐编号</th>
+                        <th>套餐名称</th>
+                        <th>套餐价格</th>
+                        <th>服务有效期</th>
+                        <th>生效日期</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="servicePlan in ServicePlans">
+                        <td>{{$index + 1}}</td>
+                        <td>{{servicePlan.SGNo}}</td>
+                        <td>{{servicePlan.SGName}}</td>
+                        <td>{{servicePlan.SumPrice | currency:"¥"}}</td>
+                        <td>{{servicePlan.SStartDate | dateFormat}}&nbsp;—&nbsp;{{servicePlan.SEndDate | dateFormat}} </td>
+                        <td>{{servicePlan.CreatedTime | timeFormat}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ui-data-table>
+    </div>
+
+    <div class="modal fade" id="modalSetServicePlan" tabindex="-1" role="dialog" aria-labelledby="modalCarryOutLabel" data-backdrop="static" data-keyboard="false" data-target=".bs-example-modal-lg">
+        <div class="modal-dialog bs-example-modal-lg" role="document">
+            <div ng-include="'/WebScripts/views/Resident/SetServicePlan.html'"></div>
+        </div>
+    </div>
+</div>
+

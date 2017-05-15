@@ -1,0 +1,89 @@
+﻿<style>
+    @media print {.noprint {display: none;}}
+</style>
+<script>
+    //https://github.com/DoersGuild/jQuery.print
+
+    $(document).ready(function () {
+        $("input#biuuu_button").click(function () {
+
+            $("#myPrintArea").print({
+                globalStyles: true,
+                mediaPrint: false,
+                stylesheet: null,
+                noPrintSelector: "#mydiv",
+                iframe: true,
+                append: null,
+                prepend: null,
+                manuallyCopyFormValues: true,
+                deferred: $.Deferred(),
+                timeout: 250,
+                title: '',
+                doctype: '<!doctype html>'
+            });
+        });
+    });
+
+</script>
+<div style="width: 900px; border: 0px" class="modal-content modal-lg" id="myPrintArea">
+    <div class="portlet box blue">
+        <div class="portlet-title noprint">
+            <div class="caption">
+                <i class="fa fa-bars"></i>工单打印预览
+            </div>
+            <div class="tools">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+        <div class="portlet-body" style="padding:10px 25px 10px 25px">
+            <div class="text-center" style="font-size: 25px;">机构服务工单</div>
+            <table style="border: 1px solid black; width: 500px; margin-left: 175px; line-height: 50px;" border="1">
+                <tr>
+                    <th style="text-align: center">订 单 号</th>
+                    <td>&nbsp;{{CurrentTask.SONo}}</td>
+                </tr>
+                <tr>
+                    <th style="text-align: center">姓 名</th>
+                    <td>&nbsp;{{CurrentTask.PersonName}}</td>
+                </tr>
+                <tr>
+                    <th style="text-align: center">性 别</th>
+                    <td>&nbsp;<span select-code="A00.001" select-value="{{CurrentTask.Sex}}"></span></td>
+                </tr>
+                <tr>
+                    <th style="text-align: center">电 话</th>
+                    <td>&nbsp;{{CurrentTask.Phone}}</td>
+                </tr>
+                <tr>
+                    <th style="text-align: center">服务地址</th>
+                    <td>&nbsp;{{CurrentTask.Address}}</td>
+                </tr>
+                <tr>
+                    <th style="text-align: center">服务项目</th>
+                    <td>&nbsp;{{CurrentTask.ServiceName}}</td>
+                </tr>
+                <tr>
+                    <th style="text-align: center">服务价格</th>
+                    <td>&nbsp;¥{{CurrentTask.Price}}</td>
+                </tr>
+                <tr>
+                    <th style="text-align: center">服务时间</th>
+                    <td>&nbsp;{{CurrentTask.AppointmentTime | timeFormat}}</td>
+                </tr>
+                <tr>
+                    <th style="text-align: center">服 务 员</th>
+                    <td>&nbsp;{{CurrentTask.EmployeeName}}</td>
+                </tr>
+                <tr>
+                    <th style="text-align: center">完成签收</th>
+                    <td></td>
+                </tr>
+            </table>
+            </br>
+            <div class="text-center noprint"  id="mydiv" >
+                <!--<div id="myPrintArea">.....文本打印部分.....</div>-->
+                <input id="biuuu_button" type="button" class="btn btn-success" value="打印" />
+            </div>
+        </div>
+    </div>
+</div>

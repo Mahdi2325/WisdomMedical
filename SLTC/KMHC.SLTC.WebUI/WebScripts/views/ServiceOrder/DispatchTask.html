@@ -1,0 +1,78 @@
+﻿
+<div class="row" ng-controller="DispatchTaskCtrl">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-bars"></i>工单派发
+            </div>
+            <div class="tools">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="row" >
+                <div class="col-md-5">
+                    <div class="form-group  form-md-line-input" style="margin:0px">
+                        <input name="Otime" ng-model="options.params['Data.CurrentDate']" ng-change="search()" class="form-control" ca-date-picker min="{{CurrentMinDate}}" required />
+                        <label for="PersonName">起始日期：</label>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group  form-md-line-input" style="margin:0px">
+                        <input type="text" class="form-control" ng-model="options.params['Data.keyWords']" placeholder="请输入服务人员姓名或电话">
+                        <label for="form_control_1">服务人员：</label>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group  form-md-line-input" style="margin:0px">
+                        <a class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding: 15px 15px 0px 15px">
+                <ui-data-table options="options">
+                    <table class="table table-striped table-bordered table-hover table-handler">
+                        <thead>
+                            <tr>
+                                <th style="vertical-align:middle;text-align:center" class="col-md-2" rowspan="2">服务人员</th>
+                                <th style="vertical-align:middle;text-align:center" colspan="2" ng-repeat="item in Data.Dates">{{item}}</th>
+                            </tr>
+                            <tr>
+                                <th style="vertical-align:middle;text-align:center;border-top-width:thin" class="col-md-1">上午</th>
+                                <th style="vertical-align: middle; text-align: center; border-top-width: thin" class="col-md-1">下午</th>
+                                <th style="vertical-align: middle; text-align: center; border-top-width: thin" class="col-md-1">上午</th>
+                                <th style="vertical-align: middle; text-align: center; border-top-width: thin" class="col-md-1">下午</th>
+                                <th style="vertical-align: middle; text-align: center; border-top-width: thin" class="col-md-1">上午</th>
+                                <th style="vertical-align: middle; text-align: center; border-top-width: thin" class="col-md-1">下午</th>
+                                <th style="vertical-align: middle; text-align: center; border-top-width: thin" class="col-md-1">上午</th>
+                                <th style="vertical-align: middle; text-align: center; border-top-width: thin" class="col-md-1">下午</th>
+                                <th style="vertical-align: middle; text-align: center; border-top-width: thin" class="col-md-1">上午</th>
+                                <th style="vertical-align: middle; text-align: center; border-top-width: thin" class="col-md-1">下午</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="emp in Data.emps" ng-click="rowClick(item)">
+                                <td style="font-weight: bold; vertical-align: middle; text-align: center">{{emp.EmpName}}</td>
+                                <td style="cursor: pointer" ng-click="Assign(dispatch.WorkDate,emp.EmployeeID,emp.EmpName,0)" ng-class="{true: 'bg-info', false: ''}[TdActive(dispatch.WorkDate,0)]" ng-repeat-start="dispatch in emp.DispatchTaskList">
+                                    <span class="font-blue" ng-attr-title="预约时间：{{task.WorkTime | timeFormat}}" ng-repeat="task in dispatch.DispatchRecordList | filter:{SplitTag:0}">
+                                        {{task.ClientName}}
+                                    </span>
+                                </td>
+                                <td style="cursor: pointer" ng-click="Assign(dispatch.WorkDate,emp.EmployeeID,emp.EmpName,1)" ng-class="{true: 'bg-info', false: ''}[TdActive(dispatch.WorkDate,1)]" ng-repeat-end>
+                                    <span class="font-blue" ng-attr-title="预约时间：{{task.WorkTime | timeFormat}}" ng-repeat="task in dispatch.DispatchRecordList | filter:{SplitTag:1}">
+                                        {{task.ClientName}}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ui-data-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

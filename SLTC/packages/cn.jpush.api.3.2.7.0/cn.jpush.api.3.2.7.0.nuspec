@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>cn.jpush.api</id>
+    <version>3.2.7.0</version>
+    <title>jpush-api-csharp-client</title>
+    <authors>jpush</authors>
+    <owners>jpush</owners>
+    <licenseUrl>http://license_url_here_or_delete_this_line/</licenseUrl>
+    <projectUrl>https://github.com/jpush/jpush-api-csharp-client</projectUrl>
+    <iconUrl>https://img.jiguang.cn/logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>JPush's officially supported C# client library for accessing JPush APIs.</description>
+    <summary />
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>jpush</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="9.0.1" />
+    </dependencies>
+  </metadata>
+</package>

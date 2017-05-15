@@ -1,0 +1,106 @@
+﻿<div style="width:900px" class="modal-content modal-lg" ng-controller="FamilyEditCtrl">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-bars"></i>{{isAdd?"添加":"编辑"}}家属信息
+            </div>
+            <div class="tools">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form role="form" name="familyEditForm" class="w5c-form"  w5c-form-validate novalidate>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" class="form-control" id="PersonName" name="PersonName" ng-model="curFamily.PersonName" disabled>
+                            <label for="PersonName">客户姓名</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" class="form-control" name="Name" ng-model="curFamily.Name" required ng-maxlength="100">
+                            <label for="Name">家属姓名<span class="required">*</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" class="form-control" name="Relation" ng-model="curFamily.Relation" required ng-maxlength="10">
+                            <label for="Name">关系<span class="required">*</span></label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group form-md-radios">
+                            <label>是否紧急联络人</label>
+                            <div class="md-radio-inline">
+                                <label>
+                                    &nbsp;
+                                    <input type="radio" name="IsEmerg1" id="IsEmerg1" ng-model="curFamily.IsEmerg" value="1">是
+                                </label>&nbsp;
+                                <label>
+                                    &nbsp;
+                                    <input type="radio" name="IsEmerg2" id="IsEmerg2" ng-model="curFamily.IsEmerg" value="0">否
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input">
+                            <div class="input-icon right">
+                                <input type="text" class="form-control"  name="Phone" ng-model="curFamily.Phone" phone ng-maxlength="20" required placeholder="请输入家属手机号码">
+                                <label for="Phone">手机<span class="required">*</span></label>
+                                <i class="fa fa-mobile-phone"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input">
+                            <div class="input-icon right">
+                                <input type="text" class="form-control"  name="Tell" ng-model="curFamily.Tell" phone ng-maxlength="20" placeholder="请输入家属座机">
+                                <label for="Tell">座机</label>
+                                <i class="fa fa-phone"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input">
+                            <input type="text" class="form-control" id="Location" name="Location" ng-model="curFamily.Location" ng-maxlength="100" placeholder="请输入所在区域">
+                            <label for="Location">所在区域</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group form-md-radios">
+                            <label>有无钥匙</label>
+                            <div class="md-radio-inline">
+                                <label>
+                                    &nbsp;
+                                    <input type="radio" name="HasKey1" id="HasKey1" ng-model="curFamily.HasKey" value="1">有
+                                </label>&nbsp;
+                                <label>
+                                    &nbsp;
+                                    <input type="radio" name="HasKey2" id="HasKey2" ng-model="curFamily.HasKey" value="0">无
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" w5c-form-submit="saveEdit()">确定</button>
+                    <button type="button" class="btn btn-grey" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+

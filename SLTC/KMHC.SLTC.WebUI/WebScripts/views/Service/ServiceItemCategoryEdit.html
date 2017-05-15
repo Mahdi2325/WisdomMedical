@@ -1,0 +1,40 @@
+﻿
+<div style="width:800px" class="modal-content modal-lg" ng-controller="ServiceitemcategoryEditCtrl">
+    <!--编辑页面-->
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-bars"></i>{{isAdd?"添加":"编辑"}}服务项目类型
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <form role="form" class="form-horizontal w5c-form" name="seritmecateditform" w5c-form-validate novalidate>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">服务项目类型编码<span class="required">*</span></label>
+                            <div class="col-sm-9">
+                                <input name="SICNo" type="text" class="form-control" ng-model="curItem.SICNo" placeholder="" ng-maxlength="20" disabled />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">服务项目类型名称<span class="required">*</span></label>
+                            <div class="col-sm-9">
+                                <input name="SICName" type="text" class="form-control" ng-model="curItem.SICName" placeholder="" maxlength="20" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">描述</label>
+                            <div class="col-sm-9">
+                                <input name="Remark" type="text" class="form-control" ng-model="curItem.Remark" placeholder="" maxlength="200" />
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="submit" w5c-form-submit="SaveOrEdit(curItem);">保存</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">关闭</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <!--编辑页面-->

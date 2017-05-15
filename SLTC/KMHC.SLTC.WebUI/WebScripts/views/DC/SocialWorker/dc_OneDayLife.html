@@ -1,0 +1,312 @@
+﻿<!--個案一天的生活-->
+
+<link href="../../../Content/socialworker.css" rel="stylesheet" />
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="marginLeft5">
+                    <resident-list feeno={{FeeNo}} callback="residentSelected(resident)" />
+                </div>
+            </div>
+            <div class="col-md-10 marginTop5">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <button class="btn btn-primary" ng-disabled="buttonShow" ng-click="saveForm(currentItem)"><i class="fa fa-save"></i> 儲存資料</button>
+
+                            <button class="btn btn-warning" ng-disabled="buttonShow" ng-click="PrintPreview(currentItem.Id)"><i class="fa fa-print"></i> 列印預覽</button>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form class="form-horizontal tb" name="rfrForm" role="form" novalidate>
+                                <div style="margin-bottom:5px;" class="col-md-12">
+
+                                    <div class="col-md-12 marginBottom5">
+                                        <div style="">
+                                            <div class="panel-title  center ">
+                                                <h3>
+                                                    <strong>{{Org}}老人日間照顧中心</strong>
+                                                </h3>
+                                                <h4>
+                                                    <strong>１天生活</strong>
+                                                </h4>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label" for="inputEmail3">個案姓名</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control bottom_blue " ng-model="currentResident.Name" readonly>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label" for="inputPassword3">性別</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control bottom_blue" id="inputPassword3" ng-model="currentResident.Sex" readonly>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label" for="inputPassword3">出生日期</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control bottom_blue" id="inputPassword3" ng-model="currentResident.BirthDate" readonly />
+                                            </div>
+
+                                            <label class="col-sm-1 control-label" for="inputPassword3">日字號</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control bottom_blue" id="inputPassword3" ng-model="currentResident.ResidentNo" readonly>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div style="margin-bottom:5px;border:2px solid #000;padding:1px;" class="col-md-12">
+                                    <div style="text-align:center;line-height:36px;">
+                                        <table class="col-md-12">
+                                            <tr class="height40">
+                                                <td class="col-md-1 tdlbl">時間</td>
+                                                <td class="col-md-5 tdlbl">
+                                                    長年習慣的生活方式
+                                                </td>
+                                                <td class="col-md-1 tdlbl">時間</td>
+                                                <td class="col-md-5 tdlbl">
+                                                    現在的生活方式
+                                                </td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>0時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past0" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>0時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now0" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>2時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past2" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>2時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now2" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>4時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past4" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>4時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now4" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>6時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past6" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>6時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now6" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>7時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past7" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>7時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now7" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>8時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past8" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>8時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now8" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>9時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past9" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>9時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now9" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>10時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past10" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>10時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now10" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>11時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past11" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>11時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now11" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>12時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past12" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>12時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now12" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+
+                                            <tr class="height40">
+                                                <td>14時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past14" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>14時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now14" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>15時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past15" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>15時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now15" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>16時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past16" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>16時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now16" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>17時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past17" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>17時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now17" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>18時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past18" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>18時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now18" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>19時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past19" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>19時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now19" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>20時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past20" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>20時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now20" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>21時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past21" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>21時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now21" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>22時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past22" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>22時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now22" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                            <tr class="height40">
+                                                <td>23時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Past24" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                                <td>23時</td>
+                                                <td><input type="text" style="width:100%;border:none" ng-model="currentItem.Now24" placeholder="請輸入......" ng-maxlength="100" /></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </form>
+                            <div style="font-family: DFKai-SB;color:#000;" class="col-md-12">
+                                <div style="font-family: DFKai-SB;float:left;font-weight:700;font-size:18px;width:50%;line-height:40px;text-align:left">主責社工：</div>
+                                <div style="font-family: DFKai-SB;float:right;font-weight:700;font-size:18px;width:50%;line-height:40px;">主任/督導核閱：</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:80%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <!--<div ng-include="'/Views/Socialworker/AddProposalDisscuss.html'"></div>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box border green">
+                            <div class="box-title">
+                                <h4>個案生活歷次記錄</h4>
+                            </div>
+                            <div class="box-body">
+                                <!--<ui-data-table options="options">-->
+                                <table class="table table-bordered" id="editTable">
+                                    <thead>
+                                        <tr>
+                                            <th>個案姓名</th>
+                                            <th>
+                                                記錄日期
+                                            </th>
+                                            <th>長年習慣和生活方式</th>
+                                            <th>現在的生活方式</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="list in HistoryList">
+                                            <td>{{currentResident.Name}}</td>
+                                            <td>{{list.CreateDate | dateFormat}}</td>
+                                            <td>
+                                                
+                                                    0時：{{list.Past0}}<br />
+                                                    2時：{{list.Past2}}<br />
+                                                    4時：{{list.Past4}}<br />
+                                                    6時：{{list.Past6}}<br />
+                                                    7時：{{list.Past7}}<br />
+                                                    8時：{{list.Past8}}<br />
+                                                    9時：{{list.Past9}}<br />
+                                                    10時：{{list.Past10}}<br />
+                                                    11時：{{list.Past11}}<br />
+                                                    12時：{{list.Past12}}<br />
+                                                    14時：{{list.Past14}}<br />
+                                                    15時：{{list.Past15}}<br />
+                                                    16時：{{list.Past16}}<br />
+                                                    17時：{{list.Past17}}<br />
+                                                    18時：{{list.Past18}}<br />
+                                                    19時：{{list.Past19}}<br />
+                                                    20時：{{list.Past20}}<br />
+                                                    21時：{{list.Past21}}<br />
+                                                    22時：{{list.Past22}}<br />
+                                                    23時：{{list.Past24}}
+                                              
+                                            </td>
+                                            <td>
+                                                0時：{{list.Now0}}<br />
+                                                2時：{{list.Now2}}<br />
+                                                4時：{{list.Now4}}<br />
+                                                6時：{{list.Now6}}<br />
+                                                7時：{{list.Now7}}<br />
+                                                8時：{{list.Now8}}<br />
+                                                9時：{{list.Now9}}<br />
+                                                10時：{{list.Now10}}<br />
+                                                11時：{{list.Now11}}<br />
+                                                12時：{{list.Now12}}<br />
+                                                14時：{{list.Now14}}<br />
+                                                15時：{{list.Now15}}<br />
+                                                16時：{{list.Now16}}<br />
+                                                17時：{{list.Now17}}<br />
+                                                18時：{{list.Now18}}<br />
+                                                19時：{{list.Now19}}<br />
+                                                20時：{{list.Now20}}<br />
+                                                21時：{{list.Now21}}<br />
+                                                22時：{{list.Now22}}<br />
+                                                23時：{{list.Now24}}
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary" ng-click="editReferral(list)">编辑</button>
+                                                <a class="btn btn-danger" role="button" data-toggle="modal" ng-click="deleteReferral(list)">删除</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                                <!--</ui-data-table>-->
+                                <div id="pager"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

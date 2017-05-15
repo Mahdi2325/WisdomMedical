@@ -1,0 +1,94 @@
+﻿<style>
+    .textAlignRight{
+        text-align:right
+    }
+    .poMainFrm {
+        width: 80%;
+        margin: 0px auto;
+    }
+
+    .poHead {
+        font-size: 36px;
+        font-weight: bolder;
+        text-align: center;
+        line-height: 60px;
+    }
+        .poInfoTab {
+        width: 100%;
+        border: 1px solid #000;
+        border-collapse: collapse;
+    }
+
+        .poInfoTab td {
+            padding: 5px;
+            border: 1px solid #000;
+        }
+        .half{
+            width:50%;
+        }
+        .floatLeft{
+            float:left;
+        }
+        .poSign{
+            margin:20px 0;
+        }
+</style>
+<div id="socialNavi" class="navibody">
+    <div class="poMainFrm">
+        <div class="poHead">
+            <div>（服務單位全銜）老人日間照顧中心</div>
+            <div>個案結案表</div>
+        </div>
+        <table class="poInfoTab">
+            <tr>
+                <td colspan="6" class="textAlignRight">填表日期：<input id="Text1" type="text" /></td>
+            </tr>
+            <tr>
+                <td style="width:200px">姓    名</td>
+                <td style="width:200px">
+                    <input id="Text2" type="text" /></td>
+                <td style="width:200px">性 別</td>
+                <td style="width:200px"></td>
+                <td style="width:200px">出 生日 期</td>
+                <td style="width:200px"><input id="Text4" type="text" /></td>
+            </tr>
+            <tr>
+                <td>婚姻狀況</td>
+                <td></td>
+                <td>身分證字號</td>
+                <td><input id="Text3" type="text" /></td>
+                <td>聯絡電話</td>
+                <td><input id="Text5" type="text" /></td>
+            </tr>
+            <tr>
+                <td>居住地址</td>
+                <td colspan="5"><input id="Text6" type="text" /></td>
+            </tr>
+            <tr>
+                <td>戶籍地址</td>
+                <td colspan="5"><input id="Text7" type="text" /></td>
+            </tr>
+            <tr>
+                <td>服務期間</td>
+                <td colspan="2"><input id="Text8" type="text" />~<input id="Text9" type="text" /></td>
+                <td>提供服務</td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td>結案原因</td>
+                <td colspan="5"></td>
+            </tr>
+            <tr>
+                <td>簡易服務摘要</td>
+                <td colspan="5">
+                    <textarea id="TextArea1"rows="6"></textarea>
+                </td>
+            </tr>
+        </table>
+        <div class="poSign">
+            <div class="half floatLeft">主責社工: <input id="Text10" type="text" /></div>
+            <div class="half floatLeft">主任/督導核閱:<input id="Text11" type="text" /></div>
+        </div>
+    </div>
+</div>
+

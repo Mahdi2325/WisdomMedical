@@ -1,0 +1,79 @@
+﻿<div class="row" ng-controller="billListCtrl">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    <input name="PayDateFrom" ng-model="options.params['Data.BillDateFrom']" class="form-control" ca-date-picker placeholder="请起始账单日期" />
+                </div>
+                <div class="col-md-2">
+                    <input name="PayDateTo" ng-model="options.params['Data.BillDateTo']" class="form-control" ca-date-picker placeholder="请结束账单日期" />
+                </div>
+                <div class="col-md-4">
+                    <span class="input-group-btn">
+                        <a class="btn blue" ng-click="options.search()"><i class="fa fa-search"></i> 查询</a>
+                        <a class="btn red" id="btnZD" data-toggle="modal" data-target="#modalEditPrePayment" ng-disabled="ZdDisabled" ng-click="CreateZD()"><i class="fa fa-plus"></i>生成账单</a>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        <ui-data-table options="options">
+            <table class="table table-striped table-bordered table-hover table-handler">
+                <thead>
+                    <tr>
+                        <th>账单流水号</th>
+                        <th>账单金额</th>
+                        <th>账单日期</th>
+                        <th>账单内容</th>
+                        <th>账单状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="bill in Data.bills">
+                        <td><a ng-click="detailClick(bill)" href="" data-toggle="modal" data-target="#modalDetail">{{bill.BillNo}}</a></td>
+                        <td>{{bill.TotalCpAmount| customCurrency:"¥"}}</td>
+                        <td>{{bill.BillDate |date:'yyyy-MM-dd hh:mm:ss'}}</td>
+                        <td>{{bill.BillContent}}</td>
+                        <td>{{bill.BillStatus==0?"未缴费":(bill.BillStatus==1?"已缴清":"未缴清")}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ui-data-table>
+    </div>
+
+
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+        <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 60%">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-table"></i>账单明细
+                    </div>
+                    <div class="tools">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-striped table-bordered table-hover table-handler">
+                        <thead>
+                            <tr>
+                                <th>收费流水号</th>
+                                <th>收费项目</th>
+                                <th>费用时间</th>
+                                <th>收费金额</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="charge in Data.BillDetails">
+                                <td>{{charge.FeeNo}}</td>
+                                <td>{{charge.FeeName}}</td>
+                                <td>{{charge.FeeDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                <td ng-class="{true: 'font-red', false: 'font-green'}[charge.TotalPrice>0]">{{charge.TotalPrice|customCurrency:"¥" }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

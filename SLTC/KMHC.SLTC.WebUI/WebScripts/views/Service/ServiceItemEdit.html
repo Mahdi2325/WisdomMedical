@@ -1,0 +1,201 @@
+﻿<script type="text/javascript" src="/WebScripts/components/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="/WebScripts/components/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="/WebScripts/components/ueditor/lang/zh-cn/zh-cn.js"></script>
+        <!--编辑页面-->
+<div class="row" ng-controller="ServiceItemEditCtrl">
+
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-bars"></i>{{isAdd?"添加":"编辑"}}服务项目
+            </div>
+
+            <div class="tools">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form role="form" name="seritemeditform" class="w5c-form" w5c-form-validate novalidate>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input name="SINo" type="text" class="form-control" ng-model="curItem.SINo" placeholder="" disabled ng-maxlength="20" />
+                            <label for="PersonName">服务项目编码<span class="required">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input name="SIName" type="text" class="form-control" ng-model="curItem.SIName" placeholder="" ng-maxlength="100" required />
+                            <label for="form_control_1">服务项目名称<span class="required">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <input name="Keywords" type="text" class="form-control" ng-model="curItem.Keywords" placeholder="" ng-maxlength="20" />
+                            <label for="form_control_1">关键字</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <select name="SIType" class="form-control" ng-model="curItem.ServiceItemCategoryID" ng-options="t.ServiceItemCategoryID as t.SICName for t in serviceitemcategoryList" required></select>
+                            <label for="form_control_1">服务项目类型<span class="required">*</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <select name="Faith" class="form-control" ng-model="curItem.OrderMode" id="Faith" ng-change="curItem.Unit=(curItem.OrderMode=='ByNum'?1:null)" select-code="Q00.011" required></select>
+                            <label for="form_control_1">预约模式<span class="required">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group form-md-line-input">
+                            <input name="SumPrice" type="number" class="form-control" min="0" ng-blur="FixPrice('SumPrice')" ng-model="curItem.SumPrice" placeholder="服务价格" />
+                            <label for="PersonName">单价<span class="required">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group form-md-line-input">
+                            <div class="input-group right-addon">
+                                <input name="Unit" type="number" class="form-control" min="0" ng-blur="FixPrice('Unit')" ng-model="curItem.Unit" ng-disabled="curItem.OrderMode=='ByNum'" placeholder="单位数量" required />
+                                <label for="PersonName">单位数量<span class="required">*</span></label>
+                                <span ng-if="curItem.OrderMode=='ByTime'" class="input-group-addon">
+                                    小时
+                                </span>
+                                <span ng-if="curItem.OrderMode=='ByNum'" class="input-group-addon">
+                                    次
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <select class="form-control" name="Hot" ng-options="t as t for t in HotArray" ng-model="curItem.Hot">
+                            </select>
+                            <label for="form_control_1">推荐指数</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group form-md-line-input">
+                            <input name="OrderNum" type="number" class="form-control" min="0" ng-model="curItem.OrderNum" placeholder="" />
+                            <label for="form_control_1">排序号</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <input name="Remark" class="form-control" ng-model="curItem.Remark" placeholder="" maxlength="60" required />
+                            <label for="Remark">服务项目简介<span class="required">*</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input">
+                            <div id="divFile" class="form-control form-control-static">
+                                <img style="height: 240px" ng-src="{{(curItem.PhotoPath != null && curItem.PhotoPath != '') ? curItem.PhotoPath : '/Images/0.png'}}" alt="" />
+                            </div>
+                            <label for="form_control_1">服务项目Logo</label>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group form-md-line-input">
+                            <div class="form-control form-control-static">
+                                <div id="PicturePathPicker">上传图片</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group form-md-line-input">
+                            <div id="divContent" class="form-control form-control-static">
+                                <script id="EditorContainer" style="height:100px" type="text/plain">
+                                </script>
+                                <script type="text/javascript">
+                                    //实例化编辑器
+                                    var ue = UE.getEditor('EditorContainer', { initialFrameHeight: 200 });
+                                </script>
+                            </div>
+                            <label for="divContent">服务项目描述</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-md-line-input">
+                            <label for="InitPrice">收费项目内容</label>
+                            <div class="portlet light " style="box-shadow:none;padding:0px">
+                                <div class="portlet-body form">
+                                    <table class="table table-striped table-bordered table-hover table-handler">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>收费项名称</th>
+                                                <th>单位</th>
+                                                <th>单价</th>
+                                                <th>数量</th>
+                                                <th>总价</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in curItem.ChargeItems track by $index">
+                                                <td><input type="hidden" ng-model="curItem.hiddenId">{{$index + 1}}</td>
+                                                <td>{{item.CIName}}</td>
+                                                <td>{{item.Unit}}</td>
+                                                <td>{{item.Price | currency:"¥"}}</td>
+                                                <td>{{item.Quantity}}</td>
+                                                <td>{{item.Quantity * item.Price | currency:"¥"}}</td>
+                                                <td class="text-left">
+                                                    <button type="button" class="btn btn-success btn-xs" ng-click="charegeClick(item,$event)">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-xs" ng-click="deleteCharegeDetl(item,$event)">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <input name="CIName" type="text" class="form-control" ng-model="curChgItem.CIName" placeholder="收费项名称" ng-maxlength="100" />
+                                                </td>
+                                                <td>
+                                                    <input name="Unit" type="text" class="form-control" ng-model="curChgItem.Unit" placeholder="单位" ng-maxlength="100" />
+                                                </td>
+                                                <td>
+                                                    <input name="Price" type="number" class="form-control" min="0" ng-blur="FixPrice('Price')" ng-model="curChgItem.Price" placeholder="单价" />
+                                                </td>
+                                                <td>
+                                                    <input name="Quantity" type="number" class="form-control" min="0" ng-blur="FixPrice('Quantity')" ng-model="curChgItem.Quantity" placeholder="次数" ng-maxlength="11" />
+                                                </td>
+                                                <td>{{(curChgItem.Quantity * curChgItem.Price)| currency:"¥" }}</td>
+                                                <td>
+                                                    <button type="button" id="chgGroupEditAdd" class="btn btn-primary btn-xs" ng-disabled="curChgItem.Quantity==0 || !curChgItem.Quantity" ng-click="saveChargeItem()">
+                                                        <span class="glyphicon glyphicon-plus"></span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit" w5c-form-submit="saveEdit(curItem)" >保存</button>
+                    <button type="button" class="btn btn-grey" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+        <!--编辑页面-->

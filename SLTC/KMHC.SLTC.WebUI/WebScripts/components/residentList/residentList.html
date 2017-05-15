@@ -1,0 +1,70 @@
+﻿<style type="text/css">
+    .box-shadow-2 {
+        -webkit-box-shadow: -5px 0 20px #f0f0f0;
+        -moz-box-shadow: -5px 0 20px #f0f0f0;
+        box-shadow: -5px 0 20px #f0f0f0;
+    }
+    .text-overflow {
+        word-break: keep-all;
+        white-space: nowrap; 
+        /*overflow: hidden; 
+        text-overflow: ellipsis;*/
+    }
+    .selectedCor{
+        background-color:#dff8e7;
+    }
+    .resident-list-area {
+        min-width: 100px;
+        height: 900px;
+        overflow: auto;
+        border-right: 1px solid rgba(195, 168, 168, 0.58);
+    }
+</style>
+<div id="residentListArea" class="row box-shadow-2 resident-list-area">
+    <div class="col-sm-12 form-horizontal" style="padding-top:10px">
+        <div class="form-group">
+            <input type="radio" value="I" name="radStatus" ng-model="resident.ipdFlag" ng-checked="true" class="col-sm-1" /><label class="col-sm-5">服务中</label>
+            <input type="radio" value="O" name="radStatus" ng-model="resident.ipdFlag" class="col-sm-1" /><label class="col-sm-5">已结案</label>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="姓名" ng-model="resident.residentName" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="编号" ng-model="resident.residentNo" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="区域" ng-model="resident.stationCode" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary col-sm-12" ng-click="Search()">查询</button>
+        </div>
+        <div class="form-group">
+            <table id="residentTb" class="table table-hover ">
+                <thead class="table-bordered">
+                    <tr class="text-overflow">
+                        <th>姓名</th>
+                        <th>編號</th>
+                        <th>区域</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color:white" ng-repeat="item in residentList">
+                    <tr ng-click="rowClick(item)" onclick="selectTr(this)">
+                        <td>{{item.Name}}</td>
+                        <td>{{item.ResidentNo}}</td>
+                        <td>{{item.StationCode}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //$(document).ready(function () {
+    //    $('#residentListArea').height($(document).height());
+    //});
+    function selectTr(item) {
+        $('#residentTb tr').removeClass("selectedCor");
+        $(item).addClass('selectedCor');
+    }
+</script>

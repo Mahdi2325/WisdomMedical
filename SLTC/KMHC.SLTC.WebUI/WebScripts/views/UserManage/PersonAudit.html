@@ -1,0 +1,69 @@
+﻿<!-- 服务项目Modal -->
+
+<div style="width:900px" class="modal-content modal-lg" ng-controller="PersonAuditCtrl">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-bars"></i>认证信息
+            </div>
+        </div>
+        <div class="portlet-body">
+            <h6 style="color:#FF7F00" id="modalBedLabel">
+                * 请仔细核对身份证信息，参考下列内容进行排查：
+                1. 确保该档案人员通过一体机建档。
+                2. 联系客服，进行健康档案更改。
+            </h6>
+            <form role="form" name="personAuditform" class="form-horizontal w5c-form" w5c-form-validate novalidate>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">编号</label>
+                    <div class="col-sm-4">
+                        <input name="PersonNo1" class="form-control" ng-model="auditItem.PersonNo" disabled />
+                    </div>
+                    <label class="col-sm-2 control-label">姓名</label>
+                    <div class="col-sm-4">
+                        <input name="Name1" class="form-control" ng-model="auditItem.Name" disabled />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">身份证号</label>
+                    <div class="col-sm-4">
+                        <input name="IdCard1" class="form-control" ng-model="auditItem.IdCard" ng-mousemove="createBirthdate(auditItem.IdCard)" disabled />
+                    </div>
+                    <label class="col-sm-2 control-label">生日</label>
+                    <div class="col-sm-4">
+                        <input name="Birthdate" class="form-control datepicker" ng-model="auditItem.Birthdate" placeholder="" disabled />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">性别</label>
+                    <div class="col-sm-4">
+                        <select name="Sex1" class="form-control" ng-model="auditItem.Sex" select-code="A00.001" disabled></select>
+                    </div>
+                    <label class="col-sm-2 control-label">本人电话</label>
+                    <div class="col-sm-4">
+                        <input name="Phone1" type="text" class="form-control" ng-model="auditItem.Phone" phone disabled/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">户籍地址</label>
+                    <div class="col-sm-10">
+                        <input name="CensusAddressName1" class="form-control" ng-model="auditItem.CensusAddressName" disabled />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">现住地址</label>
+                    <div class="col-sm-10">
+                            <input name="HomeAddress1" id="myAddress" class="form-control"  style="width:100%" ng-model="HomeAddress" type="text" disabled>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h7 style="color:#FF4040;font-weight:bold; " id="errorlose" ng-show="ErrorMsg">信息认证失败</h7>
+                    <button class="btn btn-primary" type="submit" ng-click="saveEdit(auditItem)" >认证</button>
+                    <button class="btn btn-grey " data-dismiss="modal">取消</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+  

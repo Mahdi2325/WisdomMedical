@@ -1,0 +1,19 @@
+﻿<div>
+    <input class="form-control" type="text" ng-model="searchWords" ng-change="change()" placeholder="输入项目编码或者名称" ng-required={{required}} />
+    <table class="table table-hover table-bordered input-select" ng-show="showList">
+        <thead>
+            <tr role="row">
+                <th>#</th>
+                <th>监测项目编号</th>
+                <th>监测项目名称</th>
+                <th>备注</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="item in monitorItems | filter:filterItems" ng-click="rowCick(item)">
+            <td>{{$index + 1}}</td>
+            <td>{{item.MINo}}</td>
+            <td>{{item.MIName}}</td>
+            <td>{{item.Remark}}</td>
+        </tr>
+    </table>
+</div>
